@@ -110,6 +110,5 @@ jobs:
           path: "./simulation/TestReports/*_xunit.xml"   # Path to test results
           reporter: java-junit    
           fail-on-error: 'false'                        # Format of test results
-        env:
-          NODE_EXTRA_CA_CERTS: .\certs\Vector_Root_2.0.crt 
+
 
