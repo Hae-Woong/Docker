@@ -21,8 +21,7 @@ jobs:
 
       - name: Cache SUT
         id: cache-sut
-        uses: actions/cache@v4
-        
+        uses: actions/cache@v4  
         with:
           path: |
             .\ECU\Level1SUT
@@ -105,9 +104,12 @@ jobs:
     steps:
       - name: Convert all test reports to XUnit format
         working-directory: .\simulation\TestReports\
+        shell: pwsh
+        env:
+          TestReportViewer_InstallDir: "C:\Program Files\Vector CANoe Server Edition 19\Exec64"
         run: |
           get-childitem . -Filter *.vtestreport | foreach {
-            &"$env:TestReportViewer_InstallDir\ReportViewerCli.exe" -r $_ -xu
+            & "$env:TestReportViewer_InstallDir\ReportViewerCli.exe" -r $_ -xu
           }
 
       - name: Display test results
