@@ -106,7 +106,7 @@ jobs:
         working-directory: .\simulation\TestReports\
         shell: pwsh
         env:
-          TestReportViewer_InstallDir: "C:\Program Files\Vector CANoe Server Edition 19\Exec64"
+          TestReportViewer_InstallDir: 'C:\Program Files\Vector CANoe Server Edition 19\Exec64'
         run: |
           get-childitem . -Filter *.vtestreport | foreach {
             & "$env:TestReportViewer_InstallDir\ReportViewerCli.exe" -r $_ -xu
