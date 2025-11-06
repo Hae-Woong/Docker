@@ -28,8 +28,8 @@ jobs:
         uses: actions/cache@v4  
         with:
           path: |
-            .\ECU\Level1SUT
-          key: ${{ hashFiles('.\ECU\BFC\Appl\Source', '.\ECU\BFC\Appl\IncludeLvl1', '.\ECU\BFC\LightControl-level1.vttmake', '.\ECU\BFC\LightCtrl.arxml') }}
+            ./ECU/Level1SUT
+          key: ${{ hashFiles('./ECU/BFC/Appl/Source', './ECU/BFC/Appl/IncludeLvl1', './ECU/BFC/LightControl-level1.vttmake', './ECU/BFC/LightCtrl.arxml') }}
 
       - name: Run vVIRTUALtarget
         if: steps.cache-sut.outputs.cache-hit != 'true'
@@ -46,7 +46,7 @@ jobs:
         if: always()
         with:
           name: ECU_Logs
-          path: .\ECU\BFC\Log
+          path: ./ECU/BFC/Log
           retention-days: 7
 
   build-simulation:
@@ -90,7 +90,7 @@ jobs:
         with:
           name: Test Reports ${{ matrix.TESTNAME }}
           path: |
-            .\simulation\TestReports\
+            ./simulation/TestReports/
           retention-days: 7
 
       - name: Upload log files
@@ -98,7 +98,7 @@ jobs:
         uses: actions/upload-artifact@v4       
         with:
           name: Log Files ${{ matrix.TESTNAME }}
-          path: .\simulation\*.txt
+          path: ./simulation/*.txt
 
   display-test-report:
     name: Display test report
@@ -107,7 +107,7 @@ jobs:
     runs-on: lvl1
     steps:
       - name: Convert all test reports to XUnit format
-        working-directory: .\simulation\TestReports\
+        working-directory: ./simulation/TestReports/
         shell: pwsh
         env:
           TestReportViewer_InstallDir: 'C:\Program Files\Vector CANoe Server Edition 19\Exec64'
