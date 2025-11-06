@@ -108,8 +108,8 @@ jobs:
           }
 
       - name: Display test results
-       # uses: actions-mirror/dorny-test-reporter@v1.9.1
-        uses: dorny-test-reporter@v1.9.1
+        uses: actions-mirror/dorny-test-reporter@v1.9.1
+       # uses: dorny-test-reporter@v1.9.1
         with:
           name: vECU lvl1 Test Results                   # Name of the check run which will be created
           path: "./simulation/TestReports/*_xunit.xml"   # Path to test results
@@ -118,31 +118,3 @@ jobs:
         env:
           NODE_EXTRA_CA_CERTS: .\certs\Vector_Root_2.0.crt 
 
-      #  Job to display the test reports in squore
-      #  job-AddToSquore:
-      #  name: Add Test Report to Squore
-      #  if: ${{ !cancelled() }}
-      #  needs: run-tests-simulation
-      #  runs-on: dev
-      #  steps:
-      #    - name: Download test reports
-      #      uses: actions/download-artifact@v2
-      #      env:
-      #        NODE_EXTRA_CA_CERTS: .\..\..\..\certs\Vector_Root_2.0.crt  
-      #      with:
-      #        name: Test Reports CANoe-vECU lvl1
-      #        path: ./downloaded-reports-lvl1/
-
-
-      #   convert all test reports to XML format for Squore
-      # -  name: Convert all test reports to xml format
-      #   run: |
-      #      get-childitem . -Filter *.vtestreport | foreach {
-      #      &"$env:TestReportViewer_InstallDir\ReportViewerCli.exe" -r $_ -e
-      #    }
-      #   working-directory: .\downloaded-reports-lvl1\  
-      
-      #   - name: Upload test reports to Squore
-      #    run: |
-      #    & .\import.bat "lvl1" "lvl1-${{ github.run_id }}-${{ github.run_attempt }}"
-      #   working-directory: .\..\..\..\SquoreAgent\  
