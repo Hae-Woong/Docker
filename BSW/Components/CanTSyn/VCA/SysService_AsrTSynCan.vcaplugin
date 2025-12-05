@@ -1,0 +1,57 @@
+#######################################################################################################################
+#  COPYRIGHT
+#  -------------------------------------------------------------------------------------------------------------------
+#  Copyright (c) 2020 by Vector Informatik GmbH.                                                  All rights reserved.
+#
+#                This software is copyright protected and proprietary to Vector Informatik GmbH.
+#                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+#                All other rights remain with Vector Informatik GmbH.
+#  -------------------------------------------------------------------------------------------------------------------
+#  FILE DESCRIPTION
+#  -------------------------------------------------------------------------------------------------------------------
+#  File       :  SysService_AsrTSynCan.vcaplugin
+#  Module     :  Vector Code Analyzer
+#  Description:  Entry point of Vector Code Analyzer.
+#  -------------------------------------------------------------------------------------------------------------------
+#  REVISION HISTORY
+#  -------------------------------------------------------------------------------------------------------------------
+#  Version    Date          Author   Change Id        Description
+#  -------------------------------------------------------------------------------------------------------------------
+#  01.00.00   2020-10-27    visssf   -                First version
+#  01.01.00   2020-12-14    visbfk   -                Analysis engine for forward analysis added
+#  01.02.00   2023-02-15    vrietz   -                Added MIP and Postbuild-Selectable switch
+#######################################################################################################################
+
+#######################################################################################################################
+# Mandatory Functions
+#######################################################################################################################
+
+#######################################################################################################################
+# Name         : setup
+# Return value : -
+# Description  : VectorCodeAnalyzer calls this function to query necessary information about the plugin.
+#                This function is mandatory.
+#######################################################################################################################
+def setup(plugin):
+    # Name of this plugin. Must match the component name.
+    plugin.name = "SysService_AsrTSynCan"
+
+    # Version of this plugin, encoded in BCD.
+    plugin.version = 0x010000
+
+    # Module implementation prefix of the component
+    plugin.mip = "CanTSyn"
+
+    # List of files of the component. These files are checked by VectorCodeAnalyzer. If one of the files cannot be found
+    # in the project folders, analysis is skipped.
+    plugin.files = [
+                    "CanTSyn.c",
+                    "CanTSyn_Cfg.c"
+                   ]
+
+    plugin.vca_options = {
+        "engine": "fwd-dfa"
+    }
+
+    # Additional arguments which are added to the VCA invocation
+    plugin.additional_arguments = ["--enable-csl-usecase"]

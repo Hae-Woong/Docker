@@ -1,0 +1,91 @@
+#######################################################################################################################
+#  COPYRIGHT
+#  -------------------------------------------------------------------------------------------------------------------
+#  Copyright (c) 2021 by Vector Informatik GmbH.                                                  All rights reserved.
+#
+#                This software is copyright protected and proprietary to Vector Informatik GmbH.
+#                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+#                All other rights remain with Vector Informatik GmbH.
+#  -------------------------------------------------------------------------------------------------------------------
+#  FILE DESCRIPTION
+#  -------------------------------------------------------------------------------------------------------------------
+#  File       :  Security_AsrKeyM.vcaplugin
+#  Module     :  Vector Code Analyzer
+#  Description:  Entry point of Vector Code Analyzer.
+#  -------------------------------------------------------------------------------------------------------------------
+#  REVISION HISTORY
+#  -------------------------------------------------------------------------------------------------------------------
+#  Version   Date        Author        Change Id     Description
+#  -------------------------------------------------------------------------------------------------------------------
+#  04.00.00  2021-06-28  vismxe        SEC-2323      Initial creation
+#  04.01.00  2021-12-03  visivg        SEC-3452      Add feature set
+#######################################################################################################################
+
+#######################################################################################################################
+# Mandatory Functions
+#######################################################################################################################
+
+#######################################################################################################################
+# Name         : setup
+# Return value : -
+# Description  : VectorCodeAnalyzer calls this function to query necessary information about the plugin.
+#                This function is mandatory.
+#######################################################################################################################
+def setup(plugin):
+    # Name of this plugin. Must match the component name.
+    plugin.name = "Security_AsrKeyM"
+
+    # Version of this plugin, encoded in BCD.
+    plugin.version = 0x040100
+
+    # List of files of the component. These files are checked by VectorCodeAnalyzer. If one of the files cannot be found
+    # in the project folders, analysis is skipped.
+    plugin.files = [
+    # module source code
+                    "KeyM.c",
+                    "KeyM_Asn1.c",
+                    "KeyM_Cert.c",
+                    "KeyM_Cfg.c",
+                    "KeyM_Remote.c",
+    # VCA stubs of other modules
+                    "KeyM_Csm.vcaspecs.c",
+                    "KeyM_VStdLib.vcaspecs.c",
+                    "KeyM_StbM.vcaspecs.c",
+                    "KeyM_Appl.vcaspecs.c",
+                   ]
+
+    # Optional: Define a new symbol. The define will be passed directly to the executable.
+    plugin.defines = ["__VCA__"]
+
+    # Select the feature set. VectorCodeAnalyzer will behave consistently within one feature set, independent of the
+    # actual version of VectorCodeAnalyzer. This ensures backward compatibility.
+    # The feature set should always match the most recent one. A warning is outputted if there is a new feature set
+    # available.
+    plugin.feature_set_version = 6
+
+    # VCA analysis options to configure the VCA runtime. All options are optional.
+    plugin.vca_options = {
+                          # Select the engine with which the analysis shall be executed ("fwd-dfa"/"cdfa")
+                          "engine": "fwd-dfa",
+
+                          # Select the widening threshold for the first analysis step
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "widening_threshold": 0,
+
+                          # Select the narrowing threshold for the second analysis step
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "narrowing_threshold": 0,
+
+                          # Select the iteration limit to adjust the number of repetitions per cycle
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "iteration_limit": 0,
+                         }
+
+    # Additional arguments which are added to the VCA invocation
+    plugin.additional_arguments = [
+                                   # Workaround for VCA issue with struct copy operations
+                                   "-XClang=-fpcc-struct-return",
+                                   # Workaround for VCA issue where VCA only considers non-used functions as APIs
+                                   # This list contains all APIs of KeyM and needs to be adapted if an API is added. If an entry function is not found, it is skipped.
+                                   "-entries=KeyM_CallbackNotificationSignature,KeyM_Cert_IsBusy,KeyM_Cert_SearchCert,KeyM_Cert_SetCertificateRteWrapper,KeyM_CertElementGet,KeyM_CertElementGetFirst,KeyM_CertElementGetNext,KeyM_CertGetStatus,KeyM_CertificateElementGetByIndex,KeyM_CertificateElementGetCount,KeyM_CertStructureGet,KeyM_CsrElementSet,KeyM_Deinit,KeyM_DispatchRemoteJob,KeyM_DispatchRemoteKeyElementGet,KeyM_DispatchRemoteKeyElementSet,KeyM_Finalize,KeyM_GetCertHash,KeyM_GetPubKeyHash,KeyM_GetCertificate,KeyM_GetGroupCertId,KeyM_GetIssuerCertId,KeyM_GetVersionInfo,KeyM_Init,KeyM_InitCSR,KeyM_InitMemory,KeyM_MainBackgroundFunction,KeyM_MainFunction,KeyM_NvBlock_Callback,KeyM_NvBlock_Callback_CRE,KeyM_NvBlock_Init,KeyM_NvBlock_Init_CRE,KeyM_NvBlock_ReadFromBlock,KeyM_NvBlock_ReadFrom_CRE,KeyM_NvBlock_WriteToBlock,KeyM_NvBlock_WriteTo_CRE,KeyM_Prepare,KeyM_ServiceCertificate,KeyM_ServiceCertificateById,KeyM_ServiceCertificateByIdRteAdpt,KeyM_SetCertificate,KeyM_SetCertificateInGroup,KeyM_SetCertificateWithConstPtr,KeyM_SetCRE,KeyM_Start,KeyM_Update,KeyM_Verify,KeyM_VerifyCertificate,KeyM_VerifyCertificateChain,KeyM_VerifyCertificateChainWithConstPtr,KeyM_VerifyCertificates,KeyM_VerifyGroup,KeyM_Cert_GetDynamicIssuerCertId,KeyM_CertElementGetByStructureType,KeyM_CertDelete,KeyM_CertInfoGet,KeyM_GetCertBasicConstraints,KeyM_GetCertKeyUsage",
+                                  ]

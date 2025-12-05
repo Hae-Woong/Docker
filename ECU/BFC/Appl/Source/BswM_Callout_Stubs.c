@@ -20,7 +20,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: BswM_Callout_Stubs.c
- *   Generation Time: 2025-02-27 16:00:03
+ *   Generation Time: 2025-11-06 16:02:32
  *           Project: LightControl - Version 1.0
  *          Delivery: PAI11871
  *      Tool Version: DaVinci Configurator Classic (beta) 5.29.25
@@ -44,7 +44,7 @@
  * The generated code contains features that are not licensed and thus serial production is not allowed. The code may include errors.
  * 
  * [Warning] Cfg00033 - No valid license file. Serial production is not allowed! 
- * - No license file (.veplc) found in 'D:\DaVinciPackageManager\Packages\BSW'. Please contact the Vector support to obtain valid licenses.
+ * - No license file (.veplc) found in 'D:\BSW'. Please contact the Vector support to obtain valid licenses.
  *********************************************************************************************************************/
 
 /**********************************************************************************************************************

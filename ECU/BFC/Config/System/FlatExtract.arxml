@@ -381,13 +381,6 @@
                                     <SD GID="d4c00a49-6db7-4d27-b260-ddee58f5cf4c">/AURIX2G/EcucDefs/Fls_ib_bswmd/BswModuleDescriptions/Fls/FlsBehavior/UserContentCount</SD>
                                     <SD GID="9f803859-f83b-49df-9e85-88d794fdc728">/AURIX2G/EcucDefs/Fls_ib_bswmd/BswModuleDescriptions/Fls/FlsBehavior/Write</SD>
                                     <SD GID="c4c022c4-0749-47d4-95fd-3551b141a848">/AURIX2G/EcucDefs/Fls_ib_bswmd/BswModuleDescriptions/Fls_17_Dmu_MainFunction</SD>
-                                    <SD GID="8dfb666e-3459-40d9-b8e7-678a809baf5e">/AURIX2G/EcucDefs/Irq_ib_bswmd/BswModuleDescriptions/Irq/IrqBehavior</SD>
-                                    <SD GID="f836191c-d225-4f67-a48e-2ba57e1b10ea">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib/McalLibBehavior</SD>
-                                    <SD GID="cd9c1760-772b-48b1-bbbb-e6df81de83fa">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib/McalLibBehavior/CpuEndInit</SD>
-                                    <SD GID="23cdd627-0281-4341-be9b-6767f12b4695">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib/McalLibBehavior/PeripheralEndInit</SD>
-                                    <SD GID="c0d2d4d1-264e-46d7-8ec3-d2a92b01d2cf">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib/McalLibBehavior/SafetyEndInit</SD>
-                                    <SD GID="4f1b2952-28fa-468d-9326-e594991aa134">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib/McalLibBehavior/StmTimerResolution</SD>
-                                    <SD GID="3b7ae367-9ea5-4d11-bd5f-9c00909c9e18">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib_Virtual</SD>
                                     <SD GID="6b3f72f5-d2d0-4016-b148-cde5322ddad3">/AURIX2G/EcucDefs/Mcu_ib_bswmd/BswModuleDescriptions/Mcu/McuBehavior</SD>
                                     <SD GID="de46ab08-2cdb-4688-a136-4443cc15d061">/AURIX2G/EcucDefs/Mcu_ib_bswmd/BswModuleDescriptions/Mcu/McuBehavior/AtomAgcReg</SD>
                                     <SD GID="241ae5ad-70eb-496c-bccf-0265fa39fa3c">/AURIX2G/EcucDefs/Mcu_ib_bswmd/BswModuleDescriptions/Mcu/McuBehavior/TomTgcReg</SD>
@@ -1304,9 +1297,7 @@
                                     <SD GID="942faa49-2c00-4808-969e-75fdf1054a26">/MICROSAR/Dem_swc/Interfaces/EventAvailable/E_NOT_OK</SD>
                                     <SD GID="cb5deb39-35a2-49f0-996e-594a3f9fe68f">/MICROSAR/Dem_swc/Interfaces/EventAvailable/E_OK</SD>
                                     <SD GID="01192bec-879f-4089-808d-1381d7c6afe8">/MICROSAR/Dem_swc/Interfaces/EventAvailable/GetEventAvailable</SD>
-                                    <SD GID="d1d46c9e-68c3-41ad-b003-f3d327855a89">/MICROSAR/Dem_swc/Interfaces/EventAvailable/GetEventAvailable/AvailableStatus</SD>
                                     <SD GID="c070b6a2-7a8c-4dde-a765-72380f112e4c">/MICROSAR/Dem_swc/Interfaces/EventAvailable/SetEventAvailable</SD>
-                                    <SD GID="814e3147-5d69-4ab4-a1de-0814ba713b98">/MICROSAR/Dem_swc/Interfaces/EventAvailable/SetEventAvailable/AvailableStatus</SD>
                                     <SD GID="23f7fc3d-50db-41cb-8a61-b44bbab14c77">/MICROSAR/Dem_swc/Interfaces/GeneralDiagnosticInfo</SD>
                                     <SD GID="6640719a-770d-4f07-996b-bf05dd2ed475">/MICROSAR/Dem_swc/Interfaces/GeneralDiagnosticInfo/DEM_BUFFER_TOO_SMALL</SD>
                                     <SD GID="63832295-6949-46e0-a2c4-5edbf05d360e">/MICROSAR/Dem_swc/Interfaces/GeneralDiagnosticInfo/DEM_E_NO_DTC_AVAILABLE</SD>

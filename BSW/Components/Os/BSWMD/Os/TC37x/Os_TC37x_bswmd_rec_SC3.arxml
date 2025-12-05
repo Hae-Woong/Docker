@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by Vector Employee (Vector Informatik GmbH) -->
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-2-1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+	<AR-PACKAGES>
+		<AR-PACKAGE UUID="ff55d029-386d-43a2-b3c2-dfef4c7a5e36">
+			<SHORT-NAME>MICROSAR</SHORT-NAME>
+			<ELEMENTS>
+				<ECUC-MODULE-CONFIGURATION-VALUES UUID="070ff892-2f97-4869-ba89-b5cddf6aefa3">
+					<SHORT-NAME>Os_Rec</SHORT-NAME>
+					<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/Os</DEFINITION-REF>
+					<CONTAINERS>
+						<ECUC-CONTAINER-VALUE UUID="2b697d67-8453-4108-91be-5b58a3f2df5c">
+							<SHORT-NAME>OsMemoryProtection</SHORT-NAME>
+							<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection</DEFINITION-REF>
+							<SUB-CONTAINERS>
+								<ECUC-CONTAINER-VALUE UUID="13429a9a-9c69-4ff9-a880-f0c7599f081e">
+									<SHORT-NAME>EXC_ALL_Core0</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xFFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core0/OsPhysicalCore0CodeMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS1_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS2_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS3_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS4_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS5_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="48736f0c-663b-4b22-a4c1-4062ed05eb3f">
+									<SHORT-NAME>EXC_ALL_Core1</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xFFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core1/OsPhysicalCore1CodeMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS1_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS2_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS3_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS4_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS5_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="2382be51-911f-4947-89d5-982170d65e61">
+									<SHORT-NAME>EXC_ALL_Core2</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xFFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core2/OsPhysicalCore2CodeMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS1_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS2_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS3_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS4_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS5_X</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="a892db4d-d69b-40af-ada3-d09789c8cfe5">
+									<SHORT-NAME>READ_ALL_Core0</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xFFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core0/OsPhysicalCore0DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS1_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS2_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS3_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS4_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS5_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="ba587f19-c2c6-4d85-b894-44431cc29a41">
+									<SHORT-NAME>READ_ALL_Core1</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xFFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core1/OsPhysicalCore1DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS1_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS2_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS3_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS4_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS5_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="25aeeec4-43c9-466d-920b-57e95175020f">
+									<SHORT-NAME>READ_ALL_Core2</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xFFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core2/OsPhysicalCore2DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS1_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS2_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS3_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS4_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS5_R</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="6a85815f-ce22-451a-b49b-04a1d77cc1eb">
+									<SHORT-NAME>TRUSTED_WRITE_OWN_SPR_Core0</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0x7FFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>_OS_CORE0_STACKS_END</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core0/OsPhysicalCore0DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_W</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="5dfab4f2-b569-4e4c-bb19-2f2f908a4974">
+									<SHORT-NAME>TRUSTED_WRITE_OWN_SPR_Core1</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0x6FFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>_OS_CORE1_STACKS_END</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core1/OsPhysicalCore1DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_W</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="5b774e83-84a3-4f19-9865-9ada92545270">
+									<SHORT-NAME>TRUSTED_WRITE_OWN_SPR_Core2</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0x5FFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>_OS_CORE2_STACKS_END</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core2/OsPhysicalCore2DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_W</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="9dfab64c-595f-4dc3-a6dc-91a1d7232aa0">
+									<SHORT-NAME>TRUSTED_WRITE_SEGMENT_8_To_B_Core0</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0x80000000</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xBFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core0/OsPhysicalCore0DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_W</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="7444600f-0869-4108-afe3-8dc5cca7fbec">
+									<SHORT-NAME>TRUSTED_WRITE_SEGMENT_E_To_F_Core0</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0xE0000000</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xFFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core0/OsPhysicalCore0DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_W</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="347c550d-9523-469b-9361-6761dfc4f4bd">
+									<SHORT-NAME>TRUSTED_WRITE_SEGMENT_8_To_B_Core1</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0x80000000</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xBFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core1/OsPhysicalCore1DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_W</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="753dbc2e-03a2-446d-8789-2aaae71e4565">
+									<SHORT-NAME>TRUSTED_WRITE_SEGMENT_E_To_F_Core1</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0xE0000000</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xFFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core1/OsPhysicalCore1DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_W</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="5bf74191-bc66-4270-8dc6-358ca4984e09">
+									<SHORT-NAME>TRUSTED_WRITE_SEGMENT_8_To_B_Core2</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0x80000000</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xBFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core2/OsPhysicalCore2DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_W</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="aee60d2f-f05a-4e9e-a59a-e3dfbe9b9ad2">
+									<SHORT-NAME>TRUSTED_WRITE_SEGMENT_E_To_F_Core2</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion</DEFINITION-REF>
+									<PARAMETER-VALUES>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionStartAddress</DEFINITION-REF>
+											<VALUE>0xE0000000</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+										<ECUC-TEXTUAL-PARAM-VALUE>
+											<DEFINITION-REF DEST="ECUC-STRING-PARAM-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionEndAddress</DEFINITION-REF>
+											<VALUE>0xFFFFFFF8</VALUE>
+										</ECUC-TEXTUAL-PARAM-VALUE>
+									</PARAMETER-VALUES>
+									<REFERENCE-VALUES>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionProtectionUnit</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/Core2/OsPhysicalCore2DataMpu</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+										<ECUC-REFERENCE-VALUE>
+											<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Os/OsMemoryProtection/OsMemoryRegion/OsMemoryRegionAccessRights</DEFINITION-REF>
+											<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Os_Rec/OsPublishedInformation/TC37x/OsMemoryRegionSpecifics/PS0_W</VALUE-REF>
+										</ECUC-REFERENCE-VALUE>
+									</REFERENCE-VALUES>
+								</ECUC-CONTAINER-VALUE>
+							</SUB-CONTAINERS>
+						</ECUC-CONTAINER-VALUE>
+						<ECUC-CONTAINER-VALUE UUID="4f0e3a2d-4f73-415d-9241-7c3ecb5e009f">
+							<SHORT-NAME>OsOS</SHORT-NAME>
+							<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Os/OsOS</DEFINITION-REF>
+							<PARAMETER-VALUES>
+								<ECUC-TEXTUAL-PARAM-VALUE>
+									<DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/MICROSAR/Os/OsOS/OsScalabilityClass</DEFINITION-REF>
+									<VALUE>SC3</VALUE>
+								</ECUC-TEXTUAL-PARAM-VALUE>
+							</PARAMETER-VALUES>
+						</ECUC-CONTAINER-VALUE>
+					</CONTAINERS>
+				</ECUC-MODULE-CONFIGURATION-VALUES>
+			</ELEMENTS>
+		</AR-PACKAGE>
+	</AR-PACKAGES>
+</AUTOSAR>

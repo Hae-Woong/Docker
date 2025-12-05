@@ -1,0 +1,3308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-1-1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+	<AR-PACKAGES>
+		<AR-PACKAGE UUID="ff55d029-386d-43a2-b3c2-dfef4c7a5e36">
+			<SHORT-NAME>MICROSAR</SHORT-NAME>
+			<AR-PACKAGES>
+				<AR-PACKAGE UUID="95bdeed2-921e-4200-9426-8baf454cd31a">
+					<SHORT-NAME>EthSwt_Generic</SHORT-NAME>
+					<ELEMENTS>
+						<BSW-IMPLEMENTATION UUID="3bc418a7-8a66-4401-8818-9a689f45cec6">
+							<SHORT-NAME>EthSwt_Impl</SHORT-NAME>
+							<PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+							<SW-VERSION>1.00.01</SW-VERSION>
+							<USED-CODE-GENERATOR>DaVinci Configurator</USED-CODE-GENERATOR>
+							<VENDOR-ID>30</VENDOR-ID>
+							<AR-RELEASE-VERSION>4.02.01</AR-RELEASE-VERSION>
+							<BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/MICROSAR/EthSwt_30_Generic_ib_bswmd/BswModuleDescriptions/EthSwt/EthSwt_30_GenericBehavior</BEHAVIOR-REF>
+							<PRECONFIGURED-CONFIGURATION-REFS>
+								<PRECONFIGURED-CONFIGURATION-REF DEST="ECUC-MODULE-CONFIGURATION-VALUES">/MICROSAR/EthSwt_Generic/EthSwt_Pre</PRECONFIGURED-CONFIGURATION-REF>
+							</PRECONFIGURED-CONFIGURATION-REFS>
+							<RECOMMENDED-CONFIGURATION-REFS>
+								<RECOMMENDED-CONFIGURATION-REF DEST="ECUC-MODULE-CONFIGURATION-VALUES">/MICROSAR/EthSwt_Generic/EthSwt_Rec</RECOMMENDED-CONFIGURATION-REF>
+							</RECOMMENDED-CONFIGURATION-REFS>
+							<VENDOR-API-INFIX>Generic</VENDOR-API-INFIX>
+							<VENDOR-SPECIFIC-MODULE-DEF-REFS>
+								<VENDOR-SPECIFIC-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/MICROSAR/EthSwt_Generic/EthSwt</VENDOR-SPECIFIC-MODULE-DEF-REF>
+							</VENDOR-SPECIFIC-MODULE-DEF-REFS>
+						</BSW-IMPLEMENTATION>
+						<ECUC-MODULE-DEF UUID="33152e47-7df1-44d7-aa3f-6e22c87713af">
+							<SHORT-NAME>EthSwt</SHORT-NAME>
+							<DESC>
+								<L-2 L="EN">Configuration of the EthSwt (Ethernet Switch Driver)</L-2>
+							</DESC>
+							<CATEGORY>VENDOR_SPECIFIC_MODULE_DEFINITION</CATEGORY>
+							<ADMIN-DATA>
+								<DOC-REVISIONS>
+									<DOC-REVISION>
+										<REVISION-LABEL>1.00.00</REVISION-LABEL>
+										<STATE>Beta</STATE>
+										<ISSUED-BY>visyoe</ISSUED-BY>
+										<DATE>2018-12-27</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<REASON>
+													<L-2 L="EN">Inital creation</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>1.00.01</REVISION-LABEL>
+										<STATE>Beta</STATE>
+										<ISSUED-BY>visyoe</ISSUED-BY>
+										<DATE>2019-04-15T08:20:40+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">ESCAN00102859</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">wrong container name</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+								</DOC-REVISIONS>
+							</ADMIN-DATA>
+							<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+							<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+							<REFINED-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/EthSwt</REFINED-MODULE-DEF-REF>
+							<SUPPORTED-CONFIG-VARIANTS>
+								<SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT>
+							</SUPPORTED-CONFIG-VARIANTS>
+							<CONTAINERS>
+								<ECUC-PARAM-CONF-CONTAINER-DEF UUID="8377aa88-1b54-4980-9e7d-90a22373c437">
+									<SHORT-NAME>EthSwtGeneral</SHORT-NAME>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DV:CfgPostBuild">
+												<SD GID="DV:postBuildSelectableChangeable">false</SD>
+												<SD GID="DV:postBuildNotDeletable">false</SD>
+											</SDG>
+											<SDG GID="MSR:Process">
+												<SD GID="MSR:TraceRef">SPEC-2265488</SD>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+									<REQUIRES-INDEX>false</REQUIRES-INDEX>
+									<PARAMETERS>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="fb95b262-ccdb-4fe9-a69b-fe07a7caf751">
+											<SHORT-NAME>EthSwtDevErrorDetect</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Development Error Detection</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter switches the Development Error Detection and Notification ON or OFF.
+TRUE:	Development error detection is enabled.
+FALSE:	Development error detection is disabled.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265489</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>true</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="d40e6cc9-3d27-4234-8f2c-37008278ca6b">
+											<SHORT-NAME>EthSwtEnableVlanApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_EnableVlan() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_EnableVlan() to to influence the VLAN forwarding on ports during runtime.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265490</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="7c0e6a4a-a0b6-45ad-983f-5dae1ad5f260">
+											<SHORT-NAME>EthSwtGetArlTableApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_GetArlTable() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_GetArlTable() to get current L2 lookup table entries.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265491</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="91ec919c-4298-4f3d-b0f4-e03978804413">
+											<SHORT-NAME>EthSwtGetBufferLevelApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_GetBufferLevel() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_GetBufferLevel() to get current buffer level.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265492</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="1699f2a6-677b-46e6-b80c-4f2ab445beb4">
+											<SHORT-NAME>EthSwtGetDropCountApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_GetDropCount() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_GetDropCount() to retriev the drop counts.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265493</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="9ceaf7e5-1acf-48ee-8064-5ac9aaeba75a">
+											<SHORT-NAME>EthSwtGetEtherStatsApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_GetEtherStats() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_GetEtherStats() to retriev the Ethernet statistic counters.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265494</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="65497746-fb2b-4feb-9231-c2afcb48f64d">
+											<SHORT-NAME>EthSwtGetMacLearningModeApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_GetMacLearningModel() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_GetMacLearningMode() to get current MAC learning mode.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265495</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="6e2ea564-c31e-4660-9bbc-e9250e24db96">
+											<SHORT-NAME>EthSwtGetPortMacAddrApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_GetPortMacAddr() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_GetPortMacAddress() to get the corresponding port to a MAC address.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265496</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="917b013b-d587-4405-895f-decba5bf8c7c">
+											<SHORT-NAME>EthSwtGetSwitchRegApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_GetSwitchReg() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_GetSwitchReg() to read switch registers.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265497</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="049df871-557e-479f-88d8-24443a16657b">
+											<SHORT-NAME>EthSwtGlobalTimeSupportApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable Global Time Support API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the functions related to the global time support feature.
+
+Feature not supported.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-INTEGER-PARAM-DEF UUID="543bccc6-dd64-4c8c-afa1-b1c56e4fdc12">
+											<SHORT-NAME>EthSwtSwtIndex</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Index</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter defines the module index.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265498</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>0</DEFAULT-VALUE>
+											<MAX>255</MAX>
+											<MIN>0</MIN>
+										</ECUC-INTEGER-PARAM-DEF>
+										<ECUC-FUNCTION-NAME-DEF UUID="63ecbf81-cd3a-4202-b3c7-e7a2501a628d">
+											<SHORT-NAME>EthSwtLinkDownUser</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Link Down User</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter defines the user name of the callout functions to be called if a link state changes (up/down) is detected during link state retrieval (EthSwt_GetLinkState()).
+( Not supported )
+ 
+Function prototypes:
+void &lt;User&gt;_LinkUp(uint8* SwitchIdxPtr, uint8* PortIdxPtr);
+void &lt;User&gt;_LinkDown(uint8* SwitchIdxPtr, uint8* PortIdxPtr);
+
+where &lt;User&gt; is the value of this parameter.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265499</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+										</ECUC-FUNCTION-NAME-DEF>
+										<ECUC-FUNCTION-NAME-DEF UUID="2cd2dcae-e236-4c34-b74f-a4a3a671c011">
+											<SHORT-NAME>EthSwtLinkUpUser</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Link Up User</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter defines the user name of the callout functions to be called if a link state changes (up/down) is detected during link state retrieval (EthSwt_GetLinkState()).
+( Not supported ) 
+
+Function prototypes:
+void &lt;User&gt;_LinkUp(uint8* SwitchIdxPtr, uint8* PortIdxPtr);
+void &lt;User&gt;_LinkDown(uint8* SwitchIdxPtr, uint8* PortIdxPtr);
+
+where &lt;User&gt; is the value of this parameter.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265500</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+										</ECUC-FUNCTION-NAME-DEF>
+										<ECUC-FLOAT-PARAM-DEF UUID="d1ef7345-4f5a-4586-91fa-b6697a36089f">
+											<SHORT-NAME>EthSwtMainFunctionPeriod</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">EthSwt_MainFunction() Period</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This value specifies the period the EthSwt_MainFunction() shall be called with.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:Display">
+														<SD GID="DV:BaseUnit">SEC</SD>
+														<SD GID="DV:Unit">MSEC</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>0.02</DEFAULT-VALUE>
+											<MAX>1</MAX>
+											<MIN>0.001</MIN>
+										</ECUC-FLOAT-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="78b909d8-c5ea-45d0-a5b1-5d8c31929235">
+											<SHORT-NAME>EthSwtManagementSupportApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable Frame Management Support API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the functions related to the frame management support feature.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-FLOAT-PARAM-DEF UUID="1ed04563-714d-4bfb-90db-59ca95c5ebbd">
+											<SHORT-NAME>EthSwtMgmtInfoIndicationTimeout</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Frame Management Info Indcation Timout</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter defines the timeout till management information for a specific frame must be provided.
+
+If the timeout is hit management information is assumed to be lost and indication is called without having the information so upper layers are able to recognize the issue and react on it.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:Display">
+														<SD GID="DV:BaseUnit">SEC</SD>
+														<SD GID="DV:Unit">MSEC</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>0.01</DEFAULT-VALUE>
+											<MAX>1</MAX>
+											<MIN>0.001</MIN>
+										</ECUC-FLOAT-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="a19aa94c-b201-4506-b5d1-b620d2206df5">
+											<SHORT-NAME>EthSwtPersistentConfigurationResult</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable Persistent Configuration Result Callout</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter defines if a callout function shall be called after the asynchronous NvM job triggerd by EthSwt_StoreConfiguration() or EthSwt_ResetConfiguration() has finished.
+
+FALSE: No user callout called.
+TRUE:  User callout configured by EthSwtPersistentConfigurationResultUser called.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265501</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-FUNCTION-NAME-DEF UUID="aa993e9b-552c-4f3f-bd2d-da8cba2ba39b">
+											<SHORT-NAME>EthSwtPersistentConfigurationResultUser</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Persistent Configuration Result Callout</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter defines the user name of the callout function to be called if EthSwtPersistentConfigurationResult is enabled.
+( Not Supported )
+
+Function prototype:
+void &lt;User&gt;_PersistentConfigurationResult(
+    NvM_RequestResultType JobResult
+);
+
+where &lt;User&gt; is the value of this parameter.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265502</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+										</ECUC-FUNCTION-NAME-DEF>
+										<ECUC-STRING-PARAM-DEF UUID="fa5d891b-836e-48c3-a585-1460f986f198">
+											<SHORT-NAME>EthSwtPublicCddHeaderFile</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Header File</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter defines a C/C++ header file containg the declaration of the callout defined by EthSwtPersistentConfigurationResultUser or EthSwtLinkDownUser.
+
+( Not Supported )</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265503</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<ECUC-STRING-PARAM-DEF-VARIANTS>
+												<ECUC-STRING-PARAM-DEF-CONDITIONAL>
+													<MAX-LENGTH>32</MAX-LENGTH>
+													<MIN-LENGTH>1</MIN-LENGTH>
+												</ECUC-STRING-PARAM-DEF-CONDITIONAL>
+											</ECUC-STRING-PARAM-DEF-VARIANTS>
+										</ECUC-STRING-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="d3caf564-f764-47dc-98ce-8b4cd6fafee8">
+											<SHORT-NAME>EthSwtReadTrcvRegisterApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_ReadTrcvRegister() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_ReadTrcvRegister() to read transceiver registers.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265504</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="8015a6e9-8784-4f01-a39d-33d46d9d0eba">
+											<SHORT-NAME>EthSwtResetConfigurationApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_ResetConfiguration() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_ResetConfiguration() to reset the configuration stored in NV RAM.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265505</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="41a6336e-d9b6-484b-aaad-755e324b5bc1">
+											<SHORT-NAME>EthSwtSetMacLearningModeApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_SetMacLearningModel() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_SetMacLearningMode() to influenc the MAC learning mode.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265506</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="390a5093-616e-4b77-9256-a7bdb9b0c0c9">
+											<SHORT-NAME>EthSwtSetSwitchRegApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_SetSwitchReg() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_SetSwitchReg() to write switch registers.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265507</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="fb230263-41c3-4b76-bd5f-3fe7f016f03d">
+											<SHORT-NAME>EthSwtStoreConfigurationApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_StoreConfiguration() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_StoreConfiguration() to store the current learned L2 lookup table entries in NV RAM.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265508</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="700a087a-ac2c-4572-b203-e644276e4fa7">
+											<SHORT-NAME>EthSwtVersionInfoApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_GetVersionInfo() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_GetVersionInfo() to get major, minor and patch version information.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265509</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="1b88607c-d4d8-429a-b9ab-b21456c39c8d">
+											<SHORT-NAME>EthSwtWriteTrcvRegisterApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_WriteTrcvRegister() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_WriteTrcvRegister() to write transceiver registers.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265510</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-STRING-PARAM-DEF UUID="dd1a6ae6-5e91-42bf-934f-95f4ad5cfb32">
+											<SHORT-NAME>EthSwtUserConfigFile</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">User Config File</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">Reference to an external file that will be included during generation to EthSwt_Cfg.h.
+
+The content of the user configuration file will be added at the end of the generated module configuration file and allows altering or extending the generated code.
+
+Caution: User configuration files can cause the software module to malfunction and must only be used with greate care!</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+										</ECUC-STRING-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="4e33e2d4-8584-49c9-9f0b-da3fbc33a03b">
+											<SHORT-NAME>EthSwtUpdateMCastPortAssignmentApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_UpdateMCastPortAssignment() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_UpdateMCastPortAssignment() to active/deactivate specific multicast addresses on ports.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="8d666bda-512f-4429-855b-8edcc82494fe">
+											<SHORT-NAME>EthSwtWritePortMirrorConfigurationApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_WritePortMirrorConfiguration() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_WritePortMirrorConfiguration() to write the port mirror configuration.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="e902277e-2d05-4758-bec3-536a3ee38a0d">
+											<SHORT-NAME>EthSwtReadPortMirrorConfigurationApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_ReadPortMirrorConfiguration() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_ReadPortMirrorConfiguration() to read the port mirror configuration.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="4874052c-7f73-4489-865a-51c1a8cb2b10">
+											<SHORT-NAME>EthSwtGetPortMirrorStateApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_GetPortMirrorState() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_GetPortMirrorState() to get the port mirror status.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="99f49ad8-c1c5-48af-85b6-8be53b8adaa6">
+											<SHORT-NAME>EthSwtSetPortMirrorStateApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_SetPortMirrorState() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_SetPortMirrorState() to set the port mirror status.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="bb4fc191-eea0-47cb-9b24-f711b9960ed7">
+											<SHORT-NAME>EthSwtDeletePortMirrorConfigurationApi</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable EthSwt_DeletePortMirrorConfiguration() API</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter enables/disables the function EthSwt_DeletePortMirrorConfiguration() to set the port mirror status.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+									</PARAMETERS>
+								</ECUC-PARAM-CONF-CONTAINER-DEF>
+								<ECUC-PARAM-CONF-CONTAINER-DEF UUID="398bf429-c79e-4875-8223-c9a1c367578d">
+									<SHORT-NAME>EthSwtConfig</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Configuration of one Ethernet Switch.</L-2>
+									</DESC>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DV:CfgPostBuild">
+												<SD GID="DV:postBuildSelectableChangeable">false</SD>
+												<SD GID="DV:postBuildNotDeletable">false</SD>
+											</SDG>
+											<SDG GID="MSR:Process">
+												<SD GID="MSR:TraceRef">SPEC-2265484</SD>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+									<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+									<REQUIRES-INDEX>false</REQUIRES-INDEX>
+									<PARAMETERS>
+										<ECUC-INTEGER-PARAM-DEF UUID="5b53ac2c-b951-4b19-9a1c-4e928b698ad9">
+											<SHORT-NAME>EthSwtIdx</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Index</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This value specifies the index of an Ethernet switch.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265295,SPEC-2265297,SPEC-2265485</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>true</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>0</DEFAULT-VALUE>
+											<MAX>255</MAX>
+											<MIN>0</MIN>
+										</ECUC-INTEGER-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="073e4a8c-50a6-4338-882b-bc7a61b741a6">
+											<SHORT-NAME>EthSwtDropDoubleTagged</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Enable dropping of Double Tagged Frames</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This paremeter enables/disables dropping of Double Tagged Ethernet frames.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>true</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+									</PARAMETERS>
+									<REFERENCES>
+										<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="7f6a645a-a220-4721-b1ae-4ec058f6378c">
+											<SHORT-NAME>EthSwtManagementPortRef</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Management Port</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This reference defines the port where the managment entity itself (Host-CPU) or the next switch on data path to it is connected to.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/EthSwt_Generic/EthSwt/EthSwtConfig/EthSwtPort</DESTINATION-REF>
+										</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+										<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="7924a5ac-edc0-478b-9d3b-533b1afa52a0">
+											<SHORT-NAME>EthSwtManagementEthCtrlRef</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Management Ethernet Controller</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This reference defines the Ethernet Controller connected to the Management Port where the frames to be managed are sent to.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig</DESTINATION-REF>
+										</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+										<ECUC-REFERENCE-DEF UUID="019ec87f-4d55-4516-8509-459e6ee1840d">
+											<SHORT-NAME>EthSwtGenericDriverRef</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Generic Driver</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">Reference to the generic driver which is assigned to the controller instance</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/EthSwt_Generic/EthSwt/EthSwtGenericDriver</DESTINATION-REF>
+										</ECUC-REFERENCE-DEF>
+									</REFERENCES>
+									<SUB-CONTAINERS>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="42d787b0-d162-423a-9957-7899f1c57610">
+											<SHORT-NAME>EthSwtPort</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Configuration of one Ethernet Switch Port.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265511</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<PARAMETERS>
+												<ECUC-INTEGER-PARAM-DEF UUID="c7381889-8f7a-40c5-8f50-879f81b9480a">
+													<SHORT-NAME>EthSwtPortIdx</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">Port Index</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">This parameter defines the index of this port.</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265296,SPEC-2265513</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>true</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>0</DEFAULT-VALUE>
+													<MAX>255</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="facaae4a-7894-41b2-936c-f4056e511e43">
+													<SHORT-NAME>EthSwtPortSpeed</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">Speed</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">This parameter defines the communication speed applied on this port in case there is no transceiver configured by EthSwtPortTrcvRef.
+
+Some ports do not allow to configure this parameter.
+
+ETHSWT_PORT_SPEED_10:     10 MBit/s
+ETHSWT_PORT_SPEED_100:   100 MBit/s
+ETHSWT_PORT_SPEED_1000: 1000 MBit/s</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265516</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>ETHSWT_PORT_SPEED_100</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="782dbd29-3f49-45d3-aa51-ecce06b01b80">
+															<SHORT-NAME>ETHSWT_PORT_SPEED_10</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e8a759a8-fb20-4c11-92a6-acd6977d8cb6">
+															<SHORT-NAME>ETHSWT_PORT_SPEED_100</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="6b65d3f6-aa12-4286-bec4-f15bf2c8b0d8">
+															<SHORT-NAME>ETHSWT_PORT_SPEED_1000</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-STRING-PARAM-DEF UUID="a553c7a6-4b31-4ad3-8469-2f251f384607">
+													<SHORT-NAME>EthSwtPortPredefinedMacAddresses</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">Static MAC address</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">This parameter defines a 48-bit MAC address which shalle be applied to the address resolution table during switch initialization.
+( Not Supported )
+
+The MAC address will persistenly applied to the address resolution table and will not age out.
+The format of the MAC address must match xx:xx:xx:xx:xx:xx.</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265515</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+												</ECUC-STRING-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="879437b7-8bec-4a36-8bed-f4dea71fe487">
+													<SHORT-NAME>EthSwtPortPhysicalLayerType</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">Physical Layer Type</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">This parameter defines the type of the interface on the pin level of the switch.
+
+ETHSWT_PORT_BASE_T:
+100BaseTx/1000BaseTx/...
+
+ETHSWT_PORT_BROAD_R_REACH:
+BroadR-Reach
+
+ETHSWT_PORT_RTPGE:
+Reduced Twisted Pair Gigabit Ethernet
+
+ETHSWT_PORT_X_MII:
+xMII Interface
+
+ETHSWT_PORT_INTERAL:
+Interface to the integrated CPU</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265514</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>ETHSWT_PORT_BROAD_R_REACH</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="fcdd874b-3b8a-4627-805b-7493d7fa79eb">
+															<SHORT-NAME>ETHSWT_PORT_BASE_T</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="1a0b9e53-87f4-4e74-969e-d34e2fb98720">
+															<SHORT-NAME>ETHSWT_PORT_BROAD_R_REACH</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e54e9bf4-a982-4692-85db-dece30dd6adf">
+															<SHORT-NAME>ETHSWT_PORT_RTPGE</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="aa507c29-7c0d-4871-8c1d-3df0fd909ef3">
+															<SHORT-NAME>ETHSWT_PORT_X_MII</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="0028cbd6-10ae-4730-8104-30e7dfdb9708">
+															<SHORT-NAME>ETHSWT_PORT_INTERNAL</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-BOOLEAN-PARAM-DEF UUID="ef76400e-345c-4749-8ba2-be40736af107">
+													<SHORT-NAME>EthSwtEnableLinkDownCallback</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">Enable IEEE802.1X Link Down Callback</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Enables the callback &lt;User&gt;_LinkDown for this EthSwtPort if an IEEE802.1X link loss is detected.
+(not supported)</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265512</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>false</DEFAULT-VALUE>
+												</ECUC-BOOLEAN-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="b451ccd8-0d31-40e1-980d-e2b62d4094f5">
+													<SHORT-NAME>EthSwtXMiiPhyType</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">xMII PHY Type</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">This parameter defines if and how a PHY is connected to the switch xMII port.
+
+
+ETHSWT_PHY_MANAGED_BY_MCU:
+The xMii interface of the port is connected to a PHY having its managment interface (MDIO/MDC) connected to a MCU.
+
+ETHSWT_PHY_MANAGED_BY_SWITCH:
+The xMii interface of the port is connected to a PHY having its managment interface (MDIO/MDC) connected to the switch too.
+
+ETHSWT_NO_PHY:
+The xMii interface of the port is directly connected to annother xMii interface without a PHY inbetween.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>ETHSWT_NO_PHY</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="862952da-37b7-4392-bc4c-f689c2e158fe">
+															<SHORT-NAME>ETHSWT_PHY_MANAGED_BY_MCU</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="239d44e9-5c94-4b53-aee4-9c2f57e9aa4d">
+															<SHORT-NAME>ETHSWT_PHY_MANAGED_BY_SWITCH</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e73aa404-413a-4037-ad68-e096fb6c9d4c">
+															<SHORT-NAME>ETHSWT_NO_PHY</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="e6f9ef01-38c0-43b3-9698-40feaa719f74">
+													<SHORT-NAME>EthSwtHardwarePort</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">This parameter defines the Hardware Port represented by this configuration port.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>ETHSWT_PORT_0</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="84ab6680-238b-425f-b2a6-6abfa70682b1">
+															<SHORT-NAME>ETHSWT_PORT_0</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_0</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="71d7f079-eb7e-40bc-96bd-e737a7c057f3">
+															<SHORT-NAME>ETHSWT_PORT_1</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_1</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="702d75ff-77c5-41ab-97cf-a4f9f6ed9081">
+															<SHORT-NAME>ETHSWT_PORT_2</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_2</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="a4dd0d8b-ffec-4839-a15d-51ae44560e3b">
+															<SHORT-NAME>ETHSWT_PORT_3</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_3</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="bb935b33-df82-4819-be6c-99ece9a6d0dd">
+															<SHORT-NAME>ETHSWT_PORT_4</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_4</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="00046f5b-088c-4aab-b0dc-f3114bfdf24f">
+															<SHORT-NAME>ETHSWT_PORT_5</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_5</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="6980fafd-8b27-4ee3-b1e8-912c0aa7f9ef">
+															<SHORT-NAME>ETHSWT_PORT_6</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_6</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="44beb435-7240-446e-b970-193f60bf1cf2">
+															<SHORT-NAME>ETHSWT_PORT_7</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_7</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="a154ca38-f30d-48da-a2e3-1ae91a3c71b3">
+															<SHORT-NAME>ETHSWT_PORT_8</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_8</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="a5375187-0906-4dd3-8f82-ae230747d4b9">
+															<SHORT-NAME>ETHSWT_PORT_9</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_9</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="b352c885-4459-4aa0-98e8-006e307f60cc">
+															<SHORT-NAME>ETHSWT_PORT_10</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_10</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e0db9ae4-eaa0-41cf-b937-3878cebbeffa">
+															<SHORT-NAME>ETHSWT_PORT_11</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_11</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="8de7812e-efc5-45ae-a609-1eee2ceb6b84">
+															<SHORT-NAME>ETHSWT_PORT_12</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_12</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="19505718-6827-4988-bb91-a26c4fdf8817">
+															<SHORT-NAME>ETHSWT_PORT_13</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_13</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="79af225c-dd49-4dec-ae10-6e1c466cdc99">
+															<SHORT-NAME>ETHSWT_PORT_14</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_14</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e6e4c9cc-1734-4886-b657-b244d8d64f4b">
+															<SHORT-NAME>ETHSWT_PORT_15</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_15</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="181e2b51-6bb7-4be1-8ff9-b521ce930cb5">
+															<SHORT-NAME>ETHSWT_PORT_16</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_16</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="79270e94-c32b-43e4-9d28-a346817d2df7">
+															<SHORT-NAME>ETHSWT_PORT_17</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_17</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="06b005e9-7b02-4d39-a57a-6ee6ee675c43">
+															<SHORT-NAME>ETHSWT_PORT_18</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_18</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="f43e7fb6-95c1-4fe9-b586-c2b6f1e418d3">
+															<SHORT-NAME>ETHSWT_PORT_19</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_19</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="bf30fa51-db2f-4b6f-b767-215861b34f7c">
+															<SHORT-NAME>ETHSWT_PORT_20</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_20</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="d1f509d2-3599-4d6c-ac84-a4ae9b333e59">
+															<SHORT-NAME>ETHSWT_PORT_21</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_21</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="b5327b26-d528-4771-a3e2-972d1b65b2aa">
+															<SHORT-NAME>ETHSWT_PORT_22</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_22</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="dc4ea1e8-adbb-4847-af5f-a3c4d5a33520">
+															<SHORT-NAME>ETHSWT_PORT_23</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_23</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="aae72259-cda6-4c20-b030-8caf9b9108a3">
+															<SHORT-NAME>ETHSWT_PORT_24</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_24</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="ec89b589-04f4-4fd1-ba7b-919cad888e2e">
+															<SHORT-NAME>ETHSWT_PORT_25</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_25</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="248d69e4-9d76-4d05-8b6e-a2eab85c43d2">
+															<SHORT-NAME>ETHSWT_PORT_26</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_26</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="17a35b15-7512-4a02-abbb-d5330e61d9dc">
+															<SHORT-NAME>ETHSWT_PORT_27</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_27</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="eb3cba88-4cba-4b53-9cae-4dcad6d4200e">
+															<SHORT-NAME>ETHSWT_PORT_28</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_28</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="4fe86831-2b45-4f59-a484-4a2acdbfd935">
+															<SHORT-NAME>ETHSWT_PORT_29</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_29</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="34482b05-3ce6-49f0-9fca-80045f863c86">
+															<SHORT-NAME>ETHSWT_PORT_30</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_30</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="41961c64-5552-4b1e-b819-46b0366758c7">
+															<SHORT-NAME>ETHSWT_PORT_31</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">ETHSWT_PORT_31</L-4>
+															</LONG-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="70aba6e0-043a-411c-8770-724991a510e1">
+													<SHORT-NAME>EthSwtXMiiType</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">xMII Type</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">This parameter defines the type of MII-Interface used to connect to the ports counter part (MAC/PHY).
+
+ETHSWT_RVMII:
+Reverse MII interface allowing 10/100 MBit/s data connections.
+
+ETHSWT_MII:
+Common MII interface allowing 10/100 MBit/s data connections.
+
+ETHSWT_RGMII:
+Reduced Gigabit MII Interface allowing 10/100/1000 MBit/s data connections.
+
+ETHSWT_SGMII:
+Serial Gigabit MII Interface allowing 10/100/1000 MBit/s data connections.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>ETHSWT_RVMII</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="a5ba0057-4f1c-4df6-bc6b-908f221cb673">
+															<SHORT-NAME>ETHSWT_RVMII</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="46bd1518-9b95-4088-8680-82ec7bc6adbc">
+															<SHORT-NAME>ETHSWT_MII</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e7e29eb8-04e4-4fd1-baae-e4953512c6c5">
+															<SHORT-NAME>ETHSWT_RGMII</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="edfe3bf6-f308-434b-93d0-749e185d9300">
+															<SHORT-NAME>ETHSWT_SGMII</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-BOOLEAN-PARAM-DEF UUID="307229df-92f0-4981-9cf3-158b8195729c">
+													<SHORT-NAME>EthSwtPortTimeStampSupport</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">Time Stamping Support</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">This parameter defines if time stamping on this port is enabled/disabled.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>false</DEFAULT-VALUE>
+												</ECUC-BOOLEAN-PARAM-DEF>
+											</PARAMETERS>
+											<REFERENCES>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="c5c3905c-6867-4a7f-8230-78dc7ddd9955">
+													<SHORT-NAME>EthSwtPortTrcvRef</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">Transceiver</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the ethernet transceiver driver this port is connected to.
+
+Some ports do not allow to configure this parameter because the PHY configuration is handled switch driver internally.</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265517</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+											</REFERENCES>
+											<SUB-CONTAINERS>
+												<ECUC-PARAM-CONF-CONTAINER-DEF UUID="a021019d-2f3e-45f6-92ef-7d14870eff1e">
+													<SHORT-NAME>EthSwtPortIngress</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Configuration of the ingress behavior of a port.</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:CfgPostBuild">
+																<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																<SD GID="DV:postBuildNotDeletable">false</SD>
+															</SDG>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265518</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<PARAMETERS>
+														<ECUC-INTEGER-PARAM-DEF UUID="4d4848dc-9dbd-4ec0-8048-0fbf823c343e">
+															<SHORT-NAME>EthSwtPortTrafficClassAssignment</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">Traffic Class Assignment</L-4>
+															</LONG-NAME>
+															<DESC>
+																<L-2 L="EN">This parameter defines the default PCP which shall be applied to the VLAN-tag of untagged traffic.</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265306,SPEC-2265310,SPEC-2265520</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+															<SCOPE>LOCAL</SCOPE>
+															<IMPLEMENTATION-CONFIG-CLASSES>
+																<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																	<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															</IMPLEMENTATION-CONFIG-CLASSES>
+															<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+															<DEFAULT-VALUE>0</DEFAULT-VALUE>
+															<MAX>7</MAX>
+															<MIN>0</MIN>
+														</ECUC-INTEGER-PARAM-DEF>
+														<ECUC-INTEGER-PARAM-DEF UUID="eedb5f44-476e-401a-ada6-d453c1b2aabe">
+															<SHORT-NAME>EthSwtPortIngressVlanModification</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">VLAN ID Modification</L-4>
+															</LONG-NAME>
+															<DESC>
+																<L-2 L="EN">This parameter defines the VLAN-ID untagged traffic will be tagged with.</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="DV:Display">
+																		<SD GID="DV:DefaultFormat">DEC</SD>
+																	</SDG>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265308,SPEC-2265519</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+															<SCOPE>LOCAL</SCOPE>
+															<IMPLEMENTATION-CONFIG-CLASSES>
+																<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																	<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															</IMPLEMENTATION-CONFIG-CLASSES>
+															<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+															<DEFAULT-VALUE>0</DEFAULT-VALUE>
+															<MAX>4094</MAX>
+															<MIN>0</MIN>
+														</ECUC-INTEGER-PARAM-DEF>
+													</PARAMETERS>
+													<SUB-CONTAINERS>
+														<ECUC-PARAM-CONF-CONTAINER-DEF UUID="1d0779c7-a5c7-4f86-84c1-fd5b5beca748">
+															<SHORT-NAME>EthSwtPriorityTrafficClassAssignment</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">Tuple of PCP and traffic class used for the PCP to traffic class assignment on ingress of a VLAN tagged frame.</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="DV:CfgPostBuild">
+																		<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																		<SD GID="DV:postBuildNotDeletable">false</SD>
+																	</SDG>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265306,SPEC-2265524</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>8</UPPER-MULTIPLICITY>
+															<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<PARAMETERS>
+																<ECUC-INTEGER-PARAM-DEF UUID="d6b93185-330e-4bad-8f3b-407d1e7e1088">
+																	<SHORT-NAME>EthSwtPriorityTrafficClassAssignmentPriority</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">PCP</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This value specifies the PCP the traffic class specified by EthSwtPriorityTrafficClassAssignmentTrafficClass shall be assigned to.</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265525</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>0</DEFAULT-VALUE>
+																	<MAX>7</MAX>
+																	<MIN>0</MIN>
+																</ECUC-INTEGER-PARAM-DEF>
+																<ECUC-INTEGER-PARAM-DEF UUID="2f67e118-5c66-4528-bd2b-a6a231a9fc52">
+																	<SHORT-NAME>EthSwtPriorityTrafficClassAssignmentTrafficClass</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">Traffic Class</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This value specifies the traffic class a frame with the PCP configured by EthSwtPriorityTrafficClassAssignmentPriority shall be assigned.
+
+The traffic class is used on egress side to assign the frame to a egress FIFO. Depending on the traffic class the frame is forwarded with a higher or lower priority.</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265526</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>0</DEFAULT-VALUE>
+																	<MAX>7</MAX>
+																	<MIN>0</MIN>
+																</ECUC-INTEGER-PARAM-DEF>
+															</PARAMETERS>
+														</ECUC-PARAM-CONF-CONTAINER-DEF>
+														<ECUC-PARAM-CONF-CONTAINER-DEF UUID="2d397340-6fbc-451b-b9e5-2f51829f5ad0">
+															<SHORT-NAME>EthSwtPriorityRegeneration</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">Tuple of PCP and regenerated PCP used for the PCP regeneration on ingress of a VLAN tagged frame.
+(not supported)</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="DV:CfgPostBuild">
+																		<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																		<SD GID="DV:postBuildNotDeletable">false</SD>
+																	</SDG>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265309,SPEC-2265521</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>8</UPPER-MULTIPLICITY>
+															<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<PARAMETERS>
+																<ECUC-INTEGER-PARAM-DEF UUID="e7cb341a-c0f6-45f5-9d85-52239c7226df">
+																	<SHORT-NAME>EthSwtPriorityRegenerationIngressPriority</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">PCP</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This value specifies the PCP which shall be modified to the PCP specified by EthSwtPriorityRegenerationRegeneratedPriority.
+(not supported)</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265522</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>0</DEFAULT-VALUE>
+																	<MAX>7</MAX>
+																	<MIN>0</MIN>
+																</ECUC-INTEGER-PARAM-DEF>
+																<ECUC-INTEGER-PARAM-DEF UUID="b17c51f5-a346-4d20-8a30-8528abce388f">
+																	<SHORT-NAME>EthSwtPriorityRegenerationRegeneratedPriority</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">Regenerated PCP</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This value specifies the regenerated PCP that the PCP specified by EthSwtPriorityRegenerationIngressPriority shall be changed to.
+(not supported)</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265523</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>0</DEFAULT-VALUE>
+																	<MAX>7</MAX>
+																	<MIN>0</MIN>
+																</ECUC-INTEGER-PARAM-DEF>
+															</PARAMETERS>
+														</ECUC-PARAM-CONF-CONTAINER-DEF>
+													</SUB-CONTAINERS>
+												</ECUC-PARAM-CONF-CONTAINER-DEF>
+												<ECUC-PARAM-CONF-CONTAINER-DEF UUID="b78e175f-2e05-4a72-b966-15daeb9ac25c">
+													<SHORT-NAME>EthSwtPortEgress</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Configuration of the egress behavior of a port.</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:CfgPostBuild">
+																<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																<SD GID="DV:postBuildNotDeletable">false</SD>
+															</SDG>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265305,SPEC-2265527</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<REFERENCES>
+														<ECUC-REFERENCE-DEF UUID="c5389371-4cc0-43d2-a136-6f012f90003e">
+															<SHORT-NAME>EthSwtPortEgressLastSchedulerRef</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">Last Scheduler</L-4>
+															</LONG-NAME>
+															<DESC>
+																<L-2 L="EN">Reference to the port scheduler which is the last in the egress port structure.</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265528</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+															<SCOPE>LOCAL</SCOPE>
+															<IMPLEMENTATION-CONFIG-CLASSES>
+																<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																	<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															</IMPLEMENTATION-CONFIG-CLASSES>
+															<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/EthSwt_Generic/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortScheduler</DESTINATION-REF>
+														</ECUC-REFERENCE-DEF>
+													</REFERENCES>
+													<SUB-CONTAINERS>
+														<ECUC-PARAM-CONF-CONTAINER-DEF UUID="562c85b6-293e-457a-9809-3bcc21ad182e">
+															<SHORT-NAME>EthSwtPortVlanForwarding</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">Forwarding rule used to specify the behavior that shall be applied to a VLAN tagged frame.</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="DV:CfgPostBuild">
+																		<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																		<SD GID="DV:postBuildNotDeletable">false</SD>
+																	</SDG>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265307,SPEC-2265539</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+															<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<PARAMETERS>
+																<ECUC-INTEGER-PARAM-DEF UUID="c04b9764-cfca-4629-b639-23ecd98b704e">
+																	<SHORT-NAME>EthSwtPortVlanForwardingId</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">VLAN ID</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This value specifies the VLAN ID the forwarding rule shall be applied to.</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265541</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>1</DEFAULT-VALUE>
+																	<MAX>4094</MAX>
+																	<MIN>0</MIN>
+																</ECUC-INTEGER-PARAM-DEF>
+																<ECUC-ENUMERATION-PARAM-DEF UUID="25735346-64b1-406c-8514-4a3984dce065">
+																	<SHORT-NAME>EthSwtPortVlanForwardingType</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">Forwarding Rule</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This parameter defines the rule that shall be applied to the VLAN tagged frame.
+
+ETHSWT_NOT_SENT: Do not forward a frame with the corresponding VLAN ID on this port.
+ETHSWT_SENT_TAGGED: Forward a frame with the corresponding VLAN ID on this port without changing the VLAN tag.
+ETHSWT_SENT_UNTAGGED: Forward a frame wiht the corresponding VLAN ID on this port without the VLAN tag (tag will be removed).</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265542</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>ETHSWT_SENT_TAGGED</DEFAULT-VALUE>
+																	<LITERALS>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="c3ddf850-933e-4a7b-9d94-4da8b2550740">
+																			<SHORT-NAME>ETHSWT_NOT_SENT</SHORT-NAME>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="887ebaec-9bea-483d-ab25-a2a12c25fc96">
+																			<SHORT-NAME>ETHSWT_SENT_TAGGED</SHORT-NAME>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="2b9a7102-0cb9-4240-967a-3fe85a9c00b1">
+																			<SHORT-NAME>ETHSWT_SENT_UNTAGGED</SHORT-NAME>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																	</LITERALS>
+																</ECUC-ENUMERATION-PARAM-DEF>
+																<ECUC-INTEGER-PARAM-DEF UUID="31178fdb-8c5f-4de1-9ab9-39cd382fdf07">
+																	<SHORT-NAME>EthSwtPortVlanDefaultPriority</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">Default PCP</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This value specifies the default PCP applied to a VLAN tagged frame.
+(not supported)</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265540</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>0</DEFAULT-VALUE>
+																	<MAX>7</MAX>
+																	<MIN>0</MIN>
+																</ECUC-INTEGER-PARAM-DEF>
+															</PARAMETERS>
+														</ECUC-PARAM-CONF-CONTAINER-DEF>
+														<ECUC-PARAM-CONF-CONTAINER-DEF UUID="ae4575b5-7ead-4a1b-98dc-72ba565fe1c5">
+															<SHORT-NAME>EthSwtPortScheduler</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">Scheduler used for scheduling the FIFOs, Shapers and Schedulers on egress port.</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="DV:CfgPostBuild">
+																		<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																		<SD GID="DV:postBuildNotDeletable">false</SD>
+																	</SDG>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265529</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+															<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<PARAMETERS>
+																<ECUC-ENUMERATION-PARAM-DEF UUID="33934bd2-e727-4a88-99f2-aaef835acca6">
+																	<SHORT-NAME>EthSwtPortSchedulerAlgorithm</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">Scheduling Algorithm</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This parameter defines the scheduling algorithm used to schedule the predecessor elements configured by EthSwtPortSchedulerPredecessor.
+
+ETHSWT_SCHEDULER_WEIGHTED_ROUND_ROBING: Weighted round robin algorithm.
+ETHSWT_SCHEDULER_STRICT_PRIORITY: Strict priority algorithm.
+ETHSWT_SCHEDULER_DEFICIT_ROUND_ROBIN: Deficit round robin algorithm. (not supported)</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265530</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>ETHSWT_SCHEDULER_STRICT_PRIORITY</DEFAULT-VALUE>
+																	<LITERALS>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="fb422513-964f-49e6-a12c-24e1f356598f">
+																			<SHORT-NAME>ETHSWT_SCHEDULER_DEFICIT_ROUND_ROBIN</SHORT-NAME>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="77588bd7-bad6-413b-8a5f-f334f8d5b815">
+																			<SHORT-NAME>ETHSWT_SCHEDULER_WEIGHTED_ROUND_ROBIN</SHORT-NAME>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="57be73c9-67a6-4f01-aca9-52b5daa0d3b8">
+																			<SHORT-NAME>ETHSWT_SCHEDULER_STRICT_PRIORITY</SHORT-NAME>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																	</LITERALS>
+																</ECUC-ENUMERATION-PARAM-DEF>
+															</PARAMETERS>
+															<SUB-CONTAINERS>
+																<ECUC-PARAM-CONF-CONTAINER-DEF UUID="c979e619-516b-443f-99cb-5b8ef001dcaf">
+																	<SHORT-NAME>EthSwtPortSchedulerPredecessor</SHORT-NAME>
+																	<DESC>
+																		<L-2 L="EN">Predecessor of the scheduler.</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="DV:CfgPostBuild">
+																				<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																				<SD GID="DV:postBuildNotDeletable">false</SD>
+																			</SDG>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265531</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+																	<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<PARAMETERS>
+																		<ECUC-INTEGER-PARAM-DEF UUID="93650667-5d8c-4088-b922-140ccee7bae4">
+																			<SHORT-NAME>EthSwtPortSchedulerPredecessorOrder</SHORT-NAME>
+																			<LONG-NAME>
+																				<L-4 L="EN">Order Index</L-4>
+																			</LONG-NAME>
+																			<DESC>
+																				<L-2 L="EN">This value specifes the index in the order of predecessors applied to the scheduler.</L-2>
+																			</DESC>
+																			<ADMIN-DATA>
+																				<SDGS>
+																					<SDG GID="MSR:Process">
+																						<SD GID="MSR:TraceRef">SPEC-2265532</SD>
+																					</SDG>
+																				</SDGS>
+																			</ADMIN-DATA>
+																			<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																			<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																			<SCOPE>LOCAL</SCOPE>
+																			<IMPLEMENTATION-CONFIG-CLASSES>
+																				<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																					<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																					<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																				</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			</IMPLEMENTATION-CONFIG-CLASSES>
+																			<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																			<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																			<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																			<DEFAULT-VALUE>0</DEFAULT-VALUE>
+																			<MAX>255</MAX>
+																			<MIN>0</MIN>
+																		</ECUC-INTEGER-PARAM-DEF>
+																		<ECUC-INTEGER-PARAM-DEF UUID="419cb2ce-55ed-4bc1-afb9-0d98e08989a1">
+																			<SHORT-NAME>EthSwtPredecessorWeight</SHORT-NAME>
+																			<LONG-NAME>
+																				<L-4 L="EN">WRR Scheduling Weigth</L-4>
+																			</LONG-NAME>
+																			<DESC>
+																				<L-2 L="EN">This parameter defines the weight assigned to the predecessor element in case weighted round robin is used as scheduling algorithm.</L-2>
+																			</DESC>
+																			<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+																			<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																			<SCOPE>LOCAL</SCOPE>
+																			<IMPLEMENTATION-CONFIG-CLASSES>
+																				<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																					<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																					<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																				</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			</IMPLEMENTATION-CONFIG-CLASSES>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																			<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																			<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																			<DEFAULT-VALUE>1</DEFAULT-VALUE>
+																			<MAX>255</MAX>
+																			<MIN>1</MIN>
+																		</ECUC-INTEGER-PARAM-DEF>
+																	</PARAMETERS>
+																	<REFERENCES>
+																		<ECUC-CHOICE-REFERENCE-DEF UUID="acf0e0ab-1e83-4f85-b8dd-ec4d29f0fab3">
+																			<SHORT-NAME>EthSwtPortEgressPredecessorRef</SHORT-NAME>
+																			<LONG-NAME>
+																				<L-4 L="EN">Predecessor</L-4>
+																			</LONG-NAME>
+																			<DESC>
+																				<L-2 L="EN">Reference to the predecessor of the scheduler.
+
+Predecessors can be FIFOs, Shapers or other schedulers.</L-2>
+																			</DESC>
+																			<ADMIN-DATA>
+																				<SDGS>
+																					<SDG GID="MSR:Process">
+																						<SD GID="MSR:TraceRef">SPEC-2265533</SD>
+																					</SDG>
+																				</SDGS>
+																			</ADMIN-DATA>
+																			<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																			<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																			<SCOPE>LOCAL</SCOPE>
+																			<IMPLEMENTATION-CONFIG-CLASSES>
+																				<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																					<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																					<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																				</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			</IMPLEMENTATION-CONFIG-CLASSES>
+																			<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																			<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																			<DESTINATION-REFS>
+																				<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/EthSwt_Generic/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortScheduler</DESTINATION-REF>
+																				<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/EthSwt_Generic/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortShaper</DESTINATION-REF>
+																				<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/EthSwt_Generic/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortFifo</DESTINATION-REF>
+																			</DESTINATION-REFS>
+																		</ECUC-CHOICE-REFERENCE-DEF>
+																	</REFERENCES>
+																</ECUC-PARAM-CONF-CONTAINER-DEF>
+															</SUB-CONTAINERS>
+														</ECUC-PARAM-CONF-CONTAINER-DEF>
+														<ECUC-PARAM-CONF-CONTAINER-DEF UUID="c19d3579-036c-4369-9ed8-5d847fc761ca">
+															<SHORT-NAME>EthSwtPortShaper</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">Shaper used to shape the traffic of its predecessor.</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="DV:CfgPostBuild">
+																		<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																		<SD GID="DV:postBuildNotDeletable">false</SD>
+																	</SDG>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265534</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+															<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<PARAMETERS>
+																<ECUC-INTEGER-PARAM-DEF UUID="47c3e4ad-9e85-4d21-baa3-01c9d2acee0a">
+																	<SHORT-NAME>EthSwtPortShaperIdleSlope</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">Idle Slope</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This value specifies the increase of credits per second for the AVB shaper.</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="DV:Display">
+																				<SD GID="DV:BaseUnit">bit/s</SD>
+																			</SDG>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265535</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>64000</DEFAULT-VALUE>
+																	<MAX>2147483647</MAX>
+																	<MIN>64000</MIN>
+																</ECUC-INTEGER-PARAM-DEF>
+																<ECUC-ENUMERATION-PARAM-DEF UUID="19e2403c-da11-48ef-b4ed-8579f6b7e759">
+																	<SHORT-NAME>EthSwtHardwareShaper</SHORT-NAME>
+																	<DESC>
+																		<L-2 L="EN">This parameter defines the hardware shaper representet by this configuration shaper.</L-2>
+																	</DESC>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>Vector Informatik</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>ETHSWT_SHAPER_0</DEFAULT-VALUE>
+																	<LITERALS>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="73ea3278-5c1c-4382-b2a3-eb5834657cc9">
+																			<SHORT-NAME>ETHSWT_SHAPER_0</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="be057508-95af-4988-9000-1b554c82ec40">
+																			<SHORT-NAME>ETHSWT_SHAPER_1</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="9bf670eb-a3bd-48b2-ad90-cdb9f4260522">
+																			<SHORT-NAME>ETHSWT_SHAPER_2</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="6f208eca-5c97-45c7-a505-19237660a018">
+																			<SHORT-NAME>ETHSWT_SHAPER_3</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="ee2886c2-4966-41da-b98e-125665d46800">
+																			<SHORT-NAME>ETHSWT_SHAPER_4</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="c415f7b5-b171-4fa9-a3de-faf09b5b55c6">
+																			<SHORT-NAME>ETHSWT_SHAPER_5</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="887b67b1-4d48-4a50-9551-d47121955590">
+																			<SHORT-NAME>ETHSWT_SHAPER_6</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="f7c3f0d4-2eef-42f5-807e-e67121778a18">
+																			<SHORT-NAME>ETHSWT_SHAPER_7</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																	</LITERALS>
+																</ECUC-ENUMERATION-PARAM-DEF>
+															</PARAMETERS>
+															<REFERENCES>
+																<ECUC-REFERENCE-DEF UUID="cab2ccee-8f40-44a0-a2a7-a95f0ee8606b">
+																	<SHORT-NAME>EthSwtPortEgressPredecessorFifoRef</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">FIFO</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">Reference to the FIFO which is the predecessor of the shaper.</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265536</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/EthSwt_Generic/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortFifo</DESTINATION-REF>
+																</ECUC-REFERENCE-DEF>
+															</REFERENCES>
+														</ECUC-PARAM-CONF-CONTAINER-DEF>
+														<ECUC-PARAM-CONF-CONTAINER-DEF UUID="9dd4aac4-c019-42c1-a020-3a48b2156fbc">
+															<SHORT-NAME>EthSwtPortFifo</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">FIFO the frames are directed to depending on the traffic class assignment.</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="DV:CfgPostBuild">
+																		<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																		<SD GID="DV:postBuildNotDeletable">false</SD>
+																	</SDG>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265537</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+															<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<PARAMETERS>
+																<ECUC-INTEGER-PARAM-DEF UUID="56c6cf7b-94cc-4dea-9a79-0be9d0f817ef">
+																	<SHORT-NAME>EthSwtPortFifoTrafficClassAssignment</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">Traffic Class Assignment</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This value specifies the traffic class assigned to the FIFO.</L-2>
+																	</DESC>
+																	<ADMIN-DATA>
+																		<SDGS>
+																			<SDG GID="MSR:Process">
+																				<SD GID="MSR:TraceRef">SPEC-2265306,SPEC-2265538</SD>
+																			</SDG>
+																		</SDGS>
+																	</ADMIN-DATA>
+																	<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>8</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>0</DEFAULT-VALUE>
+																	<MAX>7</MAX>
+																	<MIN>0</MIN>
+																</ECUC-INTEGER-PARAM-DEF>
+																<ECUC-ENUMERATION-PARAM-DEF UUID="7e8062e6-c171-4aa8-8a25-748deb41e023">
+																	<SHORT-NAME>EthSwtHardwareFifo</SHORT-NAME>
+																	<LONG-NAME>
+																		<L-4 L="EN">Hardware Queue</L-4>
+																	</LONG-NAME>
+																	<DESC>
+																		<L-2 L="EN">This parameter defines the hardware queue representet by this configuration FIFO.</L-2>
+																	</DESC>
+																	<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+																	<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+																	<SCOPE>LOCAL</SCOPE>
+																	<IMPLEMENTATION-CONFIG-CLASSES>
+																		<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																			<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																			<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																		</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	</IMPLEMENTATION-CONFIG-CLASSES>
+																	<ORIGIN>Vector Informatik</ORIGIN>
+																	<REQUIRES-INDEX>false</REQUIRES-INDEX>
+																	<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+																	<DEFAULT-VALUE>ETHSWT_QUEUE_0</DEFAULT-VALUE>
+																	<LITERALS>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="273da0eb-77e3-4359-a8ae-969342a0f9e1">
+																			<SHORT-NAME>ETHSWT_QUEUE_0</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="f9b26a02-c7d5-4119-ae44-e5f63fad33ba">
+																			<SHORT-NAME>ETHSWT_QUEUE_1</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="eb387d5e-b258-4efd-9cdc-97d9302594f9">
+																			<SHORT-NAME>ETHSWT_QUEUE_2</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="808b005f-b58f-4321-86f7-c89b53aa8b83">
+																			<SHORT-NAME>ETHSWT_QUEUE_3</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="1ef88a61-3328-4524-84aa-46cd8d2ee9b9">
+																			<SHORT-NAME>ETHSWT_QUEUE_4</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="7283e381-2a60-4070-b5d4-c7f61f2d99ef">
+																			<SHORT-NAME>ETHSWT_QUEUE_5</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="8d0c0d42-b66c-4cc8-9dfe-42e9960a16b2">
+																			<SHORT-NAME>ETHSWT_QUEUE_6</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																		<ECUC-ENUMERATION-LITERAL-DEF UUID="b95fd23e-e525-464f-98f0-ada9e745a7b7">
+																			<SHORT-NAME>ETHSWT_QUEUE_7</SHORT-NAME>
+																			<ORIGIN>Vector Informatik</ORIGIN>
+																		</ECUC-ENUMERATION-LITERAL-DEF>
+																	</LITERALS>
+																</ECUC-ENUMERATION-PARAM-DEF>
+															</PARAMETERS>
+														</ECUC-PARAM-CONF-CONTAINER-DEF>
+													</SUB-CONTAINERS>
+												</ECUC-PARAM-CONF-CONTAINER-DEF>
+											</SUB-CONTAINERS>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="3c1ed081-1369-4291-8f3c-cf8d04c3d131">
+											<SHORT-NAME>EthSwtSpi</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Configuration of the Ethernet Switch SPI access.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265543</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SUB-CONTAINERS>
+												<ECUC-PARAM-CONF-CONTAINER-DEF UUID="1c6f951a-f3e6-49bc-8caf-09a0ee585c88">
+													<SHORT-NAME>EthSwtSpiSequence</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">SPI sequence configuration.</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:CfgPostBuild">
+																<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																<SD GID="DV:postBuildNotDeletable">false</SD>
+															</SDG>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265544</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<PARAMETERS>
+														<ECUC-BOOLEAN-PARAM-DEF UUID="eb9224da-feab-4aab-870d-c44dd6258d58">
+															<SHORT-NAME>EthSwtSpiAccessSynchronous</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">Enable Synchronous Access</L-4>
+															</LONG-NAME>
+															<DESC>
+																<L-2 L="EN">This parameter defines the access method to the SPI.
+
+false: SPI will be accessed asynchronous.
+true: SPI will be accessed synchronous.</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265545</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+															<SCOPE>LOCAL</SCOPE>
+															<IMPLEMENTATION-CONFIG-CLASSES>
+																<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																	<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															</IMPLEMENTATION-CONFIG-CLASSES>
+															<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+															<DEFAULT-VALUE>true</DEFAULT-VALUE>
+														</ECUC-BOOLEAN-PARAM-DEF>
+													</PARAMETERS>
+													<REFERENCES>
+														<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="65f5c29b-7085-4c5b-b4a6-cd4a181b6223">
+															<SHORT-NAME>EthSwtSpiSequenceName</SHORT-NAME>
+															<LONG-NAME>
+																<L-4 L="EN">SPI Sequence</L-4>
+															</LONG-NAME>
+															<DESC>
+																<L-2 L="EN">Reference to the SPI sequence used for SPI access.</L-2>
+															</DESC>
+															<ADMIN-DATA>
+																<SDGS>
+																	<SDG GID="MSR:Process">
+																		<SD GID="MSR:TraceRef">SPEC-2265546</SD>
+																	</SDG>
+																</SDGS>
+															</ADMIN-DATA>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+															<SCOPE>LOCAL</SCOPE>
+															<IMPLEMENTATION-CONFIG-CLASSES>
+																<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																	<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															</IMPLEMENTATION-CONFIG-CLASSES>
+															<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence</DESTINATION-REF>
+														</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+													</REFERENCES>
+												</ECUC-PARAM-CONF-CONTAINER-DEF>
+											</SUB-CONTAINERS>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="2c7f8221-1daf-4f76-b401-856c33b0ce26">
+											<SHORT-NAME>EthSwtNvm</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Configuration of the NvM interface.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265547</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<REFERENCES>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="afd71add-b8ca-49dc-ab9f-e8f47708054a">
+													<SHORT-NAME>EthSwtTableNvmBlockDescriptorRef</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">NvM Block</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the Nvm block description in the Nvm module configuration to store e.g. the learned ARL table</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265548</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="9ca62373-d1d8-4611-9171-0f1cdf63ed0b">
+													<SHORT-NAME>EthSwtConfigurationNvmBlockDescriptorRef</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">Mirroring NvM Block</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the Nvm block description in the Nvm module configuration to store e.g. the port mirror configurations</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265548</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+											</REFERENCES>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="57b9f98c-2071-4c0e-ae3b-e7b364cc965f">
+											<SHORT-NAME>EthSwtDemEventParameterRefs</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Configuration of the DEM events.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+													<SDG GID="MSR:Process">
+														<SD GID="MSR:TraceRef">SPEC-2265486</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<REFERENCES>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="8f46fd6b-49f3-4ba7-964f-6a1f7955110c">
+													<SHORT-NAME>ETHSWT_E_ACCESS</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_ACCESS</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if an configuration interface access issue occurs.</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="MSR:Process">
+																<SD GID="MSR:TraceRef">SPEC-2265487</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="84dc85e7-7115-42e5-b8b6-160bd5118280">
+													<SHORT-NAME>ETHSWT_E_BUFFEROVERRUN</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_BUFFEROVERRUN</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a buffer overrun is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="a6e3c0be-5985-43fc-be0e-a1c77a751903">
+													<SHORT-NAME>ETHSWT_E_CRC</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_CRC</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a CRC error is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="fe66f815-68b7-4cf8-b3b5-f5b3fa13af0f">
+													<SHORT-NAME>ETHSWT_E_UNDERSIZEPCKT</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_UNDERSIZEPCKT</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if an undersited frame is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="f1e0f726-0c70-4c8f-b8ca-0131f844d8c6">
+													<SHORT-NAME>ETHSWT_E_OVERSIZEPCKT</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_OVERSIZEPCKT</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if an oversited frame is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="6ab259b1-37e8-4398-927a-9690c2ef527f">
+													<SHORT-NAME>ETHSWT_E_ALIGNMENT</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_ALIGNMENT</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if an alignment error is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="733adda3-32f9-48d5-a8a1-319cbcb1fb41">
+													<SHORT-NAME>ETHSWT_E_SQETEST</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_SQETEST</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a SQE test error is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="e0317e21-a71d-4f3e-a355-1fb2c118b5b4">
+													<SHORT-NAME>ETHSWT_E_INDISCARD</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_INDISCARD</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a non errornous frame is discarded on ingress side.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="1ded856f-5278-4f8f-9f31-79792c7c432e">
+													<SHORT-NAME>ETHSWT_E_INERROR</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_INERROR</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a errournous frame on ingress side is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="67d3e4ff-307d-4683-8c2a-5b4323851d5b">
+													<SHORT-NAME>ETHSWT_E_OUTDISCARD</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_OUTDISCARD</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a non errornous frame is discarded on egress side.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="f8cdcc71-e8bb-433f-9a77-76efb1c01a96">
+													<SHORT-NAME>ETHSWT_E_OUTERROR</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_OUTERROR</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a errournous frame on egress side is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="87e9d9fd-196a-4818-87aa-654370127bc9">
+													<SHORT-NAME>ETHSWT_E_SINGLECOLLISION</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_SINGLECOLLISION</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a single collision is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="77a7976c-099d-44c6-a36e-aaca32efcccd">
+													<SHORT-NAME>ETHSWT_E_MULTIPLECOLLISION</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_MULTIPLECOLLISION</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a multiple collision is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="fbeeddd5-bd57-435a-a333-8d91a6ed834d">
+													<SHORT-NAME>ETHSWT_E_DEFFEREDTRANSMISSION</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_DEFFEREDTRANSMISSION</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a deffered transmission is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="abb812f6-8035-4b3f-b9a4-4c2c40ed6ecd">
+													<SHORT-NAME>ETHSWT_E_LATECOLLISION</SHORT-NAME>
+													<LONG-NAME>
+														<L-4 L="EN">E_LATECOLLISION</L-4>
+													</LONG-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to the DEM event issued if a late collision is detected.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<SCOPE>LOCAL</SCOPE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+											</REFERENCES>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+									</SUB-CONTAINERS>
+								</ECUC-PARAM-CONF-CONTAINER-DEF>
+								<ECUC-PARAM-CONF-CONTAINER-DEF UUID="1a6a87b9-0dfd-4ae4-ac93-c0a235b12830">
+									<SHORT-NAME>EthSwtGenericDriver</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">This container represents one Generic Ethernet Switch Driver.</L-2>
+									</DESC>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DV:CfgPostBuild">
+												<SD GID="DV:postBuildSelectableChangeable">false</SD>
+												<SD GID="DV:postBuildNotDeletable">false</SD>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+									<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+									<REQUIRES-INDEX>false</REQUIRES-INDEX>
+									<PARAMETERS>
+										<ECUC-LINKER-SYMBOL-DEF UUID="2315bb44-5592-41bf-9212-04d77ace6bea">
+											<SHORT-NAME>EthSwtGenericDriverName</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Driver Name</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This value specifies the identifier used for the API infixing of the drivers AUTOSAR API.
+
+Example:
+The EthSwt_Init() API will be generated as EthSwt_&lt;Vendor ID&gt;_&lt;Driver Name&gt;_Init().</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+										</ECUC-LINKER-SYMBOL-DEF>
+										<ECUC-INTEGER-PARAM-DEF UUID="044ca5f2-627d-41eb-8d0f-e14171713556">
+											<SHORT-NAME>EthSwtGenericDriverVendorId</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Vendor ID</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">This value specifies the vendor ID used for the API infixing of the drivers AUTOSAR API.
+
+Example:
+The EthSwt_Init() API will be generated as EthSwt_&lt;Vendor ID&lt;_&lt;Driver Name&gt;_Init().</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:Display">
+														<SD GID="DV:DefaultFormat">DEC</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<SCOPE>LOCAL</SCOPE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<MAX>65535</MAX>
+											<MIN>0</MIN>
+										</ECUC-INTEGER-PARAM-DEF>
+									</PARAMETERS>
+								</ECUC-PARAM-CONF-CONTAINER-DEF>
+							</CONTAINERS>
+						</ECUC-MODULE-DEF>
+						<ECUC-MODULE-CONFIGURATION-VALUES UUID="132acdd8-180d-4e0d-b83f-2a20d8270620">
+							<SHORT-NAME>EthSwt_Pre</SHORT-NAME>
+							<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/EthSwt_Generic/EthSwt</DEFINITION-REF>
+							<CONTAINERS></CONTAINERS>
+						</ECUC-MODULE-CONFIGURATION-VALUES>
+						<ECUC-MODULE-CONFIGURATION-VALUES UUID="6a9148e4-e0f6-488f-a327-3ef44ebcd9f2">
+							<SHORT-NAME>EthSwt_Rec</SHORT-NAME>
+							<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/EthSwt_Generic/EthSwt</DEFINITION-REF>
+							<CONTAINERS></CONTAINERS>
+						</ECUC-MODULE-CONFIGURATION-VALUES>
+					</ELEMENTS>
+				</AR-PACKAGE>
+			</AR-PACKAGES>
+		</AR-PACKAGE>
+	</AR-PACKAGES>
+</AUTOSAR>

@@ -1,0 +1,316 @@
+DaVinci Package Manager version: 1.62.2
+Version details: Production release, 20241217
+Architecture: 64
+Used Character Encoding for files (Charset): windows-1252
+Copyright (c) 2024 Vector Informatik GmbH. All rights reserved.
+Copyright notice of included third party software see folder Licenses.
+Package creator: vsgoma
+
+10:34:33 Performing build on package 'DualTarget 2.1' at 'D:\DaVinciPackageManager\Packages\DualTarget'.
+
+10:34:33 Validating packages before merging...
+10:34:33 [INFO] Minor Upgrade Available
+10:34:33 [INFO] Major Upgrade Available
+10:34:33 [WARNING] Component IoHwAb found in file system, but is not imported or provided by the package
+10:34:33 
+Reading development packages...
+10:34:33 
+Cleaning package...
+10:34:33 Cleaning directory 'Components'.
+10:35:25 Cleaning directory 'DemoComponents'.
+10:35:27 Cleaning directory 'Doc'.
+10:35:31 Cleaning directory 'Misc'.
+10:35:49 Cleaning directory 'DaVinciConfigurator'.
+10:36:12 Cleaning directory 'ThirdParty'.
+10:37:34 Cleaning directory 'IssueReport'.
+10:37:34 Cleaning root directory of files.
+10:37:34 Removing file 'build.log'.
+10:37:34 Removing file 'checksums.txt'.
+10:37:34 Removing file 'DocumentationGuide_MICROSARClassic_ComponentBased.pdf'.
+10:37:34 Removing file 'Info_TimingAnalysis.pdf'.
+10:37:34 Removing file 'Readme_MICROSARClassic_Packages.pdf'.
+10:37:34 
+Performing package merge...
+10:37:36 Copying files from package 'MSR4_MPP_Aurix_2G_TC3xx_Tasking 32.07.43' at 'C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43':
+10:37:36 	Copying Components\Can_30_Core
+10:37:48 	Copying Components\Mcal_Tc3xx
+10:38:05 	Copying Components\Os
+10:39:25 	Copying Components\Tresos_proxy
+10:39:28 	Copying Components\_Generic_AddOn
+10:39:32 	Copying Components\vCan_30_Mcan
+10:39:41 	Copying Components\_Common
+10:39:44 	Copying DemoComponents\vBRS
+10:39:53 	Copying DemoComponents\vBaseEnv
+10:39:59 	Copying DemoComponents\vLinkGen
+10:40:07 	Copying Components\_Common
+10:40:07 Copying files contained in root directory from 'MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43'
+10:40:08 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents
+10:40:08 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBaseEnv
+10:40:09 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBaseEnv\BSWMD
+10:40:10 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBaseEnv\BSWMD\vBaseEnv
+10:40:10 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBaseEnv\BSWMD\vBaseEnv\TC3xx
+10:40:11 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBaseEnv\Documentation
+10:40:12 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBaseEnv\GeneratorMsr
+10:40:12 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBaseEnv\Implementation
+10:40:13 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBaseEnv\MakeSupport
+10:40:14 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBRS
+10:40:14 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBRS\BSWMD
+10:40:14 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBRS\GeneratorMsr
+10:40:15 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vBRS\Implementation
+10:40:15 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vLinkGen
+10:40:15 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vLinkGen\BSWMD
+10:40:17 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vLinkGen\Documentation
+10:40:18 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vLinkGen\GeneratorMsr
+10:40:18 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\DemoComponents\vLinkGen\Make
+10:40:18 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\Doc
+10:40:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport
+10:40:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport\cygwin_root
+10:40:20 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport\cygwin_root\cmd
+10:40:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport\cygwin_root\lib
+10:40:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport\cygwin_root\lib\gcc
+10:40:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport\cygwin_root\lib\gcc\x86_64-pc-cygwin
+10:40:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport\cygwin_root\lib\gcc\x86_64-pc-cygwin\6.4.0
+10:40:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport\doc
+10:40:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport\quality
+10:40:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport\template
+10:40:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\MakeSupport\util
+10:40:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_Aurix_2G_TC3xx_Tasking_32.07.43\ThirdParty
+10:40:32 	Copying Components\EcuC
+10:40:36 Copying files from package 'MSR4_MEP 32.07.01' at 'C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MEP_32.07.01':
+10:40:36 	Copying Components\CanTrcv_30_Generic
+10:40:42 	Copying Components\EthSwt_30_Generic
+10:40:50 	Copying Components\Eth_30_Generic
+10:40:54 	Copying Components\FrTrcv_30_Generic
+10:41:02 	Copying Components\LinTrcv_30_Generic
+10:41:09 	Copying Components\_Common
+10:41:12 	Could not find component folder at:'C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MEP_32.07.01\DemoComponents'
+10:41:12 	Copying Components\_Common
+10:41:13 Copying files contained in root directory from 'MSR4_MEP_32.07.01'
+10:41:13 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MEP_32.07.01\Doc
+10:41:14 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MEP_32.07.01\Doc\DeliveryInformation
+10:41:20 Copying files from package 'MSR4_MOP_Vector 32.07.02' at 'C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MOP_Vector_32.07.02':
+10:41:21 	Copying Components\Dcm
+10:41:59 	Copying Components\Dem
+10:43:15 	Copying Components\MSR_Vector_SLP4
+10:43:19 	Copying Components\_Common
+10:43:19 	Could not find component folder at:'C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MOP_Vector_32.07.02\DemoComponents'
+10:43:19 	Copying Components\_Common
+10:43:19 Copying files contained in root directory from 'MSR4_MOP_Vector_32.07.02'
+10:43:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MOP_Vector_32.07.02\Doc
+10:43:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MOP_Vector_32.07.02\Doc\DeliveryInformation
+10:43:21 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MOP_Vector_32.07.02\Doc\UserManuals
+10:43:23 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MOP_Vector_32.07.02\Misc
+10:43:28 Copying files from package 'MSR4_MCP 32.07.04' at 'C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04':
+10:43:28 	Copying Components\BswM
+10:43:35 	Copying Components\CanIf
+10:43:42 	Copying Components\CanNm
+10:43:50 	Copying Components\CanSM
+10:43:57 	Copying Components\CanTSyn
+10:44:03 	Copying Components\CanTp
+10:44:10 	Copying Components\CanXcp
+10:44:14 	Copying Components\Ccp
+10:44:22 	Copying Components\Cdd
+10:44:28 	Copying Components\CddDes
+10:44:34 	Copying Components\CddDrm
+10:44:41 	Copying Components\Com
+10:45:07 	Copying Components\ComM
+10:45:21 	Copying Components\ComXf
+10:45:25 	Copying Components\Crc
+10:45:30 	Copying Components\CryIf
+10:45:36 	Copying Components\Crypto_30_LibCv
+10:45:46 	Copying Components\Crypto_30_vHsm
+10:45:57 	Copying Components\Csm
+10:46:04 	Copying Components\Dbg
+10:46:12 	Copying Components\Det
+10:46:16 	Copying Components\DiagXf
+10:46:22 	Copying Components\Dlt
+10:46:32 	Copying Components\DoIP
+10:46:38 	Copying Components\DoIPInt
+10:46:49 	Copying Components\E2E
+10:46:57 	Copying Components\E2EPW
+10:47:02 	Copying Components\E2EXf
+10:47:07 	Copying Components\Ea
+10:47:15 	Copying Components\EcuM
+10:47:22 	Copying Components\EthIf
+10:47:37 	Copying Components\EthSM
+10:47:43 	Copying Components\EthTSyn
+10:47:57 	Copying Components\Fee
+10:48:06 	Copying Components\FiM
+10:48:15 	Copying Components\FrIf
+10:48:22 	Copying Components\FrNm
+10:48:29 	Copying Components\FrSM
+10:48:33 	Copying Components\FrTSyn
+10:48:40 	Copying Components\FrXcp
+10:48:47 	Copying Components\IpduM
+10:49:03 	Copying Components\KeyM
+10:49:13 	Copying Components\LdCom
+10:49:21 	Copying Components\LinIf
+10:49:29 	Copying Components\LinSM
+10:49:39 	Copying Components\LinTp
+10:49:42 	Copying Components\Lin_30_Generic
+10:49:47 	Copying Components\MemIf
+10:49:54 	Copying Components\Nm
+10:49:58 	Copying Components\NvM
+10:50:06 	Copying Components\PduR
+10:50:21 	Copying Components\Rte
+10:51:54 	Copying Components\RteAnalyzer
+10:52:07 	Copying Components\Rtm
+10:52:16 	Copying Components\Sd
+10:52:24 	Copying Components\SecOC
+10:52:30 	Copying Components\SoAd
+10:52:38 	Copying Components\SomeIpTp
+10:52:46 	Copying Components\SomeIpXf
+10:52:51 	Copying Components\StbM
+10:52:57 	Copying Components\TcpIp
+10:53:11 	Copying Components\TcpIpXcp
+10:53:16 	Copying Components\Tp_Iso10681
+10:53:25 	Copying Components\UdpNm
+10:53:32 	Copying Components\WdgIf
+10:53:36 	Copying Components\WdgM
+10:53:48 	Copying Components\Xcp
+10:53:53 	Copying Components\vFsmLib
+10:54:01 	Copying Components\vIke
+10:54:06 	Copying Components\vSecPrim
+10:55:01 	Copying Components\_Common
+10:55:05 	Could not find component folder at:'C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\DemoComponents'
+10:55:05 	Copying Components\_Common
+10:55:05 Copying files contained in root directory from 'MSR4_MCP_32.07.04'
+10:55:06 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo
+10:55:06 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly
+10:55:07 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Appl
+10:55:07 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Appl\Include
+10:55:09 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Appl\Source
+10:55:09 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Appl\Source\Capl
+10:55:10 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\CANoe
+10:55:10 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\CANoe\Exec32
+10:55:11 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\CANoe\StartApplication
+10:55:11 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\CANoe\StartApplication\Bitmap
+10:55:11 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config
+10:55:11 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config\AUTOSAR
+10:55:11 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config\Developer
+10:55:11 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config\Developer\ComponentTypes
+10:55:11 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config\Developer\ECUProjects
+10:55:11 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config\ECUC
+10:55:12 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config\InternalBehavior
+10:55:12 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config\McData
+10:55:12 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config\ServiceComponents
+10:55:14 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config\System
+10:55:15 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Config\VTT
+10:55:15 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\DefRestrict
+10:55:15 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Log
+10:55:16 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Solution
+10:55:16 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\Solution\MyECU
+10:55:16 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\SUT
+10:55:16 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\_InputFiles
+10:55:16 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Demo\DemoMcpVttOnly\_InputFiles\DemoDatabase
+10:55:16 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Doc
+10:55:16 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Doc\ApplicationNotes
+10:55:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Doc\DeliveryInformation
+10:55:20 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Doc\UserManuals
+10:55:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Misc
+10:55:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Misc\Diag_A2lGen
+10:55:24 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Misc\Diag_A2lGen\Application
+10:55:25 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Misc\Diag_A2lGen\Documentation
+10:55:26 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MCP_32.07.04\Misc\McData
+10:55:34 Copying files from package 'MSR4_MBP 32.07.04' at 'C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04':
+10:55:34 	Copying Components\Arti
+10:55:39 	Copying Components\IpBase
+10:55:48 	Copying Components\MSR4_Product
+10:55:51 	Copying Components\McDataConv
+10:55:55 	Copying Components\MemMap
+10:56:01 	Copying Components\VStdLib
+10:56:06 	Copying Components\vSet
+10:56:09 	Copying Components\_Common
+10:56:13 	Copying DemoComponents\vItaHlp
+10:56:20 	Copying Components\_Common
+10:56:21 Copying files contained in root directory from 'MSR4_MBP_32.07.04'
+10:56:21 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\DaVinciConfigurator
+10:56:25 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\DemoComponents
+10:56:26 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\DemoComponents\vItaHlp
+10:56:26 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\DemoComponents\vItaHlp\BSWMD
+10:56:27 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\DemoComponents\vItaHlp\Documentation
+10:56:27 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\DemoComponents\vItaHlp\GeneratorMsr
+10:56:28 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\DemoComponents\vItaHlp\Implementation
+10:56:30 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\DemoComponents\vItaHlp\Make
+10:56:30 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\Doc
+10:56:30 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\Doc\ApplicationNotes
+10:56:33 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\Doc\DeliveryInformation
+10:56:35 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\Doc\ReleaseNotes
+10:56:36 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\Doc\TechnicalReferences
+10:56:37 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\Doc\UserManuals
+10:56:39 Copying file: 'DocumentationGuide_MICROSARClassic_ComponentBased.pdf'
+10:56:39 Copying file: 'Info_TimingAnalysis.pdf'
+10:56:39 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04\Misc
+10:56:44 Copying file: 'Readme_MICROSARClassic_Packages.pdf'
+10:56:49 	Copying Components\EcuC
+10:56:57 Copying files from package 'MSR4_MPP_VTT 32.07.02' at 'C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02':
+10:56:58 	Copying Components\Adc
+10:56:58 	Copying Components\Can
+10:56:58 	Copying Components\Dio
+10:56:58 	Copying Components\Eep
+10:56:58 	Copying Components\Eth
+10:56:58 	Copying Components\EthTrcv_30_Vtt
+10:56:58 	Copying Components\Fls
+10:56:58 	Copying Components\Fr
+10:56:58 	Copying Components\Gpt
+10:56:58 	Copying Components\Icu
+10:56:58 	Copying Components\Mcu
+10:56:58 	Copying Components\Port
+10:56:58 	Copying Components\Pwm
+10:56:58 	Copying Components\Spi
+10:56:58 	Copying Components\VttAdc
+10:57:03 	Copying Components\VttCANoeEmu
+10:57:14 	Copying Components\VttCan
+10:57:20 	Copying Components\VttCntrl
+10:57:34 	Copying Components\VttCrypto_30_Vtt
+10:57:43 	Copying Components\VttDio
+10:57:52 	Copying Components\VttEcuC
+10:57:56 	Copying Components\VttEep
+10:58:03 	Copying Components\VttEth
+10:58:17 	Copying Components\VttEthTrcv_30_Vtt
+10:58:30 	Copying Components\VttFls
+10:58:40 	Copying Components\VttFr
+10:58:51 	Copying Components\VttGpt
+10:59:01 	Copying Components\VttIcu
+10:59:10 	Copying Components\VttLin
+10:59:20 	Copying Components\VttMcu
+10:59:27 	Copying Components\VttMemMap
+10:59:30 	Copying Components\VttOs
+11:00:14 	Copying Components\VttPort
+11:00:20 	Copying Components\VttPwm
+11:00:25 	Copying Components\VttSpi
+11:00:30 	Copying Components\VttSwCluC
+11:00:33 	Copying Components\VttWdg
+11:00:40 	Copying Components\Vtt_Common
+11:00:45 	Copying Components\VttvMem_30_Vtt
+11:00:53 	Copying Components\VttvSet
+11:00:57 	Copying Components\Wdg
+11:00:57 	Copying Components\vMem_30_Vtt
+11:01:00 	Copying Components\_Common
+11:01:04 	Copying DemoComponents\VttvBaseEnv
+11:01:08 	Copying Components\_Common
+11:01:09 Copying files contained in root directory from 'MSR4_MPP_VTT_32.07.02'
+11:01:09 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\DemoComponents
+11:01:09 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\DemoComponents\VttvBaseEnv
+11:01:10 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\DemoComponents\VttvBaseEnv\BSWMD
+11:01:11 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\Doc
+11:01:12 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\Doc\DeliveryInformation
+11:01:12 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\Doc\UserManuals
+11:01:13 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport
+11:01:13 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport\cygwin_root
+11:01:13 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport\cygwin_root\cmd
+11:01:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport\cygwin_root\lib
+11:01:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport\cygwin_root\lib\gcc
+11:01:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport\cygwin_root\lib\gcc\x86_64-pc-cygwin
+11:01:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport\cygwin_root\lib\gcc\x86_64-pc-cygwin\6.4.0
+11:01:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport\doc
+11:01:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport\quality
+11:01:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport\template
+11:01:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\MakeSupport\util
+11:01:19 	Copying C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MPP_VTT_32.07.02\Misc
+11:01:24 	Copying Components\EcuC
+11:01:24 Copying files from tool provider package 'MSR4_MBP 32.07.04' at 'C:\Users\vsgoma.VECTOR\AppData\Local\Vector\DVPM\Packages\MSR4_MBP_32.07.04':
+11:01:24 	Copying \DaVinciConfigurator
+11:01:28 Merging quality level report into 'Doc\QualityLevelReport_Package_DualTarget 2.1.html'.
+11:01:42 
+Build Finished.

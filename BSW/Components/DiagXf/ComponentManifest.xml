@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-22A47786-548B-4C84-818B-13DFECD98CF2</guid>
+        <name>Rte_Core@Implementation</name>
+        <version>4.37.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-41BCA83B-C540-4988-8C54-9B2543C09683</guid>
+        <name>Xf_DiagXf@Doc_TechRef</name>
+        <version>4.37.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-7D58B156-6DC8-45B0-873E-AA9A0AE0BDEC</guid>
+        <name>Xf_DiagXf@Generator</name>
+        <version>4.37.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-A077F516-E4A7-4360-8869-741534AB647C</guid>
+        <name>Xf_DiagXf@root</name>
+        <version>4.37.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-C21CF1A6-AD14-4823-A290-C93C7AC26E15</guid>
+        <name>Xf_DiagXf@Description</name>
+        <version>4.37.00</version>
+    </subPackage>
+</componentManifest>

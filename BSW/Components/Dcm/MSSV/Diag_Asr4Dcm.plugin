@@ -1,0 +1,1634 @@
+/**********************************************************************************************************************
+ *  COPYRIGHT
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  Copyright (c) 2024 by Vector Informatik GmbH.                                                  All rights reserved.
+ *
+ *                This software is copyright protected and proprietary to Vector Informatik GmbH.
+ *                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+ *                All other rights remain with Vector Informatik GmbH.
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  FILE DESCRIPTION
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  File       :  Diag_Asr4Dcm.plugin
+ *  Module     :  Elisa
+ *
+ *  Description:  Entry point of Elisa Core.
+ *
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  REVISION HISTORY
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  Version   Date        Author     Change Id     Description
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  01.00.00  2016-09-12  vissa      -             Initial version
+ *  05.03.00  2017-01-04  visstk     -             Implementation of MSSV tests
+ *  08.00.00  2017-04-03  viswsi     -             Extension of MSSV tests to MSR4-R19
+ *  08.01.00  2017-04-24  visygr     STORYC-637    SafeBSW for DCM - Full UDS - Other Services (0x27 - Extended)
+ *  08.01.00  2017-05-08  visygr     STORYC-466    SafeBSW for DCM - Full UDS - ASR3 Interface
+ *  08.02.00  2017-05-30  visvkr     -             Missing MSSV tests added
+ *  08.03.00  2017-07-04  visuvo     -             Adaption of CheckQMFeatures (DCM_SVC_19_16_SUPPORT_ENABLED
+ *                                                 and DCM_NET_UUDT_DELAYTIMER_ENABLED)
+ *  08.04.00  2017-07-19  visuvo     -             Minor version changed from 3 into 4
+ *  08.04.00  2017-07-27  visuvo     -             Obsolete switches for service 0x31 removed
+ *  08.04.00  2017-07-28  visuvo     -             SetVersion changed to 0x080400
+ *  08.05.00  2017-08-08  viswsi     -             Updated version
+ *  08.06.00  2017-09-18  visuvo     -             Updated version, Service 0x31 enabled (check for
+ *                                                 DCM_SVC_31_SUPPORT_ENABLED = STD_OFF removed)
+ *  08.06.00  2017-09-22  viswsi     STORYC-2092   SafeBSW for DCM - Full UDS - RID Services (0x31) Finalize
+ *  09.00.00  2017-10-09  viswsi     STORYC-2642   SafeBSW for DCM - Full UDS - Memory Services (0x23) Step 1
+ *  09.00.00  2017-10-19  viswsi     STORYC-2669   SafeBSW for DCM - Full UDS - Memory Services (0x23) Step 2
+ *  09.00.00  2017-10-20  viswsi     STORYC-460    SafeBSW for DCM - Full UDS - Memory Services (0x3D)
+ *  09.01.00  2017-11-07  viswsi     -             Updated version
+ *  09.01.00  2017-11-23  visaey     STORYC-3053   SafeBSW for DCM - Full UDS - DID Services Prio I (0x22 - Preparation)
+ *  09.02.00  2017-12-06  visuvo     -             Updated version to 09.02.00
+ *  09.02.00  2017-12-18  visuvo     -             Check for STD_OFF removed for switches
+ *                                                 DCM_DIDMGR_PERIODICDID_CHK_COND_ENABLED and
+ *                                                 DCM_DIDMGR_PERIODICDID_CHK_COND_ALL_ENABLED
+ *  09.03.00  2018-01-05  visstk     -             Verify min/max length of DID info table
+ *  09.04.00  2018-02-13  viswsi     -             Updated version
+ *  09.05.00  2018-02-22  visuvo     STORYC-443    SafeBSW for DCM - Full UDS - DID Services Prio I (0x22 - Basic)
+ *  09.05.00  2018-03-05  visahe     STORYC-539    SafeBSW for DCM - Full UDS - DID Services Prio I (0x22 - Extended)
+ *  10.00.00  2018-04-13  viswsi     STORYC-2696   SafeBSW for DCM - Full UDS - DID Services Prio I (0x2E)
+ *                        visuvo     FIX-3845      Check of switch DCM_DIDMGR_READ_VAR_SIZE_DATA_COPY_ENABLED added
+ *                        visygr     STORYC-2694   SafeBSW for DCM - Full UDS - DID Services (0x24)
+ *  10.00.00  2018-04-27  visuvo     STORYC-4977   SafeBSW for DCM - Full (WWH-)OBD - Mode 0x04
+ *  10.00.00  2018-04-27  visuvo     -             Check for STD_OFF added for switches
+ *                                                 DCM_SVC_86_03_SUPPORT_ENABLED
+ *                                                 DCM_SVC_86_EVTYPE_ONCHGDTC_ENABLED
+ *                                                 DCM_SVC_86_EVTYPE_ONCHGDID_ENABLED
+ *  10.01.00  2018-05-09  visuvo     FIX-3904      Switch DCM_DIDMGR_READ_VAR_SIZE_DATA_COPY_ENABLED renamed into
+ *                                                 DCM_DIDMGR_RTE_IMPLICIT_COM_ENABLED
+ *                        visuvo     STORYC-5128   SafeBSW for DCM - Full (WWH-)OBD - Mode 0x03, 0x07, 0x0A
+ *                        visuvo     STORYC-2695   SafeBSW for DCM - Full UDS - DID Services (0x2A)
+ *  10.02.00  2018-06-11  viswsi     STORYC-5424   SafeBSW for DCM - Full (WWH-)OBD - Mode 0x02, 0x08
+ *                        viswsi     STORYC-5423   SafeBSW for DCM - Full (WWH-)OBD - Mode 0x01, 0x09
+ *                        visuvo     STORYC-2693   SafeBSW for DCM - Full UDS - DID Services (0x2C)
+ *  10.03.00  2018-07-09  viswsi     STORYC-5614   SafeBSW for DCM - Full (WWH-)OBD - Mode 0x06
+ *                        viswsi     STORYC-464    SafeBSW for DCM - Full (WWH-)OBD - Calibration
+ *                        visahe     STORYC-537    SafeBSW for DCM - Full UDS - DID Services (0x2F)
+ *                        visuvo     ESCAN00100099 Missing limitation when using DIDs with paged-buffer.
+ *  10.04.00  2018-08-06  viswse     STORYC-5653   SafeBSW for DCM - Full UDS - DID Services (0x2F) - Extended
+ *                        visahe     STORYC-465    SafeBSW for DCM - Full UDS - Vehicle System Groups
+ *                        visuvo     STORYC-462    SafeBSW for DCM - Full UDS - Service 0x86 (Vector)
+ *                        visuvo     STORYC-5655   SafeBSW for DCM - Full UDS - Service 0x86 (BMW)
+ *                        visuvo     ESCAN00100489 SafeBSW: Consistency of Dcm_CfgNetBufferInfo[] is not ensured
+ *                        visygr     STORYC-5658   SafeBSW for DCM - Full UDS - RestoreStates
+ *                        visygr     STORYC-5657   SafeBSW for DCM - Full UDS - Supported IDs
+ *                        visera     FIX-4889      Consistency of RAM variables not ensured in post-build selectable
+ *                                                 configurations
+ *  11.00.00  2018-09-10  visera     STORYC-6369   SafeBSW for DCM - Reduce complexity I
+ *                        visahe     STORYC-2150   Service 0x27: Simplify sub-function handling
+ *  11.01.00  2018-10-01  visstk     -             Updated version to 11.01.00.
+ *                        visera     STORYC-6532   SafeBSW- for DCM - Remove deprecated interfaces
+ *  11.02.00  2018-10-26  visera     -             Updated version to 11.02.00.
+ *  11.03.00  2018-11-23  visvkr     -             Updated version to 11.03.00.
+ *  11.04.00  2018-12-20  visygr     -             Updated version to 11.04.00.
+ *  11.05.00  2019-01-18  visuvo     -             Updated version to 11.05.00.
+ *  11.06.00  2019-02-18  visygr     -             Updated version to 11.06.00.
+ *  12.00.00  2019-03-18  visera     -             Updated version to 12.00.00.
+ *  12.01.00  2019-04-16  visuvo     -             Updated version to 12.01.00.
+ *  12.02.00  2019-05-13  viswse     STORYC-7929   SafeBSW- for DCM - Traceability MSSV
+ *  12.03.00  2019-06-11  visera     -             Updated version to 12.03.00.
+ *  12.04.00  2019-07-08  visuvo     -             Updated version to 12.04.00.
+ *  12.05.00  2019-08-02  visygr     -             Updated version to 12.05.00.
+ *  13.00.00  2019-08-30  visvkr     -             Updated version to 13.00.00.
+ *  13.01.00  2019-09-27  vsarcbada  STORYC-7528   Support service 0x29 sub-function 0x00 and 0x08
+ *  13.02.00  2019-10-25  viswse     -             Updated version to 13.02.00.
+ *  13.03.00  2019-11-22  viswse     -             Updated version to 13.03.00.
+ *  13.04.00  2020-01-16  visepp     -             Updated version to 13.04.00.
+ *  13.05.00  2020-02-14  visepp     -             Updated version to 13.05.00.
+ *  14.00.00  2020-03-13  visepp     -             Updated version to 14.00.00.
+ *  14.01.00  2020-04-20  visepp     -             Updated version to 14.01.00.
+ *  14.02.00  2020-05-11  visepp     -             Updated version to 14.02.00.
+ *  14.03.00  2020-06-05  visepp     -             Updated version to 14.03.00.
+ *  14.04.00  2020-07-02  visepp     DCM-1283      Support service 0x19 sub-function 0x16
+ *  14.05.00  2020-08-03  visepp     -             Updated version to 14.05.00.
+ *  15.00.00  2020-08-31  visvkr     DCM-1898      SafeBSW for DCM - Reduce diversity of variants
+ *                        visvkr     DCM-3382      SafeBSW for DCM - Reduce diversity of variants II
+ *                        visvkr     DCM-2578      Support service 0x34, 0x36 and 0x37
+ *  15.01.00  2020-10-01  visepp     DCM-3407      SafeBSW for DCM - Reduce diversity of variants III
+ *  15.02.00  2020-10-23  visuvo     -             Updated version to 15.02.00.
+ *  15.03.00  2020-10-29  visepp     -             Updated version to 15.03.00.
+ *  15.04.00  2020-11-23  visepp     -             Updated version to 15.04.00.
+ *  15.05.00  2020-11-23  visvkr     -             Updated version to 15.05.00.
+ *  15.06.00  2020-12-22  visepp     -             Updated version to 15.06.00.
+ *  15.07.00  2021-01-21  visepp     -             Updated version to 15.07.00.
+ *  15.08.00  2021-02-15  visepp     -             Updated version to 15.08.00.
+ *  16.00.00  2021-03-15  visuvo     -             Updated version to 16.00.00.
+ *                        visuvo     DCM-4028      Dcm - Finalization for R26
+ *  16.01.00  2021-04-12  visepp     -             Updated version to 16.01.00.
+ *  16.02.00  2021-06-01  visvkr     DCM-4092      SafeBSW for DCM - Unit Repeater
+ *  16.03.00  2021-06-02  visvkr     -             Updated version to 16.03.00.
+ *  16.04.00  2021-07-05  visuvo     -             Updated version to 16.04.00.
+ *  16.05.00  2021-08-02  visepp     -             Updated version to 16.05.00.
+ *  17.00.00  2021-08-26  visepp     -             Updated version to 17.00.00.
+ *  17.01.00  2021-10-15  visepp     DCM-4758      Allow UDS Service 0x29 custom service processors
+ *  17.02.00  2021-10-22  dng        -             Updated version to 17.02.00.
+ *  17.03.00  2021-11-19  dng        -             Updated version to 17.03.00.
+ *  17.04.00  2022-01-26  visvkr     DCM-5184      Support service 0x29 sub-function 0x04
+ *  17.05.00  2022-02-16  dng        -             Updated version to 17.05.00.
+ *  18.00.00  2022-03-11  visepp     -             Updated version to 18.00.00.
+ *  18.01.00  2022-04-14  visahe     -             Updated version to 18.01.00.
+ *  18.02.00  2022-05-09  visepp     -             Updated version to 18.02.00.
+ *  18.03.00  2022-06-03  visvkr     -             Updated version to 18.03.00.
+ *  18.04.00  2022-06-30  visepp     -             Updated version to 18.04.00.
+ *  18.05.00  2022-07-29  visepp     -             Updated version to 18.05.00.
+ *  19.00.00  2022-08-26  visepp     -             Updated version to 19.00.00.
+ *  19.01.00  2022-09-22  visepp     -             Updated version to 19.01.00.
+ *  19.02.00  2022-10-21  visepp     -             Updated version to 19.02.00.
+ *  19.03.00  2022-11-21  visepp     -             Updated version to 19.03.00.
+ *  19.04.00  2023-01-16  visepp     -             Updated version to 19.04.00.
+ *  19.05.00  2023-02-09  visepp     -             Updated version to 19.05.00.
+ *  20.00.00  2023-03-23  dbusch     DCM-6967      Support service 0x35 (RequestUpload) in Dcm
+ *  20.01.00  2023-04-11  visepp     -             Updated version to 20.01.00.
+ *  20.02.00  2023-05-08  visepp     DCM-7082      Support asynchronous pre- and postprocessor callouts
+ *  20.03.00  2023-06-05  dbusch     -             Updated version to 20.03.00.
+ *  20.04.00  2023-06-30  visvkr     -             Updated version to 20.04.00.
+ *  20.05.00  2023-07-28  visepp     -             Updated version to 20.05.00.
+ *  21.00.00  2023-08-28  visepp     -             Updated version to 21.00.00.
+                          mosman     DCM-7461      Refactor configuration tables terminated by NULLPTR.
+ *  21.01.00  2023-09-25  visepp     -             Updated version to 21.01.00.
+ *  21.02.00  2023-10-30  visepp     -             Updated version to 21.02.00.
+ *  21.03.00  2023-12-01  visepp     DCM-1287      Support variant-specific security key lengths
+ *  21.04.00  2024-01-03  ssharma    -             Updated version to 21.04.00.
+ *  21.05.00  2024-02-12  visuvo     -             Updated version to 21.05.00.
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : Elisa_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+
+  reg.SetVersion(0x210500)
+  reg.SetPackageName("Diag_Asr4Dcm")
+  reg.SetInputFiles(["Dcm_Lcfg.c", "Dcm_PBcfg.c"])
+
+  return reg
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : Elisa_core calls this function to allow the plugin a version check against the BSW sources.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+  /* Version of DCM MSR4 */
+  AssertDefineEquals("DCM_SW_MAJOR_VERSION", "21u")
+  AssertDefineEquals("DCM_SW_MINOR_VERSION", "5u")
+  AssertDefineEquals("DCM_SW_PATCH_VERSION", "0u")
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the Elisa plugin. main calls all rule functions to check the configuration.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def main()
+{
+  // Static checks
+  InvokeRule("Check QM only features are deactivated",            CheckQMFeatures)
+  InvokeRule("Check features required for SafeBSW are activated", CheckSafeFeatures)
+
+  // Verification of generated initializers
+  InvokeRule("Check generated configurations", VerifyConfigurations)
+
+  // Verification of ROM array sizes
+  InvokeRule("CM_DCM_M_SIZEOF_MODEMGRRULES",             Check_CM_DCM_M_SIZEOF_MODEMGRRULES)                  /* ModeMgrRules */
+  InvokeRule("CM_DCM_M_SIZEOF_SERVICEINFO",              Check_CM_DCM_M_SIZEOF_SERVICEINFO)                   /* ServiceInfo */
+  InvokeRule("CM_DCM_M_SIZEOF_SVCPOSTPROCESSORS",        Check_CM_DCM_M_SIZEOF_SVCPOSTPROCESSORS)             /* PostProcessors */
+  InvokeRule("CM_DCM_M_SIZEOF_SVCUPDATERS",              Check_CM_DCM_M_SIZEOF_SVCUPDATERS)                   /* Updaters */
+  InvokeRule("CM_DCM_M_SIZEOF_SVCCANCELLERS",            Check_CM_DCM_M_SIZEOF_SVCCANCELLERS)                 /* Cancellers */
+  InvokeRule("CM_DCM_M_SIZEOF_SVCPREHANDLER",            Check_CM_DCM_M_SIZEOF_SVCPREHANDLER)                 /* PreHandler */
+  InvokeRule("CM_DCM_M_SIZEOF_SVCPOSTHANDLER",           Check_CM_DCM_M_SIZEOF_SVCPOSTHANDLER)                /* PostHandler */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC11SUBFUNC",             Check_CM_DCM_M_SIZEOF_SVC11SUBFUNC)                  /* Service 0x11 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC19SUBFUNC",             Check_CM_DCM_M_SIZEOF_SVC19SUBFUNC)                  /* Service 0x19 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC28SUBFUNC",             Check_CM_DCM_M_SIZEOF_SVC28SUBFUNC)                  /* Service 0x28 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC27SECLEVEL",            Check_CM_DCM_M_SIZEOF_SVC27SECLEVEL)                 /* Service 0x27 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC29SUBFUNC",             Check_CM_DCM_M_SIZEOF_SVC29SUBFUNC)                  /* Service 0x29 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_CFGAUTHMGRNETCONNINFO",    Check_CM_DCM_M_SIZEOF_CFGAUTHMGRNETCONNINFO)         /* Service 0x29 CfgAuthMgrNetConnInfo */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC2CSUBFUNC",             Check_CM_DCM_M_SIZEOF_SVC2CSUBFUNC)                  /* Service 0x2C SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC31OPFUNC",              Check_CM_DCM_M_SIZEOF_SVC31OPFUNC)                   /* Service 0x31 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC85SUBFUNC",             Check_CM_DCM_M_SIZEOF_SVC85SUBFUNC)                  /* Service 0x85 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC86SUBFUNC",             Check_CM_DCM_M_SIZEOF_SVC86SUBFUNC)                  /* Service 0x86 SubSvcFunc */
+  InvokeRule("CM_DCM_M_SIZEOF_DIDMGROPFUNC",             Check_CM_DCM_M_SIZEOF_DIDMGROPFUNC)                  /* DID Manager Operation Class Info */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC01SERVICEINFO",         Check_CM_DCM_M_SIZEOF_SVC01SERVICEINFO)              /* OBD Mode 0x01 properties */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC06MIDTIDINFO",          Check_CM_DCM_M_SIZEOF_SVC06MIDTIDINFO)               /* OBD Mode 0x06 properties */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC08SERVICEINFO",         Check_CM_DCM_M_SIZEOF_SVC08SERVICEINFO)              /* OBD Mode 0x08 properties */
+  InvokeRule("CM_DCM_M_SIZEOF_SVC09SERVICEINFO",         Check_CM_DCM_M_SIZEOF_SVC09SERVICEINFO)              /* OBD Mode 0x09 properties */
+  InvokeRule("CM_DCM_M_SIZEOF_IOCTRLSRHANDLERS",         Check_CM_DCM_M_SIZEOF_IOCTRLSRHANDLERS)              /* IO Control SenderReceiver Handlers */
+  InvokeRule("CM_DCM_M_SIZEOF_ROEEVENTMODESWITCHINFO",   Check_CM_DCM_M_SIZEOF_ROEEVENTMODESWITCHINFO)        /* Service 0x86 ModeSwitch */
+  InvokeRule("CM_DCM_M_SIZEOF_SVCINITS",                 Check_CM_DCM_M_SIZEOF_SVCINITS)                      /* svcInitializers */
+  InvokeRule("CM_DCM_M_SIZEOF_PROTOCOLNOTIFICATIONINFO", Check_CM_DCM_M_SIZEOF_PROTOCOLNOTIFICATIONINFO)      /* ProtocolNotificationInfo */
+  InvokeRule("CM_DCM_M_SIZEOF_SYSNOTIFICATIONINFO",      Check_CM_DCM_M_SIZEOF_SYSNOTIFICATIONINFO)           /* SysNotificationInfo */
+  InvokeRule("CM_DCM_M_SIZEOF_OEMNOTIFICATIONINFO",      Check_CM_DCM_M_SIZEOF_OEMNOTIFICATIONINFO)           /* OemNotificationInfo */
+  InvokeRule("CM_DCM_M_SIZEOF_SESSIONNOTIFICATIONINFO",  Check_CM_DCM_M_SIZEOF_SESSIONNOTIFICATIONINFO)       /* SessionNotificationInfo */
+  InvokeRule("CM_DCM_M_SIZEOF_SECURITYNOTIFICATIONINFO", Check_CM_DCM_M_SIZEOF_SECURITYNOTIFICATIONINFO)      /* SecurityNotificationInfo */
+  
+  // Verification of RAM array sizes
+  InvokeRule("CM_DCM_M_SIZEOF_BUFFERINFO",             Check_CM_DCM_M_SIZEOF_BUFFERINFO)             /* BufferInfo */
+  InvokeRule("CM_DCM_M_SIZEOF_PERTXOBJ",               Check_CM_DCM_M_SIZEOF_PERTXOBJ)               /* PeriodicTxObjects */
+  InvokeRule("CM_DCM_M_SIZEOF_COMMCONTEXT",            Check_CM_DCM_M_SIZEOF_COMMCONTEXT)            /* ComMContexts */
+  InvokeRule("CM_DCM_M_SIZEOF_TOBJHANDLE",             Check_CM_DCM_M_SIZEOF_TOBJHANDLE)             /* ConnHdl2TObjIdMap */
+  InvokeRule("CM_DCM_M_SIZEOF_TRANSPORTOBJECT",        Check_CM_DCM_M_SIZEOF_TRANSPORTOBJECT)        /* TranspObjects */
+  InvokeRule("CM_DCM_M_SIZEOF_BUFFERCONTEXT",          Check_CM_DCM_M_SIZEOF_BUFFERCONTEXT)          /* BufferContexts */
+  InvokeRule("CM_DCM_M_SIZEOF_COMCONTROLCHANNEL",      Check_CM_DCM_M_SIZEOF_COMCONTROLCHANNEL)      /* ComCtrlChannels */
+
+  InvokeRule("CM_DCM_M_CONSISTENCY_BUFFERINFO",        Check_CM_DCM_M_CONSISTENCY_BUFFERINFO)        /* Verify Dcm_CfgNetBufferInfo[] */
+
+  // Verification of array contents
+  InvokeRule("CM_DCM_M_MAX_ZERO_SEED_LENGTH",          Check_CM_DCM_M_MAX_ZERO_SEED_LENGTH)          /* Service 0x27 SeedLength */
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : CheckQMFeatures
+* Parameter    : None
+* Return value : None
+* Description  : Verify that all non-silent features are deactivated.
+**********************************************************************************************************************/
+def CheckQMFeatures()
+{
+  //Check mandatory features
+  AssertDefineIsStdOn("DCM_SVC_10_SUPPORT_ENABLED")
+
+  //Check not used features
+  AssertDefineIsStdOff("DCM_VARMGR_MODE_LINKTIME_ENABLED")
+  AssertDefineIsStdOff("DCM_SVC_38_SUPPORT_ENABLED")
+}
+
+/**********************************************************************************************************************
+* Name         : CheckSafeFeatures
+* Parameter    : None
+* Return value : None
+* Description  : Verify that all features that guarantee safe runtime are activated.
+**********************************************************************************************************************/
+def CheckSafeFeatures()
+{
+  AssertDefineIsStdOn("DCM_DEV_ERROR_DETECT")
+  AssertDefineIsStdOn("DCM_DEV_RUNTIME_CHECKS")
+
+  CheckSwitch_DIDMGR_RTE_IMPLICIT_COM_ENABLED()
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyConfigurations
+* Parameter    : None
+* Return value : None
+* Description  : Verify that there are no unexpected NULL_PTRs and that the symbols match the expectation.
+**********************************************************************************************************************/
+def VerifyConfigurations()
+{
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    VerifyRamConfig()
+    VerifyRomConfig()
+  }
+  VerifyVariantConfigs()
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyRamConfig
+* Parameter    : None
+* Return value : None
+* Description  : Verify the RAM configuration.
+**********************************************************************************************************************/
+def VerifyRamConfig()
+{
+  var ramNetConfig = Struct("Dcm_CfgConfigExternRam").GetMemberAsStruct("NetworkRam")
+
+  if (IsStdOn("DCM_NET_PERIODIC_TX_ENABLED"))
+  {
+    VerifyElementNotNullAndSymbol(ramNetConfig, "PeriodicTxObjects", "Dcm_CfgNetPeriodicTxObjects")
+  }
+  VerifyElementNotNullAndSymbol(ramNetConfig, "ComMContexts", "Dcm_CfgNetComMContexts")
+  if(IsStdOff("DCM_NET_MONITOR_FOREIGN_N_TA_ENABLED"))
+  {
+    VerifyElementNotNullAndSymbol(ramNetConfig, "ConnHdl2TObjIdMap", "Dcm_CfgNetConnHdl2TObjMap")
+  }
+  VerifyElementNotNullAndSymbol(ramNetConfig, "TranspObjects", "Dcm_CfgNetTransportObjects")
+  VerifyElementNotNullAndSymbol(ramNetConfig, "BufferContexts", "Dcm_CfgNetBufferContexts")
+  if (IsStdOn("DCM_MODE_COMMCTRL_ENABLED"))
+  {
+    VerifyElementNotNullAndSymbol(ramNetConfig, "ComCtrlChannels", "Dcm_CfgComCtrlChannels")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyRomConfig
+* Parameter    : None
+* Return value : None
+* Description  : Verify the ROM configuration.
+**********************************************************************************************************************/
+def VerifyRomConfig()
+{
+  var romNetConfig = Struct("Dcm_CfgConfigExternRom").GetMemberAsStruct("NetworkRom")
+  VerifyElementNotNullAndSymbol(romNetConfig, "BufferInfo", "Dcm_CfgNetBufferInfo")
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyVariantConfigs
+* Parameter    : None
+* Return value : None
+* Description  : Verify variant configurations.
+**********************************************************************************************************************/
+def VerifyVariantConfigs()
+{
+  // Iterate over all variants and check their configs
+  var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+  for (var index = 0; index < networkVariantList.size(); ++index)
+  {
+    var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+    VerifyElementNotNullAndSymbol(networkVariant, "RxPduIdTable", "Dcm_CfgNetRxPduInfo.*")
+    VerifyElementNotNullAndSymbol(networkVariant, "ConnectionTable", "Dcm_CfgNetConnectionInfo.*")
+    VerifyElementNotNullAndSymbol(networkVariant, "ProtocolTable", "Dcm_CfgNetProtocolInfo.*")
+    VerifyElementNotNullAndSymbol(networkVariant, "NetConnComMChannelMap", "Dcm_CfgNetConnComMChannelMap.*")
+    VerifyElementNotNullAndSymbol(networkVariant, "NetworkHandleLookUpTable", "Dcm_CfgNetNetworkHandleLookUpTable.*")
+    VerifyElementNotNullAndSymbol(networkVariant, "NetAllComMChannelMap", "Dcm_CfgNetAllComMChannelMap.*")
+    if (IsStdOn("DCM_NET_COMCTRL_ALLNET_SUPPORT_ENABLED"))
+    {
+      VerifyElementNotNullAndSymbol(networkVariant, "ComCtrlChannelListAll", "Dcm_CfgNetComCtrlChannelListAll.*")
+    }
+
+    VerifyElementNotNullAndSymbol(networkVariant, "TxPduIdMap", "Dcm_CfgNetTxPduInfo.*")
+    if (IsStdOn("DCM_NET_PERIODIC_TX_ENABLED"))
+    {
+      VerifyElementNotNullAndSymbol(networkVariant, "PerTxPduIdMap", "Dcm_CfgNetPeriodicTxPduInfo.*")
+      VerifyElementNotNullAndSymbol(networkVariant, "PerTxPduIdTable", "Dcm_CfgNetPeriodicTxPduIds.*")
+    }
+    else
+    {
+      VerifyElementIsNull(networkVariant, "PerTxPduIdMap")
+      VerifyElementIsNull(networkVariant, "PerTxPduIdTable")
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyElementNullOrSymbol
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+                 symbolName - Expected name of the symbol
+* Return value : bool       - True if verification succeeded
+* Description  : Verify that a specific member of a struct is either null or matches the expected symbol name.
+**********************************************************************************************************************/
+def VerifyElementNullOrSymbol(struct, varName, symbolName)
+{
+  if (StructElementIsNull(struct, varName))
+  {
+    ReportNote("Variable '" + varName + "' of struct '" + struct.GetName() + "' is null")
+    return true
+  }
+  else
+  {
+    if (!VerifySymbolName(struct, varName, symbolName))
+    {
+      return false
+    }
+  }
+  return true
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyElementNotNullAndSymbol
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+                 symbolName - Expected name of the symbol
+* Return value : bool       - True if verification succeeded
+* Description  : Verify that a specific member of a struct is not null and matches the expected symbol name.
+**********************************************************************************************************************/
+def VerifyElementNotNullAndSymbol(struct, varName, symbolName)
+{
+  if (!VerifyElementNotNull(struct, varName))
+  {
+    return false
+  }
+  if (!VerifySymbolName(struct, varName, symbolName))
+  {
+    return false
+  }
+  return true
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyElementNotNull
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+* Return value : bool       - True if verification succeeded
+* Description  : Verify that a specific member of a struct is not null.
+**********************************************************************************************************************/
+def VerifyElementNotNull(struct, varName)
+ {
+  if (StructElementIsNull(struct, varName))
+  {
+    ReportError("Variable '" + varName + "' of struct '" + struct.GetName() + "' is null")
+    return false
+  }
+  else
+  {
+    ReportNote("Variable '" + varName + "' of struct '" + struct.GetName() + "' is not null")
+    return true
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : VerifyElementIsNull
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+* Return value : bool       - True if verification succeeded
+* Description  : Verify that a specific member of a struct is null.
+**********************************************************************************************************************/
+def VerifyElementIsNull(struct, varName)
+{
+  if (StructElementIsNull(struct, varName))
+  {
+    ReportNote("Variable '" + varName + "' of struct '" + struct.GetName() + "' is null")
+    return true
+  }
+  else
+  {
+    ReportError("Variable '" + varName + "' of struct '" + struct.GetName() + "' is not null")
+    return false
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : StructElementIsNull
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+* Return value : bool       - True if member is null, false otherwise
+* Description  : Check if a struct member is null.
+**********************************************************************************************************************/
+def StructElementIsNull(struct, varName)
+{
+  var elem = struct.GetMemberAsString(varName)
+  return IsNull(elem)
+}
+
+/**********************************************************************************************************************
+* Name         : IsNull
+* Parameter    : variable   - Variable as string
+* Return value : bool       - True if variable is null, false otherwise
+* Description  : Check if a variable is null.
+**********************************************************************************************************************/
+def IsNull(variable)
+{
+  var nullPtrDefValue = Define("NULL_PTR").GetValueAsString()
+  return (variable == nullPtrDefValue)
+}
+
+/**********************************************************************************************************************
+* Name         : VerifySymbolName
+* Parameter    : struct     - Name of the struct
+                 varName    - Name of the member within the struct
+                 symbolName - Expected name of the symbol
+* Return value : None
+* Description  : Verify that the name of a specific member of a struct matches the expectation.
+**********************************************************************************************************************/
+def VerifySymbolName(struct, varName, symbolName)
+{
+  var elem = struct.GetMemberAsString(varName)
+
+  var symbolFound = false
+
+  var constSymbols := FindConstSymbol(symbolName)
+  for (var index = 0; index < constSymbols.size(); ++index)
+  {
+    if (elem == constSymbols[index].GetSymbolName())
+    {
+      symbolFound = true
+      break
+    }
+  }
+
+  if (!symbolFound)
+  {
+    var varSymbols := FindVariablesSymbol(symbolName)
+    for (var index = 0; index < varSymbols.size(); ++index)
+    {
+      if (elem == varSymbols[index].GetSymbolName())
+      {
+        symbolFound = true
+        break
+      }
+    }
+  }
+
+  if (!symbolFound)
+  {
+    ReportError("Variable '" + varName + "' of struct '" + struct.GetName() + "' does not match the expected symbol name '" + symbolName + "' (" + elem + ")")
+    return false
+  }
+  else
+  {
+    ReportNote("Variable '" + varName + "' of struct '" + struct.GetName() + "' matches the expected symbol name")
+    return true
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CheckSwitch_DIDMGR_RTE_IMPLICIT_COM_ENABLED
+* Parameter    : None
+* Return value : None
+* Description  : Verify that switch DCM_DIDMGR_RTE_IMPLICIT_COM_ENABLED is only enabled when service 0x22 is enabled.
+**********************************************************************************************************************/
+def CheckSwitch_DIDMGR_RTE_IMPLICIT_COM_ENABLED()
+{
+  if (IsStdOn("DCM_SVC_22_SUPPORT_ENABLED"))
+  {
+    AssertDefineIsStdOn("DCM_DIDMGR_RTE_IMPLICIT_COM_ENABLED")
+  }
+  else
+  {
+    AssertDefineIsStdOff("DCM_DIDMGR_RTE_IMPLICIT_COM_ENABLED")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_CONSISTENCY_BUFFERINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify for each element in Dcm_CfgNetBufferInfo[] that the member 'Size' matches to the size of the
+*                array the member 'BufferPtr' is pointing to.
+* Requirements : SBSW_DCM_POINTER_WRITE_BUFFERINFO
+**********************************************************************************************************************/
+def Check_CM_DCM_M_CONSISTENCY_BUFFERINFO()
+{
+  var netBufferInfoArray = Array("Dcm_CfgNetBufferInfo")
+
+  for (var index = 0; index < netBufferInfoArray.GetNumInits(); ++index)
+  {
+    var netBufferInfoEntry = netBufferInfoArray.GetElemAsStruct(index)
+    var size = netBufferInfoEntry.GetMemberAsNumber("Size")
+    var bufferPtr = netBufferInfoEntry.GetMemberAsString("BufferPtr")
+
+    //Search the array related to Dcm_CfgNetBufferInfo.BufferPtr
+    var bufferList := FindVariablesSymbol(bufferPtr)
+
+    var bufferArray = Array(bufferList[0].GetSymbolName())
+
+    AssertArraySize(bufferArray, Equal, size)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_BUFFERINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the buffer infos have the expected size.
+* Requirements : SBSW_DCM_COMB_PTR_FORWARD, SBSW_DCM_POINTER_WRITE_BUFFERINFO
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_BUFFERINFO()
+{
+  // Get expected size
+  var expectedSize = Define("DCM_NET_NUM_BUFFERS")
+  var expectedSizeGenerated = Define("DCM_CFGNETBUFFERINFO_SIZE")
+
+  //Check if the generated and non-generated definition are equal
+  Assert(expectedSize.GetValueAsNumber(), Equal, expectedSizeGenerated.GetValueAsNumber())
+
+  var sharedArray = Array("Dcm_CfgNetBufferInfo")
+
+  //Check shared array matches expected size
+  AssertArraySize(sharedArray, Equal, expectedSize)
+
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumBuffers")
+    }
+  }
+  else if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_SELECT_ENABLED") && IsStdOn("DCM_VARMGR_MULTI_COM_ENABLED"))
+  {
+    //only PostBuild Selectable is enabled
+    var maxNumBuffers = 0
+
+    //Iterate over all variants to get the maximum number of USDT buffers
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var numBuffers = Struct(networkVariantList[index].GetSymbolName()).GetMemberAsNumber("NumBuffers")
+      if (numBuffers > maxNumBuffers)
+      {
+        maxNumBuffers = numBuffers;
+      }
+    }
+    //Check maximum number will fit the array size
+    AssertArraySize(sharedArray, GreaterEqual, maxNumBuffers)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_PERTXOBJ
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the PeriodicTxObjects array has the expected size.
+* Requirements : SBSW_DCM_POINTER_WRITE_PERTXOBJ
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_PERTXOBJ()
+{
+  if (IsStdOn("DCM_NET_PERIODIC_TX_ENABLED"))
+  {
+    // Get expected size
+    var expectedSize = Define("DCM_NET_MAX_NUM_PERIODIC_TX_OBJ")
+
+    //Check configuration variant
+    if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+    {
+      var sharedArray = Array("Dcm_CfgNetPeriodicTxObjects")
+
+      //Check shared array matches expected size
+      AssertArraySize(sharedArray, Equal, expectedSize)
+
+      //Iterate over all variants
+      var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+      for (var index = 0; index < networkVariantList.size(); ++index)
+      {
+        var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+        //Check each variant will fit the array size
+        AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumPerTxObjects")
+      }
+    }
+    else if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_SELECT_ENABLED") && IsStdOn("DCM_VARMGR_MULTI_COM_ENABLED"))
+    {
+      //only PostBuild Selectable is enabled
+      var maxNumPerTxObjects = 0
+
+      //Iterate over all variants to get the maximum number of periodic message transport objects
+      var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+      for (var index = 0; index < networkVariantList.size(); ++index)
+      {
+        var numPerTxObjects = Struct(networkVariantList[index].GetSymbolName()).GetMemberAsNumber("NumPerTxObjects")
+        if (numPerTxObjects > maxNumPerTxObjects)
+        {
+          maxNumPerTxObjects = numPerTxObjects;
+        }
+      }
+
+      //Check maximum number fits expected size
+      Assert(maxNumPerTxObjects, LessEqual, expectedSize)
+    }
+    else
+    {
+      //Pre-compile variant is active
+      //PeriodicTxObjects are located in Dcm.c -> covered by code review.
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_COMMCONTEXT
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the COMM context has the expected size.
+* Requirements : SBSW_DCM_POINTER_WRITE_COMMCONTEXT
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_COMMCONTEXT()
+{
+  // Get expected size
+  var expectedSize = Define("DCM_NET_MAX_NUM_COMM_CHANNELS")
+
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    var sharedArray = Array("Dcm_CfgNetComMContexts")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumComMChannels")
+    }
+  }
+  else if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_SELECT_ENABLED") && IsStdOn("DCM_VARMGR_MULTI_COM_ENABLED"))
+  {
+    //only PostBuild Selectable is enabled
+    var maxNumComMChannels = 0
+
+    //Iterate over all variants to get the maximum number of all ComM channels related to diagnostic clients
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var numComMChannels = Struct(networkVariantList[index].GetSymbolName()).GetMemberAsNumber("NumComMChannels")
+      if (numComMChannels > maxNumComMChannels)
+      {
+        maxNumComMChannels = numComMChannels;
+      }
+    }
+
+    //Check maximum number fits expected size
+    Assert(maxNumComMChannels, LessEqual, expectedSize)
+  }
+  else
+  {
+    //Pre-compile variant is active
+    //ComMContext is located in Dcm.c -> covered by code review.
+  }
+}
+
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_BUFFERCONTEXT
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Buffer context has the expected size.
+* Requirements : SBSW_DCM_POINTER_WRITE_BUFFERCONTEXT
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_BUFFERCONTEXT()
+{
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    // Get expected size
+    var expectedSize = Define("DCM_NET_NUM_BUFFERS")
+
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgNetBufferContexts")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumBuffers")
+    }
+  }
+  else
+  {
+    //Pre-compile variant is active
+    //BufferContext is located in Dcm.c -> covered by code review.
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_MODEMGRRULES
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Mode Manager Rule has the expected size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_MODEMGRRULES
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_MODEMGRRULES()
+{
+  //Check configuration variant
+  if (IsStdOn("DCM_MODEMGR_CHECK_SUPPORT_ENABLED"))
+  {
+    // Get expected size
+    var expectedSize = Define("DCM_CFGMODEMGRRULES_SIZE")
+
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgModeMgrRules")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+  }
+  else
+  {
+    // Countermeasure not needed because the array is not used
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVCINITS
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the service initializers has the expected size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVCINITS
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVCINITS()
+{
+  if (SymbolExists("Dcm_CfgDiagSvcInitializers"))
+  {
+    // Get expected size
+    var expectedSize = Define("DCM_CFGDIAGSVCINITIALIZERS_SIZE")
+
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgDiagSvcInitializers")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_PROTOCOLNOTIFICATIONINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that DCM protocol switch notification info has the expected size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_PASSEDTABLETOFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_PROTOCOLNOTIFICATIONINFO()
+{
+  if (SymbolExists("Dcm_CfgNetProtocolNotificationInfo"))
+  {
+    // Get expected size
+    var expectedSize = Define("DCM_CFGNETPROTOCOLNOTIFICATIONINFO_SIZE")
+
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgNetProtocolNotificationInfo")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SYSNOTIFICATIONINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that system supplier info has the expected size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_PASSEDTABLETOFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SYSNOTIFICATIONINFO()
+{
+  if (SymbolExists("Dcm_CfgDiagSysNotificationInfo"))
+  {
+    // Get expected size
+    var expectedSize = Define("DCM_CFGDIAGSYSNOTIFICATIONINFO_SIZE")
+
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgDiagSysNotificationInfo")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_OEMNOTIFICATIONINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the OEM notification function has the expected size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_PASSEDTABLETOFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_OEMNOTIFICATIONINFO()
+{
+  if (SymbolExists("Dcm_CfgDiagOemNotificationInfo"))
+  {
+    // Get expected size
+    var expectedSize = Define("DCM_CFGDIAGOEMNOTIFICATIONINFO_SIZE")
+
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgDiagOemNotificationInfo")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SESSIONNOTIFICATIONINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the session state change notification has the expected size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_PASSEDTABLETOFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SESSIONNOTIFICATIONINFO()
+{
+  if (SymbolExists("Dcm_CfgStateSessionNotificationInfo"))
+  {
+    // Get expected size
+    var expectedSize = Define("DCM_CFGSTATESESSIONNOTIFICATIONINFO_SIZE")
+
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgStateSessionNotificationInfo")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SECURITYNOTIFICATIONINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that security state change notification has the expected size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_PASSEDTABLETOFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SECURITYNOTIFICATIONINFO()
+{
+  if (SymbolExists("Dcm_CfgStateSecurityNotificationInfo"))
+  {
+    // Get expected size
+    var expectedSize = Define("DCM_CFGSTATESECURITYNOTIFICATIONINFO_SIZE")
+
+    //Any PBX variant is active
+    var sharedArray = Array("Dcm_CfgStateSecurityNotificationInfo")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_TRANSPORTOBJECT
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the transport objects have the expected size.
+* Requirements : SBSW_DCM_POINTER_WRITE_TRANSPORTOBJECT, SBSW_DCM_POINTER_WRITE_QUEUEDTOBJ, SBSW_DCM_POINTER_WRITE_TOBJ_OF_CONNECTION, SBSW_DCM_POINTER_WRITE_ALLOCATEDTOBJ, SBSW_DCM_POINTER_WRITE_RESERVEDTOBJ
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_TRANSPORTOBJECT()
+{
+  // Get expected size
+  var expectedSize = Define("DCM_NET_MAX_NUM_TRANSP_OBJECTS")
+
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    var sharedArray = Array("Dcm_CfgNetTransportObjects")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumTranspObjects")
+    }
+  }
+  else if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_SELECT_ENABLED") && IsStdOn("DCM_VARMGR_MULTI_COM_ENABLED"))
+  {
+    //only PostBuild Selectable is enabled
+    var maxNumTranspObjects = 0
+
+    //Iterate over all variants to get the maximum number of USDT transport objects
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var numTranspObjects = Struct(networkVariantList[index].GetSymbolName()).GetMemberAsNumber("NumTranspObjects")
+      if (numTranspObjects > maxNumTranspObjects)
+      {
+        maxNumTranspObjects = numTranspObjects;
+      }
+    }
+
+    //Check maximum number fits expected size
+    Assert(maxNumTranspObjects, LessEqual, expectedSize)
+  }
+  else
+  {
+    //Pre-compile variant is active
+    //TransportObject is located in Dcm.c -> covered by code review.
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SERVICEINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDiagServiceInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SERVICEINFO
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SERVICEINFO()
+{
+  // Get expected size
+  var expectedSize = Define("DCM_CFGDIAGSERVICEINFO_SIZE")
+
+  var array = Array("Dcm_CfgDiagServiceInfo")
+
+  //Check array has expected size
+  AssertArraySize(array, Equal, expectedSize)
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVCPOSTPROCESSORS
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDiagSvcPostProcessors array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVCPOSTPROCESSORS
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVCPOSTPROCESSORS()
+{
+  // Get expected size
+  var expectedSize = Define("DCM_CFGDIAGSVCPOSTPROCESSORS_SIZE")
+
+  var array = Array("Dcm_CfgDiagSvcPostProcessors")
+
+  //Check array has expected size
+  AssertArraySize(array, Equal, expectedSize)
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVCUPDATERS
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDiagSvcUpdaters array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVCUPDATERS
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVCUPDATERS()
+{
+  // only available if paged buffer is active
+  if (IsStdOn("DCM_PAGED_BUFFER_ENABLED"))
+  {
+    // Get expected size
+    var expectedSize = Define("DCM_CFGDIAGSVCUPDATERS_SIZE")
+
+    var array = Array("Dcm_CfgDiagSvcUpdaters")
+
+    //Check array has expected size
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVCCANCELLERS
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDiagSvcCancellers array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVCCANCELLERS
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVCCANCELLERS()
+{
+  // Get expected size
+  var expectedSize = Define("DCM_CFGDIAGSVCCANCELLERS_SIZE")
+
+  var array = Array("Dcm_CfgDiagSvcCancellers")
+
+  //Check array has expected size
+  AssertArraySize(array, Equal, expectedSize)
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVCPREHANDLER
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDiagSvcPreHandlers array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVCPREHANDLER
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVCPREHANDLER()
+{
+  // Get expected size
+  var expectedSize = Define("DCM_CFGDIAGSVCPREHANDLERS_SIZE")
+
+  var array = Array("Dcm_CfgDiagSvcPreHandlers")
+
+  //Check array has expected size
+  AssertArraySize(array, Equal, expectedSize)
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVCPOSTHANDLER
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDiagSvcPostHandlers array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVCPOSTHANDLER
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVCPOSTHANDLER()
+{
+  // Get expected size
+  var expectedSize = Define("DCM_CFGDIAGSVCPOSTHANDLERS_SIZE")
+
+  var array = Array("Dcm_CfgDiagSvcPostHandlers")
+
+  //Check array has expected size
+  AssertArraySize(array, Equal, expectedSize)
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC11SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc11SubFuncInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC11SUBFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC11SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_11_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC11SUBFUNCINFO_SIZE")
+
+    var array = Array("Dcm_CfgSvc11SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC19SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc19SubFuncInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC19SUBFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC19SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_19_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC19SUBFUNCINFO_SIZE")
+
+    var array = Array("Dcm_CfgSvc19SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC27SECLEVEL
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc27SecLevelInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC27SECLEVEL, SBSW_DCM_CALL_FUNCPTR_SVC27GETSEED
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC27SECLEVEL()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_27_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC27SECLEVELINFO_SIZE")
+
+    var array = Array("Dcm_CfgSvc27SecLevelInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC29SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc29SubFuncInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC29SUBFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC29SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_29_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC29SUBFUNCINFO_SIZE")
+
+    var array = Array("Dcm_CfgSvc29SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_CFGAUTHMGRNETCONNINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgAuthMgrNetConnInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_AUTHMODESWITCH
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_CFGAUTHMGRNETCONNINFO()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_29_01_SUPPORT_ENABLED") || IsStdOn("DCM_SVC_29_02_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGAUTHMGRNETCONNINFO_SIZE")
+
+    var array = Array("Dcm_CfgAuthMgrNetConnInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC2CSUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc2CSubFuncInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC2CSUBFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC2CSUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_2C_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC2CSUBFUNCINFO_SIZE")
+
+    var array = Array("Dcm_CfgSvc2CSubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC31OPFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgRidMgrOpInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC31OPFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC31OPFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_31_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGRIDMGROPINFO_SIZE")
+
+    var array = Array("Dcm_CfgRidMgrOpInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC28SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc28SubFuncInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC28SUBFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC28SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_28_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC28SUBFUNCINFO_SIZE")
+
+    var array = Array("Dcm_CfgSvc28SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC85SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc85SubFuncInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC85SUBFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC85SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_85_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC85SUBFUNCINFO_SIZE")
+
+    var array = Array("Dcm_CfgSvc85SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC86SUBFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc86SubFuncInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC86SUBFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC86SUBFUNC()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_SVC_86_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC86SUBFUNCINFO_SIZE")
+
+    var array = Array("Dcm_CfgSvc86SubFuncInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_ROEEVENTMODESWITCHINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgModeRoEEventModeSwitchInfoTable array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_ROEMODESWITCH
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_ROEEVENTMODESWITCHINFO()
+{
+  /* Check configuration variant */
+  if (IsStdOn("DCM_MODE_ROE_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGMODEROEEVENTMODESWITCHINFOTABLE_SIZE")
+
+    var array = Array("Dcm_CfgModeRoEEventModeSwitchInfoTable")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_DIDMGROPFUNC
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDidMgrSignalOpClassInfo array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_DIDMGROPFUNC
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_DIDMGROPFUNC()
+{
+  if (IsStdOn("DCM_SVC_22_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGDIDMGRSIGNALOPCLASSINFO_SIZE")
+
+    var array = Array("Dcm_CfgDidMgrSignalOpClassInfo")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC01SERVICEINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc01ServiceInfoTable array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC01SERVICEINFO
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC01SERVICEINFO()
+{
+  if (IsStdOn("DCM_SVC_01_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC01SERVICEINFOTABLE_SIZE")
+
+    var array = Array("Dcm_CfgSvc01ServiceInfoTable")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC06MIDTIDINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc06MidTidInfoTable array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC06MIDTIDINFO
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC06MIDTIDINFO()
+{
+  if (IsStdOn("DCM_SVC_06_SUPPORT_ENABLED") && IsStdOn("DCM_OBDIDMGR_OBDMID_SUPPORT_BY_DCM_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC06MIDTIDINFOTABLE_SIZE")
+
+    var array = Array("Dcm_CfgSvc06MidTidInfoTable")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC08SERVICEINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc08ServiceInfoTable array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC08SERVICEINFO
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC08SERVICEINFO()
+{
+  if (IsStdOn("DCM_SVC_08_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC08SERVICEINFOTABLE_SIZE")
+
+    var array = Array("Dcm_CfgSvc08ServiceInfoTable")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_SVC09SERVICEINFO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc09ServiceInfoTable array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_SVC09SERVICEINFO
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_SVC09SERVICEINFO()
+{
+  if (IsStdOn("DCM_SVC_09_SUPPORT_ENABLED"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGSVC09SERVICEINFOTABLE_SIZE")
+
+    var array = Array("Dcm_CfgSvc09ServiceInfoTable")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_IOCTRLSRHANDLERS
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgDidMgr_IOControlSenderReceiverHandlers array has the correct size.
+* Requirements : SBSW_DCM_CALL_FUNCPTR_IOCTRLSRHANDLER
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_IOCTRLSRHANDLERS()
+{
+  /* Check configuration variant */
+  if (IsDefined("DCM_CFGDIDMGR_IOCONTROLSENDERRECEIVERHANDLERS_SIZE"))
+  {
+    /* Get expected size */
+    var expectedSize = Define("DCM_CFGDIDMGR_IOCONTROLSENDERRECEIVERHANDLERS_SIZE")
+
+    var array = Array("Dcm_CfgDidMgr_IOControlSenderReceiverHandlers")
+
+    /* Assert that array has expected size */
+    AssertArraySize(array, Equal, expectedSize)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_COMCONTROLCHANNEL
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the comm control channels have the expected size.
+* Requirements : SBSW_DCM_POINTER_WRITE_COMCONTROLCHANNEL
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_COMCONTROLCHANNEL()
+{
+  // Get expected size
+  var expectedSize = Define("DCM_NET_MAX_NUM_ALL_COMM_CHANNELS")
+
+  if (IsStdOn("DCM_MODE_COMMCTRL_ENABLED"))
+  {
+    //Check configuration variant
+    if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+    {
+      var sharedArray = Array("Dcm_CfgComCtrlChannels")
+
+      //Check shared array matches expected size
+      AssertArraySize(sharedArray, Equal, expectedSize)
+
+      //Iterate over all variants
+      var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+      for (var index = 0; index < networkVariantList.size(); ++index)
+      {
+        var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+        //Check each variant will fit the array size
+        AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumAllComMChannels")
+      }
+    }
+    else if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_SELECT_ENABLED") && IsStdOn("DCM_VARMGR_MULTI_COM_ENABLED"))
+    {
+      //only PostBuild Selectable is enabled
+      var maxNumAllComMChannels = 0
+
+      //Iterate over all variants to get maximum number of all ComM channels managed by DCM
+      var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+      for (var index = 0; index < networkVariantList.size(); ++index)
+      {
+        var numAllComMChannels = Struct(networkVariantList[index].GetSymbolName()).GetMemberAsNumber("NumAllComMChannels")
+        if (numAllComMChannels > maxNumAllComMChannels)
+        {
+          maxNumAllComMChannels = numAllComMChannels;
+        }
+      }
+
+      //Check maximum number fits expected size
+      Assert(maxNumAllComMChannels, LessEqual, expectedSize)
+    }
+    else
+    {
+      //Pre-compile variant is active
+      //ComCtrlChannels is located in Dcm.c -> covered by code review.
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_SIZEOF_TOBJHANDLE
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the connection id to object handle map has the expected size.
+* Requirements : SBSW_DCM_POINTER_WRITE_TOBJHANDLE
+**********************************************************************************************************************/
+def Check_CM_DCM_M_SIZEOF_TOBJHANDLE()
+{
+  // Get expected size
+  var expectedSize = Define("DCM_NET_MAX_NUM_CONNECTIONS")
+
+  //Check configuration variant
+  if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_LOAD_ENABLED"))
+  {
+    var sharedArray = Array("Dcm_CfgNetConnHdl2TObjMap")
+
+    //Check shared array matches expected size
+    AssertArraySize(sharedArray, Equal, expectedSize)
+
+    //Iterate over all variants
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var networkVariant = Struct(networkVariantList[index].GetSymbolName())
+
+      //Check each variant will fit the array size
+      AssertArraySize(sharedArray, GreaterEqual, networkVariant, "NumConnections")
+    }
+  }
+  else if (IsStdOn("DCM_VARMGR_MODE_POSTBUILD_SELECT_ENABLED") && IsStdOn("DCM_VARMGR_MULTI_COM_ENABLED"))
+  {
+    //only PostBuild Selectable is enabled
+    var maxNumConnections = 0
+
+    //Iterate over all variants to get the maximum number of diagnostic client connections
+    var networkVariantList := FindConstSymbol("Dcm_CfgNetConfig_.+")
+    for (var index = 0; index < networkVariantList.size(); ++index)
+    {
+      var numConnections = Struct(networkVariantList[index].GetSymbolName()).GetMemberAsNumber("NumConnections")
+      if (numConnections > maxNumConnections)
+      {
+        maxNumConnections = numConnections;
+      }
+    }
+
+    //Check maximum number fits expected size
+    Assert(maxNumConnections, LessEqual, expectedSize)
+  }
+  else
+  {
+    //Pre-compile variant is active
+    //ConnHdl2TObjIdMap is located in Dcm.c -> covered by code review.
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : Check_CM_DCM_M_MAX_ZERO_SEED_LENGTH
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the Dcm_CfgSvc27SecLevelInfo array does not contain seed length values greater than DCM_SAFEBSW_SVC27_MAX_SEED_LENGTH.
+* Requirements : SBSW_DCM_POINTER_WRITE_MESSAGE_CONTEXT_RESBUFFER_ZERO_SEED
+**********************************************************************************************************************/
+def Check_CM_DCM_M_MAX_ZERO_SEED_LENGTH()
+{
+  //Check configuration variant
+  if (IsStdOn("DCM_SVC_27_SUPPORT_ENABLED"))
+  {
+    var array = Array("Dcm_CfgSvc27SecLevelInfo")
+
+    // Iterate over all entries and check the seed length
+    array.ForEachAsStruct(SeedLengthCheck)
+  }
+}
+
+// Size Checker
+def SeedLengthCheck(array, index, value)
+{
+  // Get maximum size
+  var expectedMaxSeedSize = Define("DCM_SAFEBSW_SVC27_MAX_SEED_LENGTH")
+
+  // Check member SeedLength fits expected size
+  AssertStructMember(value, "SeedLength", LessEqual, expectedMaxSeedSize)
+}

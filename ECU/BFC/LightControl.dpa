@@ -34,7 +34,7 @@
         <Source>./Appl/Source</Source>
         <ServiceComponents>./Config/ServiceComponents</ServiceComponents>
         <Logs>./Log</Logs>
-        <SIP>.\..\..\..\BSW</SIP>
+        <SIP>../../../BSW</SIP>
         <StartMenu></StartMenu>
         <ApplicationComponentFolders>
             <ApplicationComponentFolder>./Config/ApplicationComponents</ApplicationComponentFolder>

@@ -31,15 +31,15 @@
         <File>.\BFC\Appl\Source\Vtt_stubs.c</File>
         <File>.\BFC\Appl\Source\BrsMainVTT.c</File>
         <File>.\BFC\Appl\Source\LightCtrl.c</File>
-        <File>..\..\BSW\ThirdParty\Mcal_Tc3xx\Supply\MC-ISAR_AS440_TC3xx_BASIC_2.30.0\McIsar\Src\Mcal\Tricore\Fee\ssc\src\Fee.c</File>
+        <File>..\..\..\BSW\ThirdParty\Mcal_Tc3xx\Supply\MC-ISAR_AS440_TC3xx_BASIC_2.30.0\McIsar\Src\Mcal\Tricore\Fee\ssc\src\Fee.c</File>
         <File>.\BFC\Appl\Source\Dcm_Callout_Stubs.c</File>
-        <File>.\BFC\Appl\GenDataVtt\src\Fee_PBcfg.c</File>
-        <File>.\BFC\Appl\GenDataVtt\Fls_17_Dmu.c</File>
+        <File>.\BFC\Appl\GenDataVtt\src\Fee_PBcfg.c</File>  
+        <File>.\BFC\Appl\GenDataVtt\Fls_17_Dmu.c</File>     
       </SourceFiles>
       <IncludeFolders>
         <IncludeFolder Configuration="All">.\BFC\Appl\GenDataVtt</IncludeFolder>
         <IncludeFolder Configuration="All">.\BFC\Appl\IncludeVtt</IncludeFolder>
-        <IncludeFolder Configuration="All">..\..\BSW\ThirdParty\Mcal_Tc3xx\Supply\MC-ISAR_AS440_TC3xx_BASIC_2.30.0\McIsar\Src\Mcal\Tricore\Fee\ssc\inc</IncludeFolder>
+        <IncludeFolder Configuration="All">..\..\..\BSW\ThirdParty\Mcal_Tc3xx\Supply\MC-ISAR_AS440_TC3xx_BASIC_2.30.0\McIsar\Src\Mcal\Tricore\Fee\ssc\inc</IncludeFolder>
         <IncludeFolder Configuration="All">.\BFC\Appl\GenDataVtt\inc</IncludeFolder>
       </IncludeFolders>
       <PreprocessorDefinitions>

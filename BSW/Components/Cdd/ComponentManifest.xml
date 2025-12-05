@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-2BDC9A44-2824-4800-B9AD-08763E0CBE14</guid>
+        <name>Cdd_AsrCddCfg5@GenTool_GeneratorMsr</name>
+        <version>8.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-4C58DC6E-E273-44D9-A65B-47A4E2A875EC</guid>
+        <name>Cdd_AsrCddCfg5@root</name>
+        <version>9.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-5F7B0817-1E64-4CA3-A7CD-1ADCAE6FD27A</guid>
+        <name>Cdd_AsrCddCfg5@Doc_TechRef</name>
+        <version>4.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-8690D153-6A7E-4BD3-B060-CF7909922625</guid>
+        <name>CommonAsr_ComValidationLib@GenTool_GeneratorMsr</name>
+        <version>4.00.01</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-F9ED3D97-D96E-454A-A409-4CA110901586</guid>
+        <name>Cdd_AsrCddCfg5@Description</name>
+        <version>5.00.00</version>
+    </subPackage>
+</componentManifest>

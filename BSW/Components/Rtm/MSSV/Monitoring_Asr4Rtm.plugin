@@ -1,0 +1,178 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2023 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  Monitoring_Asr4Rtm.plugin
+*  Module     :  MSSV
+*  Description:  Entry point of MSSV Core.
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version   Date        Author             Change Id     Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00  2021-11-28  visore             SWAT-1831     Initial creation
+*  02.00.00  2022-07-27  viszda             SWAT-2047     Tidy up (removed core specific memory sections)
+*  03.00.00  2023-07-25  mgourabathi        SWAT-2749     Improving the handling of multiple NET and FET MPs in a Task
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : MSSV_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x030000)
+  reg.SetPackageName("Monitoring_Asr4Rtm")
+  reg.SetInputFiles(["Rtm.c","Rtm_Cfg.c"])
+  return reg
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : MSSV_core calls this function to allow the plugin a version check against the BSW sources.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. Main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : N/A
+**********************************************************************************************************************/
+def main()
+{
+  InvokeRule("Check QM inactive", CheckQMDefines)
+  InvokeRule("Check size of Rtm_TaskResponseTimeStruct_<CoreIndex>[<TaskIndex>].PercentileCount[] for each core", CheckRtm_SizeOfTaskResponseTimePercentiles)
+  InvokeRule("Check size of Rtm_CommonConst[]", CheckRtm_SizeOfCommonConst)
+  InvokeRule("Check size of Rtm_TaskResponseTimeStruct_<CoreIndex>[] for each core", CheckRtm_SizeOfTaskResponseTimeTasks)
+  InvokeRule("Check size of Rtm_CommonConst[<CoreIndex>].OsTaskInfoLengthOfCommonConst against RTM_NUMBER_OF_TASKS_ON_CORE_<CoreIndex> for each core", CheckRtm_SizeOfCoreSpecificTasks)
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+* Requirements : CM_RTM_PRECOMPILEOPTIONS
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  AssertDefineIsStdOn("RTM_DEV_ERROR_DETECT")
+  AssertDefineIsStdOff("RTM_FLAT_EXECUTION_TIME_AVAILABLE")
+  AssertDefineIsStdOff("RTM_NET_EXECUTION_TIME_AVAILABLE")
+  AssertDefineIsStdOff("RTM_NET_OR_FLAT_RUNTIME_SUPPORT")
+}
+/**********************************************************************************************************************
+* Name         : CheckRtm_SizeOfTaskResponseTimePercentiles
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that the task response time percentile arrays have correct size.
+* Requirements : CM_RTM_TASK_RESPONSE_TIME_PERCENTILE_INDEX
+**********************************************************************************************************************/
+def CheckRtm_SizeOfTaskResponseTimePercentiles()
+{
+  var RTM_NUMBER_OF_TASKRESPONSETIME_PERCENTILES = Define("RTM_NUMBER_OF_TASKRESPONSETIME_PERCENTILES").GetValueAsNumber()
+  
+  if (RTM_NUMBER_OF_TASKRESPONSETIME_PERCENTILES > 0)
+  {
+    var RTM_NUMBER_OF_CORES = Define("RTM_NUMBER_OF_CORES").GetValueAsNumber()
+    
+    for (var coreIndex = 0; coreIndex < RTM_NUMBER_OF_CORES; ++coreIndex)
+    {
+      var RTM_NUMBER_OF_TASKS_ON_CORE = Define("RTM_NUMBER_OF_TASKS_ON_CORE_" + coreIndex.to_string()).GetValueAsNumber()
+      var Rtm_TaskResponseTimeStruct = Array("Rtm_TaskResponseTimeStruct_" + coreIndex.to_string())
+
+      for (var tasksOnCoreIndex = 0; tasksOnCoreIndex < RTM_NUMBER_OF_TASKS_ON_CORE; ++tasksOnCoreIndex)
+      {
+        var taskResponseTimeStructElem = Rtm_TaskResponseTimeStruct.GetElemAsStruct(tasksOnCoreIndex)
+        AssertArraySize(taskResponseTimeStructElem.GetMemberAsArray("PercentileCount"), Equal, (RTM_NUMBER_OF_TASKRESPONSETIME_PERCENTILES + 1))
+      }
+    }
+  }
+}
+/**********************************************************************************************************************
+* Name         : CheckRtm_SizeOfCommonConst
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that the array Rtm_CommonConst[] has correct size.
+* Requirements : CM_RTM_VALID_CORE_INDEX
+**********************************************************************************************************************/
+def CheckRtm_SizeOfCommonConst()
+{
+  var RTM_NUMBER_OF_CORES = Define("RTM_NUMBER_OF_CORES").GetValueAsNumber()
+  var Rtm_CommonConst = Array("Rtm_CommonConst")
+
+  AssertArraySize(Rtm_CommonConst, Equal, RTM_NUMBER_OF_CORES)
+
+}
+/**********************************************************************************************************************
+* Name         : CheckRtm_SizeOfTaskResponseTimeTasks
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that the task response time tasks arrays have correct size.
+* Requirements : CM_RTM_VALID_NUMBER_OF_CORE_SPECIFIC_TASKS
+**********************************************************************************************************************/
+def CheckRtm_SizeOfTaskResponseTimeTasks()
+{
+  var RTM_NUMBER_OF_TASKRESPONSETIME_PERCENTILES = Define("RTM_NUMBER_OF_TASKRESPONSETIME_PERCENTILES").GetValueAsNumber()
+  
+  if (RTM_NUMBER_OF_TASKRESPONSETIME_PERCENTILES > 0)
+  {
+    var RTM_NUMBER_OF_CORES = Define("RTM_NUMBER_OF_CORES").GetValueAsNumber()
+    
+    for (var coreIndex = 0; coreIndex < RTM_NUMBER_OF_CORES; ++coreIndex)
+    {
+      var RTM_NUMBER_OF_TASKS_ON_CORE = Define("RTM_NUMBER_OF_TASKS_ON_CORE_" + coreIndex.to_string()).GetValueAsNumber()
+      var Rtm_TaskResponseTimeStruct = Array("Rtm_TaskResponseTimeStruct_" + coreIndex.to_string())
+
+      AssertArraySize(Rtm_TaskResponseTimeStruct, Equal, RTM_NUMBER_OF_TASKS_ON_CORE)
+    }
+  }
+}
+/**********************************************************************************************************************
+* Name         : CheckRtm_SizeOfCoreSpecificTasks
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that the task response time tasks arrays have correct size.
+* Requirements : CM_RTM_VALID_SIZE_OF_CORE_SPECIFIC_TASKS
+**********************************************************************************************************************/
+def CheckRtm_SizeOfCoreSpecificTasks()
+{
+  var RTM_NUMBER_OF_TASKRESPONSETIME_PERCENTILES = Define("RTM_NUMBER_OF_TASKRESPONSETIME_PERCENTILES").GetValueAsNumber()
+  
+  if (RTM_NUMBER_OF_TASKRESPONSETIME_PERCENTILES > 0)
+  {
+    var RTM_NUMBER_OF_CORES = Define("RTM_NUMBER_OF_CORES").GetValueAsNumber()
+    var Rtm_CommonConstList = Array("Rtm_CommonConst")
+    
+    for (var coreIndex = 0; coreIndex < RTM_NUMBER_OF_CORES; ++coreIndex)
+    {
+      var RTM_NUMBER_OF_TASKS_ON_CORE = Define("RTM_NUMBER_OF_TASKS_ON_CORE_" + coreIndex.to_string()).GetValueAsNumber()
+      var Rtm_CommonConst = Rtm_CommonConstList.GetElemAsStruct(coreIndex)
+      
+      Assert(Rtm_CommonConst.GetMemberAsNumber("OsTaskInfoLengthOfCommonConst"), Equal, RTM_NUMBER_OF_TASKS_ON_CORE)
+    }
+  }
+}

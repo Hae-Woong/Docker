@@ -1,0 +1,138 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2023 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  Nm_Asr4NmIf.plugin
+*  Module     :  Elisa
+*  Description:  Entry point of Elisa Core.
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version    Date          Author   Change Id        Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00   2016-03-09    vismdr   ESCAN00088808    Creation
+*  02.00.00   2018-04-17    visgle   ESCAN00087043    BETA version - the BSW module has a feature with BETA state
+*                                                     (FEAT-1507: Support Fiat Class C and ClassB NM
+*                                                     with coordinator use case)
+*  03.00.00   2019-03-25    visgle   ESCAN00091204    BETA version - the Nm module has a feature with BETA state
+*                                                     (FEAT-1865 NM Coordination for TMC)
+*  03.00.01   2021-09-13    vispps                    Fixed plugin version in RegisterPlugin()
+*  04.00.00   2022-01-31    vispps                    Added version check
+*  05.00.00   2022-04-26    vispps                    Updated SW version
+*  06.00.00   2023-05-30    smarcelin                 Updated SW version
+*  07.00.00   2023-09-26    smarcelin                 Updated SW version
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : Elisa_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x050000)
+  reg.SetPackageName("Nm_Asr4NmIf")
+  reg.SetInputFiles(["Nm.c", "Nm_Cfg.c", "Nm_Lcfg.c"])
+  return reg
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : Elisa_core calls this function to allow the plugin a version check against the BSW sources.
+*                Check against the major and minor version of the source code.
+*                Note: The version check is not necessary if only rule CheckQMDefines is implemented in this plugin.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+  AssertDefineEquals("NM_SW_MAJOR_VERSION", "(18u)")
+  AssertDefineEquals("NM_SW_MINOR_VERSION", "(0u)")
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. Main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : N/A
+**********************************************************************************************************************/
+def main()
+{
+  InvokeRule("Check QM inactive", CheckQMDefines)
+  InvokeRule("Check FiatC and FiatB in coordination inactive", CheckFiatCoordStructs)
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : CheckNmCoordinatedNmFiatCDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+*                Typically it checks that QM features are inactive in safety context.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  AssertDefineIsStdOn("NM_DEV_ERROR_DETECT")
+  AssertDefineIsStdOff("NM_ENABLE_CHANNELTYPE_COORDINATED_NMFIATC")
+}
+
+/**********************************************************************************************************************
+* Name         : CheckFiatCoordStructs
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks is FiatB or FiatC is not used in the coordinator algorithm, for the safety context.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckFiatCoordStructs()
+{
+
+  var noCoordID = 255
+  var coordSupport = Define("NM_COORDINATOR_SUPPORT_ENABLED")
+  var coordSupportID = coordSupport.GetValueAsString()
+  /* In case the coodinator algorithm is active */
+  if( coordSupport.IsStdOn() && SymbolExists("Nm_ChannelConfig"))
+  {
+
+    var channelConfigArray = Array("Nm_ChannelConfig")
+    var channelConfigArraySize = channelConfigArray.GetSize()
+    var channelConfigStructElement
+    var functionTableArray = Array("Nm_NmFunctionTable")
+    var functionTableStructElement
+
+    /* Iterate over all members of Channel Config, and look for channels that participate in the coordination
+      * If the coordinator state cluster index is not equals to NM_NO_COORDINATORSTATECLUSTERIDXOFCHANNELCONFIG
+      */
+
+    for(var channelArrayElem = 0; channelArrayElem < channelConfigArraySize; channelArrayElem = channelArrayElem + 1)
+    {
+      channelConfigStructElement = channelConfigArray.GetElemAsStruct(channelArrayElem)
+      if((channelConfigStructElement.GetMemberAsNumber("CoordinatorStateClusterIdxOfChannelConfig")!= noCoordID) && (channelConfigStructElement.HasMember("NmFunctionTableIdxOfChannelConfig")))
+      {
+
+         functionTableStructElement = functionTableArray.GetElemAsStruct(channelConfigStructElement.GetMemberAsNumber("NmFunctionTableIdxOfChannelConfig"))
+         AssertStructMember(functionTableStructElement, "NetworkRequestOfNmFunctionTable", NotEqual, "NmFiatB_NetworkRequest")
+         AssertStructMember(functionTableStructElement, "NetworkRequestOfNmFunctionTable", NotEqual, "NmFiatC_NetworkRequest")
+
+      }
+    }
+  }
+}
+

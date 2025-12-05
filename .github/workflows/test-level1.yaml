@@ -1,0 +1,128 @@
+name: ECU Test Level 1
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+ 
+permissions:
+  checks: write
+  contents: read 
+  
+jobs:
+  build-sut:
+    name: Build SUT
+    runs-on: lvl1
+    env:
+      # actions/cache, actions/upload-artifact ..SSL validation off #
+      NODE_TLS_REJECT_UNAUTHORIZED: 0 
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v4         
+
+      - name: Cache SUT
+        id: cache-sut
+        uses: actions/cache@v4  
+        with:
+          path: |
+            ./ECU/Level1SUT
+          key: ${{ hashFiles('./ECU/BFC/Appl/Source', './ECU/BFC/Appl/IncludeLvl1', './ECU/BFC/LightControl-level1.vttmake', './ECU/BFC/LightCtrl.arxml') }}
+
+      - name: Run vVIRTUALtarget
+        if: steps.cache-sut.outputs.cache-hit != 'true'
+        run: |
+          &"$env:vVIRTUALtarget_InstallDir\VttMake.exe" make .\ECU\LightControl-level1.vttmake;
+          if(-Not $?)
+          {
+            Write-Host "VttMake step failed." -ForegroundColor red
+            Exit -1
+          } 
+
+      - name: Export ECU Logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ECU_Logs
+          path: ./ECU/BFC/Log
+          retention-days: 7
+
+  build-simulation:
+    name: Build simulation
+    needs: [build-sut]
+    runs-on: lvl1
+    steps:
+      - name: Make environment
+        run: |
+            &"$env:CANoeSE_InstallDir64\environment-make.exe" -o .\compiled-environment-and-tests -A Win32 -s L1_vECU .\environment-make\venvironment.yaml
+
+      - name: Make test units
+        run: |
+            & "$env:CANoeSE_InstallDir64\test-unit-make.exe" -e .\compiled-environment-and-tests\L1_vECU.venvironment -o .\compiled-environment-and-tests .\tests\auto\auto.vtestunit.yaml .\tests\basic\basic.vtestunit.yaml    
+
+      # upload the compiled environment and test units as an artifact
+      - name: Export compiled-environment-and-tests
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-environment-and-tests
+          path: ./compiled-environment-and-tests/
+          retention-days: 7
+
+  run-tests-simulation:
+    name: Run simulation
+    needs: build-simulation
+    runs-on: lvl1
+    strategy:
+      matrix:
+        TESTNAME: [auto, basic]
+      fail-fast: false
+    steps:    
+      - name: Run CANoe Server Edition
+        run : |
+          & "$env:CANoeSE_InstallDir64\canoe-se.exe" .\compiled-environment-and-tests\L1_vECU.venvironment -d .\simulation --win32 --port-rtk-api none --test-unit .\compiled-environment-and-tests\${{ matrix.TESTNAME }}.vtestunit;
+          Write-Host "CANoe Server Edition returned exit code $LASTEXITCODE"
+
+      - name: Export test reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test Reports ${{ matrix.TESTNAME }}
+          path: |
+            ./simulation/TestReports/
+          retention-days: 7
+
+      - name: Upload log files
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4       
+        with:
+          name: Log Files ${{ matrix.TESTNAME }}
+          path: ./simulation/*.txt
+
+  display-test-report:
+    name: Display test report
+    if: ${{ !cancelled() }}
+    needs: run-tests-simulation
+    runs-on: lvl1
+    steps:
+      - name: Convert all test reports to XUnit format
+        working-directory: ./simulation/TestReports/
+        shell: pwsh
+        env:
+          TestReportViewer_InstallDir: 'C:\Program Files\Vector CANoe Server Edition 19\Exec64'
+        run: |
+          get-childitem . -Filter *.vtestreport | foreach {
+            & "$env:TestReportViewer_InstallDir\ReportViewerCli.exe" -r $_ -xu
+          }
+
+      - name: Display test results
+       # uses: actions-mirror/dorny-test-reporter@v1.9.1
+        uses: dorny/test-reporter@v1.9.1
+        with:
+          name: vECU lvl1 Test Results                   # Name of the check run which will be created
+          path: "./simulation/TestReports/*_xunit.xml"   # Path to test results
+          reporter: java-junit    
+          fail-on-error: 'false'                        # Format of test results
+
+

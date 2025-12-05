@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BuildSpecification xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="6.4" xsi:noNamespaceSchemaLocation="VttMakeFileSchema_6_4.xsd">
+  <Settings>
+    <ProjectName>output</ProjectName>
+  </Settings>
+  <BuildDpa>
+    <DpaPath>D:\__GIT_1-3-HIL\ECU\BFC\LightControl.dpa</DpaPath>
+    <VsSolutionPath>Solution\output.sln</VsSolutionPath>
+    <BuildSettings>
+      <VerboseLevel>Low</VerboseLevel>
+      <SutOutputDir>SUT</SutOutputDir>
+    </BuildSettings>
+    <RuntimeSettings>
+      <AutostartEcu>true</AutostartEcu>
+    </RuntimeSettings>
+    <GenerateVcxProject>
+      <VsTargetVersion>VS2022</VsTargetVersion>
+      <TargetPlatform>Windows_x86</TargetPlatform>
+    </GenerateVcxProject>
+    <BuildVsSolution>
+      <VsConfiguration>Release</VsConfiguration>
+    </BuildVsSolution>
+    <GenerateCsvFile />
+  </BuildDpa>
+</BuildSpecification>

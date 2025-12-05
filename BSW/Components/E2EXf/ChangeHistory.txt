@@ -1,0 +1,50 @@
+/**********************************************************************************************************************
+ *  REVISION HISTORY
+ *
+ *  This file contains the revision history of the component implementation and all related artifacts.
+ *  The revision history covers all released version of the component. If you have received a development version of
+ *  this component, the changes made in the development version are not referenced herein.
+ *
+ *  Legend of Columns:
+ *
+ *    I - Implementation
+ *    G - Generator
+ *    D - Documentation & Technical Reference
+ *    T - Test Implementation
+ *    S - Specification
+ *    B - Build-Artifacts
+ *
+ *  Legend of Cells:
+ *
+ *    X - Artifact is affected by the change.
+ *    - - Artifact is not affected by the change.
+ *
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  Version              Date           Author          I G D T S B       Change Id           Description
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  4.35.00              2023-08-26     visso           X X X X X -       RTE-8116            Remove history from all generator sources and add central change history file similar to adaptive
+ *  4.35.00              2023-08-29     visso           - - - X - -       RTE-8184            Fix review findings of Rte_Asr4 4.34.0
+ *  4.35.00              2023-09-08     dschaefter      X - - - - -       RTE-8182            Enable Java Templates feature by default for all customers
+ *  4.35.00              2023-09-14     visso           X - - - - -       RTE-8196            Reviews and Release
+ *  4.35.00              2023-09-25     visso           - - - X - -       RTE-8440            Reviews and Release
+ *  4.35.00              2023-10-16     dschaefter      X - - X - -       ESCAN00115925       E2E_P11ConfigType initialized with MaxDeltaCounterInit instead of MaxDeltaCounter
+ *  4.36.00              2023-11-06     dschaefter      - - - X - -       RTE-8625            Support of ProfileBehavior = FALSE in E2E_P02MapStatusToSM
+ *  4.36.00              2023-11-09     visso           X - - X - -       RTE-8721            Reviews and Release
+ *  4.36.00              2023-11-16     dschaefter      - - - X - -       RTE-8687            Fix review findings of Rte_Asr4 4.35.0
+ *  4.36.00              2023-11-22     visdes          - - - X - -       RTE-8789            Reviews and Release
+ *  4.36.00              2023-12-18     visso           - - - X - -       RTE-8960            Reviews and Release
+ *  4.36.00              2023-12-19     visso           X - - X X -       RTE-7557            Extend E2E transformer to support new profile for J1939-76 Part 1
+ *  4.36.00              2023-12-19     visdes          - - - X - -       RTE-8632            [SomeIpXf] Abort deserialization of structs with length errors Part 2
+ *  4.36.00              2023-12-19     dschaefter      X - - - - -       RTE-8929            Parallel File Generation: Show RTE generator as 3 different generators
+ *  4.36.00              2024-01-17     visgme          X - X X X -       RTE-8937            Extend E2E transformer to support new profile for J1939-76 Part 2
+ *  4.36.00              2024-01-17     visso           X - - - - -       RTE-8987            Reviews and Release
+ *  4.36.00              2024-01-31     dschaefter      X - - - - -       RTE-6220            Combine Abstract Syntaxtree for RTE Phase and RTE Analyzer Phase (Part 1)
+ *  4.36.00              2024-02-20     visgme          - - - X - -       RTE-8926            Fix problems in test configurations for model consistency integration Part 4
+ *  4.36.00              2024-02-21     dschaefter      X - - - - -       RTE-9106            Parallel File Generation: Unit Tests Part 2 and Safety Analysis
+ *  4.36.00              2024-02-27     visso           - - - X - -       RTE-9104            Parallel File Generation: Safety Analysis
+ *  4.36.00              2024-03-05     visso           - - - X - -       RTE-9225            RTE support for NVM Multicore Production
+ *  4.36.00              2024-03-08     visgme          - - X - - -       RTE-9229            Reviews and Release 4.36.0 (changed version 4.36 to released )
+ *  4.37.00              2024-03-14     visso           X - - X - -       RTE-9410            Reviews and Release 4.37.0
+ *  4.37.00              2024-03-15     visdes          - - - X - -       RTE-9460            [SomeIpXf] Abort deserialization of structs with length errors - Next Try
+ *  4.37.00              2024-03-15     visgme          X - - X - -       RTE-9511            Remove length parameter from E2E Lib for Profile J1939-76
+ *********************************************************************************************************************/

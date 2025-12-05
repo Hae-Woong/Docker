@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-18135ABD-58A5-4FF9-AA51-89A92B6712D5</guid>
+        <name>DrvLin_GenericAsr@root</name>
+        <version>5.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-25DFA5CF-BDF3-4F2F-B1BB-9E71BDD77A7E</guid>
+        <name>DrvLin_GenericAsr@Description</name>
+        <version>5.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-7C186F7E-DF9E-48BC-A4B3-12033048A166</guid>
+        <name>DrvLin_GenericAsr@Implementation</name>
+        <version>5.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-891EB1CE-44CE-43A5-8400-DD2DFDB1F219</guid>
+        <name>DrvLin_GenericAsr@GenTool_GeneratorMsr</name>
+        <version>5.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-C0CA96E4-BC89-4099-B878-7C54D33E955F</guid>
+        <name>DrvLin_GenericAsr@Make</name>
+        <version>4.00.01</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-CA60D8B7-50B4-4295-A703-0F9DC660DAB3</guid>
+        <name>DrvLin_GenericAsr@Doc_TechRef</name>
+        <version>5.00.00</version>
+    </subPackage>
+</componentManifest>

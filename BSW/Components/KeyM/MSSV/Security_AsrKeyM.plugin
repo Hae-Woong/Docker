@@ -1,0 +1,84 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2021 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  Security_AsrKeyM.plugin
+*  Module     :  MSSV
+*  Description:  Entry point of MSSV Core.
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version   Date        Author        Change Id     Description
+*  -------------------------------------------------------------------------------------------------------------------
+#  04.00.00  2021-06-28  vismxe        SEC-2323      Initial creation
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : MSSV_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x040000)
+  reg.SetPackageName("Security_AsrKeyM")
+  reg.SetInputFiles(["KeyM.c", "KeyM_Asn1.c", "KeyM_Cert.c", "KeyM_Cfg.c", "KeyM_Remote.c"])
+  return reg
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : MSSV_core calls this function to allow the plugin a version check against the BSW sources.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. Main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : N/A
+**********************************************************************************************************************/
+def main()
+{
+  InvokeRule("Check QM inactive", CheckQMDefines)
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  AssertDefineIsStdOn("KEYM_DEV_ERROR_DETECT")
+  AssertDefineIsStdOff("KEYM_CRE_APPL")
+  AssertDefineIsStdOff("KEYM_OCSP")
+  AssertDefineIsStdOff("KEYM_REMOTE_DISPATCHING_ENABLED")
+  AssertDefineIsStdOn("KEYM_SERVICE_CERTIFICATE_FUNCTION_ENABLED")
+  AssertDefineIsStdOff("KEYM_CRYPTO_KEY_PREPARE_FUNCTION_ENABLED")
+  AssertDefineIsStdOff("KEYM_CRYPTO_KEY_START_FINALIZE_FUNCTION_ENABLED")
+  AssertDefineIsStdOff("KEYM_CRYPTO_KEY_VERIFY_FUNCTION_ENABLED")
+}

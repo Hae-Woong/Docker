@@ -1,0 +1,156 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2024 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  DrvCanGen3_Core.plugin
+*  Module     :  MSSV
+*  Description:  Checking rule for DrvCanGen3_Core
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version   Date        Author        Change Id     Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00  2022-11-10  visgaz        CANCORE-1541  Inital creation
+*  02.00.00  2022-11-10  visbir        CANCORE-548   ASIL D add some Silent counter measures
+*  03.00.00  2023-07-24  visbir        CANCORE-1979  Use ConstData2Define (has to be always used within Safe)
+*  main-1    2024-02-26  visgaz        CANCORE-2371  Change history is maintained in the global ChangeHistory.txt file starting with this release
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : MSSV_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x030000)
+  reg.SetPackageName("DrvCanGen3_Core")
+  reg.SetInputFiles(["Can_30_Core.c", "Can_30_Core_*.c", "Can_30_Core_Lcfg.c", "Can_30_Core_PBcfg.c"])
+  return reg 
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : MSSV_core calls this function to allow the plugin a version check against the BSW sources.
+*                Check against the major and minor version of the source code.
+*                Note: The version check is not necessary if only rule CheckQMDefines is implemented in this plugin.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. Main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : N/A
+**********************************************************************************************************************/
+def main()
+{
+  InvokeRule("Check QM inactive", CheckQMDefines)
+  InvokeRule("Check MaxDataLenOfMailbox does not exceed 64", CheckMaxDataLenOfMailbox)
+  InvokeRule("Check ExtensionConfigIdxOfControllerConfig is always valid", CheckExtensionConfigIdxOfControllerConfig)
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+*                Typically it checks that QM features are inactive in safety context.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  /* Access to GeneralFeature expected as Define! */
+  AssertDefineEquals("CAN_30_CORE_EQ2_SAFEBSWCHECKSOFGENERALFEATURE", "TRUE")
+  AssertDefineEquals("CAN_30_CORE_EQ2_DEVERRORDETECTIONOFGENERALFEATURE", "TRUE")
+  AssertDefineEquals("CAN_30_CORE_EQ2_CONSTANTDATATODEFINEOFGENERALFEATURE", "TRUE")
+}
+
+/**********************************************************************************************************************
+* Name         : CheckMaxDataLenOfMailbox
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that the value of all 'MaxDataLen' within 'Can_30_Core_Mailbox[]' are less than 65.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckMaxDataLenOfMailbox()
+{
+  var isDefMaxDataLenOfMailbox = Define("CAN_30_CORE_ISDEF_MAXDATALENOFMAILBOX")
+  if( isDefMaxDataLenOfMailbox.IsStdOn() )
+  { /* Const2Define optimized */
+    var maxDataLenOfMailboxDef = Define("Can_30_Core_GetMaxDataLenOfMailbox")
+    Assert( (maxDataLenOfMailboxDef.GetValueAsNumber() < 65), "Can_30_Core_GetMaxDataLenOfMailbox()", LessThan, "65")
+  } else {
+    var mailboxTabs := FindConstSymbol("Can_30_Core_Mailbox.*")
+    for(var i=0; i < mailboxTabs.size(); ++i)
+    {
+      var mailboxTab = Array(mailboxTabs[i].GetSymbolName())
+      mailboxTab.ForEachAsStruct(CheckMaxDataLen)
+    }
+  }
+}
+
+def CheckMaxDataLen(array, index, value)
+{
+  AssertStructMember(value, "MaxDataLenOfMailbox", LessThan, 65)
+}
+
+/**********************************************************************************************************************
+* Name         : CheckExtensionConfigIdxOfControllerConfig
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that the value of all 'ExtensionConfigIdx' within 'Can_30_Core_ControllerConfig[]'
+*                are valid.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckExtensionConfigIdxOfControllerConfig()
+{
+  var isDefExtensionConfigIdxOfControllerConfig = Define("CAN_30_CORE_ISDEF_EXTENSIONCONFIGIDXOFCONTROLLERCONFIG")
+  if( isDefExtensionConfigIdxOfControllerConfig.IsStdOn() )
+  { /* Const2Define optimized */
+    var extensionConfigIdxOfControllerConfigDef = Define("Can_30_Core_GetExtensionConfigIdxOfControllerConfig")
+    Assert( (extensionConfigIdxOfControllerConfigDef.GetValueAsString().find("CAN_30_CORE_NO_EXTENSIONCONFIGIDXOFCONTROLLERCONFIG") == -1), "Can_30_Core_GetExtensionConfigIdxOfControllerConfig()", NotEqual, "CAN_30_CORE_NO_EXTENSIONCONFIGIDXOFCONTROLLERCONFIG" )
+  } 
+  else
+  {
+    var controllerConfigTabs := FindConstSymbol("Can_30_Core_ControllerConfig.*")
+    for(var i=0; i < controllerConfigTabs.size(); ++i)
+    {
+      var controllerConfigTab = Array(controllerConfigTabs[i].GetSymbolName())
+      controllerConfigTab.ForEachAsStruct(CheckExtensionConfigIdx)
+    }
+  }
+}
+
+def CheckExtensionConfigIdx(array, index, value)
+{
+  var unusedExtensionConfigIdx = Define("CAN_30_CORE_NO_EXTENSIONCONFIGIDXOFCONTROLLERCONFIG").GetValueAsNumber()
+  var unusedControllerDefaultBaudrateIdx = Define("CAN_30_CORE_NO_CANCONTROLLERDEFAULTBAUDRATEIDXOFCONTROLLERCONFIG").GetValueAsNumber()
+  // The DefaultBaudrateIdx value is used to differ between dummy (unused index) controller and used controller in this variant.
+  if (value.GetMemberAsNumber("CanControllerDefaultBaudrateIdxOfControllerConfig") != unusedControllerDefaultBaudrateIdx)
+  { // not a dummy controller, ExtensionConfigIdx will be used and has to be valid
+    AssertStructMember(value, "ExtensionConfigIdxOfControllerConfig", LessThan, unusedExtensionConfigIdx)
+  }
+}

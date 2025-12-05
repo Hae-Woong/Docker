@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-05E4BF1C-51C5-429F-81E3-6EBE3DED0E79</guid>
+        <name>SysService_E2ePw@Preprocessor</name>
+        <version>2.01.06</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-18C9D59D-D83F-487A-9740-EFF5C6249A41</guid>
+        <name>SysService_E2ePw@Generator</name>
+        <version>1.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-63B2FC01-7C57-4D63-9472-0BA16B535DE4</guid>
+        <name>SysService_E2ePw@Doc_TechRef</name>
+        <version>1.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-8BFCFCBB-EA1C-4E2A-9AD3-F5C31583D25D</guid>
+        <name>SysService_E2ePw@root</name>
+        <version>1.03.01</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-CB69855F-F0DB-49B0-A134-FF8DED81B83C</guid>
+        <name>SysService_E2ePw@Description</name>
+        <version>1.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-DD34F5D2-B40E-44B7-94ED-7F7B24E33F7E</guid>
+        <name>SysService_E2ePw@GenTool_GeneratorMsr</name>
+        <version>1.02.00</version>
+    </subPackage>
+</componentManifest>

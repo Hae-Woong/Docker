@@ -1,0 +1,34 @@
+/**********************************************************************************************************************
+ *  REVISION HISTORY
+ *
+ *  This file contains the revision history of the component implementation and all related artifacts.
+ *  The revision history covers all released version of the component. If you have received a development version of
+ *  this component, the changes made in the development version are not referenced herein.
+ *
+ *  Legend of Columns:
+ *
+ *    I - Implementation
+ *    G - Generator
+ *    D - Documentation & Technical Reference
+ *    T - Test Implementation
+ *    S - Specification
+ *    B - Build-Artifacts
+ *
+ *  Legend of Cells:
+ *
+ *    X - Artifact is affected by the change.
+ *    - - Artifact is not affected by the change.
+ *
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  Version              Date           Author          I G D T S B       Change Id           Description
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  main-0               2024-02-28     visivg          X X X X X X       CRY-458             Add initial component structure
+ *  main-0               2024-03-05     mapelt          X - X X X -       CRY-556             Make Eddsa usable for OCSP
+ *  main-0               2024-03-11     lotto           X X X X X -       CRY-488             Allow persistent storage of certificates of different curves in one container
+ *  main-0               2024-03-13     vismhh          X X X X X -       ESCAN00115952       Parsing of CRL fails for missing CertRevocationList
+ *  main-0               2024-03-28     visivg          - - - X - -       CRY-752             Git Migration Remainings
+ *  main-0               2024-04-05     visivg          X X X X X -       ESCAN00117023       Certificate Signing Request generation fails for ECDSA or EdDSA public key algorithm
+ *  main-0               2024-04-08     visivg          X X - X - -       ESCAN00117055       Out of bounds memory read in ASN1-Parser
+ *  main-5               2024-04-09     visivg          X X - - - -       ESCAN00116746       Compiler error: VCA compilation failed due to missing StbM.h
+ *  4.11.01              2024-04-17     visivg          - - - - - -       -                   SemVer release 4.11.01 based on main-5 
+ *********************************************************************************************************************/

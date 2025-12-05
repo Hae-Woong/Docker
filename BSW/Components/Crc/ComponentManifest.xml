@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-64F2405D-8BC6-1745-8AF8-D99842758DF0</guid>
+        <name>SysService_AsrCrc@Doc_TechRef</name>
+        <version>7.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-6E6228F2-A628-3143-BB1E-861E05FE1AD6</guid>
+        <name>SysService_AsrCrc@Make</name>
+        <version>3.02.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-74C23709-2D83-464B-A8DB-A55617DD0E99</guid>
+        <name>SysService_AsrCrc@Description</name>
+        <version>8.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-8BC05BB3-71BE-0345-9D75-7AC5080A3B93</guid>
+        <name>SysService_AsrCrc@root</name>
+        <version>10.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-DFFA4CD6-FD23-1148-A44D-8BAF6C0AB8CF</guid>
+        <name>SysService_AsrCrc@Implementation</name>
+        <version>8.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-F1E628DE-6685-49CF-81DD-48B7ABF28B69</guid>
+        <name>SysService_AsrCrc@GenTool_GeneratorMsr</name>
+        <version>4.00.00</version>
+    </subPackage>
+</componentManifest>

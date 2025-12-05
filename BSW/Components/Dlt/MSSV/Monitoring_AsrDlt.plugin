@@ -1,0 +1,197 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2022 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  Monitoring_AsrDlt.plugin
+*  Module     :  MSSV
+*  Description:  Entry point of MSSV Core.
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version   Date        Author        Change Id     Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00  2021-11-28  visore        SWAT-1831     Initial creation
+*  01.01.00  2022-07-21  visore        SWAT-2205     Dlt: support fetching synchronized timestamps from Tsyn
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : MSSV_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x010100)
+  reg.SetPackageName("Monitoring_AsrDlt")
+  reg.SetInputFiles(["Dlt.c","Dlt_Lcfg.c"])
+  return reg
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : MSSV_core calls this function to allow the plugin a version check against the BSW sources.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. Main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : N/A
+**********************************************************************************************************************/
+def main()
+{
+  var DLT_CONFIGURATION_VARIANT = Define("DLT_CONFIGURATION_VARIANT")
+  var suffix = (DLT_CONFIGURATION_VARIANT.GetValueAsString() == "DLT_CONFIGURATION_VARIANT_PRECOMPILE") ? "PCConfig" : "LTConfig";
+  add_global(suffix, "gSuffix")
+  
+  InvokeRule("Check QM inactive", CheckQMDefines)
+  InvokeRule("Check size of LocalLogInfoType.appIds[]", CheckDlt_LocalLogInfoType_AppIdSize)
+  InvokeRule("Check size of Dlt_LocalApplicationIdInfoType.contextInfoList[]", CheckDlt_LocalApplicationIdInfoType_contextInfoList)
+  InvokeRule("Check size of Dlt_NvLogInfoType.logChannelIndexes[]", CheckDlt_NvLogInfoType_logChannelIndexes)
+  InvokeRule("Check size of Dlt_SendBuffer[LogChannelIndex].Buffer[bufferIndex]", CheckDlt_ValidSendBufferIdx)
+  InvokeRule("Check size of DLT_CONTROL_BUFFER_SIZE", CheckDlt_ValidCtrlBufferSize)
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+* Requirements : CM_DLT_PRECOMPILEOPTIONS
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  AssertDefineIsStdOn("DLT_DEV_ERROR_DETECT")
+  AssertDefineIsStdOff("DLT_USE_COMLAYER_XCP")
+}
+
+/**********************************************************************************************************************
+* Name         : CheckDlt_LocalLogInfoType_AppIdSize
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the size of Dlt_LocalLogInfoType.appIds[].
+* Requirements : CM_DLT_VALID_CONFIGURED_APP_ID
+**********************************************************************************************************************/
+def CheckDlt_LocalLogInfoType_AppIdSize()
+{
+  var DLT_USE_COMLAYER_ASR = Define("DLT_USE_COMLAYER_ASR")
+  
+  if (DLT_USE_COMLAYER_ASR.IsStdOn())
+  {
+    var Dlt_Context = Struct("Dlt_Context")
+    var Dlt_GetMaxNumberOfApplications = Define("Dlt_GetMaxNumberOfApplicationsOfPCConfig").GetValueAsNumber()
+    AssertArraySize(Dlt_Context.GetMemberAsArray("appIds"), Equal, Dlt_GetMaxNumberOfApplications)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CheckDlt_LocalApplicationIdInfoType_contextInfoList
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the size of Dlt_LocalApplicationIdInfoType.contextInfoList[].
+* Requirements : CM_DLT_VALID_CONFIGURED_CONTEXT_ID
+**********************************************************************************************************************/
+def CheckDlt_LocalApplicationIdInfoType_contextInfoList()
+{
+  var DLT_USE_COMLAYER_ASR = Define("DLT_USE_COMLAYER_ASR")
+  
+  if (DLT_USE_COMLAYER_ASR.IsStdOn())
+  {
+    var Dlt_GetMaxNumberOfContextsPerApplication = Define("Dlt_GetMaxNumberOfContextsPerApplicationOfPCConfig").GetValueAsNumber()
+    var Dlt_Context = Struct("Dlt_Context")
+    var Dlt_Application = Dlt_Context.GetMemberAsArray("appIds").GetElemAsStruct(0);
+    
+    AssertArraySize(Dlt_Application.GetMemberAsArray("contextInfoList"), GreaterEqual, Dlt_GetMaxNumberOfContextsPerApplication)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CheckDlt_NvLogInfoType_logChannelIndexes
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the size of Dlt_NvLogInfoType.logChannelIndexes[].
+* Requirements : CM_DLT_VALID_CONFIGURED_LOGCHANNEL_ID
+**********************************************************************************************************************/
+def CheckDlt_NvLogInfoType_logChannelIndexes()
+{
+  var DLT_USE_COMLAYER_ASR = Define("DLT_USE_COMLAYER_ASR")
+  
+  if (DLT_USE_COMLAYER_ASR.IsStdOn())
+  {
+    var Dlt_GetNumberOfAllValidLogChannels = Define("Dlt_GetNumberOfAllValidLogChannelsOfPCConfig").GetValueAsNumber()
+    var Dlt_GetSizeOfLogChannelDescriptor = Define("Dlt_GetSizeOfLogChannelDescriptorOf"+gSuffix).GetValueAsNumber()
+    
+    var DLT_DEFAULT_LOG_CHANNEL_INDEX = Define("DLT_DEFAULT_LOG_CHANNEL_INDEX").GetValueAsNumber()
+    var Dlt_Context = Struct("Dlt_Context")
+    var Dlt_CbkInfo = Dlt_Context.GetMemberAsArray("appIds").GetElemAsStruct(0).GetMemberAsArray("contextInfoList").GetElemAsStruct(0);
+    
+    AssertArraySize(Dlt_CbkInfo.GetMemberAsArray("logChannelIndexes"), GreaterEqual, Dlt_GetNumberOfAllValidLogChannels)
+    Assert(Dlt_GetSizeOfLogChannelDescriptor, Equal, Dlt_GetNumberOfAllValidLogChannels)
+    Assert(DLT_DEFAULT_LOG_CHANNEL_INDEX, LessThan, Dlt_GetNumberOfAllValidLogChannels)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CheckDlt_ValidSendBufferIdx
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the size of Dlt_SendBuffer[LogChannelIndex].Buffer[bufferIndex].
+* Requirements : CM_DLT_VALID_SEND_BUFFER_IDX
+**********************************************************************************************************************/
+def CheckDlt_ValidSendBufferIdx()
+{
+  var DLT_USE_COMLAYER_ASR = Define("DLT_USE_COMLAYER_ASR")
+  
+  if (DLT_USE_COMLAYER_ASR.IsStdOn())
+  {
+    var DLT_MESSAGE_BUFFER_SIZE = Define("DLT_MESSAGE_BUFFER_SIZE").GetValueAsNumber()
+    var Dlt_LogChannelDescriptorList = Array("Dlt_LogChannelDescriptor")
+    
+    for (var i = 0; i < Dlt_LogChannelDescriptorList.GetSize(); ++i)
+    {
+      var Dlt_LogChannelDescriptor = Dlt_LogChannelDescriptorList.GetElemAsStruct(i)
+      Assert(Dlt_LogChannelDescriptor.GetMemberAsNumber("LogChannelBufferSizeOfLogChannelDescriptor"), LessEqual, DLT_MESSAGE_BUFFER_SIZE)
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CheckDlt_ValidCtrlBufferSize
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the size of DLT_CONTROL_BUFFER_SIZE.
+* Requirements : CM_DLT_VALID_CTRL_BUFFER_SIZE
+**********************************************************************************************************************/
+def CheckDlt_ValidCtrlBufferSize()
+{
+  var DLT_USE_COMLAYER_ASR = Define("DLT_USE_COMLAYER_ASR")
+  
+  if (DLT_USE_COMLAYER_ASR.IsStdOn())
+  {
+    var DLT_MESSAGE_BUFFER_SIZE = Define("DLT_MESSAGE_BUFFER_SIZE").GetValueAsNumber()
+    var DLT_CONTROL_BUFFER_SIZE = Define("DLT_CONTROL_BUFFER_SIZE").GetValueAsNumber()
+    Assert(DLT_CONTROL_BUFFER_SIZE, LessEqual, DLT_MESSAGE_BUFFER_SIZE)
+  }
+}

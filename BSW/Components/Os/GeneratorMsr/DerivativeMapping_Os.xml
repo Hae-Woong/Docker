@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Settings Name="com.vector.cfg.core.sip.ISIPService">
+    <Settings Name="ModuleList">
+      <Settings Name="Os">
+        <Settings Name="TC21x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="A8826C81-07B2-46B7-8B46-B7F9C6742630">
+            <Setting Name="Derivative" Value="TC212" />
+            <Setting Name="SIP_Folder" Value="TC21x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="E85AD295-EC5A-45F8-A0F9-CE3DC650C381">
+            <Setting Name="Derivative" Value="TC213" />
+            <Setting Name="SIP_Folder" Value="TC21x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC22x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="0EB64B4C-4E23-4EB0-B6D2-9A5CA3307E36">
+            <Setting Name="Derivative" Value="TC222" />
+            <Setting Name="SIP_Folder" Value="TC22x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="A5E28E46-D378-434C-A286-C3FDF99F9FE5">
+            <Setting Name="Derivative" Value="TC223" />
+            <Setting Name="SIP_Folder" Value="TC22x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="6D7A81EF-37B1-4100-B8A9-EF3663661F87">
+            <Setting Name="Derivative" Value="TC224" />
+            <Setting Name="SIP_Folder" Value="TC22x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC23x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="8E9B4B4C-6438-4773-B77B-9E4EF4F60423">
+            <Setting Name="Derivative" Value="TC233" />
+            <Setting Name="SIP_Folder" Value="TC23x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="437ED37D-2B59-4CCB-BB95-A65DE2123AC0">
+            <Setting Name="Derivative" Value="TC234" />
+            <Setting Name="SIP_Folder" Value="TC23x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="C37D9BFC-4AEF-40F3-8106-FE88D515C858">
+            <Setting Name="Derivative" Value="TC237" />
+            <Setting Name="SIP_Folder" Value="TC23x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC26x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="6EF31A43-4ABE-48AB-86DD-F71A615B7FE4">
+            <Setting Name="Derivative" Value="TC264" />
+            <Setting Name="SIP_Folder" Value="TC26x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="4B5B4BBA-257D-465D-8095-C13E62BF6A74">
+            <Setting Name="Derivative" Value="TC264_StepB" />
+            <Setting Name="SIP_Folder" Value="TC26x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="737D8587-3473-4ABC-BE72-21008CD2E0EA">
+            <Setting Name="Derivative" Value="TC265" />
+            <Setting Name="SIP_Folder" Value="TC26x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="278D4642-AA27-47D1-BAB5-190F980C8FFD">
+            <Setting Name="Derivative" Value="TC265_StepB" />
+            <Setting Name="SIP_Folder" Value="TC26x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="BCDEDE3E-DB49-476B-A5F0-42366D2EF9D5">
+            <Setting Name="Derivative" Value="TC267" />
+            <Setting Name="SIP_Folder" Value="TC26x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="83230A80-FC6B-4F45-9709-264239792968">
+            <Setting Name="Derivative" Value="TC267_StepB" />
+            <Setting Name="SIP_Folder" Value="TC26x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC27x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="D63957BE-2AED-457C-8A45-73E391E8D21D">
+            <Setting Name="Derivative" Value="TC274" />
+            <Setting Name="SIP_Folder" Value="TC27x" />
+            <Setting Name="ReleaseType" Value="Tested" />
+          </Settings>
+          <Settings Name="5B25AE8C-845A-458C-B5E3-C1E38864F478">
+            <Setting Name="Derivative" Value="TC275" />
+            <Setting Name="SIP_Folder" Value="TC27x" />
+            <Setting Name="ReleaseType" Value="Tested" />
+          </Settings>
+          <Settings Name="99A5ED97-F7E4-48EA-8EF7-07AA18F3B507">
+            <Setting Name="Derivative" Value="TC275_StepC" />
+            <Setting Name="SIP_Folder" Value="TC27x" />
+            <Setting Name="ReleaseType" Value="Tested" />
+          </Settings>
+          <Settings Name="50191910-00FB-4BD9-8CD3-DE12EB270635">
+            <Setting Name="Derivative" Value="TC277" />
+            <Setting Name="SIP_Folder" Value="TC27x" />
+            <Setting Name="ReleaseType" Value="Tested" />
+          </Settings>
+          <Settings Name="C8846CE8-34AB-4BBD-B6D3-1CDAE0641DE2">
+            <Setting Name="Derivative" Value="TC277_StepC" />
+            <Setting Name="SIP_Folder" Value="TC27x" />
+            <Setting Name="ReleaseType" Value="Tested" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC29x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="CC6E8123-7C3D-43C5-9B84-8FD5B1F82EA2">
+            <Setting Name="Derivative" Value="TC297" />
+            <Setting Name="SIP_Folder" Value="TC29x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="00D85567-3E90-4A8C-B63A-A48AA2BDB91D">
+            <Setting Name="Derivative" Value="TC297_StepB" />
+            <Setting Name="SIP_Folder" Value="TC29x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="C1E0BB49-A707-42A9-86C7-5D3974698A18">
+            <Setting Name="Derivative" Value="TC298" />
+            <Setting Name="SIP_Folder" Value="TC29x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="318E31B8-0647-4759-9F9B-690668035775">
+            <Setting Name="Derivative" Value="TC299" />
+            <Setting Name="SIP_Folder" Value="TC29x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="FBE3B8C6-5D06-4D06-863C-25688FAF0019">
+            <Setting Name="Derivative" Value="TC299_StepB" />
+            <Setting Name="SIP_Folder" Value="TC29x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC39x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="81DE334B-4266-4D14-80D3-AFE10F7FA982">
+            <Setting Name="Derivative" Value="TC399X_StepA" />
+            <Setting Name="SIP_Folder" Value="TC39x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="BE504270-3C55-412B-AA1D-5AD59B987339">
+            <Setting Name="Derivative" Value="TC397X_StepA" />
+            <Setting Name="SIP_Folder" Value="TC39x" />
+            <Setting Name="ReleaseType" Value="Tested" />
+          </Settings>
+          <Settings Name="37B05D7F-9A16-47F8-9D0D-B0401627FE21">
+            <Setting Name="Derivative" Value="TC397X_StepB" />
+            <Setting Name="SIP_Folder" Value="TC39x" />
+            <Setting Name="ReleaseType" Value="Tested" />
+          </Settings>
+          <Settings Name="6421B967-41D8-4F99-AFF2-715BF3A5F8D6">
+            <Setting Name="Derivative" Value="TC399X_StepB" />
+            <Setting Name="SIP_Folder" Value="TC39x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC38x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="F920D4B9-2D2C-474B-9674-644EDBC66300">
+            <Setting Name="Derivative" Value="TC387Q" />
+            <Setting Name="SIP_Folder" Value="TC38x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="685C60AC-FA2D-4DBE-8676-E66C05BA9E30">
+            <Setting Name="Derivative" Value="TC389Q" />
+            <Setting Name="SIP_Folder" Value="TC38x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="4EA8F939-1F41-4B1E-9F24-A42D2E6EFFC0">
+            <Setting Name="Derivative" Value="TC380Q" />
+            <Setting Name="SIP_Folder" Value="TC38x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC35x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="123DCBFC-F470-4514-84EB-37E4A702BEBD">
+            <Setting Name="Derivative" Value="TC357T" />
+            <Setting Name="SIP_Folder" Value="TC35x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="F3C17625-3FCE-43AA-B2A9-B4323ECBDAF5">
+            <Setting Name="Derivative" Value="TC356T" />
+            <Setting Name="SIP_Folder" Value="TC35x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC33x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="22740E59-5C40-43CC-ABF9-FCFC0D30FD7F">
+            <Setting Name="Derivative" Value="TC337L" />
+            <Setting Name="SIP_Folder" Value="TC33x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="E5BA41A6-3C29-412D-9A94-A8BBF4AD6FFD">
+            <Setting Name="Derivative" Value="TC332L" />
+            <Setting Name="SIP_Folder" Value="TC33x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="FDFA4AC4-2CB3-4347-B54B-77FE7D994059">
+            <Setting Name="Derivative" Value="TC333L" />
+            <Setting Name="SIP_Folder" Value="TC33x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="1F7470F6-3BE6-409A-963A-91C4352E80BE">
+            <Setting Name="Derivative" Value="TC334L" />
+            <Setting Name="SIP_Folder" Value="TC33x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="57D8BC8E-6C57-475A-8798-B0A2A9CE72F7">
+            <Setting Name="Derivative" Value="TC336L" />
+            <Setting Name="SIP_Folder" Value="TC33x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC37x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="2A32CAD9-4C64-41FC-97A9-4F51DEF6A43F">
+            <Setting Name="Derivative" Value="TC375T" />
+            <Setting Name="SIP_Folder" Value="TC37x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="D3FC3AD7-D44D-4CD4-99E0-D5F117D1FF44">
+            <Setting Name="Derivative" Value="TC377T" />
+            <Setting Name="SIP_Folder" Value="TC37x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="4CCBEF73-8560-41EC-BCF0-BE3576BE16C3">
+            <Setting Name="Derivative" Value="TC370T" />
+            <Setting Name="SIP_Folder" Value="TC37x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="7261F4E5-B9FA-4EC9-ACE9-0302808142E4">
+            <Setting Name="Derivative" Value="TC374T" />
+            <Setting Name="SIP_Folder" Value="TC37x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="E8D416BC-3EAE-4644-83B6-86702FA4B4DE">
+            <Setting Name="Derivative" Value="TC377V" />
+            <Setting Name="SIP_Folder" Value="TC37x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC36x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="890EE65A-3EE9-41A6-B463-58E2428EEC76">
+            <Setting Name="Derivative" Value="TC367D" />
+            <Setting Name="SIP_Folder" Value="TC36x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="826009CB-3AE5-40EC-8148-C70FAE15C76D">
+            <Setting Name="Derivative" Value="TC364D" />
+            <Setting Name="SIP_Folder" Value="TC36x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="0649AA35-D723-492E-A89F-97BD833F128D">
+            <Setting Name="Derivative" Value="TC360D" />
+            <Setting Name="SIP_Folder" Value="TC36x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="828BB55A-2DF6-4D5C-A4A3-4CFAA1A7011B">
+            <Setting Name="Derivative" Value="TC365D" />
+            <Setting Name="SIP_Folder" Value="TC36x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="4A0FC71F-1AB8-4672-8B50-4CED33B8C197">
+            <Setting Name="Derivative" Value="TC366D" />
+            <Setting Name="SIP_Folder" Value="TC36x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC32x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="8165C005-42C5-4B53-A60E-1F97D70A80F1">
+            <Setting Name="Derivative" Value="TC322L" />
+            <Setting Name="SIP_Folder" Value="TC32x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="7F7E1636-F19C-430D-8BA2-1A464ADD3727">
+            <Setting Name="Derivative" Value="TC323L" />
+            <Setting Name="SIP_Folder" Value="TC32x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="BDBE45FD-33B7-403C-8F9F-2A1E83C4ABA9">
+            <Setting Name="Derivative" Value="TC324L" />
+            <Setting Name="SIP_Folder" Value="TC32x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="9150FB64-C7B4-412A-9DB3-9E80D7F4E66A">
+            <Setting Name="Derivative" Value="TC327L" />
+            <Setting Name="SIP_Folder" Value="TC32x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC33xD">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="297B84DA-2BCC-4842-AC4C-D1C00B0BA60C">
+            <Setting Name="Derivative" Value="TC336D" />
+            <Setting Name="SIP_Folder" Value="TC33xD" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="F37894C1-E4CE-4928-A566-B8ABF4DEE016">
+            <Setting Name="Derivative" Value="TC337D" />
+            <Setting Name="SIP_Folder" Value="TC33xD" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC37xD">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="26CF4A49-325D-4A74-ADB0-E71B1E276AAD">
+            <Setting Name="Derivative" Value="TC375D" />
+            <Setting Name="SIP_Folder" Value="TC37xD" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="BFB486E2-1CE7-4D23-BD68-BB1721ED00F1">
+            <Setting Name="Derivative" Value="TC377D" />
+            <Setting Name="SIP_Folder" Value="TC37xD" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC3ExQ">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="FE438941-4E69-42AF-A9F5-B39504384086">
+            <Setting Name="Derivative" Value="TC3E7Q" />
+            <Setting Name="SIP_Folder" Value="TC3ExQ" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC38xT">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="5C9AB1BE-FE0F-42CC-BDC1-AD6EF13BF209">
+            <Setting Name="Derivative" Value="TC387T" />
+            <Setting Name="SIP_Folder" Value="TC38xT" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC39xQ">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="9065E110-F7E9-4413-9A01-CF01064DA11A">
+            <Setting Name="Derivative" Value="TC397Q_StepB" />
+            <Setting Name="SIP_Folder" Value="TC39xQ" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC49x">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="C4D20B02-3750-4257-B44D-2B75A44ADF48">
+            <Setting Name="Derivative" Value="TC49x_VirtualPrototype" />
+            <Setting Name="SIP_Folder" Value="TC49x" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+          <Settings Name="7B3821A5-5F91-4A98-8185-919B7F7F9322">
+            <Setting Name="Derivative" Value="TC49xX24O_StepA" />
+            <Setting Name="SIP_Folder" Value="TC49x" />
+            <Setting Name="ReleaseType" Value="Tested" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC4Dx">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="ABDCFC94-F1DE-4711-86A1-37BEBB3A73B9">
+            <Setting Name="Derivative" Value="TC4DxX20F" />
+            <Setting Name="SIP_Folder" Value="TC4Dx" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+        <Settings Name="TC49xN">
+          <Setting Name="SIP_Folder" Value="Os" />
+          <Settings Name="ED0D0D3A-A160-4A33-8A63-6F9F81290658">
+            <Setting Name="Derivative" Value="TC49xP20F" />
+            <Setting Name="SIP_Folder" Value="TC49xN" />
+            <Setting Name="ReleaseType" Value="Hardware Reference Checked" />
+          </Settings>
+        </Settings>
+      </Settings>
+    </Settings>
+  </Settings>
+</Settings>

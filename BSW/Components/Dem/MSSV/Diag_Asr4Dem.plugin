@@ -1,0 +1,2190 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2020 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  Diag_Asr4Dem.plugin
+*  Module     :  Elisa
+*  Description:  Entry point of Elisa Core.
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version    Date          Author   Change Id      Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00   2016-08-18    vismhe   ESCAN00089386  FEAT-1734: SafeBSW Step 5
+*  01.00.01   2016-09-13    vismhe   ESCAN00091855  Component version updated to 07.01.xx
+*  11.01.01   2017-04-25    vismhe                  Implementation version updated to 11.01.01
+*  11.01.02   2017-04-25    visanh                  Implementation version updated to 11.01.02
+*  14.00.00   2017-10-27    vismhe                  Extend SilentBSW support
+*             2017-12-06    visavi                  Adapted plugin checks for 'Dem_Cfg_Prestorage Entry'
+*             2018-01-10    visavi                  Added new plugin checks
+*             2018-03-12    visavi                  Deleted deprecated plugin checks
+*  15.00.00   2018-08-26    visejz   ESCAN00100569  Fix ESCAN00100569
+*  16.00.00   2018-10-17    visavi   STORYC-4762    Added plugin checks for global snapshot record
+*             2018-11-18    visavi   STORYC-6793    Added plugin checks for aging counter array
+*             2018-11-19    visavi   STORYC-6782    Added plugin checks for confirmation chronology
+*             2019-01-09    visejz   STORYC-4761    Added plugin checks for aged counter array
+*  17.00.00   2019-08-14    visera   STORY-12861    Added plugin checks for processed combined DTC groups array
+*  18.00.00   2019-09-13    visavi   DEM-103        Added plugin checks for readout buffer memory entry array
+*             2019-09-30    visera   DEM-840        Adapted plugin checks for permanent data entry and confirmed chronolgy array
+*  19.00.00   2020-03-18    visejz   DEM-4176       Update Elisa Plugin Version and updated some checks
+*                                                   due to comstack lib access macro changes
+*  19.01.00   2020-04-01    visera   DEM-3743       ExtendedDataRecord readable without event storage
+*             2020-04-21    visern   DEM-4277       Replace SMI with MSSV Plugin
+*  19.02.00   2020-07-01    vissat                  Implementation version updated to 19.05.00
+*  19.03.00   2020-08-21    visejz                  Implementation version updated to 19.07.00
+*                                                   Excluded Table 'Dem_Cfg_EventTable_ERec2EventIdInd' from
+*                                                   any checks that uses Dem_Cfg_EventTable.*
+*  20.00.00   2020-09-09    visxli                  Excluded Table 'Dem_Cfg_EventTable_ObdRdyGroup2EventIdInd' from
+*                                                   any checks that uses Dem_Cfg_EventTable.*
+*  20.01.00   2020-11-09    visejz   DEM-5169       Implementation: Adapt/ Implement MSSV Plugins
+*             2020-11-09    visejz   DEM-4898       Implementation: MSSV Plugin
+*             2020-12-07    visern   DEM-5266       Virtual Buffer: Rework access to relocated virtual buffer members
+*             2020-12-16    visera   DEM-5310       Renamed OEM compiler switches
+*  21.00.00   2021-05-04    visxli   DEM-5472       Adapted MSSV Plug-In for OBDonUDS Freeze Frame
+*             2021-08-04    visxli   DEM-5801       Support OBDonUDS Monitor Activity Ratio
+*             2021-08-12    visavi   ESCAN00109933  MSSV plugin does not verify the array sizes in Dem_Cfg_StatusData correctly
+*  22.00.00   2021-11-30    visavi   DEM-5059       Support User Defined Fault Memories according to ISO 14229-1
+*             2021-12-09    visfrs   DEM-6214       Indicators is refactored in Global Diagnostics
+*             2021-12-20    visxli   DEM-6596       MSSV: Remove/adapt secondary relevant code
+*             2022-02-23    vissat   DEM-6823       Update Implementation version to 22.06.00
+*  23.00.00   2022-08-23    vissat                  Update Implementation version to 23.05.00
+*  24.00.00   2022-09-19    eacar    DEM-7609       Update Implementation version to 24.00.00
+*  24.01.00   2022-12-12    visxli   DEM-7936       Added plugin check for event PTO timer array
+*             2023-01-12    eacar                   Updated implementation version to 24.04.00
+*  24.02.00   2023-02-27    visxli   DEM-7326       Adapted MSSV Plugins for TSSR UDM
+*             2023-03-03    visxli                  Update Implementation version to 24.06.00
+*  25.00.00   2023-07-06    visabn   DEM-8516       Updated MSSV Plugins for TSSR FIFO
+*  26.00.00   2023-09-05    viskod   DEM-6969       Unified structure of MSSV rules and test cases for robustness
+*             2023-09-12    sbappanadu   DEM-8946   Updated MSSV Plugins with renaming of Internal Memory Handling
+*  26.01.00   2023-10-09    visera   DEM-8861       Updated MSSV Plugins for TSSR
+*             2023-10-09    visera   ESCAN00115598  MSSV plugin does not verify the array sizes in Dem_Cfg_TimeSeriesEntryType
+*             2023-10-16    sbappanadu   DEM-9121   Counter Measure CM_DEM_M_TIMESERIESINDEX_LIMITS removed
+*  26.02.00   2023-11-07    sbappanadu   DEM-9023   Fix ESCAN00115514
+*  26.06.00   2024-01-09    akarlsson    CARC-3833  Support configurable number of sampling profiles.
+*             2024-01-31    sbappanadu   DEM-9121   Added check CM_DEM_M_SIZEOF_CUSTOMTRIGGERENTRY_SNAPSHOTDATA
+*             2024-02-12    sbappanadu   DEM-9506   Added check CM_DEM_M_SIZEOF_ADMINDATA_MAXFDCSINCELASTCLEAR (Fix ESCAN00116368)
+*             2024-02-21    sbappanadu   DEM-9300   Extended CM_DEM_M_SIZEOF_CUSTOMTRIGGERENTRY_SNAPSHOTDATA to support Custom Trigger TimeSeries Snapshots
+*             2024-02-21    akarlsson    CARC-3862  Support TSSR multi trigger
+*             2024-03-06    visxli       DEM-9857   Add check for DEM_CFG_SUPPORT_CALIBRATION into CheckQMDefines()
+*  27.00.00   2024-03-19    eacar                   Update Implementation version to 27.00.00
+*             2024-03-26    viskod       DEM-9399   CheckMandatoryObjectsInGeneration Counter Measure removed
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : Elisa_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x270000)
+  reg.SetPackageName("Diag_Asr4Dem")
+  reg.SetInputFiles(["Dem_Lcfg.c", "Dem_PBcfg.c"])
+  return reg
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : Elisa_core calls this function to allow the plugin a version check against the BSW sources.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+  AssertDefineEquals("DEM_SW_MAJOR_VERSION", "(27U)")
+  AssertDefineEquals("DEM_SW_MINOR_VERSION", "(0U)")
+  AssertDefineEquals("DEM_SW_PATCH_VERSION", "(0U)")
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. Main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : N/A
+**********************************************************************************************************************/
+def main()
+{
+  /* Rules for preprocessor switch combinations */
+  InvokeRule("Check QM only features are deactivated", CheckQMDefines)
+  InvokeRule("Check safety relevant switches are activated", CheckSilentDefines)
+  /* Rules for array size verifications */
+  InvokeRule("CM_DEM_M_SIZEOF_ADMINDATA_CYCLECOUNTER", CM_DEM_M_SIZEOF_ADMINDATA_CYCLECOUNTER)
+  InvokeRule("CM_DEM_M_SIZEOF_ADMINDATA_MEMORYOVERFLOW", CM_DEM_M_SIZEOF_ADMINDATA_MEMORYOVERFLOW)
+  InvokeRule("CM_DEM_M_SIZEOF_STATUSDATA_EVENTSTATUS", CM_DEM_M_SIZEOF_STATUSDATA_EVENTSTATUS)
+  InvokeRule("CM_DEM_M_SIZEOF_STATUSDATA_STATE", CM_DEM_M_SIZEOF_STATUSDATA_STATE)
+  InvokeRule("CM_DEM_M_SIZEOF_STATUSDATA_TRIPCOUNT", CM_DEM_M_SIZEOF_STATUSDATA_TRIPCOUNT)
+  InvokeRule("CM_DEM_M_SIZEOF_STATUSDATA_MILGROUPTRIPCOUNT", CM_DEM_M_SIZEOF_STATUSDATA_MILGROUPTRIPCOUNT)
+  InvokeRule("CM_DEM_M_SIZEOF_STATUSDATA_MILGROUPACTIVEEVENTS", CM_DEM_M_SIZEOF_STATUSDATA_MILGROUPACTIVEEVENTS)
+  InvokeRule("CM_DEM_M_SIZEOF_STATUSDATA_EXTENDEDEVENTSTATUS", CM_DEM_M_SIZEOF_STATUSDATA_EXTENDEDEVENTSTATUS)
+  InvokeRule("CM_DEM_M_SIZEOF_STATUSDATA_SI30STATUS", CM_DEM_M_SIZEOF_STATUSDATA_SI30STATUS)
+  InvokeRule("CM_DEM_M_SIZEOF_PERMANENT_PERMANENTDATAENTRY", CM_DEM_M_SIZEOF_PERMANENT_PERMANENTDATAENTRY)
+  InvokeRule("CM_DEM_M_SIZEOF_EVENTAVAILABLEDATA", CM_DEM_M_SIZEOF_EVENTAVAILABLEDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_DEBOUNCEDATA", CM_DEM_M_SIZEOF_DEBOUNCEDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_PRESTORAGE", CM_DEM_M_SIZEOF_PRESTORAGE)
+  InvokeRule("CM_DEM_M_SIZEOF_REPORTEDEVENTSOFFILTER", CM_DEM_M_SIZEOF_REPORTEDEVENTSOFFILTER)
+  InvokeRule("CM_DEM_M_SIZEOF_EVENTENTRY_STDENVDATA", CM_DEM_M_SIZEOF_EVENTENTRY_STDENVDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_NVBLOCKDATAPTR", CM_DEM_M_SIZEOF_NVBLOCKDATAPTR)
+  InvokeRule("CM_DEM_M_SIZEOF_PRESTORED_SNAPSHOT", CM_DEM_M_SIZEOF_PRESTORED_SNAPSHOT)
+  InvokeRule("CM_DEM_M_SIZEOF_PRESTORED_OBDFREEZEFRAME", CM_DEM_M_SIZEOF_PRESTORED_OBDFREEZEFRAME)
+  InvokeRule("CM_DEM_M_SIZEOF_PRESTORED_J1939FREEZEFRAME", CM_DEM_M_SIZEOF_PRESTORED_J1939FREEZEFRAME)
+  InvokeRule("CM_DEM_M_SIZEOF_EVENTENTRY_EXTENDEDDATA", CM_DEM_M_SIZEOF_EVENTENTRY_EXTENDEDDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_EVENTENTRY_SNAPSHOTDATA", CM_DEM_M_SIZEOF_EVENTENTRY_SNAPSHOTDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_EVENTENTRY_J1939FREEZEFRAME", CM_DEM_M_SIZEOF_EVENTENTRY_J1939FREEZEFRAME)
+  InvokeRule("CM_DEM_M_SIZEOF_RINGBUFFER", CM_DEM_M_SIZEOF_RINGBUFFER)
+  InvokeRule("CM_DEM_M_SIZEOF_RINGBUFFER_CURRENTINDEX", CM_DEM_M_SIZEOF_RINGBUFFER_CURRENTINDEX)
+  InvokeRule("CM_DEM_M_SIZEOF_RINGBUFFER_SAMPLECOUNT", CM_DEM_M_SIZEOF_RINGBUFFER_SAMPLECOUNT)
+  InvokeRule("CM_DEM_M_TIMESERIESENTRYCOMPANIONINDEX_LIMITS", CM_DEM_M_TIMESERIESENTRYCOMPANIONINDEX_LIMITS)
+  InvokeRule("CM_DEM_M_SIZEOF_EVENTENTRY_GLOBALSNAPSHOTDATA", CM_DEM_M_SIZEOF_EVENTENTRY_GLOBALSNAPSHOTDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_PRESTORED_GLOBALSNAPSHOTDATA", CM_DEM_M_SIZEOF_PRESTORED_GLOBALSNAPSHOTDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_AGINGDATA_AGINGTARGETCYCLE", CM_DEM_M_SIZEOF_AGINGDATA_AGINGTARGETCYCLE)
+  InvokeRule("CM_DEM_M_SIZEOF_STATUSDATA_CONFIRMEDCHRONOLOGY", CM_DEM_M_SIZEOF_STATUSDATA_CONFIRMEDCHRONOLOGY)
+  InvokeRule("CM_DEM_M_SIZEOF_AGINGDATA_AGEDCOUNTER", CM_DEM_M_SIZEOF_AGINGDATA_AGEDCOUNTER)
+  InvokeRule("CM_DEM_M_SIZEOF_READOUTBUFFER_OBDFREEZEFRAME", CM_DEM_M_SIZEOF_READOUTBUFFER_OBDFREEZEFRAME)
+  InvokeRule("CM_DEM_M_SIZEOF_READOUTBUFFER_READOUTBUFFERDATA", CM_DEM_M_SIZEOF_READOUTBUFFER_READOUTBUFFERDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_CYCLECOUNTERDATA_FAILEDCYCLECOUNTER", CM_DEM_M_SIZEOF_CYCLECOUNTERDATA_FAILEDCYCLECOUNTER)
+  InvokeRule("CM_DEM_M_SIZEOF_CYCLECOUNTERDATA_FAULTPENDINGCOUNTER", CM_DEM_M_SIZEOF_CYCLECOUNTERDATA_FAULTPENDINGCOUNTER)
+  InvokeRule("CM_DEM_M_ORGANI_TESTCODE_COMMENT_UNDEFINED", CM_DEM_M_ORGANI_TESTCODE_COMMENT_UNDEFINED)
+  InvokeRule("CM_DEM_M_SIZEOF_DTRDATA", CM_DEM_M_SIZEOF_DTRDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_OBDIUMPRDATA_IUMPRRATIO", CM_DEM_M_SIZEOF_OBDIUMPRDATA_IUMPRRATIO)
+  InvokeRule("CM_DEM_M_SIZEOF_OBDIUMPRDATA_MONITORACTIVITYDATA", CM_DEM_M_SIZEOF_OBDIUMPRDATA_MONITORACTIVITYDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_FREEZEFRAME", CM_DEM_M_SIZEOF_FREEZEFRAME)
+  InvokeRule("CM_DEM_M_SIZEOF_NVBLOCKID", CM_DEM_M_SIZEOF_NVBLOCKID)
+  InvokeRule("CM_DEM_M_SIZEOF_NVBLOCKDATASIZE", CM_DEM_M_SIZEOF_NVBLOCKDATASIZE)
+  InvokeRule("CM_DEM_M_SIZEOF_ADMINDATA_PTOTIMER", CM_DEM_M_SIZEOF_ADMINDATA_PTOTIMER)
+  InvokeRule("CM_DEM_M_SIZEOF_TIMESERIES_BASEENTRY_UNUSEDSAMPLES", CM_DEM_M_SIZEOF_TIMESERIES_BASEENTRY_UNUSEDSAMPLES)
+  InvokeRule("CM_DEM_M_SIZEOF_TIMESERIES_BASEENTRY_SETINDEX", CM_DEM_M_SIZEOF_TIMESERIES_BASEENTRY_SETINDEX)
+  InvokeRule("CM_DEM_M_SIZEOF_ENTRYCOMPANION_MISSINGFUTURESAMPLES", CM_DEM_M_SIZEOF_ENTRYCOMPANION_MISSINGFUTURESAMPLES)
+  InvokeRule("CM_DEM_M_SIZEOF_READOUTBUFFER_UNUSEDFUTURESAMPLES", CM_DEM_M_SIZEOF_READOUTBUFFER_UNUSEDFUTURESAMPLES)
+  InvokeRule("CM_DEM_M_SIZEOF_CUSTOMTRIGGERENTRY_SNAPSHOTDATA", CM_DEM_M_SIZEOF_CUSTOMTRIGGERENTRY_SNAPSHOTDATA)
+  InvokeRule("CM_DEM_M_SIZEOF_ADMINDATA_MAXFDCSINCELASTCLEAR", CM_DEM_M_SIZEOF_ADMINDATA_MAXFDCSINCELASTCLEAR)
+  InvokeRule("CM_DEM_M_SIZEOF_TIMESERIESENTRY_ENTRYDATA", CM_DEM_M_SIZEOF_TIMESERIESENTRY_ENTRYDATA)
+}
+
+/**********************************************************************************************************************
+* Name         : GetStructNameFromStructMemberReferenceString
+* Parameter    : RefString
+* Return value : The name of the referenced Struct variable
+* Description  : Extracts the name of the Struct variable from the passed String which is a reference to a member of
+*                the Struct.
+*                E.g., extracts "Dem_Cfg_PrimaryTimeSeriesEntry_0" from
+*                "&(Dem_Cfg_PrimaryTimeSeriesEntry_0.SnapshotData_NormalRate[0][0])"
+* Requirements : N/A
+**********************************************************************************************************************/
+def GetStructNameFromStructMemberReferenceString(RefString)
+{
+  var RefStart = "&("
+  RefString=drop(RefString, RefStart.size())
+
+  var DotIndex = RefString.find(".")
+
+  return take(RefString, DotIndex)
+}
+
+/**********************************************************************************************************************
+* Name         : GetMemberNameFromStructMemberReferenceString
+* Parameter    : RefString
+* Return value : The name of the referenced Struct member variable
+* Description  : Extracts the name of the Struct member variable from the passed String which is a reference to the
+*                Struct member.
+*                E.g., extracts "SnapshotData_NormalRate" from
+*                "&(Dem_Cfg_PrimaryTimeSeriesEntry_0.SnapshotData_NormalRate[0][0])"
+* Requirements : N/A
+**********************************************************************************************************************/
+def GetMemberNameFromStructMemberReferenceString(RefString)
+{
+  var DotIndex = RefString.find(".")
+  RefString=drop(RefString, DotIndex+1)
+
+  var RefEnd = ")"
+  var TwoDimArrayRefEnd = "[0][0])"
+
+  if(RefString.find(TwoDimArrayRefEnd) >= 0)
+  {
+    RefString=take(RefString, RefString.size()- TwoDimArrayRefEnd.size())
+  }
+  else if(RefString.find(RefEnd) >= 0)
+  {
+    RefString=take(RefString, RefString.size()- RefEnd.size())
+  }
+
+  return RefString
+}
+
+/**********************************************************************************************************************
+* Name         : GetStructNameFromReferenceString
+* Parameter    : RefString
+* Return value : The name of the referenced Struct variable
+* Description  : Extracts the name of the Struct variable from the passed String which is a reference to the Struct.
+*                E.g. extracts "Dem_Cfg_PrimaryEntry_0" from "(&(Dem_Cfg_PrimaryEntry_0))"
+* Requirements : N/A
+**********************************************************************************************************************/
+def GetStructNameFromReferenceString(RefString)
+{
+  var RefStart = "Dem"
+  var RefEnd = ")"
+
+  if(RefString.find(RefEnd) >= 0)
+  {
+    RefString=take(RefString, RefString.find(RefEnd))
+  }
+  if(RefString.find(RefStart) >= 0)
+  {
+    RefString = drop(RefString, RefString.find(RefStart))
+  }
+
+  return RefString
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVariableInDemNameSpace
+* Parameter    : RefString
+* Return value : None
+* Description  : Verify that the variable name is defined in DEM namespace (starts with 'Dem_Cfg')
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckVariableInDemNameSpace(RefString)
+{
+    /* Assert that the name of the referenced variable with 'Dem_Cfg' */
+    Assert(RefString.find("Dem_Cfg_") == 0, RefString + " starts with", Equal, "Dem_Cfg_")
+}
+
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+*                Typically it checks that QM features are inactive in safety context.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  // SMI-1002
+  AssertDefineIsStdOff("DEM_CFG_SUPPORT_MIRROR")
+  // SMI-1001
+  AssertDefineIsStdOff("DEM_CFG_SUPPORT_CALIBRATION")
+}
+
+/**********************************************************************************************************************
+* Name         : CheckSilentDefines
+* Parameter    : None
+* Return value : None
+* Description  : Verify that all features that guarantee safe runtime are activated.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckSilentDefines()
+{
+  AssertDefineIsStdOn("DEM_CFG_SAFE_BSW_MODE")
+  AssertDefineIsStdOn("DEM_DEV_ERROR_DETECT")
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_ADMINDATA_CYCLECOUNTER
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_AdminData.CycleCounter[] is defined for each id in range [0..DEM_CFG_GLOBAL_CYCLE_COUNT[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_ADMINDATA_CYCLECOUNTER()
+{
+  var Dem_Cfg_AdminData = Struct("Dem_Cfg_AdminData")
+  if (Dem_Cfg_AdminData.HasMember("CycleCounter"))
+  {
+    var Dem_Cfg_AdminData_CycleCounter = Dem_Cfg_AdminData.GetMemberAsArray("CycleCounter")
+    var DEM_CFG_GLOBAL_CYCLE_COUNT = Define("DEM_CFG_GLOBAL_CYCLE_COUNT")
+    AssertArraySize(Dem_Cfg_AdminData_CycleCounter, Equal, DEM_CFG_GLOBAL_CYCLE_COUNT)
+  }
+  else
+  {
+    ReportError("Member CycleCounter of Dem_Cfg_AdminData is missing or renamed")
+  }
+
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_DEBOUNCEDATA
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_DebounceData[] is defined for each id in range [0..DEM_CFG_GLOBAL_DEBOUNCE_STORAGE_EVENT_COUNT[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_DEBOUNCEDATA()
+{
+  if (SymbolExists("Dem_Cfg_DebounceData"))
+  {
+    var Dem_Cfg_DebounceData = Array("Dem_Cfg_DebounceData")
+    var DEM_CFG_GLOBAL_DEBOUNCE_STORAGE_EVENT_COUNT = Define("DEM_CFG_GLOBAL_DEBOUNCE_STORAGE_EVENT_COUNT")
+    AssertArraySize(Dem_Cfg_DebounceData, Equal, DEM_CFG_GLOBAL_DEBOUNCE_STORAGE_EVENT_COUNT)
+  }
+  else if(IsStdOff("DEM_CFG_SUPPORT_DEBOUNCE_NV"))
+  {
+    // Feature is disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_DebounceData is not generated although DEM_CFG_SUPPORT_DEBOUNCE_NV is ON or DEM_CFG_SUPPORT_DEBOUNCE_NV does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_PRESTORAGE
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_Prestorage[] is defined for each id in range [0..DEM_CFG_GLOBAL_PRESTORED_FF_SIZE]
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_PRESTORAGE()
+{
+  if (SymbolExists("Dem_Cfg_Prestorage"))
+  {
+    var Dem_Cfg_Prestorage = Array("Dem_Cfg_Prestorage")
+    var DEM_CFG_GLOBAL_PRESTORED_FF_SIZE = Define("DEM_CFG_GLOBAL_PRESTORED_FF_SIZE")
+
+    AssertArraySize(Dem_Cfg_Prestorage, Equal, DEM_CFG_GLOBAL_PRESTORED_FF_SIZE.GetValueAsNumber() + 1)
+  }
+  else if(IsStdOff("DEM_CFG_SUPPORT_PRESTORED_FF"))
+  {
+    // Feature is disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_Prestorage is not generated although DEM_CFG_SUPPORT_PRESTORED_FF is ON or DEM_CFG_SUPPORT_PRESTORED_FF does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_NVBLOCKDATAPTR
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_NvBlockDataPtr[] is defined for each id in range [0..DEM_CFG_GLOBAL_NV_BLOCK_COUNT[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_NVBLOCKDATAPTR()
+{
+  if (SymbolExists("Dem_Cfg_NvBlockDataPtr"))
+  {
+    var Dem_Cfg_NvBlockDataPtr = Array("Dem_Cfg_NvBlockDataPtr")
+    var DEM_CFG_GLOBAL_NV_BLOCK_COUNT = Define("DEM_CFG_GLOBAL_NV_BLOCK_COUNT")
+    AssertArraySize(Dem_Cfg_NvBlockDataPtr, Equal, DEM_CFG_GLOBAL_NV_BLOCK_COUNT)
+  }
+  else
+  {
+    ReportError("Dem_Cfg_NvBlockDataPtr is missing or renamed.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_PRESTORED_SNAPSHOT
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_PrestorageEntryType.SnapshotData[] has at least DEM_CFG_MAX_SIZE_SNAPSHOT elements
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_PRESTORED_SNAPSHOT()
+{
+  if (SymbolExists("Dem_Cfg_Prestorage") && Array("Dem_Cfg_Prestorage").GetElemAsStruct(0).HasMember("SnapshotData"))
+  {
+    var Dem_Cfg_Prestorage = Array("Dem_Cfg_Prestorage")
+    var Dem_Cfg_PrestorageEntry = Dem_Cfg_Prestorage.GetElemAsStruct(0)
+    var DEM_CFG_MAX_SIZE_SNAPSHOT = Define("DEM_CFG_MAX_SIZE_SNAPSHOT")
+    var Dem_Cfg_PrestorageEntry_SnapshotData = Dem_Cfg_PrestorageEntry.GetMemberAsArray("SnapshotData")
+    AssertArraySize(Dem_Cfg_PrestorageEntry_SnapshotData, Equal, DEM_CFG_MAX_SIZE_SNAPSHOT)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_PRESTORED_FF") || IsStdOff("DEM_CFG_SUPPORT_SRECS"))
+  {
+    // Feature is disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_Prestorage or Member SnapshotData in Dem_Cfg_Prestorage does not exist although DEM_CFG_SUPPORT_PRESTORED_FF and DEM_CFG_SUPPORT_SRECS both are on or one of the PP switches does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_PRESTORED_OBDFREEZEFRAME
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_PrestorageEntryType.ObdFreezeFrame[] has at least DEM_CFG_MAX_SIZE_OBDFREEZEFRAME
+*                elements if OBD is supported.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_PRESTORED_OBDFREEZEFRAME()
+{
+  if (SymbolExists("Dem_Cfg_Prestorage") && Array("Dem_Cfg_Prestorage").GetElemAsStruct(0).HasMember("ObdFreezeFrame"))
+  {
+    var Dem_Cfg_Prestorage = Array("Dem_Cfg_Prestorage")
+    var Dem_Cfg_PrestorageEntry = Dem_Cfg_Prestorage.GetElemAsStruct(0)
+    var DEM_CFG_MAX_SIZE_OBDFREEZEFRAME = Define("DEM_CFG_MAX_SIZE_OBDFREEZEFRAME")
+    var Dem_Cfg_PrestorageEntry_ObdFreezeFrame = Dem_Cfg_PrestorageEntry.GetMemberAsArray("ObdFreezeFrame")
+    AssertArraySize(Dem_Cfg_PrestorageEntry_ObdFreezeFrame, Equal, DEM_CFG_MAX_SIZE_OBDFREEZEFRAME)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_PRESTORED_FF") || IsStdOff("DEM_CFG_SUPPORT_OBDII_OR_OBDONUDS"))
+  {
+    // Feature is disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_Prestorage or Member ObdFreezeFrame in Dem_Cfg_Prestorage does not exist although DEM_CFG_SUPPORT_PRESTORED_FF and DEM_CFG_SUPPORT_OBDII_OR_OBDONUDS both are ON or one of the switches does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_EVENTENTRY_EXTENDEDDATA
+* Parameter    : None
+* Return value : None
+* Description  : For each Event Entry referenced in Table Dem_Cfg_EventEntryPtr (Readout Buffer Entries are not tested):
+*                Verify that ExtendedData[] is valid for values in range [0..DEM_CFG_MAX_NUM_EXT_RECORDS[
+*                Verify that each ExtendedData[][] has at least DEM_CFG_MAX_SIZE_EXT_RECORD elements
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_EVENTENTRY_EXTENDEDDATA()
+{
+  var PrimaryEntry0Tested = false
+  // Array("") will report an error if the object does not exist
+  var Dem_Cfg_EventEntryPtrTable = Array("Dem_Cfg_EventEntryPtr")
+
+  for(var Index = 0; Index < Dem_Cfg_EventEntryPtrTable.GetSize(); ++Index)
+  {
+    var ArrayElement = Dem_Cfg_EventEntryPtrTable.GetElemAsString(Index)
+
+    // Extract name of the global variable (e.g., "Dem_Cfg_PrimaryEntry_0"), to which the entry of Dem_Cfg_EventEntryPtr points
+    var Dem_EventEntry = GetStructNameFromReferenceString(ArrayElement)
+
+    // At least one Primary Entry is always configured, so table should always contain a pointer to "Dem_Cfg_PrimaryEntry_0"
+    if (Dem_EventEntry == "Dem_Cfg_PrimaryEntry_0")
+    {
+      PrimaryEntry0Tested = true
+    }
+    // Assert that the name of the referenced struct starts with 'Dem_Cfg'
+    CheckVariableInDemNameSpace(Dem_EventEntry)
+
+    // Only event memory entries in Dem_Cfg_EventEntryPtr are tested
+    // Readout buffer entries are verified by customer with SMI-524392
+    if(Dem_EventEntry.find("Dem_Cfg_ReadoutBuffer") < 0)
+    {
+      var Dem_EventEntryStruct = Struct(Dem_EventEntry)
+
+      if(Dem_EventEntryStruct.HasMember("ExtendedData"))
+      {
+        var DEM_CFG_MAX_NUM_EXT_RECORDS = Define("DEM_CFG_MAX_NUM_EXT_RECORDS")
+        var DEM_CFG_MAX_SIZE_EXT_RECORD = Define("DEM_CFG_MAX_SIZE_EXT_RECORD")
+
+        var Dem_EventEntry_ExtendedData = Dem_EventEntryStruct.GetMemberAsArray("ExtendedData")
+        var Dem_EventEntry_ExtendedData_Max_Size = Dem_EventEntry_ExtendedData.GetElemAsArray(0)
+
+        AssertArraySize(Dem_EventEntry_ExtendedData, Equal, DEM_CFG_MAX_NUM_EXT_RECORDS)
+        AssertArraySize(Dem_EventEntry_ExtendedData_Max_Size, Equal, DEM_CFG_MAX_SIZE_EXT_RECORD)
+
+      }
+      else if (IsStdOff("DEM_CFG_SUPPORT_USER_ERECS"))
+      {
+        // Feature disabled, no check needed
+      }
+      else
+      {
+        ReportError("Member ExtendedData not generated or renamed for EventEntries although DEM_CFG_SUPPORT_USER_ERECS is ON or PP switch does not exist.")
+      }
+    }
+  }
+  if (PrimaryEntry0Tested == false)
+  {
+    ReportError("Dem_Cfg_EventEntryPtr does not contain reference to Dem_Cfg_PrimaryEntry_0!")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_EVENTENTRY_SNAPSHOTDATA
+* Parameter    : None
+* Return value : None
+* Description  : For each EventEntry referenced in Table Dem_Cfg_EventEntryPtr (Readout Buffer Entries are not tested):
+*                Verify that SnapshotData[] is valid for values in range [0..DEM_CFG_MAX_NUM_SNAPSHOTS[
+*                Verify that each SnapshotData[][] has at least DEM_CFG_MAX_SIZE_SNAPSHOT elements
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_EVENTENTRY_SNAPSHOTDATA()
+{
+  var PrimaryEntry0Tested = false
+  // Array("") will report an error if the object does not exist
+  var Dem_Cfg_EventEntryPtrTable = Array("Dem_Cfg_EventEntryPtr")
+
+  for(var Index = 0; Index < Dem_Cfg_EventEntryPtrTable.GetSize(); ++Index)
+  {
+    var ArrayElement = Dem_Cfg_EventEntryPtrTable.GetElemAsString(Index)
+
+    // Extract name of the global variable (e.g., "Dem_Cfg_PrimaryEntry_0"), to which the entry of Dem_Cfg_EventEntryPtr points
+    var Dem_EventEntry = GetStructNameFromReferenceString(ArrayElement)
+
+    // At least one Primary Entry is always configured, so table should always contain a pointer to "Dem_Cfg_PrimaryEntry_0"
+    if (Dem_EventEntry == "Dem_Cfg_PrimaryEntry_0")
+    {
+        PrimaryEntry0Tested = true
+    }
+    // Assert that the name of the referenced struct starts with 'Dem_Cfg'
+    CheckVariableInDemNameSpace(Dem_EventEntry)
+
+    // Only event memory entries in Dem_Cfg_EventEntryPtr are tested
+    // Readout buffer entries are verified by customer with SMI-524392
+    if(Dem_EventEntry.find("Dem_Cfg_ReadoutBuffer") < 0)
+    {
+      var Dem_EventEntryStruct = Struct(Dem_EventEntry)
+
+      if(Dem_EventEntryStruct.HasMember("SnapshotData"))
+      {
+        var DEM_CFG_MAX_NUM_SNAPSHOTS = Define("DEM_CFG_MAX_NUM_SNAPSHOTS")
+        var DEM_CFG_MAX_SIZE_SNAPSHOT = Define("DEM_CFG_MAX_SIZE_SNAPSHOT")
+
+        var Dem_EventEntry_SnapshotData = Dem_EventEntryStruct.GetMemberAsArray("SnapshotData")
+        var Dem_EventEntry_SnapshotData_Max_Size = Dem_EventEntry_SnapshotData.GetElemAsArray(0)
+
+        AssertArraySize(Dem_EventEntry_SnapshotData, Equal, DEM_CFG_MAX_NUM_SNAPSHOTS)
+        AssertArraySize(Dem_EventEntry_SnapshotData_Max_Size, Equal, DEM_CFG_MAX_SIZE_SNAPSHOT)
+      }
+      else if (IsStdOff("DEM_CFG_SUPPORT_SRECS"))
+      {
+        // Feature disabled, no check needed
+      }
+      else
+      {
+        ReportError("Member SnapshotData not generated or renamed for EventEntries although DEM_CFG_SUPPORT_SRECS is ON or PP switch does not exist.")
+      }
+    }
+  }
+  if (PrimaryEntry0Tested == false)
+  {
+    ReportError("Dem_Cfg_EventEntryPtr does not contain reference to Dem_Cfg_PrimaryEntry_0!")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CheckTimeSeriesSamplingProfileTableElement
+* Parameter    : array - the array object for which the function is called
+* Parameter    : index - the index of the current array element
+* Parameter    : value - the value of the current array element
+* Return value : None
+* Description  : Callback function that verifies for an element in array Dem_Cfg_TimeSeriesSnapshotData
+*                the first dimension of the array referenced by SnapshotDataPtrOfTimeSeriesSnapshotData is valid for values in range [0..MaxNumSamplesOfTimeSeriesSnapshotData[
+*                the second dimension of the array referenced by SnapshotDataPtrOfTimeSeriesSnapshotData has at least MaxSnapshotSizeOfTimeSeriesSnapshotData elements
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckTimeSeriesSamplingProfileTableElement(array, index, value)
+{
+  var TimeSeriesSamplingProfileRingBufferPtrString = value.GetMemberAsString("RingBufferPtrOfTimeSeriesSamplingProfileTable")
+  var InnerArraySize = value.GetMemberAsNumber("SampleSizeOfTimeSeriesSamplingProfileTable");
+  var PastSamples = value.GetMemberAsNumber("PastSamplesOfTimeSeriesSamplingProfileTable");
+  var OuterSize
+
+  if(PastSamples == 0)
+  {
+    OuterSize = 1
+  }
+  else
+  {
+    OuterSize = PastSamples
+  }
+
+  var StructName = GetStructNameFromStructMemberReferenceString(TimeSeriesSamplingProfileRingBufferPtrString)
+  CheckVariableInDemNameSpace(StructName)
+
+  var RingBufferStruct = Struct(StructName)
+
+  var memberName = GetMemberNameFromStructMemberReferenceString(TimeSeriesSamplingProfileRingBufferPtrString)
+  var RingBufferMemberBuffer = RingBufferStruct.GetMemberAsArray(memberName)
+  var InnerArray = RingBufferMemberBuffer.GetElemAsArray(0)
+
+  AssertArraySize(RingBufferMemberBuffer, Equal, OuterSize)
+  AssertArraySize(InnerArray, Equal, InnerArraySize)
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_RINGBUFFER
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the buffer member of Dem_Cfg_RingBufferType pointed to by each element in the time series sampling profile table 
+*   Dem_Cfg_TimeSeriesSamplingProfileTable is valid for indices in range specified by the relevant entries in the sampling profile table.
+*   I.e. verify that the inner array size is SampleSizeOfTimeSeriesSamplingProfileTable and the outer array
+*   size is PastSamplesOfTimeSeriesSamplingProfileTable or 1, if PastSamplesOfTimeSeriesSamplingProfileTable is 0. 
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_RINGBUFFER()
+{
+  if(SymbolExists("Dem_Cfg_RingBuffer") && SymbolExists("Dem_Cfg_TimeSeriesSamplingProfileTable"))
+  {
+    var Dem_Cfg_TimeSeriesSamplingProfileTable = Array("Dem_Cfg_TimeSeriesSamplingProfileTable")
+    var Dem_Cfg_RingBuffer = Struct("Dem_Cfg_RingBuffer")
+    Dem_Cfg_TimeSeriesSamplingProfileTable.ForEachAsStruct(CheckTimeSeriesSamplingProfileTableElement)
+    var DEM_CFG_TIMESERIES_NUMBER_OF_SAMPLING_PROFILES = Define("DEM_CFG_TIMESERIES_NUMBER_OF_SAMPLING_PROFILES")
+    AssertArraySize(Dem_Cfg_TimeSeriesSamplingProfileTable, Equal, DEM_CFG_TIMESERIES_NUMBER_OF_SAMPLING_PROFILES)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_PAST") && IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_FUTURE")) // Note: We expect the buffer to be generated even for future only time series since a single slot ring buffer is still used to keep track of the latest sample.
+  {
+    // Feature is disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_RingBuffer or Dem_Cfg_TimeSeriesSamplingProfileTable not generated although DEM_CFG_SUPPORT_TIME_SERIES_PAST is ON or DEM_CFG_SUPPORT_TIME_SERIES_PAST does not exist")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_RINGBUFFER_CURRENTINDEX
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the array Dem_Cfg_RingBuffer.CurrentIndex[] has size equal to the number of sampling profiles.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_RINGBUFFER_CURRENTINDEX() {
+  if(SymbolExists("Dem_Cfg_RingBuffer"))
+  {
+    var DEM_CFG_TIMESERIES_NUMBER_OF_SAMPLING_PROFILES = Define("DEM_CFG_TIMESERIES_NUMBER_OF_SAMPLING_PROFILES")
+    var Dem_Cfg_RingBuffer = Struct("Dem_Cfg_RingBuffer")
+    if (Dem_Cfg_RingBuffer.HasMember("CurrentIndex"))
+    {
+      var CurrentIndexArray = Dem_Cfg_RingBuffer.GetMemberAsArray("CurrentIndex")
+      AssertArraySize(CurrentIndexArray, Equal, DEM_CFG_TIMESERIES_NUMBER_OF_SAMPLING_PROFILES)
+    }
+    else
+    {
+      ReportError("Mandatory member CurrentIndex of Dem_Cfg_RingBuffer has not been generated")
+    }
+  }
+  else
+  {
+    // Reported by CM_DEM_M_SIZEOF_RINGBUFFER
+  }
+}
+
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_RINGBUFFER_SAMPLECOUNT
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the array Dem_Cfg_RingBuffer.SampleCount[] has size equal to the number of sampling profiles.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_RINGBUFFER_SAMPLECOUNT() {
+  if(SymbolExists("Dem_Cfg_RingBuffer"))
+  {
+    var Dem_Cfg_RingBuffer = Struct("Dem_Cfg_RingBuffer")
+    var DEM_CFG_TIMESERIES_NUMBER_OF_SAMPLING_PROFILES = Define("DEM_CFG_TIMESERIES_NUMBER_OF_SAMPLING_PROFILES")
+    if (Dem_Cfg_RingBuffer.HasMember("SampleCount"))
+    {
+      var SampleCountArray = Dem_Cfg_RingBuffer.GetMemberAsArray("SampleCount")
+      AssertArraySize(SampleCountArray, Equal, DEM_CFG_TIMESERIES_NUMBER_OF_SAMPLING_PROFILES)
+    }
+    else
+    {
+      ReportError("Mandatory member SampleCount of Dem_Cfg_RingBuffer has not been generated")
+    }
+  }
+  else
+  {
+    // Reported by CM_DEM_M_SIZEOF_RINGBUFFER
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_TIMESERIESENTRYCOMPANIONINDEX_LIMITS
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_TimeSeriesEntryCompanion[] is defined for each index in range [0..DEM_CFG_GLOBAL_TIMESERIES_SNAPSHOTS_SIZE[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_TIMESERIESENTRYCOMPANIONINDEX_LIMITS()
+{
+  if (SymbolExists("Dem_Cfg_TimeSeriesEntryCompanion"))
+  {
+    var DEM_CFG_TIMESERIES_SNAPSHOTS_SIZE = Define("DEM_CFG_GLOBAL_TIMESERIES_SNAPSHOTS_SIZE")
+    var Dem_Cfg_TimeSeriesEntryCompanion = Array("Dem_Cfg_TimeSeriesEntryCompanion")
+    AssertArraySize(Dem_Cfg_TimeSeriesEntryCompanion, Equal, DEM_CFG_TIMESERIES_SNAPSHOTS_SIZE)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_PAST") && IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_FUTURE"))
+  {
+    // Feature is disabled, no check needed
+  }
+  else
+  {
+     ReportError("Dem_Cfg_TimeSeriesEntryCompanion not generated although either DEM_CFG_SUPPORT_TIME_SERIES_PAST or DEM_CFG_SUPPORT_TIME_SERIES_FUTURE is ON or one of the PP switches is not generated.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CheckEntryTimeSeriesSnapshotDataTableElement
+* Parameter    : array - the array object for which the function is called
+* Parameter    : index - the index of the current array element
+* Parameter    : value - the value of the current array element
+* Return value : None
+* Description  : Callback function that verifies for an element in array Dem_Cfg_TimeSeriesSnapshotData
+*                the array referenced by EntryData has a size of BufferSize bytes
+*                the inner dimension of the array referenced by EntryData has MaxSnapShotSize elements
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckEntryTimeSeriesSnapshotDataTableElement(array, index, value)
+{
+  var EntryDataPtrString = value.GetMemberAsString("EntryDataOfTimeSeriesEntryTable")
+  var ArrayByteSize = value.GetMemberAsNumber("BufferSizeOfTimeSeriesEntryTable");
+  var InnerArraySize = value.GetMemberAsNumber("MaxSnapShotSizeOfTimeSeriesEntryTable");
+
+  var StructName=GetStructNameFromStructMemberReferenceString(EntryDataPtrString)
+  /* Assert that the name of the referenced struct starts with 'Dem_Cfg' */
+  CheckVariableInDemNameSpace(StructName)
+
+  var TimeSeriesEntryStruct = Struct(StructName)
+
+  var memberName = GetMemberNameFromStructMemberReferenceString(EntryDataPtrString);
+  var SnapshotDataArray = TimeSeriesEntryStruct.GetMemberAsArray(memberName)
+  var InnerArray = SnapshotDataArray.GetElemAsArray(0)
+
+  Assert(SnapshotDataArray.GetSize() * InnerArraySize, Equal, ArrayByteSize)
+  AssertArraySize(InnerArray, Equal, InnerArraySize)
+}
+
+/**********************************************************************************************************************
+* Name         : GetBaseEntryFromTimeSeriesBaseEntryPtrString
+* Parameter    : TimeSeriesBaseEntryPtrString - base entry ptr string
+* Parameter    : TestAssertions - Condition to make assertions that don't need to be duplicated for every caller of this function
+* Return value : BaseEntry
+* Description  : Get base entry from time series base entry ptr string
+* Requirements : N/A
+**********************************************************************************************************************/
+def GetBaseEntryFromTimeSeriesBaseEntryPtrString(TimeSeriesBaseEntryPtrString, TestAssertions) {
+  var StructName=GetStructNameFromStructMemberReferenceString(TimeSeriesBaseEntryPtrString)
+  /* Assert that the name of the referenced struct starts with 'Dem_Cfg' */
+
+  if(TestAssertions) {
+    CheckVariableInDemNameSpace(StructName)
+  }
+
+  var TimeSeriesEntryStruct = Struct(StructName)
+
+  var BaseEntryMemberName = GetMemberNameFromStructMemberReferenceString(TimeSeriesBaseEntryPtrString);
+
+  Assert(BaseEntryMemberName, Equal, "BaseEntry")
+  return TimeSeriesEntryStruct.GetMemberAsStruct(BaseEntryMemberName)
+}
+
+/**********************************************************************************************************************
+* Name         : CheckBaseEntryInTimeSeriesEntryTableElement
+* Parameter    : array - the array object for which the function is called
+* Parameter    : index - the index of the current array element
+* Parameter    : value - the value of the current array element
+* Return value : None
+* Description  : Callback function that verifies for the BaseEntry referenced by BaseEntryOfTimeSeriesEntryTable
+*                of an element in array Dem_Cfg_TimeSeriesEntryTable:
+*                - that BaseEntry.UnusedSamples[][] is defined where the first index has to be in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES[ and the second index in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS[
+*                - that BaseEntry.UnusedPastSamples[][] is defined where the first index has to be in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES[ and the second index in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS[
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckBaseEntryInTimeSeriesEntryTableElement(array, index, value)
+{
+  var TimeSeriesBaseEntryPtrString = value.GetMemberAsString("BaseEntryOfTimeSeriesEntryTable")
+  var BaseEntry = GetBaseEntryFromTimeSeriesBaseEntryPtrString(TimeSeriesBaseEntryPtrString, true)
+
+  if(BaseEntry.HasMember("UnusedPastSamples"))
+  {
+    var DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS = Define("DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS")
+    var DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES = Define("DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES")
+
+    var UnusedPastSamples_Buffer = BaseEntry.GetMemberAsArray("UnusedPastSamples")
+    var InnerArray = UnusedPastSamples_Buffer.GetElemAsArray(0)
+
+    AssertArraySize(UnusedPastSamples_Buffer, Equal, DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES)
+    AssertArraySize(InnerArray, Equal, DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_PAST"))
+  {
+    // Feature is disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_TimeSeriesEntryType.BaseEntry.UnusedPastSamples not generated although DEM_CFG_SUPPORT_TIME_SERIES_PAST is ON or DEM_CFG_SUPPORT_TIME_SERIES_PAST does not exist.")
+  }
+
+  if (BaseEntry.HasMember("UnusedFutureSamples"))
+  {
+    var DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS = Define("DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS")
+    var DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES = Define("DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES")
+
+    var UnusedFutureSamples_Buffer = BaseEntry.GetMemberAsArray("UnusedFutureSamples")
+    var InnerArray = UnusedFutureSamples_Buffer.GetElemAsArray(0)
+
+    AssertArraySize(UnusedFutureSamples_Buffer, Equal, DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES)
+    AssertArraySize(InnerArray, Equal, DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_FUTURE"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_TimeSeriesEntryType.BaseEntry.UnusedFutureSamples[][] not generated although DEM_CFG_SUPPORT_TIME_SERIES_FUTURE is ON or DEM_CFG_SUPPORT_TIME_SERIES_FUTURE does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_TIMESERIES_BASEENTRY_UNUSEDSAMPLES
+* Parameter    : None
+* Return value : None
+* Description  : For each BaseEntry referenced by BaseEntryOfTimeSeriesEntryTable in Dem_Cfg_TimeSeriesEntryTable verify:
+*                - that BaseEntry.UnusedFutureSamples[][] is defined where the first index has to be in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES[ and the second index in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS[
+*                - that BaseEntry.UnusedPastSamples[][] is defined where the first index has to be in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES[ and the second index in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_TIMESERIES_BASEENTRY_UNUSEDSAMPLES()
+{
+  if (SymbolExists("Dem_Cfg_TimeSeriesEntryTable"))
+  {
+    var Dem_Cfg_TimeSeriesEntryTable = Array("Dem_Cfg_TimeSeriesEntryTable")
+    Dem_Cfg_TimeSeriesEntryTable.ForEachAsStruct(CheckBaseEntryInTimeSeriesEntryTableElement)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_PAST") && IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_FUTURE"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_TimeSeriesEntryTable not present although DEM_CFG_SUPPORT_TIME_SERIES_PAST/FUTURE is ON or one of the PP switches does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_TIMESERIES_BASEENTRY_SETINDEX
+* Parameter    : None
+* Return value : None
+* Description  : For each BaseEntry referenced by BaseEntryOfTimeSeriesEntryTable in Dem_Cfg_TimeSeriesEntryTable verify:
+            - that BaseEntry.NextSetId[] and BaseEntry.AllSetsStored[] are defined for indices in the range
+              [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_TIMESERIES_BASEENTRY_SETINDEX()
+{
+  if (SymbolExists("Dem_Cfg_TimeSeriesEntryTable"))
+  {
+      var Dem_Cfg_TimeSeriesEntryTable = Array("Dem_Cfg_TimeSeriesEntryTable")
+      Dem_Cfg_TimeSeriesEntryTable.ForEachAsStruct(fun(array, index, value) {
+      var TimeSeriesBaseEntryPtrString = value.GetMemberAsString("BaseEntryOfTimeSeriesEntryTable")
+
+      var BaseEntry
+      try {
+        BaseEntry = GetBaseEntryFromTimeSeriesBaseEntryPtrString(TimeSeriesBaseEntryPtrString, false)
+      } catch (e) {
+        return // Error already reported by CM_DEM_M_SIZEOF_TIMESERIES_BASEENTRY_UNUSEDSAMPLES
+      }
+
+      var DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES = Define("DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES")
+
+      if (BaseEntry.HasMember("NextSetId"))
+      {
+        var NextSetId = BaseEntry.GetMemberAsArray("NextSetId")
+        AssertArraySize(NextSetId, Equal, DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES)
+      }
+      else
+      {
+        ReportError("Mandatory member NextSetId of BaseEntry has not been generated")
+      }
+
+      if (BaseEntry.HasMember("AllSetsStored"))
+      {
+        var AllSetsStored = BaseEntry.GetMemberAsArray("AllSetsStored")
+        AssertArraySize(AllSetsStored, Equal, DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES)
+      }
+      else
+      {
+        ReportError("Mandatory member AllSetsStored of BaseEntry has not been generated")
+      }
+
+    })
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_PAST") && IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_FUTURE"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+     // Error already reported by CM_DEM_M_SIZEOF_TIMESERIES_BASEENTRY_UNUSEDSAMPLES
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_TIMESERIESENTRY_ENTRYDATA
+* Parameter    : None
+* Return value : None
+* Description  : Verify that the buffer member of the time series entry type pointed to by the entry data pointer has
+*                the size specified by the relevant entries in the Dem_Cfg_TimeSeriesEntryTable.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_TIMESERIESENTRY_ENTRYDATA()
+{
+  if (SymbolExists("Dem_Cfg_TimeSeriesEntryTable"))
+  {
+    var Dem_Cfg_TimeSeriesEntryTable = Array("Dem_Cfg_TimeSeriesEntryTable")
+    Dem_Cfg_TimeSeriesEntryTable.ForEachAsStruct(CheckEntryTimeSeriesSnapshotDataTableElement)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_PAST") && IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_FUTURE"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_TimeSeriesEntryTable not present although DEM_CFG_SUPPORT_TIME_SERIES_PAST/FUTURE is ON or one of the PP switches does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_ENTRYCOMPANION_MISSINGFUTURESAMPLES
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_TimeSeriesEntryCompanionType.MissingFutureSamples[][] is defined where the first index has to be in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES[ and the second index in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_ENTRYCOMPANION_MISSINGFUTURESAMPLES()
+{
+  if(SymbolExists("Dem_Cfg_TimeSeriesEntryCompanion"))
+  {
+    var Dem_Cfg_TimeSeriesEntryCompanion = Array("Dem_Cfg_TimeSeriesEntryCompanion")
+    var Dem_Cfg_TimeSeriesEntryCompanionEntry = Dem_Cfg_TimeSeriesEntryCompanion.GetElemAsStruct(0)
+    if(Dem_Cfg_TimeSeriesEntryCompanionEntry.HasMember("MissingFutureSamples"))
+    {
+      var DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS = Define("DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS")
+      var DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES = Define("DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES")
+
+      var Dem_Cfg_TimeSeriesEntryCompanion_Buffer = Dem_Cfg_TimeSeriesEntryCompanionEntry.GetMemberAsArray("MissingFutureSamples")
+      var InnerArray = Dem_Cfg_TimeSeriesEntryCompanion_Buffer.GetElemAsArray(0)
+
+      AssertArraySize(Dem_Cfg_TimeSeriesEntryCompanion_Buffer, Equal, DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES)
+      AssertArraySize(InnerArray, Equal, DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS)
+    }
+    else if (IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_FUTURE"))
+    {
+      // Feature is disabled, no check needed
+    }
+    else
+    {
+      ReportError("Dem_Cfg_TimeSeriesEntryCompanion.MissingFutureSample[][] not generated although DEM_CFG_SUPPORT_TIME_SERIES_FUTURE is ON")
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_STATUSDATA_EVENTSTATUS
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_StatusData.EventStatus[] is defined for each configured event, .i.e. for each index
+*                in range [0..DEM_G_NUMBER_OF_EVENTS[ .
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_STATUSDATA_EVENTSTATUS()
+{
+ var Dem_Cfg_StatusData = Struct("Dem_Cfg_StatusData")
+ if (Dem_Cfg_StatusData.HasMember("EventStatus"))
+ {
+   var EventStatus = Dem_Cfg_StatusData.GetMemberAsArray("EventStatus")
+   var DEM_G_NUMBER_OF_EVENTS = Define("DEM_G_NUMBER_OF_EVENTS")
+   AssertArraySize(EventStatus, Equal, DEM_G_NUMBER_OF_EVENTS)
+ }
+ else
+ {
+   ReportError("Mandatory member EventStatus of Dem_Cfg_StatusData has not been generated")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_STATUSDATA_STATE
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_StatusData.State[] is defined for each configured event, .i.e. for each index
+*                in range [0..DEM_G_NUMBER_OF_EVENTS[ .
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_STATUSDATA_STATE()
+{
+  var Dem_Cfg_StatusData = Struct("Dem_Cfg_StatusData")
+  if (Dem_Cfg_StatusData.HasMember("State"))
+  {
+    var State = Dem_Cfg_StatusData.GetMemberAsArray("State")
+    var DEM_G_NUMBER_OF_EVENTS = Define("DEM_G_NUMBER_OF_EVENTS")
+    AssertArraySize(State, Equal, DEM_G_NUMBER_OF_EVENTS)
+  }
+  else if ((IsStdOff("DEM_CFG_SUPPORT_OBDII_OR_OBDONUDS") && IsStdOff("DEM_CFG_SUPPORT_WWHOBD")) || IsStdOff("DEM_CFG_PROCESS_CDTC_ALL_DTC"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Member State of Dem_Cfg_StatusData not generated although the corresponding PP switches are ON or one of the required PP switches is not existing.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_STATUSDATA_TRIPCOUNT
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_StatusData.TripCount[] is defined for each configured event, .i.e. for each index
+*                in range [0..DEM_G_NUMBER_OF_EVENTS[ .
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_STATUSDATA_TRIPCOUNT()
+{
+  var Dem_Cfg_StatusData = Struct("Dem_Cfg_StatusData")
+  if (Dem_Cfg_StatusData.HasMember("TripCount"))
+  {
+    var TripCount = Dem_Cfg_StatusData.GetMemberAsArray("TripCount")
+    var DEM_G_NUMBER_OF_EVENTS = Define("DEM_G_NUMBER_OF_EVENTS")
+    AssertArraySize(TripCount, Equal, DEM_G_NUMBER_OF_EVENTS)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_MULTITRIP"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Member TripCount of Dem_Cfg_StatusData has not been generated altough DEM_CFG_SUPPORT_MULTITRIP is set to ON or DEM_CFG_SUPPORT_MULTITRIP does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_STATUSDATA_SI30STATUS
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_StatusData.SI30Status[] is defined for each configured event, .i.e. for each index
+*                in range [0..DEM_G_NUMBER_OF_EVENTS[ .
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_STATUSDATA_SI30STATUS()
+{
+  var Dem_Cfg_StatusData = Struct("Dem_Cfg_StatusData")
+  if (Dem_Cfg_StatusData.HasMember("SI30Status"))
+  {
+    var SI30Status = Dem_Cfg_StatusData.GetMemberAsArray("SI30Status")
+    var DEM_G_NUMBER_OF_EVENTS = Define("DEM_G_NUMBER_OF_EVENTS")
+    AssertArraySize(SI30Status, Equal, DEM_G_NUMBER_OF_EVENTS)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_SI30_STATUS"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Member SI30Status of Dem_Cfg_StatusData has not been generated although DEM_CFG_SUPPORT_SI30_STATUS is set to ON or DEM_CFG_SUPPORT_SI30_STATUS does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_STATUSDATA_EXTENDEDEVENTSTATUS
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_StatusData.ExtendedEventStatus[] is defined for each configured event, .i.e. for each index
+*                in range [0..DEM_G_NUMBER_OF_EVENTS[ .
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_STATUSDATA_EXTENDEDEVENTSTATUS()
+{
+  var Dem_Cfg_StatusData = Struct("Dem_Cfg_StatusData")
+  if (Dem_Cfg_StatusData.HasMember("ExtendedEventStatus"))
+  {
+    var ExtendedEventStatus = Dem_Cfg_StatusData.GetMemberAsArray("ExtendedEventStatus")
+    var DEM_G_NUMBER_OF_EVENTS = Define("DEM_G_NUMBER_OF_EVENTS")
+    AssertArraySize(ExtendedEventStatus, Equal, DEM_G_NUMBER_OF_EVENTS)
+  }
+  else if((IsStdOff("DEM_CFG_SUPPORT_MAJOR_MONITORS") || IsStdOff("DEM_CFG_SUPPORT_PID01") || (IsStdOff("DEM_CFG_SUPPORT_OBDII_OR_OBDONUDS") && IsStdOff("DEM_CFG_SUPPORT_WWHOBD"))) && (IsStdOff("DEM_CFG_SUPPORT_J1939") || IsStdOff("DEM_CFG_SUPPORT_OBDII") || IsStdOff("DEM_CFG_SUPPORT_MAJOR_MONITORS") || IsStdOff("DEM_CFG_SUPPORT_J1939_READINESS1")) && (IsStdOff("DEM_CFG_SUPPORT_OBDONUDS") || (IsStdOff("DEM_CFG_SUPPORT_MAJOR_MONITORS") && IsStdOn("DEM_CFG_PROCESS_PIDF501_COMPREHENSIVE_COMPLETE"))) && IsStdOff("DEM_CFG_SUPPORT_SIMILAR_CONDITIONS"))
+  {
+    // ( Conditions for PID01 ) , ( Conditions for DM5 Readiness1 ) , (Conditions for PIDF501 ) , (Similar Conditions enabled )
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Member ExtendedEventStatus of Dem_Cfg_StatusData has not been generated although either readiness calculation or similar conditions is configured or a mandatory PP switch is missing.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_STATUSDATA_MILGROUPTRIPCOUNT
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_StatusData.MilGroupTripCount[] is defined for each index in range [0..DEM_CFG_GLOBAL_MIL_GROUP_COUNT[ .
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_STATUSDATA_MILGROUPTRIPCOUNT()
+{
+  var Dem_Cfg_StatusData = Struct("Dem_Cfg_StatusData")
+  if (Dem_Cfg_StatusData.HasMember("MilGroupTripCount"))
+  {
+    var Dem_Cfg_StatusData_MilGroupTripCount = Dem_Cfg_StatusData.GetMemberAsArray("MilGroupTripCount")
+    var DEM_CFG_GLOBAL_MIL_GROUP_COUNT = Define("DEM_CFG_GLOBAL_MIL_GROUP_COUNT")
+    AssertArraySize(Dem_Cfg_StatusData_MilGroupTripCount, Equal, DEM_CFG_GLOBAL_MIL_GROUP_COUNT)
+  }
+  else if(IsStdOff("DEM_CFG_SUPPORT_MIL_GROUP"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Member MilGroupTripCount of Dem_Cfg_StatusData has not been generated although DEM_CFG_SUPPORT_MIL_GROUP is ON or DEM_CFG_SUPPORT_MIL_GROUP does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_STATUSDATA_MILGROUPACTIVEEVENTS
+* Parameter    : None
+* Return value : None
+* Description  : Dem_Cfg_StatusData.MilGroupActiveEvents[] is defined for each index in range [0..DEM_CFG_GLOBAL_MIL_GROUP_COUNT[ .
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_STATUSDATA_MILGROUPACTIVEEVENTS()
+{
+  var Dem_Cfg_StatusData = Struct("Dem_Cfg_StatusData")
+  if (Dem_Cfg_StatusData.HasMember("MilGroupActiveEvents"))
+  {
+    var Dem_Cfg_StatusData_MilGroupActiveEvents = Dem_Cfg_StatusData.GetMemberAsArray("MilGroupActiveEvents")
+    var DEM_CFG_GLOBAL_MIL_GROUP_COUNT = Define("DEM_CFG_GLOBAL_MIL_GROUP_COUNT")
+    AssertArraySize(Dem_Cfg_StatusData_MilGroupActiveEvents, Equal, DEM_CFG_GLOBAL_MIL_GROUP_COUNT)
+  }
+  else if(IsStdOff("DEM_CFG_SUPPORT_MIL_GROUP"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Member MilGroupActiveEvents of Dem_Cfg_StatusData has not been generated although DEM_CFG_SUPPORT_MIL_GROUP is ON or DEM_CFG_SUPPORT_MIL_GROUP does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_EVENTAVAILABLEDATA
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_EventAvailableData[] is defined for each index in range [0..DEM_CFG_EVENTAVAILABLEDATATYPE_SIZE[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_EVENTAVAILABLEDATA()
+{
+  if (SymbolExists("Dem_Cfg_EventAvailableData"))
+  {
+    var Dem_Cfg_EventAvailableData = Array("Dem_Cfg_EventAvailableData")
+    var DEM_CFG_EVENTAVAILABLEDATATYPE_SIZE = Define("DEM_CFG_EVENTAVAILABLEDATATYPE_SIZE")
+    AssertArraySize(Dem_Cfg_EventAvailableData, Equal, DEM_CFG_EVENTAVAILABLEDATATYPE_SIZE.GetValueAsNumber())
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_EVENTAVAILABLE_NV"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_EventAvailableData not generated although DEM_CFG_SUPPORT_EVENTAVAILABLE_NV is ON or DEM_CFG_SUPPORT_EVENTAVAILABLE_NV does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_PERMANENT_PERMANENTDATAENTRY
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_PermanentData.PermanentDataEntry[] is defined for each index in range [0..DEM_CFG_GLOBAL_PERMANENT_SIZE[ .
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_PERMANENT_PERMANENTDATAENTRY()
+{
+  if (SymbolExists("Dem_Cfg_PermanentData"))
+  {
+    var Dem_Cfg_PermanentData = Struct("Dem_Cfg_PermanentData")
+    var PermanentDataEntry = Dem_Cfg_PermanentData.GetMemberAsArray("PermanentDataEntry")
+    var DEM_CFG_GLOBAL_PERMANENT_SIZE = Define("DEM_CFG_GLOBAL_PERMANENT_SIZE")
+    AssertArraySize(PermanentDataEntry, Equal, DEM_CFG_GLOBAL_PERMANENT_SIZE)
+  }
+  else if(IsStdOff("DEM_CFG_SUPPORT_PERMANENT"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_PermanentData not generated although DEM_CFG_SUPPORT_PERMANENT is ON or DEM_CFG_SUPPORT_PERMANENT does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_REPORTEDEVENTSOFFILTER
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_ReportedEventsOfFilter[][] is defined for each index in range
+*                [0..DEM_CFG_GLOBAL_PROCESSORWORDS_PER_REPORTEDEVENTSTYPE[ .
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_REPORTEDEVENTSOFFILTER()
+{
+  if (SymbolExists("Dem_Cfg_ReportedEventsOfFilter"))
+  {
+    var Dem_Cfg_ReportedEventsOfFilter = Array("Dem_Cfg_ReportedEventsOfFilter")
+    var InnerArray_Dem_Cfg_ReportedEventsOfFilter = Dem_Cfg_ReportedEventsOfFilter.GetElemAsArray(0)
+    var DEM_CFG_GLOBAL_PROCESSORWORDS_PER_REPORTEDEVENTSTYPE = Define("DEM_CFG_GLOBAL_PROCESSORWORDS_PER_REPORTEDEVENTSTYPE")
+    AssertArraySize(InnerArray_Dem_Cfg_ReportedEventsOfFilter, Equal, DEM_CFG_GLOBAL_PROCESSORWORDS_PER_REPORTEDEVENTSTYPE)
+  }
+  else
+  {
+    ReportError("Dem_Cfg_ReportedEventsOfFilter is missing or renamed.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_PRESTORED_J1939FREEZEFRAME
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_PrestorageEntryType.J1939FreezeFrame[] has at least
+                (DEM_CFG_MAX_J1939_FF_SIZE + DEM_CFG_MAX_J1939_EXP_FF_SIZE) elements, if J1939 freezeframe or
+                 J1939Expanded freezeframe is supported.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_PRESTORED_J1939FREEZEFRAME()
+{
+  if (SymbolExists("Dem_Cfg_Prestorage") && Array("Dem_Cfg_Prestorage").GetElemAsStruct(0).HasMember("J1939FreezeFrame"))
+  {
+    var DEM_CFG_MAX_J1939_FF_SIZE = Define("DEM_CFG_MAX_J1939_FF_SIZE")
+    var DEM_CFG_MAX_J1939_EXP_FF_SIZE = Define("DEM_CFG_MAX_J1939_EXP_FF_SIZE")
+    var TotalSize = DEM_CFG_MAX_J1939_FF_SIZE.GetValueAsNumber() + DEM_CFG_MAX_J1939_EXP_FF_SIZE.GetValueAsNumber()
+
+    var Dem_Cfg_Prestorage = Array("Dem_Cfg_Prestorage")
+    var Dem_Cfg_PrestorageEntry = Dem_Cfg_Prestorage.GetElemAsStruct(0)
+    var Dem_Cfg_PrestorageEntry_J1939FreezeFrame = Dem_Cfg_PrestorageEntry.GetMemberAsArray("J1939FreezeFrame")
+    AssertArraySize(Dem_Cfg_PrestorageEntry_J1939FreezeFrame, Equal, TotalSize)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_PRESTORED_FF") || (IsStdOff("DEM_CFG_SUPPORT_J1939_FREEZEFRAME") && IsStdOff("DEM_CFG_SUPPORT_J1939_EXPANDED_FREEZEFRAME")))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_Prestorage member J1939FreezeFrame not generated although DEM_CFG_SUPPORT_PRESTORED_FF and either DEM_CFG_SUPPORT_J1939_FREEZEFRAME or DEM_CFG_SUPPORT_J1939_EXPANDED_FREEZEFRAME are ON or one of the PP switches does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_EVENTENTRY_J1939FREEZEFRAME
+* Parameter    : None
+* Return value : None
+* Description  : For each EventEntry referenced in Table Dem_Cfg_EventEntryPtr (Readout Buffer Entries are not tested):
+*                Verify that J1939FreezeFrame[] is valid for values in range [0..(DEM_CFG_MAX_J1939_FF_SIZE + DEM_CFG_MAX_J1939_EXP_FF_SIZE)[,
+*                if J1939 freezeframe or J1939Expanded freezeframe is supported.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_EVENTENTRY_J1939FREEZEFRAME()
+{
+  var PrimaryEntry0Tested = false
+  // Array("") will report an error if the object does not exist
+  var Dem_Cfg_EventEntryPtrTable = Array("Dem_Cfg_EventEntryPtr")
+
+  for(var Index = 0; Index < Dem_Cfg_EventEntryPtrTable.GetSize(); ++Index)
+  {
+    var ArrayElement = Dem_Cfg_EventEntryPtrTable.GetElemAsString(Index)
+
+    // Extract name of the global variable (e.g., "Dem_Cfg_PrimaryEntry_0"), to which the entry of Dem_Cfg_EventEntryPtr points
+    var Dem_EventEntry = GetStructNameFromReferenceString(ArrayElement)
+
+    // At least one Primary Entry is always configured, so table should always contain a pointer to "Dem_Cfg_PrimaryEntry_0"
+    if (Dem_EventEntry == "Dem_Cfg_PrimaryEntry_0")
+    {
+      PrimaryEntry0Tested = true
+    }
+    // Assert that the name of the referenced struct starts with 'Dem_Cfg'
+    CheckVariableInDemNameSpace(Dem_EventEntry)
+
+    // Only event memory entries in Dem_Cfg_EventEntryPtr are tested
+    // Readout buffer entries are verified by customer with SMI-524392
+    if(Dem_EventEntry.find("Dem_Cfg_ReadoutBuffer") < 0)
+    {
+      var Dem_EventEntryStruct = Struct(Dem_EventEntry)
+
+      if(Dem_EventEntryStruct.HasMember("J1939FreezeFrame"))
+      {
+        var DEM_CFG_MAX_J1939_FF_SIZE = Define("DEM_CFG_MAX_J1939_FF_SIZE")
+        var DEM_CFG_MAX_J1939_EXP_FF_SIZE = Define("DEM_CFG_MAX_J1939_EXP_FF_SIZE")
+        var TotalSize = DEM_CFG_MAX_J1939_FF_SIZE.GetValueAsNumber() + DEM_CFG_MAX_J1939_EXP_FF_SIZE.GetValueAsNumber()
+        var Dem_EventEntryStruct_J1939FreezeFrame = Dem_EventEntryStruct.GetMemberAsArray("J1939FreezeFrame")
+
+        AssertArraySize(Dem_EventEntryStruct_J1939FreezeFrame, Equal, TotalSize)
+
+      }
+      else if (IsStdOff("DEM_CFG_SUPPORT_J1939_FREEZEFRAME") && IsStdOff("DEM_CFG_SUPPORT_J1939_EXPANDED_FREEZEFRAME"))
+      {
+        // Feature disabled, no check needed
+      }
+      else
+      {
+        ReportError("Member J1939FreezeFrame not generated or renamed for EventEntries although DEM_CFG_SUPPORT_J1939_FREEZEFRAME or DEM_CFG_SUPPORT_J1939_EXPANDED_FREEZEFRAME is ON or one of the PP switches does not exist.")
+      }
+    }
+  }
+  if (PrimaryEntry0Tested == false)
+  {
+    ReportError("Dem_Cfg_EventEntryPtr does not contain reference to Dem_Cfg_PrimaryEntry_0!")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_EVENTENTRY_STDENVDATA
+* Parameter    : None
+* Return value : None
+* Description  : For each EventEntry referenced in Table Dem_Cfg_EventEntryPtr (Readout Buffer Entries are not tested):
+*                Verify that StdEnvData[] is valid for values in range
+*                [0..DEM_EVENTENTRY_STD_ENV_DATA_SIZE[, if DEM_CFG_DATA_STANDARD_ENV_DATA == STD_ON and
+*                [0..DEM_EVENTENTRY_EXT_ENV_DATA_SIZE[, if DEM_CFG_DATA_EXTENDED_ENV_DATA == STD_ON.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_EVENTENTRY_STDENVDATA()
+{
+  var PrimaryEntry0Tested = false
+  // Array("") will report an error if the object does not exist
+  var Dem_Cfg_EventEntryPtrTable = Array("Dem_Cfg_EventEntryPtr")
+
+  for(var Index = 0; Index < Dem_Cfg_EventEntryPtrTable.GetSize(); ++Index)
+  {
+    var ArrayElement = Dem_Cfg_EventEntryPtrTable.GetElemAsString(Index)
+
+    // Extract name of the global variable (e.g., "Dem_Cfg_PrimaryEntry_0"), to which the entry of Dem_Cfg_EventEntryPtr points
+    var Dem_EventEntry = GetStructNameFromReferenceString(ArrayElement)
+
+    // At least one Primary Entry is always configured, so table should always contain a pointer to "Dem_Cfg_PrimaryEntry_0"
+    if (Dem_EventEntry == "Dem_Cfg_PrimaryEntry_0")
+    {
+      PrimaryEntry0Tested = true
+    }
+    // Assert that the name of the referenced struct starts with 'Dem_Cfg'
+    CheckVariableInDemNameSpace(Dem_EventEntry)
+
+    // Only event memory entries in Dem_Cfg_EventEntryPtr are tested
+    // Readout buffer entries are verified by customer with SMI-524392
+    if(Dem_EventEntry.find("Dem_Cfg_ReadoutBuffer") < 0)
+    {
+      var Dem_EventEntryStruct = Struct(Dem_EventEntry)
+
+      if(Dem_EventEntryStruct.HasMember("StdEnvData"))
+      {
+        var Dem_EventEntry_EnvData = Dem_EventEntryStruct.GetMemberAsArray("StdEnvData")
+        if (IsStdOn("DEM_CFG_DATA_EXTENDED_ENV_DATA"))
+        {
+          var ArraySize_ExtEnvData = Define("DEM_EVENTENTRY_EXT_ENV_DATA_SIZE")  /* Size of Extended Environmental data stored in an event entry */
+
+          AssertArraySize(Dem_EventEntry_EnvData, Equal, ArraySize_ExtEnvData)
+        }
+        else if (IsStdOn("DEM_CFG_DATA_STANDARD_ENV_DATA"))
+        {
+          var ArraySize_StdEnvData = Define("DEM_EVENTENTRY_STD_ENV_DATA_SIZE")  /* Size of Standard Environmental data stored in an event entry*/
+
+          AssertArraySize(Dem_EventEntry_EnvData, Equal, ArraySize_StdEnvData)
+        }
+        else
+        {
+          ReportError("Member StdEnvData exists although DEM_CFG_DATA_STANDARD_ENV_DATA or DEM_CFG_DATA_EXTENDED_ENV_DATA is OFF.")
+        }
+      }
+      else if (IsStdOff("DEM_CFG_DATA_STANDARD_ENV_DATA") && IsStdOff("DEM_CFG_DATA_EXTENDED_ENV_DATA"))
+      {
+        // Feature disabled, no check needed
+      }
+      else
+      {
+        ReportError("Member StdEnvData not generated or renamed for EventEntries although DEM_CFG_DATA_STANDARD_ENV_DATA or DEM_CFG_DATA_EXTENDED_ENV_DATA is ON or one of the PP switches does not exist.")
+      }
+    }
+  }
+  if (PrimaryEntry0Tested == false)
+  {
+    ReportError("Dem_Cfg_EventEntryPtr does not contain reference to Dem_Cfg_PrimaryEntry_0!")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_EVENTENTRY_GLOBALSNAPSHOTDATA
+* Parameter    : None
+* Return value : None
+* Description  : For each EventEntry referenced in Table Dem_Cfg_EventEntryPtr (Readout Buffer Entries are not tested):
+*                Verify that GlobalSnapshotData[] is defined for each index in range
+*                [0..DEM_CFG_MAX_SIZE_GLOBAL_SNAPSHOT[ if DEM_CFG_SUPPORT_GLOBAL_SRECS == STD_ON.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_EVENTENTRY_GLOBALSNAPSHOTDATA()
+{
+  var PrimaryEntry0Tested = false
+  // Array("") will report an error if the object does not exist
+  var Dem_Cfg_EventEntryPtrTable = Array("Dem_Cfg_EventEntryPtr")
+
+  for(var Index = 0; Index < Dem_Cfg_EventEntryPtrTable.GetSize(); ++Index)
+  {
+    var ArrayElement = Dem_Cfg_EventEntryPtrTable.GetElemAsString(Index)
+
+    // Extract name of the global variable (e.g., "Dem_Cfg_PrimaryEntry_0"), to which the entry of Dem_Cfg_EventEntryPtr points
+    var Dem_EventEntry = GetStructNameFromReferenceString(ArrayElement)
+
+    // At least one Primary Entry is always configured, so table should always contain a pointer to "Dem_Cfg_PrimaryEntry_0"
+    if (Dem_EventEntry == "Dem_Cfg_PrimaryEntry_0")
+    {
+      PrimaryEntry0Tested = true
+    }
+    // Assert that the name of the referenced struct starts with 'Dem_Cfg'
+    CheckVariableInDemNameSpace(Dem_EventEntry)
+
+    // Only event memory entries in Dem_Cfg_EventEntryPtr are tested
+    // Readout buffer entries are verified by customer with SMI-524392
+    if(Dem_EventEntry.find("Dem_Cfg_ReadoutBuffer") < 0)
+    {
+      var Dem_EventEntryStruct = Struct(Dem_EventEntry)
+
+      if(Dem_EventEntryStruct.HasMember("GlobalSnapshotData"))
+      {
+        var DEM_CFG_MAX_SIZE_GLOBAL_SNAPSHOT = Define("DEM_CFG_MAX_SIZE_GLOBAL_SNAPSHOT")
+        var Dem_EventEntry_GlobalSnapshotData = Dem_EventEntryStruct.GetMemberAsArray("GlobalSnapshotData")
+
+        AssertArraySize(Dem_EventEntry_GlobalSnapshotData, Equal, DEM_CFG_MAX_SIZE_GLOBAL_SNAPSHOT)
+      }
+      else if (IsStdOff("DEM_CFG_SUPPORT_GLOBAL_SRECS"))
+      {
+        // Feature disabled, no check needed
+      }
+      else
+      {
+        ReportError("Member GlobalSnapshotData not generated or renamed for EventEntries although DEM_CFG_SUPPORT_GLOBAL_SRECS is ON or PP switch does not exist.")
+      }
+    }
+  }
+  if (PrimaryEntry0Tested == false)
+  {
+    ReportError("Dem_Cfg_EventEntryPtr does not contain reference to Dem_Cfg_PrimaryEntry_0!")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_PRESTORED_GLOBALSNAPSHOTDATA
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_PrestorageEntryType.GlobalSnapshotData[] is defined for each index in range
+*                [0..DEM_CFG_MAX_SIZE_GLOBAL_SNAPSHOT[ if DEM_CFG_SUPPORT_GLOBAL_SRECS == STD_ON and
+*                DEM_CFG_SUPPORT_PRESTORED_FF == STD_ON.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_PRESTORED_GLOBALSNAPSHOTDATA()
+{
+  if(SymbolExists("Dem_Cfg_Prestorage") && Array("Dem_Cfg_Prestorage").GetElemAsStruct(0).HasMember("GlobalSnapshotData"))
+  {
+    var Dem_Cfg_Prestorage = Array("Dem_Cfg_Prestorage")
+    var Dem_Cfg_PrestorageEntry = Dem_Cfg_Prestorage.GetElemAsStruct(0)
+    var Dem_Cfg_PrestorageEntry_GlobalSnapshotData = Dem_Cfg_PrestorageEntry.GetMemberAsArray("GlobalSnapshotData")
+    var DEM_CFG_MAX_SIZE_GLOBAL_SNAPSHOT = Define("DEM_CFG_MAX_SIZE_GLOBAL_SNAPSHOT")
+    AssertArraySize(Dem_Cfg_PrestorageEntry_GlobalSnapshotData, Equal, DEM_CFG_MAX_SIZE_GLOBAL_SNAPSHOT)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_PRESTORED_FF") || IsStdOff("DEM_CFG_SUPPORT_GLOBAL_SRECS"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_Prestorage member GlobalSnapshotData not generated although DEM_CFG_SUPPORT_PRESTORED_FF and DEM_CFG_SUPPORT_GLOBAL_SRECS are ON or one of the PP switches does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_AGINGDATA_AGINGTARGETCYCLE
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_AgingData.AgingTargetCycle[] is defined for each index in range
+*                [0..DEM_CFG_MAX_NUMBER_AGING_DTCS[ if memory independent aging for DTCs is enabled.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_AGINGDATA_AGINGTARGETCYCLE()
+{
+  if (SymbolExists("Dem_Cfg_AgingData"))
+  {
+    /* Assert that dedicated aging target cycle is generated */
+    var Dem_Cfg_AgingData = Struct("Dem_Cfg_AgingData")
+    if (Dem_Cfg_AgingData.HasMember("AgingTargetCycle"))
+    {
+      var Dem_Cfg_AgingData_AgingTargetCycle = Dem_Cfg_AgingData.GetMemberAsArray("AgingTargetCycle")
+      var DEM_CFG_MAX_NUMBER_AGING_DTCS = Define("DEM_CFG_MAX_NUMBER_AGING_DTCS")
+      AssertArraySize(Dem_Cfg_AgingData_AgingTargetCycle, Equal, DEM_CFG_MAX_NUMBER_AGING_DTCS)
+    }
+    else if (IsStdOff("DEM_CFG_SUPPORT_AGING_FOR_ALL_DTCS"))
+    {
+      // Feature disabled, no check needed
+    }
+    else
+    {
+      ReportError("Aging target cycle array is not generated although DEM_CFG_SUPPORT_AGING_FOR_ALL_DTCS is ON or DEM_CFG_SUPPORT_AGING_FOR_ALL_DTCS does not exist.")
+    }
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_AGING_FOR_ALL_DTCS") && IsStdOff("DEM_CFG_DATA_AGED_COUNTER"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_AgingData is not generated when DEM_CFG_SUPPORT_AGING_FOR_ALL_DTCS or DEM_CFG_DATA_AGED_COUNTER is ON")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_STATUSDATA_CONFIRMEDCHRONOLOGY
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_StatusData.ConfirmedChronology[] is defined for each index in range
+*                [0..DEM_CFG_MAX_NUMBER_PERMANENT_CHRONOLOGY[ if DEM_CFG_SUPPORT_PERMANENT is enabled.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_STATUSDATA_CONFIRMEDCHRONOLOGY()
+{
+  var Dem_Cfg_StatusData = Struct("Dem_Cfg_StatusData")
+  if (Dem_Cfg_StatusData.HasMember("ConfirmedChronology"))
+  {
+     /* Confirmation chronology is generated */
+    var Dem_Cfg_StatusData_ConfirmedChronology = Dem_Cfg_StatusData.GetMemberAsArray("ConfirmedChronology")
+    var DEM_CFG_MAX_NUMBER_PERMANENT_CHRONOLOGY = Define("DEM_CFG_MAX_NUMBER_PERMANENT_CHRONOLOGY")
+    AssertArraySize(Dem_Cfg_StatusData_ConfirmedChronology, Equal, DEM_CFG_MAX_NUMBER_PERMANENT_CHRONOLOGY)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_PERMANENT"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Member ConfirmedChronology of Dem_Cfg_StatusData has not been generated although DEM_CFG_SUPPORT_PERMANENT is ON or DEM_CFG_SUPPORT_PERMANENT does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_AGINGDATA_AGEDCOUNTER
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_AgingData.AgedCounter[] is defined for each index in range
+*                [0..DEM_CFG_MAX_NUMBER_AGED_DTCS[ if at least one DTC uses internal data element 'aged counter'.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_AGINGDATA_AGEDCOUNTER()
+{
+ if (SymbolExists("Dem_Cfg_AgingData"))
+  {
+    /* Assert that dedicated aged counter is generated */
+    var Dem_Cfg_AgingData = Struct("Dem_Cfg_AgingData")
+    if (Dem_Cfg_AgingData.HasMember("AgedCounter"))
+    {
+      var Dem_Cfg_AgingData_AgedCounter = Dem_Cfg_AgingData.GetMemberAsArray("AgedCounter")
+      var DEM_CFG_MAX_NUMBER_AGED_DTCS = Define("DEM_CFG_MAX_NUMBER_AGED_DTCS")
+      AssertArraySize(Dem_Cfg_AgingData_AgedCounter, Equal, DEM_CFG_MAX_NUMBER_AGED_DTCS)
+    }
+    else if (IsStdOff("DEM_CFG_DATA_AGED_COUNTER"))
+    {
+      // Feature disabled, no check needed
+    }
+    else
+    {
+      ReportError("Aged Counter array is not generated when DEM_CFG_DATA_AGED_COUNTER is ON or DEM_CFG_DATA_AGED_COUNTER does not exist.")
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_READOUTBUFFER_OBDFREEZEFRAME
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_ReadoutBufferEntryType.OBDFreezeFrameData.ObdFreezeFrame[] is defined for each index
+*                in range [0.. DEM_CFG_MAX_NUM_OBDFREEZEFRAME[.
+*                Verify that Dem_Cfg_ReadoutBufferEntryType.OBDFreezeFrameData.ObdFreezeFrame[][] is defined for each index
+*                in range [0.. DEM_CFG_MAX_SIZE_OBDFREEZEFRAME[.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_READOUTBUFFER_OBDFREEZEFRAME()
+{
+  var Dem_Cfg_ReadoutBuffer = Array("Dem_Cfg_ReadoutBuffer")
+  var Dem_Cfg_ReadoutBufferStruct = Dem_Cfg_ReadoutBuffer.GetElemAsStruct(0)
+  var DEM_CFG_MAX_SIZE_OBDFREEZEFRAME = Define("DEM_CFG_MAX_SIZE_OBDFREEZEFRAME")
+  var DEM_CFG_MAX_NUM_OBDFREEZEFRAME = Define("DEM_CFG_MAX_NUM_OBDFREEZEFRAME")
+  if (Dem_Cfg_ReadoutBufferStruct.HasMember("OBDFreezeFrameData"))
+  {
+    var OBDFreezeFrameData = Dem_Cfg_ReadoutBufferStruct.GetMemberAsStruct("OBDFreezeFrameData")
+    var ObdFreezeFrame = OBDFreezeFrameData.GetMemberAsArray("ObdFreezeFrame")
+    var InnerArray = ObdFreezeFrame.GetElemAsArray(0)
+    AssertArraySize(ObdFreezeFrame, Equal, DEM_CFG_MAX_NUM_OBDFREEZEFRAME)
+    AssertArraySize(InnerArray, Equal, DEM_CFG_MAX_SIZE_OBDFREEZEFRAME)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_OBDII_OR_OBDONUDS") && IsStdOff("DEM_CFG_SUPPORT_WWHOBD"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Member OBDFreezeFrameData of Dem_Cfg_ReadoutBuffer is not generated when DEM_CFG_SUPPORT_OBDII_OR_OBDONUDS or DEM_CFG_SUPPORT_WWHOBD is ON or one of the PP switches does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_READOUTBUFFER_READOUTBUFFERDATA
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_ReadoutBufferEntryType.ReadOutBufferData[] is defined for each index in range
+*                [0.. DEM_CFG_NUMBER_OF_SUBEVENT_DATA_READOUTBUFFERS[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_READOUTBUFFER_READOUTBUFFERDATA()
+{
+  var DEM_CFG_NUMBER_OF_SUBEVENT_DATA_READOUTBUFFERS = Define("DEM_CFG_NUMBER_OF_SUBEVENT_DATA_READOUTBUFFERS")
+  if (IsStdOff("DEM_CFG_SUPPORT_TYPE2_COMBINATION"))
+  {
+    Assert(DEM_CFG_NUMBER_OF_SUBEVENT_DATA_READOUTBUFFERS, Equal, 1)
+  }
+  var Dem_Cfg_ReadoutBuffer = Array("Dem_Cfg_ReadoutBuffer")
+  var Dem_Cfg_ReadoutBufferStruct = Dem_Cfg_ReadoutBuffer.GetElemAsStruct(0)
+  if (Dem_Cfg_ReadoutBufferStruct.HasMember("ReadOutBufferData"))
+  {
+    var Dem_Cfg_ReadoutBuffer_ReadOutBufferData = Dem_Cfg_ReadoutBufferStruct.GetMemberAsArray("ReadOutBufferData")
+    AssertArraySize(Dem_Cfg_ReadoutBuffer_ReadOutBufferData, Equal, DEM_CFG_NUMBER_OF_SUBEVENT_DATA_READOUTBUFFERS)
+  }
+  else
+  {
+    ReportError("Mandatory member ReadOutBufferData of Dem_Cfg_ReadoutBuffer not generated")
+  }
+}
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_READOUTBUFFER_UNUSEDFUTURESAMPLES
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_ReadoutBufferEntryType.UnusedFutureSamples[][] is defined where the first index has to be in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES[ and the second index in the range
+*                [0.. DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS[
+* Requirements :
+**********************************************************************************************************************/
+
+def CM_DEM_M_SIZEOF_READOUTBUFFER_UNUSEDFUTURESAMPLES()
+{
+  var Dem_Cfg_ReadoutBuffer = Array("Dem_Cfg_ReadoutBuffer")
+  var Dem_Cfg_ReadoutBufferEntry = Dem_Cfg_ReadoutBuffer.GetElemAsStruct(0)
+
+  if (Dem_Cfg_ReadoutBufferEntry.HasMember("UnusedFutureSamples"))
+  {
+    var DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS = Define("DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS")
+    var DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES = Define("DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES")
+
+    var Dem_Cfg_ReadoutBufferEntry_UnusedFutureSamples = Dem_Cfg_ReadoutBufferEntry.GetMemberAsArray("UnusedFutureSamples")
+    var InnerArray = Dem_Cfg_ReadoutBufferEntry_UnusedFutureSamples.GetElemAsArray(0)
+
+    AssertArraySize(Dem_Cfg_ReadoutBufferEntry_UnusedFutureSamples, Equal, DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SERIES)
+    AssertArraySize(InnerArray, Equal, DEM_CFG_TIMESERIES_MAX_NUMBER_OF_SETS)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_TIME_SERIES_FUTURE"))
+  {
+    // Feature is disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_ReadoutBufferEntry.UnusedFutureSamples[][] not generated although DEM_CFG_SUPPORT_TIME_SERIES_FUTURE is ON or DEM_CFG_SUPPORT_TIME_SERIES_FUTURE does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_CYCLECOUNTERDATA_FAILEDCYCLECOUNTER
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_CycleCounterDataType.FailedCycleCounter[] is defined for each index in range
+*                [0.. DEM_CFG_MAX_NUMBER_FAILED_CYCLE_DTCS[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_CYCLECOUNTERDATA_FAILEDCYCLECOUNTER()
+{
+  if (SymbolExists("Dem_Cfg_CycleCounterData"))
+  {
+    var Dem_Cfg_CycleCounterData = Struct("Dem_Cfg_CycleCounterData")
+
+    if (Dem_Cfg_CycleCounterData.HasMember("FailedCycleCounter"))
+    {
+      var DEM_CFG_MAX_NUMBER_FAILED_CYCLE_DTCS = Define("DEM_CFG_MAX_NUMBER_FAILED_CYCLE_DTCS")
+
+      var Dem_Cfg_CycleCounterData_FailedCycleCounter = Dem_Cfg_CycleCounterData.GetMemberAsArray("FailedCycleCounter")
+      AssertArraySize(Dem_Cfg_CycleCounterData_FailedCycleCounter, Equal, DEM_CFG_MAX_NUMBER_FAILED_CYCLE_DTCS)
+    }
+    else if (IsStdOff("DEM_CFG_DATA_FAILED_CYCLES"))
+    {
+      // Feature disabled, no check needed
+    }
+    else
+    {
+      ReportError("Failed Cycle Counter array not generated although Dem_Cfg_CycleCounterData exists and DEM_CFG_DATA_FAILED_CYCLES is ON or DEM_CFG_DATA_FAILED_CYCLES does not exist.")
+    }
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_MEM_INDEPENDENT_CYCLE_COUNTERS"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_CycleCounterData not generated although DEM_CFG_SUPPORT_MEM_INDEPENDENT_CYCLE_COUNTERS is ON or DEM_CFG_SUPPORT_MEM_INDEPENDENT_CYCLE_COUNTERS does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_CYCLECOUNTERDATA_FAULTPENDINGCOUNTER
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_CycleCounterDataType.FaultPendingCounter[] is defined for each index in range
+*                [0.. DEM_CFG_MAX_NUMBER_FAULT_PENDING_DTCS[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_CYCLECOUNTERDATA_FAULTPENDINGCOUNTER()
+{
+  if (SymbolExists("Dem_Cfg_CycleCounterData"))
+  {
+    var Dem_Cfg_CycleCounterData = Struct("Dem_Cfg_CycleCounterData")
+
+    if (Dem_Cfg_CycleCounterData.HasMember("FaultPendingCounter"))
+    {
+      var DEM_CFG_MAX_NUMBER_FAULT_PENDING_DTCS = Define("DEM_CFG_MAX_NUMBER_FAULT_PENDING_DTCS")
+
+      var Dem_Cfg_CycleCounterData_FaultPendingCounter = Dem_Cfg_CycleCounterData.GetMemberAsArray("FaultPendingCounter")
+      AssertArraySize(Dem_Cfg_CycleCounterData_FaultPendingCounter, Equal, DEM_CFG_MAX_NUMBER_FAULT_PENDING_DTCS)
+    }
+    else if (IsStdOff("DEM_CFG_DATA_FAULT_PENDING_COUNTER"))
+    {
+      // Feature disabled, no check needed
+    }
+    else
+    {
+      ReportError("Fault Pending Counter array not generated although Dem_Cfg_CycleCounterData exists and DEM_CFG_DATA_FAULT_PENDING_COUNTER is ON or DEM_CFG_DATA_FAULT_PENDING_COUNTER does not exist.")
+    }
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_MEM_INDEPENDENT_CYCLE_COUNTERS"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_CycleCounterData not generated although DEM_CFG_SUPPORT_MEM_INDEPENDENT_CYCLE_COUNTERS is ON or DEM_CFG_SUPPORT_MEM_INDEPENDENT_CYCLE_COUNTERS does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_ORGANI_TESTCODE_COMMENT_UNDEFINED
+* Parameter    : None
+* Return value : None
+* Description  : Verify that DEM_ORGANI_TESTCODE_COMMENT is not defined.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_ORGANI_TESTCODE_COMMENT_UNDEFINED()
+{
+  if(IsDefined("DEM_ORGANI_TESTCODE_COMMENT"))
+  {
+    ReportError("DEM_ORGANI_TESTCODE_COMMENT is defined")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_OBDIUMPRDATA_IUMPRRATIO
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_ObdIumprData.Numerator[], Dem_Cfg_ObdIumprData.Denominator[], and Dem_Cfg_ObdIumprData.Status[] is defined for each index in range
+*                [0.. DEM_G_NUMBER_OF_RATIO_IDS[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_OBDIUMPRDATA_IUMPRRATIO()
+{
+  if (SymbolExists("Dem_Cfg_ObdIumprData"))
+  {
+    var Dem_Cfg_ObdIumprData = Struct("Dem_Cfg_ObdIumprData")
+    var DEM_G_NUMBER_OF_RATIO_IDS = Define("DEM_G_NUMBER_OF_RATIO_IDS")
+
+    if (Dem_Cfg_ObdIumprData.HasMember("Numerator") && Dem_Cfg_ObdIumprData.HasMember("Denominator") && Dem_Cfg_ObdIumprData.HasMember("Status"))
+    {
+      var Dem_Cfg_ObdIumprData_Numerator = Dem_Cfg_ObdIumprData.GetMemberAsArray("Numerator")
+      AssertArraySize(Dem_Cfg_ObdIumprData_Numerator, Equal, DEM_G_NUMBER_OF_RATIO_IDS)
+
+      var Dem_Cfg_ObdIumprData_Denominator = Dem_Cfg_ObdIumprData.GetMemberAsArray("Denominator")
+      AssertArraySize(Dem_Cfg_ObdIumprData_Denominator, Equal, DEM_G_NUMBER_OF_RATIO_IDS)
+
+      var Dem_Cfg_ObdIumprData_Status = Dem_Cfg_ObdIumprData.GetMemberAsArray("Status")
+      AssertArraySize(Dem_Cfg_ObdIumprData_Status, Equal, DEM_G_NUMBER_OF_RATIO_IDS)
+    }
+    else if (IsStdOff("DEM_CFG_SUPPORT_IUMPR"))
+    {
+        // Feature disabled, no check needed
+    }
+    else
+    {
+        ReportError("At least one of members Numerator, Denominator and Status of Dem_Cfg_ObdIumprData is not generated although DEM_CFG_SUPPORT_IUMPR is ON or DEM_CFG_SUPPORT_IUMPR does not exist.")
+    }
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_IUMPR") && IsStdOff("DEM_CFG_DATA_MONITOR_ACTIVITY_DATA"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_ObdIumprData not generated although either DEM_CFG_SUPPORT_IUMPR or DEM_CFG_DATA_MONITOR_ACTIVITY_DATA is ON or DEM_CFG_DATA_MONITOR_ACTIVITY_DATA does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_OBDIUMPRDATA_MONITORACTIVITYDATA
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_ObdIumprData.MonitorActivityNumerator[] is defined for each index in range [0.. DEM_CFG_MAX_NUMBER_OF_EVENTS_WITH_MAR[
+*                Verify that Dem_Cfg_ObdIumprData.MonitorActivityNumeratorToBeIncrementedFlag[] is defined for each index in range [0.. DEM_CFG_MAX_NUMBER_OF_MAN_TO_BE_INCREMENTED_ENTRIES[
+*                Verify that Dem_Cfg_ObdIumprData.StoredMonitorActivityRatio[] is defined for each index in range [0.. DEM_CFG_MAX_NUMBER_OF_STORED_MONITOR_ACTIVITY_RATIO[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_OBDIUMPRDATA_MONITORACTIVITYDATA()
+{
+  //checks for existence of Dem_Cfg_ObdIumprData: CM_DEM_M_SIZEOF_OBDIUMPRDATA_IUMPRRATIO
+  if (SymbolExists("Dem_Cfg_ObdIumprData"))
+  {
+    var Dem_Cfg_ObdIumprData = Struct("Dem_Cfg_ObdIumprData")
+
+    if (Dem_Cfg_ObdIumprData.HasMember("MonitorActivityNumerator") && Dem_Cfg_ObdIumprData.HasMember("MonitorActivityNumeratorToBeIncrementedFlag") && Dem_Cfg_ObdIumprData.HasMember("StoredMonitorActivityRatio"))
+    {
+      var DEM_CFG_MAX_NUMBER_OF_EVENTS_WITH_MAR = Define("DEM_CFG_MAX_NUMBER_OF_EVENTS_WITH_MAR")
+      var Dem_Cfg_ObdIumprData_MonitorActivityNumerator = Dem_Cfg_ObdIumprData.GetMemberAsArray("MonitorActivityNumerator")
+      AssertArraySize(Dem_Cfg_ObdIumprData_MonitorActivityNumerator, Equal, DEM_CFG_MAX_NUMBER_OF_EVENTS_WITH_MAR)
+
+      var DEM_CFG_MAX_NUMBER_OF_MAN_TO_BE_INCREMENTED_ENTRIES = Define("DEM_CFG_MAX_NUMBER_OF_MAN_TO_BE_INCREMENTED_ENTRIES")
+      var Dem_Cfg_ObdIumprData_MARIncrementedFlag = Dem_Cfg_ObdIumprData.GetMemberAsArray("MonitorActivityNumeratorToBeIncrementedFlag")
+      AssertArraySize(Dem_Cfg_ObdIumprData_MARIncrementedFlag, Equal, DEM_CFG_MAX_NUMBER_OF_MAN_TO_BE_INCREMENTED_ENTRIES)
+
+      var DEM_CFG_MAX_NUMBER_OF_STORED_MONITOR_ACTIVITY_RATIO = Define("DEM_CFG_MAX_NUMBER_OF_STORED_MONITOR_ACTIVITY_RATIO")
+      var Dem_Cfg_ObdIumprData_SMAR = Dem_Cfg_ObdIumprData.GetMemberAsArray("StoredMonitorActivityRatio")
+      AssertArraySize(Dem_Cfg_ObdIumprData_SMAR, Equal, DEM_CFG_MAX_NUMBER_OF_STORED_MONITOR_ACTIVITY_RATIO)
+    }
+    else if (IsStdOff("DEM_CFG_DATA_MONITOR_ACTIVITY_DATA"))
+    {
+      // Feature disabled, no check needed
+    }
+    else
+    {
+      ReportError("At least one of members MonitorActivityNumerator, MonitorActivityNumeratorToBeIncrementedFlag and StoredMonitorActivityRatio of Dem_Cfg_ObdIumprData is not generated although DEM_CFG_DATA_MONITOR_ACTIVITY_DATA is ON or DEM_CFG_DATA_MONITOR_ACTIVITY_DATA does not exist.")
+    }
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_DTRDATA
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_DtrData.TestValue[], Dem_Cfg_DtrData.LowLimValue[], and Dem_Cfg_DtrData.UppLimValue[] is defined for each index in range
+*                [0.. DEM_CFG_MAX_NUMBER_CONFIGURABLE_DTRS[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_DTRDATA()
+{
+  if (SymbolExists("Dem_Cfg_DtrData") && Struct("Dem_Cfg_DtrData").HasMember("TestValue") && Struct("Dem_Cfg_DtrData").HasMember("LowLimValue") && Struct("Dem_Cfg_DtrData").HasMember("UppLimValue"))
+  {
+    var Dem_Cfg_DtrData = Struct("Dem_Cfg_DtrData")
+    var DEM_CFG_MAX_NUMBER_CONFIGURABLE_DTRS = Define("DEM_CFG_MAX_NUMBER_CONFIGURABLE_DTRS")
+
+    var Dem_Cfg_DtrData_TestValue = Dem_Cfg_DtrData.GetMemberAsArray("TestValue")
+    AssertArraySize(Dem_Cfg_DtrData_TestValue, Equal, DEM_CFG_MAX_NUMBER_CONFIGURABLE_DTRS)
+
+    var Dem_Cfg_DtrData_LowLimValue = Dem_Cfg_DtrData.GetMemberAsArray("LowLimValue")
+    AssertArraySize(Dem_Cfg_DtrData_LowLimValue, Equal, DEM_CFG_MAX_NUMBER_CONFIGURABLE_DTRS)
+
+    var Dem_Cfg_DtrData_UppLimValue = Dem_Cfg_DtrData.GetMemberAsArray("UppLimValue")
+    AssertArraySize(Dem_Cfg_DtrData_UppLimValue, Equal, DEM_CFG_MAX_NUMBER_CONFIGURABLE_DTRS)
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_DTR"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_DtrData or its members are not generated although DEM_CFG_SUPPORT_DTR is ON or DEM_CFG_SUPPORT_DTR does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_FREEZEFRAME
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_FreezeFrameData[].FreezeFrameData[] is defined for each id in range
+*                [0..max(1, DEM_CFG_GLOBAL_FREEZEFRAME_SIZE)[ ,[0..DEM_CFG_MAX_NUM_OBDFREEZEFRAME[
+*                Verify Dem_Cfg_FreezeFrameData[].FreezeFrameData[][] is defined for each id in range
+*                [0..max(1, DEM_CFG_GLOBAL_FREEZEFRAME_SIZE)[ ,[0..max(1,DEM_CFG_MAX_SIZE_OBDFREEZEFRAME)[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_FREEZEFRAME()
+{
+  if (SymbolExists("Dem_Cfg_FreezeFrameData") && Array("Dem_Cfg_FreezeFrameData").GetElemAsStruct(0).HasMember("FreezeFrameData"))
+  {
+    var Dem_Cfg_FreezeFrameData = Array("Dem_Cfg_FreezeFrameData")
+    var DEM_CFG_GLOBAL_FREEZEFRAME_SIZE = Define("DEM_CFG_GLOBAL_FREEZEFRAME_SIZE")
+
+    if (DEM_CFG_GLOBAL_FREEZEFRAME_SIZE.GetValueAsNumber() > 0)
+    {
+      AssertArraySize(Dem_Cfg_FreezeFrameData, Equal, DEM_CFG_GLOBAL_FREEZEFRAME_SIZE)
+    }
+    else
+    {
+      AssertArraySize(Dem_Cfg_FreezeFrameData, Equal, 1)
+    }
+
+    var InnerStruct = Dem_Cfg_FreezeFrameData.GetElemAsStruct(0)
+
+    var DEM_CFG_MAX_SIZE_OBDFREEZEFRAME = Define("DEM_CFG_MAX_SIZE_OBDFREEZEFRAME")
+    var DEM_CFG_MAX_NUM_OBDFREEZEFRAME = Define("DEM_CFG_MAX_NUM_OBDFREEZEFRAME")
+
+    var Dem_FreezeFrameEntry_FreezeFrameData  = InnerStruct.GetMemberAsArray("FreezeFrameData")
+    var InnerArray = Dem_FreezeFrameEntry_FreezeFrameData.GetElemAsArray(0)
+
+    AssertArraySize(Dem_FreezeFrameEntry_FreezeFrameData, Equal, DEM_CFG_MAX_NUM_OBDFREEZEFRAME)
+
+    if (DEM_CFG_MAX_SIZE_OBDFREEZEFRAME.GetValueAsNumber() > 0)
+    {
+      AssertArraySize(InnerArray, Equal, DEM_CFG_MAX_SIZE_OBDFREEZEFRAME)
+    }
+    else
+    {
+      AssertArraySize(InnerArray, Equal, 1)
+    }
+  }
+  else if (IsStdOff("DEM_CFG_SUPPORT_OBDII_OR_OBDONUDS"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_FreezeFrameData or member FreezeFrameData not generated although DEM_CFG_SUPPORT_OBDII_OR_OBDONUDS is ON or DEM_CFG_SUPPORT_OBDII_OR_OBDONUDS does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_NVBLOCKID
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_NvBlockId[] is defined for each index in range
+*                [0.. DEM_CFG_GLOBAL_NV_BLOCK_COUNT[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_NVBLOCKID()
+{
+  if (SymbolExists("Dem_Cfg_NvBlockId"))
+  {
+    var Dem_Cfg_NvBlockId = Array("Dem_Cfg_NvBlockId")
+    var DEM_CFG_GLOBAL_NV_BLOCK_COUNT = Define("DEM_CFG_GLOBAL_NV_BLOCK_COUNT")
+    AssertArraySize(Dem_Cfg_NvBlockId, Equal, DEM_CFG_GLOBAL_NV_BLOCK_COUNT)
+  }
+  else if (IsStdOff("DEM_CFG_USE_NVM"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_NvBlockId not generated although DEM_CFG_USE_NVM is ON or DEM_CFG_USE_NVM does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_NVBLOCKDATASIZE
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_NvBlockDataSize[] is defined for each index in range
+*                [0.. DEM_CFG_GLOBAL_NV_BLOCK_COUNT[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_NVBLOCKDATASIZE()
+{
+  if (SymbolExists("Dem_Cfg_NvBlockDataSize"))
+  {
+    var Dem_Cfg_NvBlockDataSize = Array("Dem_Cfg_NvBlockDataSize")
+    var DEM_CFG_GLOBAL_NV_BLOCK_COUNT = Define("DEM_CFG_GLOBAL_NV_BLOCK_COUNT")
+
+    AssertArraySize(Dem_Cfg_NvBlockDataSize, Equal, DEM_CFG_GLOBAL_NV_BLOCK_COUNT)
+  }
+  else if (IsStdOff("DEM_CFG_USE_NVM"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_NvBlockDataSize not generated although DEM_CFG_USE_NVM is ON or DEM_CFG_USE_NVM does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_ADMINDATA_MEMORYOVERFLOW
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_AdminData.MemoryOverflow[] is defined for each index in range
+*                [0..DEM_CFG_MAX_SIZE_OVERFLOWINDICATOR[ if memory overflow indication is enabled.
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_ADMINDATA_MEMORYOVERFLOW()
+{
+  var Dem_Cfg_AdminData = Struct("Dem_Cfg_AdminData")
+  if (Dem_Cfg_AdminData.HasMember("MemoryOverflow"))
+  {
+    var Dem_Cfg_AdminData_MemoryOverflow = Dem_Cfg_AdminData.GetMemberAsArray("MemoryOverflow")
+    var DEM_CFG_MAX_SIZE_OVERFLOWINDICATOR = Define("DEM_CFG_MAX_SIZE_OVERFLOWINDICATOR")
+    AssertArraySize(Dem_Cfg_AdminData_MemoryOverflow, Equal, DEM_CFG_MAX_SIZE_OVERFLOWINDICATOR)
+  }
+  else if (IsStdOff("DEM_CFG_DATA_OVFLIND") && IsStdOff("DEM_CFG_SUPPORT_OVFLIND_API"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_AdminData.MemoryOverflow not generated although DEM_CFG_DATA_OVFLIND OR DEM_CFG_SUPPORT_OVFLIND_API is ON or one of the PP switches does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_ADMINDATA_PTOTIMER
+* Parameter    : None
+* Return value : None
+* Description  : Verify that Dem_Cfg_AdminData.EventPtoTimer[] is defined for each index in range [0.. DEM_CFG_MAX_NUMBER_EVENTS_WITH_PTO_TIMER[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_ADMINDATA_PTOTIMER()
+{
+  var Dem_Cfg_AdminData = Struct("Dem_Cfg_AdminData")
+  if (Dem_Cfg_AdminData.HasMember("EventPtoTimer"))
+  {
+    var DEM_CFG_MAX_NUMBER_EVENTS_WITH_PTO_TIMER = Define("DEM_CFG_MAX_NUMBER_EVENTS_WITH_PTO_TIMER")
+    var Dem_Cfg_AdminData_EventPtoTimer = Dem_Cfg_AdminData.GetMemberAsArray("EventPtoTimer")
+    AssertArraySize(Dem_Cfg_AdminData_EventPtoTimer, Equal, DEM_CFG_MAX_NUMBER_EVENTS_WITH_PTO_TIMER)
+  }
+  else if (IsStdOff("DEM_CFG_PTO_STATUS_SUPPORT"))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_AdminData or its member EventPtoTimer is missing or renamed although switch DEM_CFG_PTO_STATUS_SUPPORT is STD_ON or one of the PP switches does not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_CUSTOMTRIGGERENTRY_SNAPSHOTDATA
+* Parameter    : None
+* Return value : None
+* Description  : For each CustomTriggerEntry referenced in Table Dem_Cfg_CustomTriggerEntryPtr (Readout Buffer Entries are not tested):
+*                Verify that SnapshotData[] is defined for values in range [0..DEM_CFG_MAX_SIZE_CUSTOM_TRIGGERED_RECORD[
+*                Verify that TSSnapshotData[][] is defined where the first index has to be in the range [0..DEM_CFG_MAX_SAMPLES_CUSTOM_TRIGGERED_TIMESERIESSNAPSHOT[ 
+*                                                                and second index in range [0..DEM_CFG_MAX_SIZE_CUSTOM_TRIGGERED_RECORD[
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_CUSTOMTRIGGERENTRY_SNAPSHOTDATA()
+{
+  if(SymbolExists("Dem_Cfg_CustomTriggerEntryPtr"))
+  {
+    var AtleastOneEntryTested = false
+    // Array("") will report an error if the object does not exist
+    var Dem_Cfg_CustomTriggerEntryPtrTable = Array("Dem_Cfg_CustomTriggerEntryPtr")
+
+    for(var Index = 0; Index < Dem_Cfg_CustomTriggerEntryPtrTable.GetSize(); ++Index)
+    {
+      var ArrayElement = Dem_Cfg_CustomTriggerEntryPtrTable.GetElemAsString(Index)
+
+      // Extract name of the global variable (e.g., "Dem_Cfg_PrimaryCustomTriggerEntry_0"), to which the entry of Dem_Cfg_CustomTriggerEntryPtrTable points
+      var Dem_CustomTriggerEntry = GetStructNameFromReferenceString(ArrayElement)
+
+      // Assert that the name of the referenced struct starts with 'Dem_Cfg'
+      CheckVariableInDemNameSpace(Dem_CustomTriggerEntry)
+
+      // Only primary custom trigger memory and user defined custom trigger memory entries in Dem_Cfg_CustomTriggerEntryPtr are tested
+      // Readout buffer entries are verified by customer with SMI-DEM-1000
+      if(Dem_CustomTriggerEntry.find("Dem_Cfg_ReadoutBuffer") < 0)
+      {
+        // Atleast one entry with reference to either PrimaryMemory or UserDefinedMemory is tested
+        AtleastOneEntryTested = true
+        var Dem_CustomTriggerEntryStruct = Struct(Dem_CustomTriggerEntry)
+
+        // For Configured SRecs with Custom Trigger
+        if(Dem_CustomTriggerEntryStruct.HasMember("SnapshotData"))
+        {
+          var DEM_CFG_MAX_SIZE_CUSTOM_TRIGGERED_RECORD = Define("DEM_CFG_MAX_SIZE_CUSTOM_TRIGGERED_RECORD")
+          var Dem_CustomTriggerEntryStruct_SnapshotData = Dem_CustomTriggerEntryStruct.GetMemberAsArray("SnapshotData")
+        
+          AssertArraySize(Dem_CustomTriggerEntryStruct_SnapshotData, Equal, DEM_CFG_MAX_SIZE_CUSTOM_TRIGGERED_RECORD)
+        }
+        else if (IsStdOff("DEM_CFG_SUPPORT_CUSTOMTRIGGER_SREC"))
+        {
+          // Feature disabled, no check needed : No Configured SRecs with Custom Trigger
+        }
+        else
+        {
+          ReportError("Member SnapshotData not generated or renamed for CustomTriggerEntries in Dem_Cfg_CustomTriggerEntryPtr[], even though the switch DEM_CFG_SUPPORT_CUSTOMTRIGGER_SREC is ON or PP switch does not exist.")
+        }
+        
+        // For TimeSeries SRecs with Custom Trigger
+        if(Dem_CustomTriggerEntryStruct.HasMember("TSSnapshotData"))
+        {
+          var DEM_CFG_MAX_SAMPLES_CUSTOM_TRIGGERED_TIMESERIESSNAPSHOT = Define("DEM_CFG_MAX_SAMPLES_CUSTOM_TRIGGERED_TIMESERIESSNAPSHOT")
+          var DEM_CFG_MAX_SIZE_CUSTOM_TRIGGERED_RECORD = Define("DEM_CFG_MAX_SIZE_CUSTOM_TRIGGERED_RECORD")
+
+          var Dem_CustomTriggerEntryStruct_TSSnapshotData = Dem_CustomTriggerEntryStruct.GetMemberAsArray("TSSnapshotData")
+          var InnerArray = Dem_CustomTriggerEntryStruct_TSSnapshotData.GetElemAsArray(0)
+
+          AssertArraySize(Dem_CustomTriggerEntryStruct_TSSnapshotData, Equal, DEM_CFG_MAX_SAMPLES_CUSTOM_TRIGGERED_TIMESERIESSNAPSHOT)
+          AssertArraySize(InnerArray, Equal, DEM_CFG_MAX_SIZE_CUSTOM_TRIGGERED_RECORD)
+        }
+        else if (IsStdOff("DEM_CFG_SUPPORT_CUSTOMTRIGGER_TSSR"))
+        {
+          // Feature disabled, no check needed : No TimeSeries SRecs with Custom Trigger
+        }
+        else
+        {
+          ReportError("Member TSSnapshotData not generated or renamed for CustomTriggerEntries in Dem_Cfg_CustomTriggerEntryPtr[], even though the switch DEM_CFG_SUPPORT_CUSTOMTRIGGER_TSSR is ON or PP switch does not exist.")
+        }
+      }
+    }
+    if (AtleastOneEntryTested == false)
+    {
+      ReportError("Dem_Cfg_CustomTriggerEntryPtr does not contain reference to either PrimaryMemory or UserDefinedMemory Custom Trigger Entry.!!")
+    }
+  }
+  else if ((IsStdOff("DEM_CFG_SUPPORT_CUSTOMTRIGGER_SREC")) && (IsStdOff("DEM_CFG_SUPPORT_CUSTOMTRIGGER_TSSR")))
+  {
+    // Feature disabled, no check needed
+  }
+  else
+  {
+    ReportError("Dem_Cfg_CustomTriggerEntryPtr renamed or not generated although DEM_CFG_SUPPORT_CUSTOMTRIGGER_SREC or DEM_CFG_SUPPORT_CUSTOMTRIGGER_TSSR is ON or PP switches do not exist.")
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CM_DEM_M_SIZEOF_ADMINDATA_MAXFDCSINCELASTCLEAR
+* Parameter    : None
+* Return value : None
+* Description  : Verify Dem_Cfg_AdminData.MaxFDCSinceLastClear[] is defined for each index in range [0..DEM_CFG_MAX_NUMBER_MAX_FDC_SLC_DTCS[ 
+*                if 'MaxFDCSinceLastClear' is used as internal data element and memory independent storage for 'MaxFDCSinceLastClear' is enabled. 
+* Requirements :
+**********************************************************************************************************************/
+def CM_DEM_M_SIZEOF_ADMINDATA_MAXFDCSINCELASTCLEAR()
+{  
+  var Dem_Cfg_AdminData = Struct("Dem_Cfg_AdminData")
+
+  if (Dem_Cfg_AdminData.HasMember("MaxFDCSinceLastClear"))
+  {
+    var DEM_CFG_MAX_NUMBER_MAX_FDC_SLC_DTCS = Define("DEM_CFG_MAX_NUMBER_MAX_FDC_SLC_DTCS")
+    var Dem_Cfg_AdminData_MaxFDCSinceLastClear = Dem_Cfg_AdminData.GetMemberAsArray("MaxFDCSinceLastClear")
+    AssertArraySize(Dem_Cfg_AdminData_MaxFDCSinceLastClear, Equal, DEM_CFG_MAX_NUMBER_MAX_FDC_SLC_DTCS)  
+  } 
+  else if (IsStdOff("DEM_CFG_SUPPORT_MEM_INDEPENDENT_MAX_FDC_SLC"))
+  {
+    // Feature is disabled, no check needed
+  }
+  else
+  {
+    ReportError("Member MaxFDCSinceLastClear in Dem_Cfg_AdminData does not exist, although DEM_CFG_SUPPORT_MEM_INDEPENDENT_MAX_FDC_SLC is ON or PP switch does not exist.")
+  }  
+}

@@ -1,0 +1,116 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2021 by Vector Informatik GmbH.                                            All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  If_AsrIfEa.plugin
+*  Module     :  MSSV
+*  Description:  Checking rule for If_AsrIfEa
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version    Date          Author   Change Id        Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  00.01.00   2012-05-21    visml    -                Initial version
+*  00.02.00   2012-07-13    visgms   -                Updated to current API version
+*  00.03.00   2012-08-07    visml    -                Added field for requirements tracking.
+*  01.00.00   2015-04-14    virgmi   -                First version
+*  01.00.01   2016-01-14    virgmi   -                Generator version was incremented
+*  01.00.02   2016-03-07    virgmi   -                Generator version was incremented. QM Check was added
+*  01.01.00   2017-04-20    virgmi   ESCAN00094819    ElisaPlugin does not work with Generator version 5.02.xx
+*  01.01.01   2019-08-19    virbka   -                Updated trace reference
+*  01.01.02   2021-03-18    virbka   ESCAN00108123    Deleted version check
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : MSSV_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x010102)
+  reg.SetPackageName("If_AsrIfEa")
+  reg.SetInputFiles(["Ea_Cfg.c"])
+  return reg
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : -
+**********************************************************************************************************************/
+def CheckVersions()
+{
+    /* Intentionally left empty. */
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. Main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : 
+**********************************************************************************************************************/
+def main()
+{
+  InvokeRule("Verify that size of all configured write alignments is equal or smaller than EA_MAX_WRITE_ALIGNMENT", CheckAlignmentSize)
+  InvokeRule("Check QM inactive", CheckQMDefines)
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : CheckAlignmentSize
+* Parameter    : None
+* Return value : None
+* Description  : Verifies that size of all configured write alignments is equal or smaller than EA_MAX_WRITE_ALIGNMENT
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckAlignmentSize()
+{
+  var DEF_MAX_ALIGNMENT = Define("EA_MAX_WRITE_ALIGNMENT")
+  var MaxAlignmentValue = DEF_MAX_ALIGNMENT.GetValueAsNumber()
+  
+  var DEF_NUMBER_PARTITIONS = Define("EA_NUMBER_OF_PARTITIONS") 
+  var NumberPartitionsValue = DEF_NUMBER_PARTITIONS.GetValueAsNumber()
+  
+  var partitionConfigList = Array("Ea_PartitionConfigList")
+  
+  for (var i = 0; i < NumberPartitionsValue; ++i)
+  {
+    var partitionStruct = partitionConfigList.GetElemAsStruct(i)
+
+    var writeAlignment = partitionStruct.GetMemberAsNumber("PartitionWriteAlignment")
+
+    Assert(writeAlignment, LessEqual, MaxAlignmentValue)
+  }
+}
+
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+*                Typically it checks that QM features are inactive in safety context.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  AssertDefineEquals("EA_DEV_ERROR_DETECT", "(STD_ON)")
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<license xmlns="urn:vector:schema:license" version="1.0">
+    <deliveries>
+        <delivery id="PAI11774">
+            <subprojectnumber>PAI11774</subprojectnumber>
+            <showbetadisclaimer>true</showbetadisclaimer>
+        </delivery>
+    </deliveries>
+    <paramset idref="PAI11774" consumer="DaVinciConfigurator">
+        <param>
+            <key>MDTYPE-71D05393-A4A6-4C10-8E11-D245F0206DC2</key>
+            <value>MDVALUE-CB20E225-1E44-46AD-B933-2516F0E18E56</value>
+        </param>
+        <param>
+            <key>bf0295da-341e-4ee4-b204-a143f3972752</key>
+            <value>cd6b2127-7d48-4df2-a71c-9ecbfa02ba41</value>
+        </param>
+        <param>
+            <key>MDTYPE-B61D54D9-AC58-41F0-B8DD-3C3E0E62A594</key>
+            <value>MDVALUE-A23E8084-D3B2-40CD-BFB4-F546BE2DE4AC</value>
+        </param>
+        <param>
+            <key>MDTYPE-A7408B40-BE74-4FA7-BB62-FDC84588BA38</key>
+            <value>MDVALUE-C86F5C4C-02E3-4BD6-9FC6-F3F499125758</value>
+        </param>
+        <param>
+            <key>9C0F5762-CBF9-4807-B868-66E972955EAA</key>
+            <value>2CF82D89-A3BC-4383-A26F-B7475C6C8413</value>
+        </param>
+        <param>
+            <key>MDTYPE-93C96091-F29E-4D53-B335-A0FFD6E0BC70</key>
+            <value>MDVALUE-52B6FACE-0F39-4D07-8934-D2CBBCC6C1CF</value>
+        </param>
+        <param>
+            <key>MDTYPE-7EE1CC75-DD31-4905-A34C-7D0B8B969D99</key>
+            <value>MDVALUE-027F6D38-8F26-4F28-84CA-81AD002088EF</value>
+        </param>
+        <param>
+            <key>9FCA8D2A-1E02-488C-A20B-DD5D12A85DEE</key>
+            <value>53857B0C-FDF3-4D89-81A3-84223A415CF4</value>
+        </param>
+        <param>
+            <key>MDTYPE-073E5189-471E-4D92-B6F6-A7BB6010FD85</key>
+            <value>MDVALUE-6391610E-DB4D-4E6C-918E-B9F69B3EF870</value>
+        </param>
+        <param>
+            <key>3b70654f-80f1-48d0-be57-c3d83715c816</key>
+            <value>bef5c0e0-468a-49f5-8a40-77db72d85901</value>
+        </param>
+        <param>
+            <key>MDTYPE-A89DF6CB-9DB0-4A89-A1AC-6B4F72DF3FB6</key>
+            <value>MDVALUE-C5F5AEBB-16C8-4665-9045-0877CF47788B</value>
+        </param>
+    </paramset>
+</license>
+<!-- 55D27901E1C47C7D0DFE2C01AF39F62E52EB2EC0F85CF44EA0C7697F7E48AE9CEEB38328BE075D27CA0209F503912BAD71A399956B07267B094BF9006F06EE88DCB587A7AB9A323289EC3101D8917185B25D0FFE4F0CADE9B91E44F1C63774D0E4DAB4712C6EA196DE7BE0B2E7E69DEC2A12A8C73DBEF8ACB4F31CB08792348A2E12A972F05E2DF40CBD1B30A865FF38F70EFF48B005C2FA2062A0CADA16C3FECF85AE172ED3078144E232159DA3ECF6730F58B8B2ED9A857A6F95684673A0719D65AF811BF01DC136BE1D17560783EEEC0176E2F5ADF0385791D30AFD28225774DA72C5CC5C20D69D25254903345948E980F4896BCEFF833A2F3D5E4ED2973D -->

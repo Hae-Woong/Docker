@@ -1,0 +1,255 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2016 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  If_AsrIfFee.plugin
+*  Module     :  Elisa
+*  Description:  Checks for FEE
+*  -------------------------------------------------------------------------------------------------------------------
+*  AUTHOR IDENTITY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Name                          Initials      Company
+*  -------------------------------------------------------------------------------------------------------------------
+*  Christian Kaiser              virck          Vector Informatik GmbH
+*  Michael Goﬂ                   virgmi         Vector Informatik GmbH
+*  Johannes Wagner               virjwa         Vector Informatik GmbH
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version    Date          Author   Change Id        Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00   2016-09-08    virck                     Initial creation for If_AsrIfFee
+*  01.00.01   2017-02-23    virck    TASK-28884       MSSV Plugin: Input File(s)
+*  01.01.00   2017-10-25    virgmi   STORYC-2583      Check for LookUpTable feature
+*  01.02.00   2018-05-27    virjwa   STORYC-5401      Check LookUpTable configuration
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : Elisa_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x010200)
+  reg.SetPackageName("If_AsrIfFee")
+  reg.SetInputFiles(["Fee_Lcfg.c"])
+  return reg 
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : Elisa_core calls this function to allow the plugin a version check against the BSW sources.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+	/* Intentionally left empty. */
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. Main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : N/A
+**********************************************************************************************************************/
+def main()
+{
+  InvokeRule("Check QM inactive", CheckQMDefines)
+  var lutEnabledDef = Define("FEE_LOOKUPTABLE_MODE")
+  /*Following rules are only necessary and also executable if lut feature is enabled*/
+  if(lutEnabledDef.IsStdOn)
+  {
+	InvokeRule("Check lookup table entries cfg", CheckLutEntriesIndicesAndLengths)
+	InvokeRule("Check lookup table modfied flags cfg", CheckModifiedFlagsIndices)
+	InvokeRule("Check lookup table nv blocks cfg", CheckNvBlockIndicesAndLength)
+	InvokeRule("Check lookup table cfg idx", CheckLutCfgIdx)
+	InvokeRule("Check  block lookup table  base idx", CheckBlocksLutBaseIdx)
+  }
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+*                Typically it checks that QM features are inactive in safety context.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  /* Default function not usable for FEE because the value of FEE_DEV_ERROR_DETECT is (STD_ON) (with parenthesis) */
+  /* AssertDefineIsStdOn("FEE_DEV_ERROR_DETECT") */
+  /* check define version directly */
+  AssertDefineEquals("FEE_DEV_ERROR_DETECT", "(STD_ON)")
+  AssertDefineEquals("FEE_DATA_CONVERSION_API", "(STD_OFF)")
+}
+
+
+/**********************************************************************************************************************
+* Name         : CheckLutEntriesIndicesAndLengths
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that for every lut configuration entries startidx and endidx (startidx + (numberLutNvBlocks * numerEntriesPerNvBlock) - 1)
+*                are within entries array borders.
+* Requirements : SBSW_FEE_Lut_Block_Ram_Entries
+**********************************************************************************************************************/
+def CheckLutEntriesIndicesAndLengths()
+{
+  var numberOfEntriesDef = Define("FEE_LUT_ENTRIES_ARRAY_SIZE")
+  var numberOfEntries = numberOfEntriesDef.GetValueAsNumber()
+  
+  var numberOfLutPartitionsDef = Define("FEE_NUMBER_OF_PARTITIONS_WITH_LUT")
+  var numberOfLutPartitions = numberOfLutPartitionsDef.GetValueAsNumber()
+  
+  var lutCfgArrayDef = Array("Fee_LookUpTableConfig")
+  
+  for(var i = 0; i < numberOfLutPartitions; ++i)
+  {
+	var lutCfgStruct = lutCfgArrayDef.GetElemAsStruct(i)
+	var entriesEndIdx = lutCfgStruct.GetMemberAsNumber("LutEntriesStartIdx") + (lutCfgStruct.GetMemberAsNumber("NrBlocks") * lutCfgStruct.GetMemberAsNumber("NrEntries") - 1)
+	Assert(lutCfgStruct.GetMemberAsNumber("LutEntriesStartIdx"),LessThan,numberOfEntries)
+	Assert(entriesEndIdx,LessThan,numberOfEntries)
+  }
+
+}
+
+
+/**********************************************************************************************************************
+* Name         : CheckModifiedFlagsIndices
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that for every lut configuration modifedFlagIdx is within modified flags array borders.
+* Requirements : SBSW_FEE_Lut_ModifiedFlags_Access
+**********************************************************************************************************************/
+def CheckModifiedFlagsIndices()
+{
+    
+  var numberOfLutPartitionsDef = Define("FEE_NUMBER_OF_PARTITIONS_WITH_LUT")
+  var numberOfLutPartitions = numberOfLutPartitionsDef.GetValueAsNumber()
+  
+  var numberOfModifiedFlags = numberOfLutPartitions
+  
+  var lutCfgArrayDef = Array("Fee_LookUpTableConfig")
+  
+  for(var i = 0; i < numberOfLutPartitions; ++i)
+  {
+	var lutCfgStruct = lutCfgArrayDef.GetElemAsStruct(i)
+	Assert(lutCfgStruct.GetMemberAsNumber("LutModifedFlagIdx"),LessThan,numberOfModifiedFlags)
+  }
+
+}
+
+
+/**********************************************************************************************************************
+* Name         : CheckNvBlockIndicesAndLength
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that for every lut configuration nv block startidx and endidx startidx + (numberLutNvBlocks - 1)
+*                are within entries array borders.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckNvBlockIndicesAndLength()
+{
+
+  var feeCfgDef = Struct("Fee_Config")
+  var numberOfBlocks = feeCfgDef.GetMemberAsNumber("Fee_NumberOfBlocks_u16")
+  
+  var numberOfLutPartitionsDef = Define("FEE_NUMBER_OF_PARTITIONS_WITH_LUT")
+  var numberOfLutPartitions = numberOfLutPartitionsDef.GetValueAsNumber()
+  
+  var lutCfgArrayDef = Array("Fee_LookUpTableConfig")
+  
+  for(var i = 0; i < numberOfLutPartitions; ++i)
+  {
+	var lutCfgStruct = lutCfgArrayDef.GetElemAsStruct(i)
+	var blocksEndIdx = lutCfgStruct.GetMemberAsNumber("LutRomBlockStartIdx") + (lutCfgStruct.GetMemberAsNumber("NrBlocks") - 1)
+	Assert(lutCfgStruct.GetMemberAsNumber("LutRomBlockStartIdx"),LessThan,numberOfBlocks)
+	Assert(blocksEndIdx,LessThan,numberOfBlocks)
+  }
+
+}
+
+
+/**********************************************************************************************************************
+* Name         : CheckLutCfgIdx
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that for every partition configuration the lut cfg idx is within lut cfg array borders.
+* Requirements : SBSW_FEE_Lut_ModifiedFlags_Access,SBSW_FEE_Lut_Entry_Index,SBSW_FEE_Lut_Block_Ram_Entries
+**********************************************************************************************************************/
+def CheckLutCfgIdx()
+{
+
+  var feeCfgDef = Struct("Fee_Config")
+  var numberOfPartitions = feeCfgDef.GetMemberAsNumber("Fee_NumberOfPartitions_u8")
+  
+  var numberOfLutPartitionsDef = Define("FEE_NUMBER_OF_PARTITIONS_WITH_LUT")
+  var numberOfLutPartitions = numberOfLutPartitionsDef.GetValueAsNumber()
+  
+  var partitionArrayDef = Array("Fee_PartitionConfig_at")
+  
+  for(var i = 0; i < numberOfPartitions; ++i)
+  {
+	var partitionCfgStruct = partitionArrayDef.GetElemAsStruct(i)
+	Assert(partitionCfgStruct.GetMemberAsNumber("lutCfgIdx"),LessThan,numberOfLutPartitions)
+  }
+
+}
+
+
+/**********************************************************************************************************************
+* Name         : CheckBlocksLutBaseIdx
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that for block configuration entriesStartIdx + base idx + numberOfDatasets - 1 is within entries array.
+                 Background: Base Index + DataIndex is used as index within entries array. Max DataIndex for a block is number of datasets - 1
+* Requirements : SBSW_FEE_Lut_Entry_Index
+**********************************************************************************************************************/
+def CheckBlocksLutBaseIdx()
+{
+
+  var feeCfgDef = Struct("Fee_Config")
+  var numberOfBlocks = feeCfgDef.GetMemberAsNumber("Fee_NumberOfBlocks_u16")
+  
+  var numberOfEntriesDef = Define("FEE_LUT_ENTRIES_ARRAY_SIZE")
+  var numberOfEntries = numberOfEntriesDef.GetValueAsNumber()
+  
+  var blockCfgArrayDef = Array("Fee_BlockConfig_at")
+    
+  for(var i = 0; i < numberOfBlocks; ++i)
+  {
+	var partitionArrayDef = Array("Fee_PartitionConfig_at")
+	var lutCfgArrayDef = Array("Fee_LookUpTableConfig")
+	var blockCfgStruct = blockCfgArrayDef.GetElemAsStruct(i)
+	var currentPartition = partitionArrayDef.GetElemAsStruct(blockCfgStruct.GetMemberAsNumber("PartitionIndex"))
+	if(currentPartition.GetMemberAsNumber("lutEnabled") == 1)
+	{
+		var lutCfgIdx = currentPartition.GetMemberAsNumber("lutCfgIdx")
+		var entriesStartIdx = lutCfgArrayDef.GetElemAsStruct(lutCfgIdx).GetMemberAsNumber("LutEntriesStartIdx")
+		var maxEntryIdx = entriesStartIdx + blockCfgStruct.GetMemberAsNumber("LookUpTableIndex") + blockCfgStruct.GetMemberAsNumber("NumberOfDatasets_u8") - 1
+		Assert(maxEntryIdx,LessThan,numberOfEntries)
+	}
+  }
+
+}
+

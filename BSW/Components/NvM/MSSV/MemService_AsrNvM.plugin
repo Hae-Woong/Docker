@@ -1,0 +1,383 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2022 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  MemService_AsrNvM.plugin
+*  Module     :  Elisa
+*  Description:  Checks for AsrNvM
+*  
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version    Date          Author   Change Id        Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00   2016-03-03    viroto                    Initial creation for MemService_AsrNvM
+*  01.01.00   2017-02-08    viroto   ESCAN00093734    added CheckMultiBlockPreconditions to ensure fulfilled multi block preconditions
+*  01.01.01   2017-07-28    virbmz   TASK-45077       extended plugin with check of BlockIdCheck switch
+*  01.01.02   2020-05-18    virsrl   ESCAN00106276    Correct usage of parameter "Flags".
+*  01.02.00   2020-08-12    virljs   MWDG-3612        NvM shall check the length of the internal buffer via MSSV
+*  02.00.00   2020-10-20    virsrl   MWDG-4176        NvM shall notify about loss of redundancy during block reading
+*  02.00.01   2020-01-25    virjwa   MWDG-4351        NvM: Improve InternalBuffer size calculation
+*  02.01.00   2020-03-18    virlra   MWDG-4548        NvM tamper detection: Add CSM MAC handling to data integrity service
+*  02.02.00   2021-10-08    virsrl   MWDG-4828        NvM: replace safety manual check for ciphered data buffer with MSSV check
+*  02.03.00   2022-05-13    vireno   MWDG-4193        NvM: Split ReadAll into two phases
+*  02.04.00   2022-07-12    vireno   MWDG-7169        NvM: Add separate internal buffer for immediate prio jobs
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : Elisa_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x020400)
+  reg.SetPackageName("MemService_AsrNvM")
+  reg.SetInputFiles(["NvM_Cfg.c"])
+  return reg 
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : Elisa_core calls this function to allow the plugin a version check against the BSW sources.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+    /* Intentionally left empty. */
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. Main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : N/A
+**********************************************************************************************************************/
+def main()
+{
+  InvokeRule("Check QM inactive", CheckQMDefines);
+  InvokeRule("Check SelectForReadAll, SelectForPreReadAll  and SelectForWriteAll preconditions", CheckMultiBlockPreconditions);
+  InvokeRule("Check UseBlockIdCheck to be enabled", CheckActivationOfBlockIdCheck);
+  InvokeRule("Check internal buffer length", CheckInternalBufferLength);
+  InvokeRule("Check immediate priority buffer length", CheckImmediatePriorityBufferLength);
+  InvokeRule("Check internal ciphering buffer length", CheckCipheringBufferLength);
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+*                Typically it checks that QM features are inactive in safety context.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  /* AssertDefineIsStdOn("NVM_DEV_ERROR_DETECT") */
+  AssertDefineEquals("NVM_DEV_ERROR_DETECT", "(STD_ON)")
+  
+}
+/**********************************************************************************************************************
+* Name         : CheckActivationOfBlockIdCheck
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of NvMUseBlockIdCheck.
+*                It checks whether the switch is enabled.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckActivationOfBlockIdCheck()
+{
+
+  var selectForBlockIdCheckDef = Define("NVM_USE_BLOCK_ID_CHECK")
+  var selectForBlockIdCheckDefVal = selectForBlockIdCheckDef.GetValueAsString() 
+  print("NVM_USE_BLOCK_ID_CHECK value: " + selectForBlockIdCheckDefVal)
+  
+  AssertDefineIsStdOn("NVM_USE_BLOCK_ID_CHECK")
+}
+
+/**********************************************************************************************************************
+* Name         : CheckMultiBlockPreconditions
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the configuration for NvM blocks with enabled SelectBlockForReadAll, 
+*                SelectBlockForPreReadAll or SelectBlockForWriteAll - those block has to have a RAM pointer or 
+*                explicit synchronization configured.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckMultiBlockPreconditions()
+{
+    /* get block array */
+    var allBlockCfgs = Array("NvM_BlockDescriptorTable_at");
+    
+    /* get define values */
+    var selectForReadAllOnDef = Define("NVM_SELECT_BLOCK_FOR_READALL_ON");
+    var selectForReadAllOnDefVal = selectForReadAllOnDef.GetValueAsNumber();
+    print("SelectForReadAllOnDef value: " + selectForReadAllOnDefVal.to_string());
+    
+    var selectForWriteAllOnDef = Define("NVM_SELECT_BLOCK_FOR_WRITEALL_ON");
+    var selectForWriteAllOnDefVal = selectForWriteAllOnDef.GetValueAsNumber();
+    print("SelectForWriteAllOnDef value: " + selectForWriteAllOnDefVal.to_string());
+
+    var selectForPreReadAllOnDef = Define("NVM_SELECT_BLOCK_FOR_PRE_READALL_ON");
+    var selectForPreReadAllOnDefVal = selectForPreReadAllOnDef.GetValueAsNumber();
+    print("SelectForPreReadAllOnDef value: " + selectForPreReadAllOnDefVal.to_string());
+    
+    /* loop over each user block and the configuration block to check the preconditions */
+    for (var i = 1; i < allBlockCfgs.GetSize (); ++i)
+    {
+        print("Executing checks for block: " + i.to_string());
+        var blockCfg = allBlockCfgs.GetElemAsStruct(i);  
+        
+        Assert(blockCfg.HasMember("Flags"));
+        var blockFlags = blockCfg.GetMemberAsStruct("Flags");
+        
+        var blockSelectedForReadAll = (blockFlags.GetMemberAsNumber("SelectBlockForReadAllEnabled") == selectForReadAllOnDefVal);
+        print("SelectForReadAll enabled: " + blockSelectedForReadAll.to_string());
+
+        var blockSelectedForWriteAll = blockFlags.GetMemberAsNumber("SelectBlockForWriteAllEnabled") == selectForWriteAllOnDefVal;
+        print("SelectForWriteAll enabled: " + blockSelectedForWriteAll.to_string());
+
+        var blockSelectedForPreReadAll = (blockFlags.GetMemberAsNumber("SelectBlockForPreReadAllEnabled") == selectForPreReadAllOnDefVal);
+        print("SelectForPreReadAll enabled: " + blockSelectedForPreReadAll.to_string());
+        
+
+        /* SelectForReadAll, SelectForWriteAll or SelectForPreReadAll enabled? */ 
+        if(blockSelectedForReadAll || blockSelectedForWriteAll || blockSelectedForPreReadAll)
+        {
+            /* has to have RAM or Explicit Synchronization enabled */
+            var hasRam = (blockCfg.GetMemberAsString("RamBlockDataAddr_t") != Define("NULL_PTR").GetValueAsString());
+            var hasExplSyncGet = (blockCfg.GetMemberAsString("CbkGetMirrorFunc_pt") != Define("NULL_PTR").GetValueAsString());
+            var hasExplSyncSet = (blockCfg.GetMemberAsString("CbkSetMirrorFunc_pt") != Define("NULL_PTR").GetValueAsString());
+            
+            Assert((hasRam || (hasExplSyncGet && hasExplSyncSet)));
+        }
+      
+        print("");
+        /* skip all other blocks */
+    }
+}
+
+/**********************************************************************************************************************
+* Name         : CheckInternalBufferLength
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that the configuration has an appropriately sized internal buffer if one is used.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckInternalBufferLength()
+{
+     print("Execute internal buffer length check")
+     
+     
+    var jobForwarding = Define("NVM_JOB_FORWARDING_TO_MEMORY_CORE").GetValueAsString() == "(STD_ON)";
+    var allBlockCfgs = Array("NvM_BlockDescriptorTable_at");
+    var startIndex = 1; /* Ignore multiblock, start with config block as potential first block */
+    var currentBufferSize = 0;
+
+    /* Find largest block in configured blocks */
+    for (var i = startIndex ; i < allBlockCfgs.GetSize(); ++i)
+    {
+        var currentBlock = allBlockCfgs.GetElemAsStruct(i);
+
+        var nonImmediate = (currentBlock.GetMemberAsNumber("BlockPrio_u8") != 0);
+        var nonCrypto =  (HasBlockEncryptionReferences(currentBlock) == false);
+
+        var blockRelevant = (jobForwarding || ((!jobForwarding) && (IsBlockRelevantForInternalBufferSizeCheck(currentBlock) == true)));
+
+        /* Block is only relevant if it is not of immediate priority and non crypto. */
+        if(nonImmediate && nonCrypto && blockRelevant) 
+        {
+
+            currentBufferSize = ComputeCurrentBufferSize(currentBufferSize,currentBlock);
+
+        } 
+    }
+
+
+    /* Test */
+    var internalBufferSize = Define("NVM_INTERNAL_BUFFER_LENGTH").GetValueAsNumber();
+    Assert(internalBufferSize, GreaterEqual, currentBufferSize);
+
+
+}
+
+/**********************************************************************************************************************
+* Name         : CheckImmediatePriorityBufferLength
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that the configuration has an appropriately sized immediate priority buffer if one is used.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckImmediatePriorityBufferLength()
+{
+    if (Define("NVM_INTERNAL_IMMEDIATE_DATA_BUFFER").GetValueAsString() == "(STD_ON)")
+    {
+        print("Immediate priority jobs configured. Checking for correct buffer length")
+        var allBlockCfgs = Array("NvM_BlockDescriptorTable_at");
+        var startIndex = 1; /* Ignore multiblock, start with config block as potential first block */
+        var currentBufferSize = 0;
+
+        /* Find largest block in configured blocks */
+        for (var i = startIndex ; i < allBlockCfgs.GetSize(); ++i)
+        {
+            var currentBlock = allBlockCfgs.GetElemAsStruct(i);
+
+            /* Immediate priority buffer is only used for immediate priority blocks. */
+            if((IsBlockRelevantForInternalBufferSizeCheck(currentBlock) == true) && (currentBlock.GetMemberAsNumber("BlockPrio_u8") == 0)) 
+            {
+                currentBufferSize = ComputeCurrentBufferSize(currentBufferSize,currentBlock);
+            }
+        }
+
+        /* Test */
+        var immediateBufferSize = Define("NVM_INTERNAL_IMMEDIATE_DATA_BUFFER_LENGTH").GetValueAsNumber();
+        Assert(immediateBufferSize, GreaterEqual, currentBufferSize);
+        }
+    else
+    {
+        print("No immediate priority blocks configured. No check for correct immediate
+        priority block buffer size has to be done.")
+    }
+}
+
+/**********************************************************************************************************************
+* Name         : CheckCipheringBufferLength
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks that the configuration has an appropriately sized ciphering buffer if one is used.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckCipheringBufferLength()
+{
+    if (Define("NVM_NR_OF_CSM_CRYPTO_JOBS").GetValueAsNumber() > 0)
+    {
+        print("CSM crypto jobs configured. Checking for correct ciphering buffer length")
+
+        var allBlockCfgs = Array("NvM_BlockDescriptorTable_at");
+        var startIndex = 1; /* Ignore multiblock, start with config block as potential first block */
+        var biggestBufferSize = 0;
+
+        /* Find largest block in configured blocks */
+        for (var i = startIndex ; i < allBlockCfgs.GetSize(); ++i)
+        {
+            var currentBlock = allBlockCfgs.GetElemAsStruct(i);
+            if(HasBlockEncryptionReferences(currentBlock) == true)
+            {
+                print ("current block is relevant!!!!")
+                biggestBufferSize = ComputeCurrentBufferSize(biggestBufferSize, currentBlock)
+            }
+        }
+
+        /* Test crypto buffer size */
+        var cryptoBufferSize = Define("NVM_CRYPTO_BUFFER_LENGTH").GetValueAsNumber()
+
+        Assert(cryptoBufferSize, GreaterEqual, biggestBufferSize)
+    }
+    else
+    {
+        print("No CSM crypto jobs configured. No check for correct ciphering buffer size has to be done.")
+    }
+}
+
+/**********************************************************************************************************************
+* Internal functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : IsBlockRelevantForInternalBufferSizeCheck
+* Parameter    : currentBlock: one entry of "NvM_BlockDescriptorTable_at", describing the config of theblock that shall be checked 
+* Return value : true: The block is relevant for buffer length, false: The block is not relevant for buffer length
+* Description  : Checks if a block is relevant for the buffer length computation.
+* Requirements : N/A
+**********************************************************************************************************************/
+def IsBlockRelevantForInternalBufferSizeCheck(currentBlock)
+{
+    var repairRedundantBlocksEnabled = Define("NVM_REPAIR_REDUNDANT_BLOCKS_API").GetValueAsString() == "(STD_ON)";
+    var internalDataIntegrityBufferEnabled = Define("NVM_DATA_INTEGRITY_INT_BUFFER").GetValueAsString() == "(STD_ON)";
+    var defineValueBlockManagementTypeRedundant = Define("NVM_BLOCK_REDUNDANT").GetValueAsNumber();
+
+    var defineValueDataIntegrityOff = Define("NVM_BLOCK_DATA_INTEGRITY_OFF").GetValueAsNumber();
+    var currentBlockIntegritySetting = currentBlock.GetMemberAsNumber("DataIntegritySettings");
+    var hasCurrentBlockExplSyncGet = (currentBlock.GetMemberAsString("CbkGetMirrorFunc_pt") != Define("NULL_PTR").GetValueAsString());
+    var hasCurrentBlockExplSyncSet = (currentBlock.GetMemberAsString("CbkSetMirrorFunc_pt") != Define("NULL_PTR").GetValueAsString());
+    var isCurrentBlockRelevant = false;
+
+    if(repairRedundantBlocksEnabled && (currentBlock.GetMemberAsNumber("MngmtType_t") == defineValueBlockManagementTypeRedundant))
+    {
+        isCurrentBlockRelevant = true;
+    }
+            
+    if (hasCurrentBlockExplSyncGet || hasCurrentBlockExplSyncSet)
+    {
+        isCurrentBlockRelevant = true;
+    }
+           
+    if (internalDataIntegrityBufferEnabled && (currentBlockIntegritySetting != defineValueDataIntegrityOff))
+    {
+        isCurrentBlockRelevant = true;
+    }
+
+    return isCurrentBlockRelevant;
+}
+
+/**********************************************************************************************************************
+* Name         : HasBlockEncryptionReferences
+* Parameter    : currentBlock: one entry of "NvM_BlockDescriptorTable_at", describing the config of theblock that shall be checked 
+* Return value : true: The block has a CSM job reference configured.
+* Description  : Checks if a given block has a CSM job reference configured.
+* Requirements : N/A
+**********************************************************************************************************************/
+def HasBlockEncryptionReferences(currentBlock)
+{
+    return (currentBlock.GetMemberAsNumber("NvCryptoReference") < Define("NVM_NR_OF_CSM_CRYPTO_JOBS").GetValueAsNumber());
+}
+
+
+/**********************************************************************************************************************
+* Name         : ComputeCurrentBufferSize
+* Parameter    : currentBufferSize: current size of the buffer, currentBlock: one entry of "NvM_BlockDescriptorTable_at", describing the config of theblock that shall be checked 
+* Return value : size of the buffer after processing the given block
+* Description  : Computes the size of the current block and returns the buffersize after this single computation step (max(currentBufferSize, currentBlockSize).
+* Requirements : N/A
+**********************************************************************************************************************/
+def ComputeCurrentBufferSize(currentBufferSize, currentBlock)
+{
+    var currentBlockIntegritySetting = currentBlock.GetMemberAsNumber("DataIntegritySettings");
+    var currentBlockSize = currentBlock.GetMemberAsNumber("NvBlockLength_u16");
+
+    /* Use different buffer size calculations depending selected integrity type */
+    if(currentBlockIntegritySetting == Define("NVM_BLOCK_MAC_ON").GetValueAsNumber())
+    {
+        var macSize = currentBlock.GetMemberAsNumber("MacSize");
+        currentBlockSize = currentBlock.GetMemberAsNumber("NvBlockLength_u16") + macSize;
+    }
+    else
+    {   /* NvM uses a 3 bit bitfield for the data integrity setting => Reuse the bitfield to determine the length of the CRC. 
+            Bitfield value:  0   1   2   3
+            CRC length:      0   1   2   4
+            => Change the CRC length only if the bitfield value is 3
+        */
+        currentBlockSize = currentBlock.GetMemberAsNumber("NvBlockLength_u16") + (currentBlockIntegritySetting == 3 ? 4 : currentBlockIntegritySetting);
+    }
+
+    return (currentBlockSize > currentBufferSize) ? currentBlockSize : currentBufferSize;
+}

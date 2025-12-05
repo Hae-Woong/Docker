@@ -1,0 +1,49 @@
+/**********************************************************************************************************************
+ *  REVISION HISTORY
+ *
+ *  This file contains the revision history of the component implementation and all related artifacts.
+ *  The revision history covers all released version of the component. If you have received a development version of
+ *  this component, the changes made in the development version are not referenced herein.
+ *
+ *  Legend of Columns:
+ *
+ *    I - Implementation
+ *    G - Generator
+ *    D - Documentation & Technical Reference
+ *    T - Test Implementation
+ *    S - Specification
+ *    B - Build-Artifacts
+ *
+ *  Legend of Cells:
+ *
+ *    X - Artifact is affected by the change.
+ *    - - Artifact is not affected by the change.
+ *
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  Version              Date           Author          I G D T S B       Change Id           Description
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  main-1               2024-03-06     visgaz          X X X X X X       CANCORE-2371        Initial migration to git
+ *  main-2               2024-03-07     visgaz          - - - - - -       CANCORE-2371        Fix descriptor for ComponentLicense_Can.lic
+ *  main-3               2024-03-11     visgaz          - - - X X -       TAR-44276           Automatic execution of MSSV test cases
+ *  main-3               2024-03-13     visgaz          - - - X - -       CANCORE-2525        Add selection of config list based on CI_MERGE_REQUEST_LABELS to reduce average rumtime of CI+
+ *  main-3               2024-03-21     visgaz          X - - X X -       CANCORE-2494        Improve static-code-analysis
+ *  main-4               2024-04-12     visgaz          - X - X - -       TAR-44354           Fix component license errors in test environment
+ *  main-4               2024-04-24     destler         - X - - - -       ESCAN00117041       Acceptance Filter Comfort View does not optimize filters in certain configurations
+ *  main-6               2024-05-06     group_433_bot_8918be7e278d67622ccce09cfb7f4951 - - - - - -       CIA-488             Renovate Update config/common digest to fdda146
+ *  main-6               2024-05-15     m6tendonge      - X - - - -       CANCORE-2574        Make rejection filters independent of Basic-CANs
+ *  main-6               2024-05-21     destler         - X - - - -       ESCAN00117042       Acceptance Filter Comfort View does not optimize filters in post-build selectable configurations
+ *  main-7               2024-06-03     destler         - X - - X -       CANCORE-2576        Adapt Extension filter settings to meet MCAN needs
+ *  main-7               2024-06-07     visgaz          - - - X - -       CANCORE-2447        Execute complexity analysis
+ *  main-7               2024-06-10     destler         - X - - - -       ESCAN00117117       Inconsistent postbuild configuration lead to NULL pointer access
+ *  main-8               2024-06-14     destler         X X - X - -       ESCAN00117370       Unintended DET error 'CAN_30_CORE_E_INIT_FAILED' occure because of missing precondition
+ *  4.00.00              -              -               - - - - - -       -                   SemVer release 4.00.00 based on main-8 
+ *  main-9               2024-06-28     destler         X X X X - -       CANCORE-2715        Change  update vehub coordinate and readme
+ *  main-9               2024-07-25     visbir          X X - - - -       CANCORE-1586        Some generator fixes for VTT
+ *  main-9               2024-08-06     visgaz          - - X - - -       ESCAN00117912       Safety Manual: The defines to be checked mentioned in SMI-1141633 cannot be found
+ *  main-9               2024-08-06     visgaz          - - X - - -       ESCAN00117914       Safety Manual: Description in SMI-1030730 is wrong
+ *  main-10              2024-09-03     pwelz           - - - X - -       CANCORE-2496        Fix unit tests Can_30_Core_TxBufferHandler
+ *  main-10              2024-11-13     visgaz          X X X X X -       CANCORE-2451        Safety Analysis
+ *  main-10              2024-11-18     destler         - X X - - -       TAR-65273           Improve overrun description
+ *  main-10              2024-12-02     visgaz          X X - X X -       CANCORE-2878        Reduce RAM consumption of RxQueue when disabled
+ *  4.01.00              -              -               - - - - - -       -                   SemVer release 4.01.00 based on main-10 
+ *********************************************************************************************************************/

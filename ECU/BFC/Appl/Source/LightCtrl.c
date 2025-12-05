@@ -14,12 +14,11 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *             File:  LightCtrl.c
- *           Config:  LightControl.dpa
  *        SW-C Type:  LightCtrl
  *
- *        Generator:  MICROSAR RTE Generator Version 4.37.00
- *                    RTE Core Version 4.37.00
- *          License:  PAI11871
+ *        Generator:  MICROSAR RTE ContractPhase Generator Version 4.39.00
+ *                    RTE Core Version 4.39.00
+ *          License:  DVSwcGen
  *
  *      Description:  C-Code implementation template for SW-C <LightCtrl>
  *********************************************************************************************************************/
@@ -94,130 +93,6 @@ DW_LightCtrl_SWC_T LightCtrl_SWC_DW;
 
 /**********************************************************************************************************************
  *
- * Runnable Entity Name: ECU_Reset
- *
- *---------------------------------------------------------------------------------------------------------------------
- *
- * Executed if at least one of the following trigger conditions occurred:
- *   - triggered on entering of Mode <HARD> of ModeDeclarationGroupPrototype <DcmEcuReset> of PortPrototype <DcmEcuReset>
- *   - triggered on entering of Mode <JUMPTOBOOTLOADER> of ModeDeclarationGroupPrototype <DcmEcuReset> of PortPrototype <DcmEcuReset>
- *   - triggered on entering of Mode <JUMPTOSYSSUPPLIERBOOTLOADER> of ModeDeclarationGroupPrototype <DcmEcuReset> of PortPrototype <DcmEcuReset>
- *
- **********************************************************************************************************************
- *
- * Mode Interfaces:
- * ================
- *   uint8 Rte_Mode_DcmEcuReset_DcmEcuReset(void)
- *   Modes of Rte_ModeType_DcmEcuReset:
- *   - RTE_MODE_DcmEcuReset_EXECUTE
- *   - RTE_MODE_DcmEcuReset_HARD
- *   - RTE_MODE_DcmEcuReset_JUMPTOBOOTLOADER
- *   - RTE_MODE_DcmEcuReset_JUMPTOSYSSUPPLIERBOOTLOADER
- *   - RTE_MODE_DcmEcuReset_KEYONOFF
- *   - RTE_MODE_DcmEcuReset_NONE
- *   - RTE_MODE_DcmEcuReset_SOFT
- *   - RTE_TRANSITION_DcmEcuReset
- *
- *********************************************************************************************************************/
-/**********************************************************************************************************************
- * DO NOT CHANGE THIS COMMENT!           << Start of documentation area >>                  DO NOT CHANGE THIS COMMENT!
- * Symbol: ECU_Reset_doc
- *********************************************************************************************************************/
-
-
-/**********************************************************************************************************************
- * DO NOT CHANGE THIS COMMENT!           << End of documentation area >>                    DO NOT CHANGE THIS COMMENT!
- *********************************************************************************************************************/
-
-FUNC(void, LightCtrl_CODE) ECU_Reset(void) /* PRQA S 0624, 3206 */ /* MD_Rte_0624, MD_Rte_3206 */
-{
-  /**********************************************************************************************************************
-   * DO NOT CHANGE THIS COMMENT!           << Start of runnable implementation >>             DO NOT CHANGE THIS COMMENT!
-   * Symbol: ECU_Reset
-   *********************************************************************************************************************/
-#if !defined (LEVEL1_vECU) && !defined (LEVEL3_vECU)
-    uint8 Mode = Rte_Mode_DcmEcuReset_DcmEcuReset();
-
-    switch (Mode)
-    {
-    case RTE_TRANSITION_DcmEcuReset:
-        break;
-    case RTE_MODE_DcmEcuReset_JUMPTOBOOTLOADER:
-        break;
-    }
-	
-#else
-
-	//Nothing for vECU lvl1 and lvl3
-	
-#endif	
-  /**********************************************************************************************************************
-   * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
-   *********************************************************************************************************************/
-}
-
-/**********************************************************************************************************************
- *
- * Runnable Entity Name: ECU_Reset_Execution
- *
- *---------------------------------------------------------------------------------------------------------------------
- *
- * Executed if at least one of the following trigger conditions occurred:
- *   - triggered on entering of Mode <EXECUTE> of ModeDeclarationGroupPrototype <DcmEcuReset> of PortPrototype <DcmEcuReset>
- *
- **********************************************************************************************************************
- *
- * Mode Interfaces:
- * ================
- *   uint8 Rte_Mode_DcmEcuReset_DcmEcuReset(void)
- *   Modes of Rte_ModeType_DcmEcuReset:
- *   - RTE_MODE_DcmEcuReset_EXECUTE
- *   - RTE_MODE_DcmEcuReset_HARD
- *   - RTE_MODE_DcmEcuReset_JUMPTOBOOTLOADER
- *   - RTE_MODE_DcmEcuReset_JUMPTOSYSSUPPLIERBOOTLOADER
- *   - RTE_MODE_DcmEcuReset_KEYONOFF
- *   - RTE_MODE_DcmEcuReset_NONE
- *   - RTE_MODE_DcmEcuReset_SOFT
- *   - RTE_TRANSITION_DcmEcuReset
- *
- *********************************************************************************************************************/
-/**********************************************************************************************************************
- * DO NOT CHANGE THIS COMMENT!           << Start of documentation area >>                  DO NOT CHANGE THIS COMMENT!
- * Symbol: ECU_Reset_Execution_doc
- *********************************************************************************************************************/
-
-
-/**********************************************************************************************************************
- * DO NOT CHANGE THIS COMMENT!           << End of documentation area >>                    DO NOT CHANGE THIS COMMENT!
- *********************************************************************************************************************/
-
-FUNC(void, LightCtrl_CODE) ECU_Reset_Execution(void) /* PRQA S 0624, 3206 */ /* MD_Rte_0624, MD_Rte_3206 */
-{
-  /**********************************************************************************************************************
-   * DO NOT CHANGE THIS COMMENT!           << Start of runnable implementation >>             DO NOT CHANGE THIS COMMENT!
-   * Symbol: ECU_Reset_Execution
-   *********************************************************************************************************************/
-#if !defined (LEVEL1_vECU) && !defined (LEVEL3_vECU)
-	uint8 Mode = Rte_Mode_DcmEcuReset_DcmEcuReset();
-	
-	switch (Mode)
-    {
-    case RTE_TRANSITION_DcmEcuReset:
-        EcuM_AL_Reset(EcuMConf_EcuMResetMode_ECUM_RESET_MCU);
-        break;
-    }
-#else
-
-	//Nothing for vECU lvl1 and lvl3
-	
-#endif
-  /**********************************************************************************************************************
-   * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
-   *********************************************************************************************************************/
-}
-
-/**********************************************************************************************************************
- *
  * Runnable Entity Name: LightCtrl
  *
  *---------------------------------------------------------------------------------------------------------------------
@@ -263,6 +138,7 @@ FUNC(void, LightCtrl_CODE) LightCtrl(void) /* PRQA S 0624, 3206 */ /* MD_Rte_062
    * DO NOT CHANGE THIS COMMENT!           << Start of runnable implementation >>             DO NOT CHANGE THIS COMMENT!
    * Symbol: LightCtrl
    *********************************************************************************************************************/
+
   /*LÄGG TILL DENNA KOD RAD FÖR ATT ETT TEST SKA FAILA (APPLIKATIONS TEST) LOWERTHRESHOLD = 60, UPPERTHRESHOLD=70*/
   //LightCtrl_SWC_P.LightIntensityToOff_Value = 55; 
 
@@ -501,6 +377,54 @@ FUNC(void, LightCtrl_CODE) LightCtrl(void) /* PRQA S 0624, 3206 */ /* MD_Rte_062
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << Start of removed code area >>                   DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
+
+#if 0
+/***  Start of saved code (symbol: documentation area:ECU_Reset_Execution_doc)  *****************************/
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: documentation area:ECU_Reset_doc)  ***************************************/
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: runnable implementation:ECU_Reset)  **************************************/
+#if !defined (LEVEL1_vECU) && !defined (LEVEL3_vECU)
+    uint8 Mode = Rte_Mode_DcmEcuReset_DcmEcuReset();
+
+    switch (Mode)
+    {
+    case RTE_TRANSITION_DcmEcuReset:
+        break;
+    case RTE_MODE_DcmEcuReset_JUMPTOBOOTLOADER:
+        break;
+    }
+	
+#else
+
+	//Nothing for vECU lvl1 and lvl3
+	
+#endif	/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: runnable implementation:ECU_Reset_Execution)  ****************************/
+#if !defined (LEVEL1_vECU) && !defined (LEVEL3_vECU)
+	uint8 Mode = Rte_Mode_DcmEcuReset_DcmEcuReset();
+	
+	switch (Mode)
+    {
+    case RTE_TRANSITION_DcmEcuReset:
+        EcuM_AL_Reset(EcuMConf_EcuMResetMode_ECUM_RESET_MCU);
+        break;
+    }
+#else
+
+	//Nothing for vECU lvl1 and lvl3
+	
+#endif/***  End of saved code  ************************************************************************************/
+#endif
 
 
 /**********************************************************************************************************************

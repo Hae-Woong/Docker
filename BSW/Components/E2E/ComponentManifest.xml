@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-02A7AD40-1C71-4A29-AD48-8B0A0498627C</guid>
+        <name>SysService_E2eLib@root</name>
+        <version>9.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-305B48B1-AD4A-446A-A43D-C38BBF26D16C</guid>
+        <name>SysService_E2eLib@Make</name>
+        <version>4.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-68F6FF60-B60D-409F-BBB2-6BCE5C70EBD2</guid>
+        <name>SysService_E2eLib@Description</name>
+        <version>1.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-B1B92BC2-0108-4F9A-BBDE-F9D8163C8D85</guid>
+        <name>SysService_E2eLib@Implementation</name>
+        <version>7.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-F438ACC0-ACA9-400D-90E1-D28DBADF7F4F</guid>
+        <name>SysService_E2eLib@Doc_TechRef</name>
+        <version>7.00.00</version>
+    </subPackage>
+</componentManifest>

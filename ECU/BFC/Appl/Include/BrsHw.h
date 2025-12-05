@@ -284,7 +284,7 @@
  *                                           HIGHTEC GCC
  *********************************************************************************************************************/
 #else
-  #error "Compiler not yet supported"
+//  #error "Compiler not yet supported"
 #endif /*BRS_COMP_x*/
 
 /**********************************************************************************************************************
@@ -673,7 +673,7 @@ void BrsHwSoftwareResetECU(void);
  *             startup. The old API name BrsHwGetResetReason() is remapped
  *             to BrsMainGetResetReason.
  *****************************************************************************/
-brsMain_ResetReasonType BrsHwGetResetReasonStartup(void);
+//brsMain_ResetReasonType BrsHwGetResetReasonStartup(void);
 #define BRS_STOP_SEC_STARTUP_CODE
 #include "Brs_MemMap.h"
 

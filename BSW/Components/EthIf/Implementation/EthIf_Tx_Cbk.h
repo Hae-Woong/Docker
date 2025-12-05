@@ -1,0 +1,116 @@
+/**********************************************************************************************************************
+ *  COPYRIGHT
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  \verbatim
+ *  Copyright (c) 2024 by Vector Informatik GmbH.                                              All rights reserved.
+ *
+ *                This software is copyright protected and proprietary to Vector Informatik GmbH.
+ *                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+ *                All other rights remain with Vector Informatik GmbH.
+ *  \endverbatim
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  FILE DESCRIPTION
+ *  -----------------------------------------------------------------------------------------------------------------*/
+/*!        \file  EthIf_Tx_Cbk.h
+ *        \brief  EthIf Tx public callback API header
+ *
+ *      \details  Provides access to the public callback API of the sub-module Tx of EthIf.
+ *
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  REVISION HISTORY
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  Refer to the module's header file.
+ *
+ *  FILE VERSION
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  Refer to the VERSION CHECK below.
+ *********************************************************************************************************************/
+
+#if !defined (ETHIF_TX_CBK_H)
+# define ETHIF_TX_CBK_H
+
+/**********************************************************************************************************************
+ *  INCLUDES
+ *********************************************************************************************************************/
+
+/*********************************************************************************************************
+ * Predefined file includes based on \trace DSGN-EthIfDiag1975
+ *********************************************************************************************************/
+# include "EthIf_Tx_Types.h"
+
+/**********************************************************************************************************************
+ *  GLOBAL CONSTANT MACROS
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  GLOBAL FUNCTION MACROS
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  GLOBAL DATA TYPES AND STRUCTURES
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  GLOBAL DATA PROTOTYPES
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  GLOBAL FUNCTION PROTOTYPES
+ *********************************************************************************************************************/
+
+# define ETHIF_START_SEC_CODE
+# include "EthIf_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_MemMap */
+
+
+# if (ETHIF_ENABLE_AUTOSAR_FORWARD_COMPATIBILITY == STD_ON)
+/**********************************************************************************************************************
+ *  EthIf_TxConfirmation
+ *********************************************************************************************************************/
+/*! \brief          Notifies the EthIf about the transmission of a Ethernet frame
+ *  \details        Function handles the confirmation of an Ethernet frame transmission and passes it to the respective
+ *                  EthIf user.
+ *  \param[in]      CtrlIdx   Ethernet controller index
+ *  \param[in]      BufIdx    Index of the buffer the transmission is confirmed for
+ *  \param[in]      Result    Indication if transmission was successful
+ *  \pre            ETHIF_ENABLE_AUTOSAR_FORWARD_COMPATIBILITY == STD_ON
+ *  \context        TASK|ISR1|ISR2
+ *  \reentrant      TRUE
+ *  \synchronous    TRUE
+ *  \trace          DSGN-EthIf22848
+ *********************************************************************************************************************/
+FUNC(void, ETHIF_CODE) EthIf_TxConfirmation(
+    uint8           CtrlIdx,
+    Eth_BufIdxType  BufIdx,
+    Std_ReturnType  Result);
+
+# else
+/**********************************************************************************************************************
+ *  EthIf_TxConfirmation
+ *********************************************************************************************************************/
+/*! \brief          Notifies the EthIf about the transmission of a Ethernet frame
+ *  \details        Function handles the confirmation of an Ethernet frame transmission and passes it to the respective
+ *                  EthIf user.
+ *  \param[in]      CtrlIdx  Ethernet controller index
+ *  \param[in]      BufIdx   Index of the buffer the transmission is confirmed for
+ *  \pre            ETHIF_ENABLE_AUTOSAR_FORWARD_COMPATIBILITY == STD_OFF
+ *  \context        TASK|ISR1|ISR2
+ *  \reentrant      TRUE
+ *  \synchronous    TRUE
+ *  \trace          DSGN-EthIf22848
+ *********************************************************************************************************************/
+FUNC(void, ETHIF_CODE) EthIf_TxConfirmation(
+    uint8  CtrlIdx,
+    uint8  BufIdx);
+# endif /* ETHIF_ENABLE_AUTOSAR_FORWARD_COMPATIBILITY */
+
+# define ETHIF_STOP_SEC_CODE
+# include "EthIf_MemMap.h" /* PRQA S 5087 */  /* MD_MSR_MemMap */
+
+#endif /* ETHIF_TX_CBK_H */
+
+/**********************************************************************************************************************
+ *  END OF FILE: EthIf_Tx_Cbk.h
+ *********************************************************************************************************************/
+

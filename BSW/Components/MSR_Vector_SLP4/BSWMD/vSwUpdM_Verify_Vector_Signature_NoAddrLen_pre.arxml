@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!---->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00048.xsd">
+	<AR-PACKAGES>
+		<AR-PACKAGE UUID="ff55d029-386d-43a2-b3c2-dfef4c7a5e36">
+			<SHORT-NAME>MICROSAR</SHORT-NAME>
+			<ELEMENTS>
+				<ECUC-MODULE-CONFIGURATION-VALUES UUID="ba6c9c89-0f62-473a-8653-c04b556396d5">
+					<SHORT-NAME>vStreamProc_Pre</SHORT-NAME>
+					<ADMIN-DATA>
+						<SDGS>
+							<SDG GID="DV:UseCases">
+								<SD GID="DV:vSwUpdM_Verification">Vector</SD>
+								<SD GID="DV:vSwUpdM_Verification_Vector">Signature</SD>
+								<SD GID="DV:vSwUpdM_Verification_Vector_Signature">NoAddrLen</SD>
+							</SDG>
+						</SDGS>
+					</ADMIN-DATA>
+					<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/vStreamProc</DEFINITION-REF>
+					<IMPLEMENTATION-CONFIG-VARIANT>VARIANT-LINK-TIME</IMPLEMENTATION-CONFIG-VARIANT>
+					<MODULE-DESCRIPTION-REF DEST="BSW-IMPLEMENTATION">/MICROSAR/vStreamProc_Impl</MODULE-DESCRIPTION-REF>
+					<CONTAINERS>
+						<ECUC-CONTAINER-VALUE UUID="44dfa51d-4e18-474d-b582-9c5e87468c6f">
+							<SHORT-NAME>vSwUpdMVerifyModulePipe</SHORT-NAME>
+							<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/vStreamProc/vStreamProcPipe</DEFINITION-REF>
+							<SUB-CONTAINERS>
+								<ECUC-CONTAINER-VALUE UUID="f53627ad-41db-4dec-9517-42168b212511">
+									<SHORT-NAME>vStreamProcEdges</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcEdges</DEFINITION-REF>
+									<SUB-CONTAINERS>
+										<ECUC-CONTAINER-VALUE UUID="77940f02-5c06-4e98-81b1-63c5be98cbf5">
+											<SHORT-NAME>Read_Data_Out</SHORT-NAME>
+											<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcEdges/vStreamProcProducer</DEFINITION-REF>
+											<REFERENCE-VALUES>
+												<ECUC-REFERENCE-VALUE>
+													<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcEdges/vStreamProcProducer/vStreamProcStorageNodeRef</DEFINITION-REF>
+													<VALUE-REF DEST="ECUC-CONTAINER-VALUE">/MICROSAR/vStreamProc_Pre/vSwUpdMVerifyModulePipe/vStreamProcNodes/vSwUpdMVerifyModule_Read_Data</VALUE-REF>
+												</ECUC-REFERENCE-VALUE>
+												<ECUC-REFERENCE-VALUE>
+													<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcEdges/vStreamProcProducer/vStreamProcProcessingNodeOutputRef</DEFINITION-REF>
+													<VALUE-REF DEST="ECUC-CONTAINER-VALUE">/MICROSAR/vStreamProc_Pre/vSwUpdMVerifyModulePipe/vStreamProcNodes/vSwUpdMVerifyModule_Read/vSwUpdMVerifyModule_Read_Data_Out</VALUE-REF>
+												</ECUC-REFERENCE-VALUE>
+											</REFERENCE-VALUES>
+										</ECUC-CONTAINER-VALUE>
+									</SUB-CONTAINERS>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="a77a5f0b-0a1d-418c-ad4f-1a987654db48">
+									<SHORT-NAME>vStreamProcNodes</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcNodes</DEFINITION-REF>
+									<SUB-CONTAINERS>
+										<ECUC-CONTAINER-VALUE UUID="7a190a4a-1ca5-4c1d-b580-7ac4a9dd07c3">
+											<SHORT-NAME>vSwUpdMVerifyModule_Read</SHORT-NAME>
+											<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcNodes/vStreamProcProcessingNode</DEFINITION-REF>
+											<REFERENCE-VALUES>
+												<ECUC-REFERENCE-VALUE>
+													<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcNodes/vStreamProcProcessingNode/vStreamProcProcessingNodeTypeRef</DEFINITION-REF>
+													<VALUE-REF DEST="ECUC-CONTAINER-VALUE">/MICROSAR/vStreamProc_Rec/vStreamProcDefinitions/vStreamProcNodeTypes/vSwUpdM_Read</VALUE-REF>
+												</ECUC-REFERENCE-VALUE>
+											</REFERENCE-VALUES>
+											<SUB-CONTAINERS>
+												<ECUC-CONTAINER-VALUE UUID="c0d96a81-8fac-4791-bed9-6b20429e1917">
+													<SHORT-NAME>vSwUpdMVerifyModule_Read_Range_In</SHORT-NAME>
+													<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcNodes/vStreamProcProcessingNode/vStreamProcProcessingNodeInputPort</DEFINITION-REF>
+													<REFERENCE-VALUES>
+														<ECUC-REFERENCE-VALUE>
+															<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcNodes/vStreamProcProcessingNode/vStreamProcProcessingNodeInputPort/vStreamProcProcessingNodeInput</DEFINITION-REF>
+															<VALUE-REF DEST="ECUC-CONTAINER-VALUE">/MICROSAR/vStreamProc_Rec/vStreamProcDefinitions/vStreamProcNodeTypes/vSwUpdM_Read/vStreamProcExternalProcessingNode/vStreamProcRequiredInputPorts/RangeInputPort</VALUE-REF>
+														</ECUC-REFERENCE-VALUE>
+													</REFERENCE-VALUES>
+												</ECUC-CONTAINER-VALUE>
+												<ECUC-CONTAINER-VALUE UUID="4e8fddb0-18da-42db-96cd-07c26ce271fc">
+													<SHORT-NAME>vSwUpdMVerifyModule_Read_Entites_In</SHORT-NAME>
+													<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcNodes/vStreamProcProcessingNode/vStreamProcProcessingNodeInputPort</DEFINITION-REF>
+													<REFERENCE-VALUES>
+														<ECUC-REFERENCE-VALUE>
+															<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcNodes/vStreamProcProcessingNode/vStreamProcProcessingNodeInputPort/vStreamProcProcessingNodeInput</DEFINITION-REF>
+															<VALUE-REF DEST="ECUC-CONTAINER-VALUE">/MICROSAR/vStreamProc/vStreamProcDefinitions/vStreamProcNodeTypes/vSwUpdM_Read/vStreamProcExternalProcessingNode/vStreamProcRequiredInputPorts/EntitiesInputPort</VALUE-REF>
+														</ECUC-REFERENCE-VALUE>
+													</REFERENCE-VALUES>
+												</ECUC-CONTAINER-VALUE>
+												<ECUC-CONTAINER-VALUE UUID="6b9dfae1-1219-4996-a9f3-37b7aa42b6f6">
+													<SHORT-NAME>vSwUpdMVerifyModule_Read_Data_Out</SHORT-NAME>
+													<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcNodes/vStreamProcProcessingNode/vStreamProcProcessingNodeOutputPort</DEFINITION-REF>
+													<REFERENCE-VALUES>
+														<ECUC-REFERENCE-VALUE>
+															<DEFINITION-REF DEST="ECUC-CHOICE-REFERENCE-DEF">/MICROSAR/vStreamProc/vStreamProcPipe/vStreamProcNodes/vStreamProcProcessingNode/vStreamProcProcessingNodeOutputPort/vStreamProcProcessingNodeOutput</DEFINITION-REF>
+															<VALUE-REF DEST="ECUC-CONTAINER-VALUE">/MICROSAR/vStreamProc_Rec/vStreamProcDefinitions/vStreamProcNodeTypes/vSwUpdM_Read/vStreamProcExternalProcessingNode/vStreamProcOptionalOutputPorts/DataOutputPort</VALUE-REF>
+														</ECUC-REFERENCE-VALUE>
+													</REFERENCE-VALUES>
+												</ECUC-CONTAINER-VALUE>
+											</SUB-CONTAINERS>
+										</ECUC-CONTAINER-VALUE>
+									</SUB-CONTAINERS>
+								</ECUC-CONTAINER-VALUE>
+							</SUB-CONTAINERS>
+						</ECUC-CONTAINER-VALUE>
+					</CONTAINERS>
+				</ECUC-MODULE-CONFIGURATION-VALUES>
+				<ECUC-MODULE-CONFIGURATION-VALUES UUID="9b0dfd7c-a6fd-408d-9e5c-b9d574635279">
+					<SHORT-NAME>vStreamProc_Rec</SHORT-NAME>
+					<ADMIN-DATA>
+						<SDGS>
+							<SDG GID="DV:UseCases">
+								<SD GID="DV:vSwUpdM_Verification">Vector</SD>
+								<SD GID="DV:vSwUpdM_Verification_Vector">Signature</SD>
+								<SD GID="DV:vSwUpdM_Verification_Vector_Signature">NoAddrLen</SD>
+							</SDG>
+						</SDGS>
+					</ADMIN-DATA>
+					<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/vStreamProc</DEFINITION-REF>
+					<IMPLEMENTATION-CONFIG-VARIANT>VARIANT-LINK-TIME</IMPLEMENTATION-CONFIG-VARIANT>
+					<MODULE-DESCRIPTION-REF DEST="BSW-IMPLEMENTATION">/MICROSAR/vStreamProc_Impl</MODULE-DESCRIPTION-REF>
+					<CONTAINERS></CONTAINERS>
+				</ECUC-MODULE-CONFIGURATION-VALUES>
+			</ELEMENTS>
+		</AR-PACKAGE>
+	</AR-PACKAGES>
+</AUTOSAR>

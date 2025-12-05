@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-034D91FE-D579-47F9-A7F7-245A05BC207B</guid>
+        <name>Common_MemMap_Base@GenTool_GeneratorMsr</name>
+        <version>1.02.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-0CB85242-6C4C-4A3B-9089-40A22C72A6A1</guid>
+        <name>Common_MemMap@Doc_TechRef</name>
+        <version>1.04.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-638987C2-58D6-4A7C-B0DA-1B692DED5327</guid>
+        <name>Common_MemMap@Description</name>
+        <version>1.07.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-7FE4C2E8-B4EE-4D1A-8037-403BA3433712</guid>
+        <name>Common_MemMap@root</name>
+        <version>1.10.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-9BAC079E-E77B-48CD-A172-2D4A8939BD3E</guid>
+        <name>Common_MemMap@GenTool_GeneratorMsr</name>
+        <version>1.10.00</version>
+    </subPackage>
+</componentManifest>

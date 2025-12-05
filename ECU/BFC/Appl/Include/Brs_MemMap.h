@@ -57,7 +57,7 @@
 #if defined (BRS_COMP_TASKING)              
 
 #else
-  #error "Unknown compiler specified! Pragmas for mapping into specific sections not yet implemented for your compiler."
+//  #error "Unknown compiler specified! Pragmas for mapping into specific sections not yet implemented for your compiler."
 #endif
 
 /**********************************************************************************************************************

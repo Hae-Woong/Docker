@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-45EBB830-236A-4D1A-946F-B4001601E459</guid>
+        <name>Rte_Analyzer@GenTool_GeneratorMsr</name>
+        <version>4.37.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-6F42848E-E01F-427D-A2DE-B20D054F21F1</guid>
+        <name>Rte_Analyzer@Doc_TechRef</name>
+        <version>4.37.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-D9084832-B994-4580-914E-80411C7E6E74</guid>
+        <name>Rte_Analyzer@root</name>
+        <version>4.37.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-E55225A7-25ED-4F70-B5AE-21AA2308AF9B</guid>
+        <name>Rte_Analyzer@Application</name>
+        <version>4.37.00</version>
+    </subPackage>
+</componentManifest>

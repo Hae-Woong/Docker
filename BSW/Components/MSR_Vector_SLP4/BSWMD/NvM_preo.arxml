@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+	<AR-PACKAGES>
+		<AR-PACKAGE UUID="ff55d029-386d-43a2-b3c2-dfef4c7a5e36">
+			<SHORT-NAME>MICROSAR</SHORT-NAME>
+			<ADMIN-DATA>
+				<DOC-REVISIONS>
+					<DOC-REVISION>
+						<REVISION-LABEL>28.00.00</REVISION-LABEL>
+						<STATE>released</STATE>
+						<ISSUED-BY>vissvh</ISSUED-BY>
+						<DATE>2022-01-24T08:18:37+01:00</DATE>
+						<MODIFICATIONS>
+							<MODIFICATION>
+								<CHANGE>
+									<L-2 L="EN">PCM-1022</L-2>
+								</CHANGE>
+								<REASON>
+									<L-2 L="EN">PbD Move Program Content to own Program Package - MSR_Vector_SLP4</L-2>
+								</REASON>
+							</MODIFICATION>
+						</MODIFICATIONS>
+					</DOC-REVISION>
+				</DOC-REVISIONS>
+			</ADMIN-DATA>
+			<ELEMENTS>
+				<ECUC-MODULE-CONFIGURATION-VALUES UUID="2e0c6c41-59eb-4ed0-8099-d419c7f1bfde">
+					<SHORT-NAME>NvM_Rec</SHORT-NAME>
+					<ADMIN-DATA>
+						<SDGS>
+							<SDG GID="DV:ClassConfiguration">
+								<SD>/MICROSAR/NvM_Rec_Class1/NvMBlockDescriptor</SD>
+							</SDG>
+						</SDGS>
+					</ADMIN-DATA>
+					<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/NvM</DEFINITION-REF>
+					<CONTAINERS />
+				</ECUC-MODULE-CONFIGURATION-VALUES>
+				<ECUC-MODULE-CONFIGURATION-VALUES UUID="f9d6774c-8ffa-41bf-b530-4ab5bcbddd5e">
+					<SHORT-NAME>NvM_Rec_Class1</SHORT-NAME>
+					<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/NvM</DEFINITION-REF>
+					<CONTAINERS>
+						<ECUC-CONTAINER-VALUE UUID="5857b571-c4aa-43ec-9911-492a72e9c65a">
+							<SHORT-NAME>NvMBlockDescriptor</SHORT-NAME>
+							<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/NvM/NvMBlockDescriptor</DEFINITION-REF>
+							<PARAMETER-VALUES>
+								<ECUC-TEXTUAL-PARAM-VALUE>
+									<DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/MICROSAR/NvM/NvMBlockDescriptor/NvMBlockCrcType</DEFINITION-REF>
+									<VALUE>NVM_CRC16</VALUE>
+								</ECUC-TEXTUAL-PARAM-VALUE>
+								<ECUC-NUMERICAL-PARAM-VALUE>
+									<DEFINITION-REF DEST="ECUC-BOOLEAN-PARAM-DEF">/MICROSAR/NvM/NvMBlockDescriptor/NvMSelectBlockForWriteAll</DEFINITION-REF>
+									<VALUE>0</VALUE>
+								</ECUC-NUMERICAL-PARAM-VALUE>
+								<ECUC-NUMERICAL-PARAM-VALUE>
+									<DEFINITION-REF DEST="ECUC-BOOLEAN-PARAM-DEF">/MICROSAR/NvM/NvMBlockDescriptor/NvMBlockUseCrc</DEFINITION-REF>
+									<VALUE>1</VALUE>
+								</ECUC-NUMERICAL-PARAM-VALUE>
+							</PARAMETER-VALUES>
+						</ECUC-CONTAINER-VALUE>
+					</CONTAINERS>
+				</ECUC-MODULE-CONFIGURATION-VALUES>
+			</ELEMENTS>
+		</AR-PACKAGE>
+	</AR-PACKAGES>
+</AUTOSAR>

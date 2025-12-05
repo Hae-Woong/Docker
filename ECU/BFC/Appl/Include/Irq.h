@@ -216,7 +216,7 @@ __interrupt void isr(void)
    guideline. */
 /* MISRA2012_RULE_4_10_JUSTIFICATION: Memmap header is repeatedly included
    without safegaurd. It complies to Autosar guidelines. */
-#include "Irq_MemMap.h"
+//#include "Irq_MemMap.h"
 
 
 #if (IRQ_CCU6_EXIST == STD_ON)
@@ -660,7 +660,7 @@ extern void IrqI2c_Init(void);
    guideline. */
 /* MISRA2012_RULE_4_10_JUSTIFICATION: Memmap header is repeatedly included
    without safegaurd. It complies to Autosar guidelines. */
-#include "Irq_MemMap.h"
+//#include "Irq_MemMap.h"
 
 
 /*******************************************************************************

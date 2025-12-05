@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="BSW"/>
+    <Filter Include="BSW\RTEModel"/>
+    <Filter Include="BSW\VTT"/>
+    <Filter Include="BSW\VttPlatformEmu"/>
+    <Filter Include="SWC"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\RTE.cpp">
+      <Filter>BSW\RTEModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\RTE_BSW_Handler.cpp">
+      <Filter>BSW\RTEModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\RTE_IoHwAb.cpp">
+      <Filter>BSW\RTEModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\RTE_LightCtrl.cpp">
+      <Filter>BSW\RTEModel</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SIPDIR)\BSW\VttPlatformEmu\VttPlatformEmu_DllMain.cpp">
+      <Filter>BSW\VttPlatformEmu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BFC\Appl\Source\BSW_Handler.c">
+      <Filter>SWC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BFC\Appl\Source\IoHwAb.c">
+      <Filter>SWC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BFC\Appl\Source\LightCtrl.c">
+      <Filter>SWC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\Vtt_CustomVars.c">
+      <Filter>BSW\VTT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BFC\Appl\Source\Vtt_CustomVars_InitCfg.c">
+      <Filter>BSW\VTT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\Vtt_Config.c">
+      <Filter>BSW\VTT</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SIPDIR)\BSW\VttPlatformEmu\CANoeApi.h">
+      <Filter>BSW\VttPlatformEmu</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SIPDIR)\BSW\VttPlatformEmu\CANoeEmuProcessor.h">
+      <Filter>BSW\VttPlatformEmu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BFC\Appl\GenDataVtt\Vtt_CustomVars.h">
+      <Filter>BSW\VTT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BFC\Appl\GenDataVtt\Vtt_CustomVars_private.h">
+      <Filter>BSW\VTT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BFC\Appl\Source\Vtt_CustomVars_Cfg.h">
+      <Filter>BSW\VTT</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\BFC\Appl\GenDataVtt\VttPlatformEmu.rc">
+      <Filter>BSW\VttPlatformEmu</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

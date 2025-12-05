@@ -1,0 +1,89 @@
+/**********************************************************************************************************************
+ *  COPYRIGHT
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  \verbatim
+ *  Copyright (c) 2024 by Vector Informatik GmbH.                                                  All rights reserved.
+ *
+ *                This software is copyright protected and proprietary to Vector Informatik GmbH.
+ *                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+ *                All other rights remain with Vector Informatik GmbH.
+ *  \endverbatim
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  FILE DESCRIPTION
+ *  -------------------------------------------------------------------------------------------------------------------
+ *         \file  IpduM_ContainerTxRequestQueueUtil.h
+ *         \unit  ContainerTxRequestQueueUtil
+ *        \brief  Microsar IpduM ContainerTxRequestQueueUtil header file
+ *      \details  This is the implementation of the MICROSAR IpduM module.
+ *                The basic software module is based on the AUTOSAR IpduM specification.
+ *
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  REVISION HISTORY
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  Refer to the module's header file.
+ *
+ *  FILE VERSION
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  Refer to the module's header file.
+ *********************************************************************************************************************/
+#ifndef IPDUM_CONTAINERTXREQUESTQUEUEUTIL_H
+# define IPDUM_CONTAINERTXREQUESTQUEUEUTIL_H
+
+/**********************************************************************************************************************
+  INCLUDES
+**********************************************************************************************************************/
+# include "IpduM_Cfg.h"
+# include "IpduM_Lcfg.h"
+# include "IpduM_PBcfg.h"
+# include "ComStack_Types.h"
+
+/**********************************************************************************************************************
+  GLOBAL CONSTANT MACROS
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+  GLOBAL FUNCTION MACROS
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+  GLOBAL DATA TYPES AND STRUCTURES
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+  GLOBAL DATA PROTOTYPES
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+  GLOBAL FUNCTION PROTOTYPES
+**********************************************************************************************************************/
+# define IPDUM_START_SEC_CODE
+# include "IpduM_MemMap.h"    /* PRQA S 5087 */       /* MD_MSR_MemMap */
+
+/*******************************************************************************************
+ *  IpduM_ContainerTx_RequestQueueUtil_TriggerTransmission()
+*******************************************************************************************/
+/*! \brief        Trigger the transmission of a request queue container.
+ *  \details      -
+ *  \param[in]    txContainerId
+ *  \return       E_OK            Transmission was successful.
+ *  \return       E_NOT_OK        Transmission was unsuccessful.
+ *  \pre          -
+ *  \context      TASK|ISR
+ *  \reentrant    TRUE for different container IDs.
+ *  \synchronous  TRUE
+ *  \spec
+ *    requires txContainerId < IpduM_GetSizeOfCTxContainerPdu();
+ *  \endspec
+*******************************************************************************************/
+FUNC(Std_ReturnType, IPDUM_CODE) IpduM_ContainerTx_RequestQueueUtil_TriggerTransmission(IpduM_CTxContainerPduIterType txContainerId);
+
+# define IPDUM_STOP_SEC_CODE
+# include "IpduM_MemMap.h"    /* PRQA S 5087 */       /* MD_MSR_MemMap */
+
+#endif /* IPDUM_CONTAINERTXREQUESTQUEUEUTIL_H */
+
+/**********************************************************************************************************************
+ *  END OF FILE: IpduM_ContainerTxRequestQueueUtil.h
+ *********************************************************************************************************************/

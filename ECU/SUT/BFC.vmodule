@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CANoe_vmodule_1.1.xsd">
+  <Name>BFC</Name>
+  <Version>0.0</Version>
+  <Application>CANoe</Application>
+  <ModuleType>NodeLayer-DLL</ModuleType>
+  <ModuleType>CAPL-DLL</ModuleType>
+  
+  <SupportedArchitecture arch="Windows-x86"/>
+  <LibraryPath arch="Windows-x86">./BFC.dll</LibraryPath>
+  <CAPL-DLL minAppVersion="14.0.0">
+    <ExportTable>
+      <Function>
+        <FunctionName>VTT_Reset</FunctionName>
+        <Result>
+          <Type>void</Type>
+        </Result>
+      </Function>
+      <Function>
+        <FunctionName>VTT_Trap</FunctionName>
+        <Result>
+          <Type>void</Type>
+        </Result>
+        <Parameter>
+          <Name>InterruptName</Name>
+          <Type rank="1">char</Type>
+          <ParameterPassing>CallByValue</ParameterPassing>
+        </Parameter>
+      </Function>
+      <Function>
+        <FunctionName>OSEK_Reset</FunctionName>
+        <Result>
+          <Type>void</Type>
+        </Result>
+      </Function>
+      <Function>
+        <FunctionName>OSEK_Trap</FunctionName>
+        <Result>
+          <Type>void</Type>
+        </Result>
+        <Parameter>
+          <Name>InterruptName</Name>
+          <Type rank="1">char</Type>
+          <ParameterPassing>CallByValue</ParameterPassing>
+        </Parameter>
+      </Function>
+      <Function>
+        <FunctionName>LIN_WakeupDropTime</FunctionName>
+        <Result>
+          <Type>void</Type>
+        </Result>
+        <Parameter>
+          <Name>ExtraDelayInMilliseconds</Name>
+          <Type>dword</Type>
+          <ParameterPassing>CallByValue</ParameterPassing>
+        </Parameter>
+      </Function>
+    </ExportTable>
+    <CallbackTable />
+  </CAPL-DLL>
+</Module>

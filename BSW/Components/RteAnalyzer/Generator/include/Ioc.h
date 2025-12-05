@@ -1,0 +1,28 @@
+/**********************************************************************************************************************
+ *  COPYRIGHT
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  \verbatim
+ *  Copyright (c) 2023 by Vector Informatik GmbH.                                                  All rights reserved.
+ *
+ *                This software is copyright protected and proprietary to Vector Informatik GmbH.
+ *                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+ *                All other rights remain with Vector Informatik GmbH.
+ *  \endverbatim
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  FILE DESCRIPTION
+ *  -----------------------------------------------------------------------------------------------------------------*/
+/**        \file  
+ *        \brief  Ioc Header for RTE Analyzer
+ *
+ *      \details  This header provides the OS IOC prototypes
+ *                that are required for the static analysis with RTE Analyzer.
+ *
+ *********************************************************************************************************************/
+#ifndef _IOC_H
+# define _IOC_H
+
+# include "RteAnalyzer/Source/Ioc_Cfg.h"
+
+
+
+#endif

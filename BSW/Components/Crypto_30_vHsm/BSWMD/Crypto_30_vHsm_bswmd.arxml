@@ -1,0 +1,3016 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+***********************************************************************************************************************
+COPYRIGHT
+===============================================================================
+Copyright (c) 2023 by Vector Informatik GmbH.                                       All rights reserved.
+
+    This software is copyright protected and proprietary to Vector Informatik GmbH.
+    Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+    All other rights remain with Vector Informatik GmbH.
+
+File:           Crypto_30_vHsm_bswmd.arxml
+Component:      DrvCrypto_vHsm
+Module:         Crypto_30_vHsm
+Generator:      DaVinci Configurator
+Description:    Configuration of the MICROSAR vHSM Crypto Driver
+*********************************************************************************************************************** 
+-->
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+	<AR-PACKAGES>
+		<AR-PACKAGE UUID="ff55d029-386d-43a2-b3c2-dfef4c7a5e36">
+			<SHORT-NAME>MICROSAR</SHORT-NAME>
+			<AR-PACKAGES>
+				<AR-PACKAGE UUID="0c4e5e56-b5a6-40b9-8562-1babe381bf69">
+					<SHORT-NAME>Crypto_30_vHsm</SHORT-NAME>
+					<ELEMENTS>
+						<BSW-IMPLEMENTATION UUID="661e93af-9a72-489e-bf84-112e3696e3dd">
+							<SHORT-NAME>Crypto_Impl</SHORT-NAME>
+							<PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+							<SW-VERSION>4.00.01</SW-VERSION>
+							<USED-CODE-GENERATOR>DaVinci Configurator</USED-CODE-GENERATOR>
+							<VENDOR-ID>30</VENDOR-ID>
+							<AR-RELEASE-VERSION>4.03.01</AR-RELEASE-VERSION>
+							<BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/MICROSAR/Crypto_30_vHsm_ib_bswmd/BswModuleDescriptions/Crypto/Crypto_30_vHsm</BEHAVIOR-REF>
+							<PRECONFIGURED-CONFIGURATION-REFS>
+								<PRECONFIGURED-CONFIGURATION-REF DEST="ECUC-MODULE-CONFIGURATION-VALUES">/MICROSAR/Crypto_30_vHsm/Crypto_Pre</PRECONFIGURED-CONFIGURATION-REF>
+							</PRECONFIGURED-CONFIGURATION-REFS>
+							<RECOMMENDED-CONFIGURATION-REFS>
+								<RECOMMENDED-CONFIGURATION-REF DEST="ECUC-MODULE-CONFIGURATION-VALUES">/MICROSAR/Crypto_30_vHsm/Crypto_Rec</RECOMMENDED-CONFIGURATION-REF>
+							</RECOMMENDED-CONFIGURATION-REFS>
+							<VENDOR-API-INFIX>vHsm</VENDOR-API-INFIX>
+							<VENDOR-SPECIFIC-MODULE-DEF-REFS>
+								<VENDOR-SPECIFIC-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/MICROSAR/Crypto_30_vHsm/Crypto</VENDOR-SPECIFIC-MODULE-DEF-REF>
+							</VENDOR-SPECIFIC-MODULE-DEF-REFS>
+						</BSW-IMPLEMENTATION>
+						<ECUC-MODULE-DEF UUID="cc13fd78-eae2-46e6-9953-10ab262fc418">
+							<SHORT-NAME>Crypto</SHORT-NAME>
+							<DESC>
+								<L-2 L="EN">Vector Crypto Driver for the MICROSAR vHSM. The Crypto Driver (CRYPTO) is called by the Crypto Interface (CRYIF) and forwards the specific cryptographic operations to the MICROSAR vHSM side.
+The Crypto Driver interfaces are specificed by AUTOSAR. This software-based Crypto Driver offers algorithms and features depending on the configuration of MICROSAR vHSM.
+
+#Security #Crypto #Cryptography #HSM
+#AUTOSAR</L-2>
+							</DESC>
+							<CATEGORY>VENDOR_SPECIFIC_MODULE_DEFINITION</CATEGORY>
+							<ADMIN-DATA>
+								<DOC-REVISIONS>
+									<DOC-REVISION>
+										<REVISION-LABEL>1.00.00</REVISION-LABEL>
+										<STATE>beta</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2017-06-23T02:45:06+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Initial creation</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">-</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>1.01.00</REVISION-LABEL>
+										<STATE>beta</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2018-01-09T15:56:29+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Feature Completion</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">STORYC-4214</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>1.02.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2018-05-08T15:56:30+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Release of Component, Added Missing compiler abstractions</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">STORYC-5257, ESCAN00099366</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>1.03.00</REVISION-LABEL>
+										<STATE>beta</STATE>
+										<ISSUED-BY>visjhi</ISSUED-BY>
+										<DATE>2018-06-20T19:38:49+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Hardware independent memory area configuration</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">STORYC-5741</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.00.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>visrpp</ISSUED-BY>
+										<DATE>2018-09-24T16:22:39+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Removed pre-configured primitives since they are generated by vHSM now. Added CryptoHsmUserRevision and CryptoIpcChannels</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">STORYC-6561, STORYC-6299</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.01.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2019-01-11T20:28:24+01:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">FastMAC, Redirection, Crypto_KeyElementCopyPartial</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">STORYC-7341,STORYC-7143,STORYC-7339</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.01.01</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>visjhi</ISSUED-BY>
+										<DATE>2019-05-13T11:11:27+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Remove VTT code, improve handling of verifyPtr</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">STORYC-8370, ESCAN00103101</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.01.02</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2019-08-06T15:02:24+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">No changes in code</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">ESCAN00103644</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.02.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2019-08-06T15:02:56+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Summarized Buffers to one per Driver Object, Det error CRYPTO_E_PARAM_POINTER during Fast MAC Generation</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-432, ESCAN00103942, HSM-432</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.02.01</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2020-01-28T10:58:30+01:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Compiler error when DEV_ERROR_REPORT and DEV_ERROR_DETECT have different values</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">ESCAN00105494</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.03.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2020-01-30T12:01:33+01:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Extend HSM/HOST communication over registers and interrupts, Make DET errors from vHsm distinguishable from application core DET errors, async key handling</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-629, HSM-619, HSM-160, HSM-699</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.03.01</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2020-07-14T13:15:32+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Set software version</L-2>
+												</CHANGE>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.04.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2020-08-07T13:48:41+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Support SafeBswChecks Switch and Pre-Config</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-1098</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.05.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2020-10-02T17:49:02+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Support multiple Key managment objects</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-1193</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.05.01</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2020-10-27T16:33:17+01:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Set software version</L-2>
+												</CHANGE>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>2.06.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2021-01-05T15:45:59+01:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">NoBuffering Driver objects</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-1296</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>3.00.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2021-01-25T18:23:47+01:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Support for IPCv3, Custom Modes according ASR 20-11</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-1324, HSM-270</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>3.00.01</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2021-03-25T11:27:39+01:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Buffer inside GlobalRamBuffer is not allocated correctly during runtime</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">ESCAN00108847</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>3.01.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>visebj</ISSUED-BY>
+										<DATE>2021-07-23T11:48:30+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Support save/restore context</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-1785</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>3.02.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2022-07-07T19:21:24+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Usage of Mip_MemMap.h</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-2091</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>3.03.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2022-10-19T13:15:23+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Support for Sitara platforms (Enums for Interrupt handling)</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-3092</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>3.04.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>viskju</ISSUED-BY>
+										<DATE>2023-02-13T14:47:53+01:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Reworked loop callout</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-3377</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>4.00.00</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2023-04-14T17:11:36+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Support Multicore</L-2>
+												</CHANGE>
+												<REASON>
+													<L-2 L="EN">HSM-3734</L-2>
+												</REASON>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+									<DOC-REVISION>
+										<REVISION-LABEL>4.00.01</REVISION-LABEL>
+										<STATE>released</STATE>
+										<ISSUED-BY>vistof</ISSUED-BY>
+										<DATE>2023-06-06T11:26:05+02:00</DATE>
+										<MODIFICATIONS>
+											<MODIFICATION>
+												<CHANGE>
+													<L-2 L="EN">Set software version</L-2>
+												</CHANGE>
+											</MODIFICATION>
+										</MODIFICATIONS>
+									</DOC-REVISION>
+								</DOC-REVISIONS>
+							</ADMIN-DATA>
+							<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+							<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+							<REFINED-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/Crypto</REFINED-MODULE-DEF-REF>
+							<SUPPORTED-CONFIG-VARIANTS>
+								<SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT>
+							</SUPPORTED-CONFIG-VARIANTS>
+							<CONTAINERS>
+								<ECUC-PARAM-CONF-CONTAINER-DEF UUID="2afe0d42-e52c-4710-aac6-5a235560aaa6">
+									<SHORT-NAME>CryptoDriverObjects</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Container for Crypto Driver Objects </L-2>
+									</DESC>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DV:CfgPostBuild">
+												<SD GID="DV:postBuildSelectableChangeable">false</SD>
+												<SD GID="DV:postBuildNotDeletable">false</SD>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+									<SUB-CONTAINERS>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="36e1af48-f681-4fde-b53b-1d6adf9636f0">
+											<SHORT-NAME>CryptoDriverObject</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Container for configuration of Crypto Driver Object. The container name 
+serves as a symbolic name for the identifier of a Crypto Driver Object. </L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<PARAMETERS>
+												<ECUC-INTEGER-PARAM-DEF UUID="946cd5fc-473b-4957-a542-042ca3fd9171">
+													<SHORT-NAME>CryptoDriverObjectId</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Identifier of the Crypto Driver Object. The Crypto Driver Object offers 
+different crypto primitives. </L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">DEC</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>true</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>0</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-INTEGER-PARAM-DEF UUID="167b3a49-50a6-41a0-b110-77d036dee05c">
+													<SHORT-NAME>CryptoDriverObjectQueueSize</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Size of the queue in the Crypto Driver. Defines the maximum number of 
+jobs in the Crypto Driver Object queue. If it is set to 0, queueing is disabled 
+in the Crypto Driver Object.
+This Crypto Driver does not support queuing but uses the buffer for asynchronous processing.</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">DEC</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>1</DEFAULT-VALUE>
+													<MAX>1</MAX>
+													<MIN>1</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-INTEGER-PARAM-DEF UUID="98f617bd-43be-4317-8349-70e96dc415d2">
+													<SHORT-NAME>CryptoBufferSize</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Size of the buffer allocated in the global RAM for this driver object.
+This buffer stores all the input and output data, which is not directly accessible by the vHsm,  of the to be processed job. If Memory is accessible or not is defined by the CryptoMemoryArea configuration, e.g. RAM accessible by local CPU only or protected by MPU.
+
+Attention: The buffer may contain the data of up to 5 pointers. For better performance, the driver inserts padding bytes between the different data to ensure aligned access for vHsm. Therefore, the needed buffer size could be greater than the total size of the buffered data.
+
+To avoid unnecessary big buffers and the time to copy the data, consider providing the data directly from code flash or global RAM.
+
+The buffer can also be configured to 0 to avoid unecessary pointer checks against the whitelist of the driver (the vHsm firmware will still check the pointers). Pay attention that all input and output needs to be mapped correctly in this case as the driver will not take care about copying the data to and from memory which can be accessed by the vHsm firmware. For SafeBsw it is also no possible to use a buffersize of 0.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>128</DEFAULT-VALUE>
+													<MAX>4294967294</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+											</PARAMETERS>
+											<REFERENCES>
+												<ECUC-REFERENCE-DEF UUID="bf3b888f-9dfb-492a-8529-e20199c5b85c">
+													<SHORT-NAME>CryptoPrimitiveRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Refers to primitive in the CRYPTO. 
+The CryptoPrimitive is a pre-configured container of the crypto service that shall be used. </L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoPrimitives/CryptoPrimitive</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+												<ECUC-REFERENCE-DEF UUID="5db710df-cfcd-4ecb-a5a0-6e8c48ad6def">
+													<SHORT-NAME>CryptoDriverObjectEcucPartitionRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Maps a crypto driver object to zero or one ECUC partition.
+The ECUC partition referenced is a subset of the ECUC partitions where the Crypto driver is mapped to.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+											</REFERENCES>
+											<SUB-CONTAINERS>
+												<ECUC-PARAM-CONF-CONTAINER-DEF UUID="5ac8d059-dfd7-44de-9a7f-d7c54a7b2146">
+													<SHORT-NAME>CryptovHsmBuffer</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Use /MICROSAR/Crypto_30_vHsm/Crypto/CryptoDriverObjects/CryptoDriverObject/CryptoBufferSize instead. This parameter summarizes all buffers included in this container.
+
+Container to specify the size of the buffers for each parameter which will be used when the pointer points to invalid memory e.g. local RAM.</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:CfgPostBuild">
+																<SD GID="DV:postBuildSelectableChangeable">false</SD>
+																<SD GID="DV:postBuildNotDeletable">false</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+													<PARAMETERS>
+														<ECUC-INTEGER-PARAM-DEF UUID="34c9323a-f58d-42dc-9092-008b236df6ec">
+															<SHORT-NAME>CryptoInputBufferSize</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">Parameter is deprecated and not used anymore. Only available for backward compatibility.
+Use /MICROSAR/Crypto_30_vHsm/Crypto/CryptoDriverObjects/CryptoDriverObject/CryptoBufferSize instead.
+
+Size of the buffer on the global RAM to store the input data which is provided from the local RAM.
+</L-2>
+															</DESC>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+															<IMPLEMENTATION-CONFIG-CLASSES>
+																<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																	<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															</IMPLEMENTATION-CONFIG-CLASSES>
+															<ORIGIN>Vector Informatik</ORIGIN>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+															<DEFAULT-VALUE>0</DEFAULT-VALUE>
+															<MAX>4294967294</MAX>
+															<MIN>0</MIN>
+														</ECUC-INTEGER-PARAM-DEF>
+														<ECUC-INTEGER-PARAM-DEF UUID="1ca89522-797f-435f-90c2-246faffb8f11">
+															<SHORT-NAME>CryptoSecondaryInputBufferSize</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">Parameter is deprecated and not used anymore. Only available for backward compatibility.
+Use /MICROSAR/Crypto_30_vHsm/Crypto/CryptoDriverObjects/CryptoDriverObject/CryptoBufferSize instead.
+
+Size of the buffer on the global RAM to store the secondary input data which is provided from the local RAM.</L-2>
+															</DESC>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+															<IMPLEMENTATION-CONFIG-CLASSES>
+																<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																	<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															</IMPLEMENTATION-CONFIG-CLASSES>
+															<ORIGIN>Vector Informatik</ORIGIN>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+															<DEFAULT-VALUE>0</DEFAULT-VALUE>
+															<MAX>4294967294</MAX>
+															<MIN>0</MIN>
+														</ECUC-INTEGER-PARAM-DEF>
+														<ECUC-INTEGER-PARAM-DEF UUID="e81f402c-d61c-46ee-ba70-08a17721a74c">
+															<SHORT-NAME>CryptoTertiaryInputBufferSize</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">Parameter is deprecated and not used anymore. Only available for backward compatibility.
+Use /MICROSAR/Crypto_30_vHsm/Crypto/CryptoDriverObjects/CryptoDriverObject/CryptoBufferSize instead.
+
+Size of the buffer on the global RAM to store the tertiary input data which is provided from the local RAM.</L-2>
+															</DESC>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+															<IMPLEMENTATION-CONFIG-CLASSES>
+																<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																	<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															</IMPLEMENTATION-CONFIG-CLASSES>
+															<ORIGIN>Vector Informatik</ORIGIN>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+															<DEFAULT-VALUE>0</DEFAULT-VALUE>
+															<MAX>4294967294</MAX>
+															<MIN>0</MIN>
+														</ECUC-INTEGER-PARAM-DEF>
+														<ECUC-INTEGER-PARAM-DEF UUID="a4e8712f-8d48-4cc4-ad68-e2d43f72c2d4">
+															<SHORT-NAME>CryptoOutputBufferSize</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">Parameter is deprecated and not used anymore. Only available for backward compatibility.
+Use /MICROSAR/Crypto_30_vHsm/Crypto/CryptoDriverObjects/CryptoDriverObject/CryptoBufferSize instead.
+
+Size of the buffer on the global RAM to store the output data which will be written to the local RAM.</L-2>
+															</DESC>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+															<IMPLEMENTATION-CONFIG-CLASSES>
+																<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																	<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															</IMPLEMENTATION-CONFIG-CLASSES>
+															<ORIGIN>Vector Informatik</ORIGIN>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+															<DEFAULT-VALUE>0</DEFAULT-VALUE>
+															<MAX>4294967294</MAX>
+															<MIN>0</MIN>
+														</ECUC-INTEGER-PARAM-DEF>
+														<ECUC-INTEGER-PARAM-DEF UUID="a8264d7a-b4f9-4fdb-8fa1-af8541fe7e66">
+															<SHORT-NAME>CryptoSecondaryOutputBufferSize</SHORT-NAME>
+															<DESC>
+																<L-2 L="EN">Parameter is deprecated and not used anymore. Only available for backward compatibility.
+Use /MICROSAR/Crypto_30_vHsm/Crypto/CryptoDriverObjects/CryptoDriverObject/CryptoBufferSize instead.
+
+Size of the buffer on the global RAM to store the secondary output data which will be written to the local RAM.</L-2>
+															</DESC>
+															<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+															<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+															<IMPLEMENTATION-CONFIG-CLASSES>
+																<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+																	<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+																	<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+																</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															</IMPLEMENTATION-CONFIG-CLASSES>
+															<ORIGIN>Vector Informatik</ORIGIN>
+															<REQUIRES-INDEX>false</REQUIRES-INDEX>
+															<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+															<DEFAULT-VALUE>0</DEFAULT-VALUE>
+															<MAX>4294967294</MAX>
+															<MIN>0</MIN>
+														</ECUC-INTEGER-PARAM-DEF>
+													</PARAMETERS>
+												</ECUC-PARAM-CONF-CONTAINER-DEF>
+											</SUB-CONTAINERS>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+									</SUB-CONTAINERS>
+								</ECUC-PARAM-CONF-CONTAINER-DEF>
+								<ECUC-PARAM-CONF-CONTAINER-DEF UUID="9d7a263c-f3f9-4622-8d35-774922e676ab">
+									<SHORT-NAME>CryptoGeneral</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Container for common configuration options.</L-2>
+									</DESC>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DV:CfgPostBuild">
+												<SD GID="DV:postBuildSelectableChangeable">false</SD>
+												<SD GID="DV:postBuildNotDeletable">false</SD>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+									<MULTIPLE-CONFIGURATION-CONTAINER>false</MULTIPLE-CONFIGURATION-CONTAINER>
+									<PARAMETERS>
+										<!-- PARAMETER DEFINITION: CsmDevErrorDetect -->
+										<ECUC-BOOLEAN-PARAM-DEF UUID="1520b4d1-7517-461f-b929-3f585a8444c2">
+											<SHORT-NAME>CryptoDevErrorDetect</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Switches the development error detection and notification on or off. 
+- True: detection and notification is enabled. 
+- False: detection and notification is disabled.
+</L-2>
+											</DESC>
+											<INTRODUCTION>
+												<P>
+													<L-1 L="EN">True: Development error detection enabled.
+                                        False: Development error detection disabled</L-1>
+												</P>
+											</INTRODUCTION>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>true</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<!-- PARAMETER DEFINITION: CsmMaxAlignScalarType -->
+										<!-- PARAMETER DEFINITION: CsmMaximumBlockingTime -->
+										<!-- PARAMETER DEFINITION: CsmUseInterruption -->
+										<!-- PARAMETER DEFINITION: CsmUseSyncJobProcessing -->
+										<!-- PARAMETER DEFINITION: CsmVersionInfoApi -->
+										<ECUC-BOOLEAN-PARAM-DEF UUID="e5dfd150-de23-42b2-af0e-0b5b9216d0d7">
+											<SHORT-NAME>CryptoVersionInfoApi</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Pre-processor switch to enable and disable availability of the API Crypto_GetVersionInfo().  
+- True: API Crypto_GetVersionInfo() is available 
+- False: API Crypto_GetVersionInfo() is not available. </L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-FLOAT-PARAM-DEF UUID="b4db62ae-2736-4a01-bd4a-7df64a309db0">
+											<SHORT-NAME>CryptoMainFunctionPeriod</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Specifies the period of main function Crypto_MainFunction in seconds. </L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:Display">
+														<SD GID="DV:BaseUnit">SEC</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>0.01</DEFAULT-VALUE>
+											<MAX>3600</MAX>
+											<MIN>0</MIN>
+										</ECUC-FLOAT-PARAM-DEF>
+										<ECUC-STRING-PARAM-DEF UUID="814cfa35-b241-471c-9194-4981edba5cd6">
+											<SHORT-NAME>CryptoUserConfigFile</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Reference to an external user configuration file that will be included during generation.
+The content of the user configuration file will be added at the end of the generated module configuration file and allows altering or extending the generated code.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+										</ECUC-STRING-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="e60153cc-fdbb-4dbc-ac65-60a9b18a2047">
+											<SHORT-NAME>CryptoSafeBswChecks</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Selects if safety checks are used. These checks improve robustness as e.g. invalid parameters are checked before function is executed. This attribute has to be enabled for safety projects where this component is mapped to an ASIL partition.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="918884ba-e8e9-46a9-920d-42cfd9bea742">
+											<SHORT-NAME>CryptoMultiPartitionRuntimeChecks</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">If enabled, additional checks are performed to prevent the usage of driver objects by wrong partitions.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="c0345ada-6896-4822-ad38-db878220addc">
+											<SHORT-NAME>CryptoTimeoutCallout</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">If this parameter is set to true, the following callout functions get called at each loop where the driver has to wait for the HSM core: 
+Crypto_30_vHsm_TimeoutDetect_Start_Callout, Crypto_30_vHsm_TimeoutDetect_Loop_Callout, Crypto_30_vHsm_TimeoutDetect_End_Callout
+
+These callouts can be used to detect violations of freedom from interference with respect to timing of the loops.
+See the Technical Reference of this module for more information.
+
+If this parameter is set to false, the mentioned callout functions never get called.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+									</PARAMETERS>
+									<REFERENCES>
+										<ECUC-REFERENCE-DEF UUID="de130ea1-24bc-4873-ac1f-aeaacda4ed7e">
+											<SHORT-NAME>CryptoEcucPartitionRef</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Maps the Crypto driver to zero or multiple ECUC partitions to make the modules API available in this partition. 
+The module will operate as an independent instance in each of the partitions.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition</DESTINATION-REF>
+										</ECUC-REFERENCE-DEF>
+									</REFERENCES>
+								</ECUC-PARAM-CONF-CONTAINER-DEF>
+								<ECUC-PARAM-CONF-CONTAINER-DEF UUID="a1c74b54-a95e-4dd7-a21d-a17097ae732d">
+									<SHORT-NAME>CryptoKeyElements</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Container  for CRYPTO  key elements</L-2>
+									</DESC>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DV:CfgPostBuild">
+												<SD GID="DV:postBuildSelectableChangeable">false</SD>
+												<SD GID="DV:postBuildNotDeletable">false</SD>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
+									<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+									<SUB-CONTAINERS>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="5651e7e5-1973-4837-b89a-81f1800729a1">
+											<SHORT-NAME>CryptoKeyElement</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Configuration of a CryptoKeyElement </L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<PARAMETERS>
+												<ECUC-INTEGER-PARAM-DEF UUID="e32bf300-e4c9-4e91-a217-63a33db70ec0">
+													<SHORT-NAME>CryptoKeyElementId</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Identifier of the CRYPTO key element </L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">DEC</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>true</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>0</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-INTEGER-PARAM-DEF UUID="23426719-5b9d-4f8c-927c-b5969fc13cf1">
+													<SHORT-NAME>CryptoKeyElementSize</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Maximum size of a CRYPTO key element in bytes </L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">DEC</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>16</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>1</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-STRING-PARAM-DEF UUID="a604d634-83d4-44fe-bda1-2d934d5b164f">
+													<SHORT-NAME>CryptoKeyElementInitValue</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Value which will be used to fill the element during initialization, when the element is not already initialized. </L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<ECUC-STRING-PARAM-DEF-VARIANTS>
+														<ECUC-STRING-PARAM-DEF-CONDITIONAL>
+															<DEFAULT-VALUE>0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</DEFAULT-VALUE>
+														</ECUC-STRING-PARAM-DEF-CONDITIONAL>
+													</ECUC-STRING-PARAM-DEF-VARIANTS>
+												</ECUC-STRING-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="06c3a235-d4c3-4b76-85cc-568f87ceedf4">
+													<SHORT-NAME>CryptoKeyElementReadAccess</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Define the reading access rights of the key element. 
+CRYPTO_RA_DENIED = key element cannot be read from outside the Crypto 
+Driver 
+CRYPTO_RA INTERNAL_COPY = key element can be copied to another key 
+element in the same crypto driver. 
+CRYPTO_RA_ALLOWED = key element can be read as plaintext 
+CRYPTO_RA_ENCRYPTED = key element can be read encrypted. E.g. SHE Ram-
+Key export. </L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>RA_ALLOWED</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="17c491ed-21d4-411e-8954-767f788ac632">
+															<SHORT-NAME>RA_ALLOWED</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="85e8d780-8348-49de-b0a4-2cf98e73165f">
+															<SHORT-NAME>RA_DENIED</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="0d2c7b44-baea-45fb-85e2-35a5abc34cea">
+															<SHORT-NAME>RA_ENCRYPTED</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="91211df3-41e6-45ce-9a64-1d6729f7a662">
+															<SHORT-NAME>RA_INTERNAL_COPY</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-BOOLEAN-PARAM-DEF UUID="828bf5c0-b857-4a8d-bf0f-2b18766633a9">
+													<SHORT-NAME>CryptoKeyElementAllowPartialAccess</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Enable or disable writing and reading the key element with data smaller 
+than the size of the element. 
+- True: enable partial access of the key element 
+- False: disable partial access of the key element </L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>false</DEFAULT-VALUE>
+												</ECUC-BOOLEAN-PARAM-DEF>
+												<ECUC-BOOLEAN-PARAM-DEF UUID="efaa990d-2bb0-4cfc-adde-25eb2703fa51">
+													<SHORT-NAME>CryptoKeyElementPersist</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Enable or disable persisting of the key element in non-volatile storage. 
+- True: enable persisting of the key element. 
+- False: disable persisting of the key element. </L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>false</DEFAULT-VALUE>
+												</ECUC-BOOLEAN-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="e854aa62-3cd9-4b92-b5fb-e7108ac025dc">
+													<SHORT-NAME>CryptoKeyElementWriteAccess</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Define the writing access rights of the key element 
+CRYPTO_WA_DENIED = key element cannot be written from outside the Crypto Driver 
+CRYPTO_WA INTERNAL_COPY = key element can be filled with another key element in the same crypto driver. 
+CRYPTO_WA_ALLOWED = key element can be rewritten as plaintext 
+CRYPTO_WA_ENCRYPTED = key element can be written encrypted. E.g. SHE load key.
+</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>WA_ALLOWED</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="611f5e92-2762-463e-8c49-7807a3cdcafa">
+															<SHORT-NAME>WA_ALLOWED</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="644e8346-c0fb-4575-bed8-a08624d726bf">
+															<SHORT-NAME>WA_DENIED</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="04a49bf8-380c-45ab-ad7a-add89c5f1c10">
+															<SHORT-NAME>WA_ENCRYPTED</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="52f21cf3-ecdb-484d-95b3-b034c699ad0f">
+															<SHORT-NAME>WA_INTERNAL_COPY</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+											</PARAMETERS>
+											<REFERENCES>
+												<ECUC-REFERENCE-DEF UUID="0ce7166a-8adc-4e94-b09d-0efbcf84375b">
+													<SHORT-NAME>CryptoKeyElementVirtualTargetRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Refers to a key element which will contain the actual data. If the Reference 
+is configured, the key element will be a virtual key element. </L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements/CryptoKeyElement</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+											</REFERENCES>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+									</SUB-CONTAINERS>
+								</ECUC-PARAM-CONF-CONTAINER-DEF>
+								<ECUC-PARAM-CONF-CONTAINER-DEF UUID="d1b389d2-77bf-4b01-8d26-0aeddded8d73">
+									<SHORT-NAME>CryptoKeyTypes</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Container for CRYPTO key types </L-2>
+									</DESC>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DV:CfgPostBuild">
+												<SD GID="DV:postBuildSelectableChangeable">false</SD>
+												<SD GID="DV:postBuildNotDeletable">false</SD>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
+									<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+									<SUB-CONTAINERS>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="27c09eae-3124-4d7a-8ed6-b51847d309b6">
+											<SHORT-NAME>CryptoKeyType</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Configuration of a CryptoKeyType </L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<REFERENCES>
+												<ECUC-REFERENCE-DEF UUID="44e69a1d-c76e-45fe-8e10-afdf7ac0203e">
+													<SHORT-NAME>CryptoKeyElementRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Refers to a pointer in the CRYPTOCrypto Key Element, which holds the 
+data of the crypto key element. </L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements/CryptoKeyElement</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+											</REFERENCES>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+									</SUB-CONTAINERS>
+								</ECUC-PARAM-CONF-CONTAINER-DEF>
+								<ECUC-PARAM-CONF-CONTAINER-DEF UUID="538dbfae-1285-4cb2-8875-6710af8a5bd2">
+									<SHORT-NAME>CryptoKeys</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Container for CRYPTO keys</L-2>
+									</DESC>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DV:CfgPostBuild">
+												<SD GID="DV:postBuildSelectableChangeable">false</SD>
+												<SD GID="DV:postBuildNotDeletable">false</SD>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
+									<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+									<SUB-CONTAINERS>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="95137452-25b6-41c2-8700-0835d7959f2c">
+											<SHORT-NAME>CryptoKey</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Configuration of a CryptoKey</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<PARAMETERS>
+												<ECUC-INTEGER-PARAM-DEF UUID="454851ad-c6ab-41c3-a722-16512f7cab89">
+													<SHORT-NAME>CryptoKeyId</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Identifier of the CRYPTO key</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">DEC</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>true</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>0</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-INTEGER-PARAM-DEF UUID="5fd0a743-1fa8-421b-94cc-6da74607c181">
+													<SHORT-NAME>CryptoKeyDeriveIterations</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Holds the number of iterations to be performed by the key derivation primitive</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>1</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>1</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+											</PARAMETERS>
+											<REFERENCES>
+												<ECUC-REFERENCE-DEF UUID="bf72d470-98c4-405e-abad-c8f7625eed69">
+													<SHORT-NAME>CryptoKeyTypeRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Refers to a pointer in the CRYPTO to a CryptoKeyType. The CryptoKeyType provides the information which key elements are contained in a CryptoKey. </L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyTypes/CryptoKeyType</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+											</REFERENCES>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+									</SUB-CONTAINERS>
+								</ECUC-PARAM-CONF-CONTAINER-DEF>
+								<ECUC-PARAM-CONF-CONTAINER-DEF UUID="2a8ff4d1-8449-4cd5-823c-116aaf8119f4">
+									<SHORT-NAME>CryptoPrimitives</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Container for CRYPTO primitives </L-2>
+									</DESC>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DV:CfgPostBuild">
+												<SD GID="DV:postBuildSelectableChangeable">false</SD>
+												<SD GID="DV:postBuildNotDeletable">false</SD>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
+									<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+									<SUB-CONTAINERS>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="3ff0ebef-9318-4e09-8319-9fb65d24df78">
+											<SHORT-NAME>CryptoPrimitive</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Configuration of a CryptoPrimitive </L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<PARAMETERS>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="08d1a99e-20c0-4cf3-8618-1cdc87e836a5">
+													<SHORT-NAME>CryptoPrimitiveAlgorithmFamily</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Determines the algorithm family used for the crypto service.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>CRYPTO_ALGOFAM_NOT_SET</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="dbd6fb60-bd2f-4bf1-9444-b9278b593fda">
+															<SHORT-NAME>CRYPTO_ALGOFAM_NOT_SET</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="88a09896-83cd-48a5-9a1c-17ad083c2688">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA1</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="361ac42f-24a9-4943-b1ea-cf6450cf19c3">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_224</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="8721ef15-d13d-4bd5-8034-61667f121ec3">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="37e09f5d-432e-4a9b-922e-ac8758052dc3">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_384</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="b92924f1-fc64-4817-95a2-32a15ffa3b49">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_512</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="178b3937-b054-4d23-a38a-92e9cca92ae3">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_512_224</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="c6829361-3d81-44ff-bd5e-a98f86001417">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_512_256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="94ea1155-c1df-47c3-b4af-a1d9f97c4172">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA3_224</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="963c7356-ecb6-412d-abbc-a00b12565b7b">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA3_256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e88b8b97-042a-4c5e-93a9-daa28393bb4b">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA3_384</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="4f985c74-e8f9-40a6-809d-5cc37b1acc62">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA3_512</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="c5b81d68-7d77-4159-94cc-580b31044783">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHAKE128</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="5fe4437f-60aa-4c47-9cb6-316a34965395">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHAKE256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="a2b6ffb9-c787-4ffd-baf3-012006120a5d">
+															<SHORT-NAME>CRYPTO_ALGOFAM_RIPEMD160</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="d8b5584e-fd73-486a-bfd5-99fe56a6d756">
+															<SHORT-NAME>CRYPTO_ALGOFAM_BLAKE_1_256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="dbe8e03e-2dec-4787-a6f5-92e2d26dba82">
+															<SHORT-NAME>CRYPTO_ALGOFAM_BLAKE_1_512</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="5b5f4f3f-95f0-4b0b-831b-ab4d6db621b8">
+															<SHORT-NAME>CRYPTO_ALGOFAM_BLAKE_2s_256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="d884411a-a001-4b37-b35d-fe892f544d05">
+															<SHORT-NAME>CRYPTO_ALGOFAM_BLAKE_2s_512</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="91820f53-070d-4550-bb6b-ca8f0d24ba32">
+															<SHORT-NAME>CRYPTO_ALGOFAM_3DES</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="72dbdcd6-f0e7-45e3-90d4-44e0d9adae22">
+															<SHORT-NAME>CRYPTO_ALGOFAM_AES</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="be29aa11-282f-44d6-8810-29a05c94cf82">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CHACHA</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="c2f6d02f-1081-4cf9-8cc1-ef8a90fafce5">
+															<SHORT-NAME>CRYPTO_ALGOFAM_RSA</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="d96f5b78-2574-4f6a-ad93-be8149b86324">
+															<SHORT-NAME>CRYPTO_ALGOFAM_ED25519</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="ac6741c8-f97c-4a24-87e9-341ab5130949">
+															<SHORT-NAME>CRYPTO_ALGOFAM_BRAINPOOL</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="5a912d95-6e71-45b4-a69b-4a82d30c5388">
+															<SHORT-NAME>CRYPTO_ALGOFAM_ECCNIST</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="76416c50-b730-4282-9562-58ba1a4ffeb9">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SECURECOUNTER</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="0ee1314c-c312-4099-b14b-4d7f923b9cce">
+															<SHORT-NAME>CRYPTO_ALGOFAM_RNG</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="acc5a859-df84-468e-9f51-b73c9cf8849d">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SIPHASH</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="bea225b1-6c05-435c-a517-db1dc2ecc8ab">
+															<SHORT-NAME>CRYPTO_ALGOFAM_ECIES</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="25b9f8aa-2840-41ff-ba4d-01c3c2f1b0c7">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CUSTOM</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="ca25bae9-f52d-4905-91f5-e0797830cb13">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CUSTOM_ECCANSI</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="5f5693df-e5c1-4103-a7f9-772ffe5a7760">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CUSTOM_DRBG</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="6dc216da-b34e-4ee8-b668-08b3dcd88b40">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CUSTOM_FIPS186</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="90c0c788-331b-4f29-a50b-1b09e81059ab">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CUSTOM_ECCSEC</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="12cce6e5-d7c9-4d81-86ef-d3c850dc8d81">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CUSTOM_VHSM_SECURE_BOOT</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e9f11d57-10e3-46f5-b172-197f695e06c9">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CUSTOM_VHSM_SOFTWARE_DOWNLOAD</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="5d7dca85-fdb2-4fec-801c-4ea99a37394c">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CUSTOM_VHSM_FIRMWARE_UPDATE</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="20915b3f-0ad3-44a4-83cd-9deec09b45fa">
+													<SHORT-NAME>CryptoPrimitiveAlgorithmMode</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Determines the algorithm mode used for the crypto service</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>CRYPTO_ALGOMODE_NOT_SET</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="fe731c0d-3716-40dd-9011-3f62bdf9a75d">
+															<SHORT-NAME>CRYPTO_ALGOMODE_NOT_SET</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="2b905f55-da31-4e13-be09-31fd848971b8">
+															<SHORT-NAME>CRYPTO_ALGOMODE_ECB</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="b6e6229b-8e5c-4c3b-933b-0828af4b3e69">
+															<SHORT-NAME>CRYPTO_ALGOMODE_CBC</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="3af6b618-f64d-4836-9c4b-c227caf002e7">
+															<SHORT-NAME>CRYPTO_ALGOMODE_CFB</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="412e29eb-f844-46c0-b4b6-d9d2d09f1ddc">
+															<SHORT-NAME>CRYPTO_ALGOMODE_OFB</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="7810d421-a394-4672-873d-78ca002a3164">
+															<SHORT-NAME>CRYPTO_ALGOMODE_CTR</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="2a3d6745-86bc-4cb7-9cc7-4570d5d34a7d">
+															<SHORT-NAME>CRYPTO_ALGOMODE_GCM</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="2f1dd526-aa7c-4551-91f8-d5ffe8a0c923">
+															<SHORT-NAME>CRYPTO_ALGOMODE_XTS</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="cddcb3c5-5a7b-4cdb-9be3-832d5043a4b0">
+															<SHORT-NAME>CRYPTO_ALGOMODE_RSAES_OAEP</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="80adb122-50f4-4bf2-933c-96c0724f5bbe">
+															<SHORT-NAME>CRYPTO_ALGOMODE_RSAES_PKCS1_v1_5</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="aa7c394c-0f71-4c19-98ca-6f21cf279085">
+															<SHORT-NAME>CRYPTO_ALGOMODE_RSASSA_PSS</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="2fdb75a0-6993-4921-9e49-d9c544b7f78a">
+															<SHORT-NAME>CRYPTO_ALGOMODE_RSASSA_PKCS1_v1_5</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="1d9e6364-6117-46c7-a0a9-fd32d483dc0b">
+															<SHORT-NAME>CRYPTO_ALGOMODE_8ROUNDS</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="0deb1bc2-82f3-49d7-be1b-a2ba50186591">
+															<SHORT-NAME>CRYPTO_ALGOMODE_12ROUNDS</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="a5b90e53-c38c-4fd3-a1c9-30c27c19020d">
+															<SHORT-NAME>CRYPTO_ALGOMODE_20ROUNDS</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="ddb21db3-8eb4-4db2-b5a1-98c67426d0a2">
+															<SHORT-NAME>CRYPTO_ALGOMODE_HMAC</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="65f36ac5-c585-49fc-be4b-2686a2717cbb">
+															<SHORT-NAME>CRYPTO_ALGOMODE_CMAC</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="df1999ce-441f-4b86-8c17-f3ba2c39c5b6">
+															<SHORT-NAME>CRYPTO_ALGOMODE_GMAC</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="9bd2c7ef-00ad-4228-9062-96ff87a3b59f">
+															<SHORT-NAME>CRYPTO_ALGOMODE_CTRDRBG</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="afcef5cd-ae72-46b5-8125-0c94800c7d4a">
+															<SHORT-NAME>CRYPTO_ALGOMODE_SIPHASH_2_4</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="53058378-f858-4491-8af9-6965d8a1761c">
+															<SHORT-NAME>CRYPTO_ALGOMODE_SIPHASH_4_8</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="ec4f618b-ad42-48c8-bc91-712415f73cf3">
+															<SHORT-NAME>CRYPTO_ALGOMODE_CUSTOM</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="f75aee68-c778-4c9c-8ebf-edee8eb0f1f2">
+															<SHORT-NAME>CRYPTO_ALGOMODE_CUSTOM_P256R1</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="6af79287-5d3a-4b18-9099-547bcf125493">
+															<SHORT-NAME>CRYPTO_ALGOMODE_CUSTOM_RSASSA_PKCS1_v1_5_CRT</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="36211674-ca8a-4ffb-8fd3-63b59ccdb201">
+															<SHORT-NAME>CRYPTO_ALGOMODE_CUSTOM_USE_DF</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e9f8f8c5-4308-414a-ba3c-c2885cc98e97">
+															<SHORT-NAME>CRYPTO_ALGOMODE_CUSTOM_P384R1</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="f76bb9a0-ff72-4eae-bc95-97cb6cb7a95f">
+													<SHORT-NAME>CryptoPrimitiveService</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Determines the crypto service used for defining the capabilities</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>CRYPTO_MAC_VERIFY</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="52f15a3a-5c98-46b5-b77d-06a2e824b6ff">
+															<SHORT-NAME>CRYPTO_MAC_VERIFY</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="6c030a8b-553a-4ee8-bc4b-9ecf0db732df">
+															<SHORT-NAME>CRYPTO_MAC_GENERATE</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="890f7287-046f-42cb-9452-2ad0d3b00697">
+															<SHORT-NAME>CRYPTO_SIGNATURE_VERIFY</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="ebbcd403-6253-478b-acae-c55d3a3adbc3">
+															<SHORT-NAME>CRYPTO_SIGNATURE_GENERATE</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="74c58b2b-0887-4787-8af5-2554a9b3477a">
+															<SHORT-NAME>CRYPTO_ENCRYPT</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="c84b0986-8bb1-4182-8df3-8336795b7da0">
+															<SHORT-NAME>CRYPTO_DECRYPT</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="b385d986-cd4d-4eef-9670-56574be5d2a2">
+															<SHORT-NAME>CRYPTO_AEADENCRYPT</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="be46995e-c9fe-4008-9dc7-18cf7f7324c1">
+															<SHORT-NAME>CRYPTO_AEADDECRYPT</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="3bb8d195-1537-4724-a99a-49296b6bfc19">
+															<SHORT-NAME>CRYPTO_HASH</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="a8400d8e-3872-470c-a7a2-73e8587638a9">
+															<SHORT-NAME>CRYPTO_RANDOM</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="db0aaf5f-b749-4b71-bcd7-96fd54431b7d">
+															<SHORT-NAME>CRYPTO_KEY_SET_VALID</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="09d35998-036b-4799-9d1d-abcaf098d7d8">
+															<SHORT-NAME>CRYPTO_RANDOM_SEED</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="50a43553-5cc8-4d46-b177-fe1fc48e84c4">
+															<SHORT-NAME>CRYPTO_KEY_GENERATE</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="cdfee70b-ce59-47b6-ac3f-7956c1d729a9">
+															<SHORT-NAME>CRYPTO_KEY_DERIVE</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="ba46d234-918d-4c3d-b824-551109cd3d32">
+															<SHORT-NAME>CRYPTO_KEY_EXCHANGE_CALC_PUBVAL</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="d0800ce5-53cc-4f36-aca0-c2bb410383cc">
+															<SHORT-NAME>CRYPTO_KEY_EXCHANGE_CALC_SECRET</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="3a945fd8-4a86-4e98-baaa-770e18887dbc">
+															<SHORT-NAME>CRYPTO_CERIFICATE_PARSE</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="acc8fa0f-9714-4cb2-aea5-252d54927be0">
+															<SHORT-NAME>CRYPTO_CERTIFICATE_VERIFY</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="7cba5f3b-9065-45c7-b087-e4153c17137c">
+													<SHORT-NAME>CryptoPrimitiveAlgorithmSecondaryFamily</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Determines the algorithm secondary family used for the crypto service</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>CRYPTO_ALGOFAM_NOT_SET</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="3e815924-5a55-463c-bbea-939852bbb219">
+															<SHORT-NAME>CRYPTO_ALGOFAM_NOT_SET</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="704f13af-fede-4968-b867-91556089d284">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA1</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="f16bb9e8-141e-4e34-9856-f20efba86c0e">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_224</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="9d330dd5-10bc-4708-b244-e72f252a6e38">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="ae4b56c6-97a7-4e8c-b05a-2a89ccf0ffe1">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_384</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="92f2bd96-195d-482c-8e3d-e66fcd965d1b">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_512</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="078eb3fa-a7ad-4ec8-bc5c-c512239de0f7">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_512_224</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="52024d29-9189-4eee-82d2-b11bb1aa531f">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA2_512_256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="212d5e32-27ef-4fae-bc2e-03a66e02da0b">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA3_224</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="af1e2b58-7427-477e-8b76-c2758db78622">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA3_256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="55d202d8-a425-449e-a9b6-a6029627f43c">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA3_384</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="b79b21ad-1004-4b73-9757-5844894c652c">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHA3_512</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="8010390d-fead-4232-9ccd-3c5b0a8746bd">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHAKE128</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="dce43d7d-ad7e-4fa9-80f5-a604d8bf01c4">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SHAKE256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="262032f6-0cfb-4f18-8a7d-0eb2ae9e7f6c">
+															<SHORT-NAME>CRYPTO_ALGOFAM_RIPEMD160</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="288e66ad-79a2-458f-91f6-d7adb7811d63">
+															<SHORT-NAME>CRYPTO_ALGOFAM_BLAKE_1_256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="50b99d5c-3e0d-4617-b699-980abe37cf6c">
+															<SHORT-NAME>CRYPTO_ALGOFAM_BLAKE_1_512</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="193cf0f9-4c01-48ad-9e3e-43aacf178a4c">
+															<SHORT-NAME>CRYPTO_ALGOFAM_BLAKE_2s_256</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="d6612f71-53ae-4421-be53-03f7e8ac5efc">
+															<SHORT-NAME>CRYPTO_ALGOFAM_BLAKE_2s_512</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="691ae7c6-b95b-4d9e-9526-fa30401c0177">
+															<SHORT-NAME>CRYPTO_ALGOFAM_3DES</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="d2ca9387-bf03-415f-9536-96de216c0339">
+															<SHORT-NAME>CRYPTO_ALGOFAM_AES</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="0a077919-845e-44d0-9c4c-036a2c0f16d1">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CHACHA</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e9119ed2-a0b5-42d1-a285-afa85359d4a7">
+															<SHORT-NAME>CRYPTO_ALGOFAM_RSA</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="b9115971-838d-4532-9fb2-a079dcedd510">
+															<SHORT-NAME>CRYPTO_ALGOFAM_ED25519</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="4782d6d4-8648-4444-b96f-948e02598791">
+															<SHORT-NAME>CRYPTO_ALGOFAM_BRAINPOOL</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="59816b37-06d0-4317-83d9-e3037eef514a">
+															<SHORT-NAME>CRYPTO_ALGOFAM_ECCNIST</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="b5633cb7-e402-45d3-a8bb-457a6528f79c">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SECURECOUNTER</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="e025d5d0-4f59-47ea-b4bf-c47bc0d990c7">
+															<SHORT-NAME>CRYPTO_ALGOFAM_RNG</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="b586832d-90ea-4889-a2c3-dbd0933e72eb">
+															<SHORT-NAME>CRYPTO_ALGOFAM_SIPHASH</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="fd7899d3-ef54-4443-9e7c-e6e40657549f">
+															<SHORT-NAME>CRYPTO_ALGOFAM_ECIES</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="51a684a4-7a43-4e3e-b7c3-172708a35213">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CUSTOM</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="1f24e61e-899d-4ffc-bc0e-89e00318dc65">
+															<SHORT-NAME>CRYPTO_ALGOFAM_CUSTOM_PADDING_PKCS7</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-BOOLEAN-PARAM-DEF UUID="9466eb91-7db3-4518-8601-e10a6d0bc29a">
+													<SHORT-NAME>CryptoPrimitiveSupportContext</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Configures if the crypto primitive supports to store or restore context data of the workspace. Since this option is vulnerable to security, it shall only set to TRUE if absolutely needed.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>AUTOSAR_ECUC</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>false</DEFAULT-VALUE>
+												</ECUC-BOOLEAN-PARAM-DEF>
+											</PARAMETERS>
+											<REFERENCES>
+												<ECUC-REFERENCE-DEF UUID="a887a2d8-79f9-438f-858f-7cace74670f5">
+													<SHORT-NAME>CryptoPrimitiveAlgorithmFamilyCustomRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to a customer specific algorithm family custom container</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:CfgPostBuild">
+																<SD GID="DV:variantMultiplicityPBL">false</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoPrimitives/CryptoPrimitiveAlgorithmFamilyCustom</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+												<ECUC-REFERENCE-DEF UUID="8e6604df-228f-4743-9a21-23257c75c6c7">
+													<SHORT-NAME>CryptoPrimitiveAlgorithmModeCustomRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to a customer specific algorithm mode custom container</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:CfgPostBuild">
+																<SD GID="DV:variantMultiplicityPBL">false</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoPrimitives/CryptoPrimitiveAlgorithmModeCustom</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+												<ECUC-REFERENCE-DEF UUID="609840d1-794f-4795-96d3-ed580f914d4c">
+													<SHORT-NAME>CryptoPrimitiveAlgorithmSecondaryFamilyCustomRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to a customer specific algorithm family custom container</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:CfgPostBuild">
+																<SD GID="DV:variantMultiplicityPBL">false</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoPrimitives/CryptoPrimitiveAlgorithmFamilyCustom</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+											</REFERENCES>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="3e29fd09-5a7c-415e-a5b2-fbc0d963ace6">
+											<SHORT-NAME>CryptoPrimitiveAlgorithmFamilyCustom</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Container of custom algorithm family values.
+The container name serves as a symbolic name for the identifier of the custom algorithm family type. </L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<PARAMETERS>
+												<ECUC-INTEGER-PARAM-DEF UUID="ae2e6a89-bea2-4374-b0a9-1de057a6ee72">
+													<SHORT-NAME>CryptoPrimitiveAlgorithmFamilyCustomId</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">The custom value of this algorithm family</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>true</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>128</DEFAULT-VALUE>
+													<MAX>254</MAX>
+													<MIN>128</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+											</PARAMETERS>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="c5785bab-a523-4a64-ada9-66caee33a8fa">
+											<SHORT-NAME>CryptoPrimitiveAlgorithmModeCustom</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Container of custom algorithm mode values. 
+The container name serves as a symbolic name for the identifier of the custom algorithm mode type. </L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<PARAMETERS>
+												<ECUC-INTEGER-PARAM-DEF UUID="82c5671d-21a3-4ebe-8e99-67b079075cca">
+													<SHORT-NAME>CryptoPrimitiveAlgorithmModeCustomId</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">The custom value of this algorithm mode</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>true</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>128</DEFAULT-VALUE>
+													<MAX>254</MAX>
+													<MIN>128</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+											</PARAMETERS>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+									</SUB-CONTAINERS>
+								</ECUC-PARAM-CONF-CONTAINER-DEF>
+								<ECUC-PARAM-CONF-CONTAINER-DEF UUID="87f8507e-debb-46c6-aa50-4064fae6e12a">
+									<SHORT-NAME>CryptovHsm</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Basic configuration of the vHsm Driver</L-2>
+									</DESC>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DV:CfgPostBuild">
+												<SD GID="DV:postBuildSelectableChangeable">false</SD>
+												<SD GID="DV:postBuildNotDeletable">false</SD>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+									<PARAMETERS>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="14fe25f1-6171-414c-89b8-ff60bb9de4b3">
+											<SHORT-NAME>CryptoKeyElementDeleteSupport</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">If this option is enabled, it disables a DET check which checks if the keyLength and keyPtr is not zero. (This check is part of the AUTOSAR Specification.)</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>true</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="6db4d4e1-377b-4e54-aa7b-763db8e513eb">
+											<SHORT-NAME>CryptoInterruptMode</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">If the interrupt mode is enabled, the vHsm will inform the application core about a finished job with the help of an interrupt.
+The interrupt will then call the CryIf callback from the interrupt context in case of an async job.
+
+If the interrupt mode is disabled, the driver will poll the IPC for finished jobs.
+- For async jobs, this will be done in the main function. Also the callback will be called from the main function.
+- For sync jobs, this will be done in the waiting loop during the job.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>true</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-INTEGER-PARAM-DEF UUID="8c9dec8b-ba24-49e9-ac6b-e5346c6e88f9">
+											<SHORT-NAME>CryptoIpcChannels</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Number of IPC channels used to communicate with the vHsm</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>4</DEFAULT-VALUE>
+											<MAX>255</MAX>
+											<MIN>1</MIN>
+										</ECUC-INTEGER-PARAM-DEF>
+										<ECUC-INTEGER-PARAM-DEF UUID="7dfb9543-343b-4924-bac5-b54e48606f1e">
+											<SHORT-NAME>CryptoIpcProtocolVersion</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Protocol version used to communicate with the vHsm Firmware over IPC.
+The used protocol version must be the same on both the driver and vHsm Firmware.
+
+Info: IPC Protocol Version 2 is deprecated and will be removed in future versions.
+</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>3</DEFAULT-VALUE>
+											<MAX>3</MAX>
+											<MIN>2</MIN>
+										</ECUC-INTEGER-PARAM-DEF>
+										<ECUC-FUNCTION-NAME-DEF UUID="9708a23a-16e9-4a96-8068-1d808a6bbb4f">
+											<SHORT-NAME>CryptoWaitLoopCallout</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Callout which is called while waiting for responses from the vHsm.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<ECUC-FUNCTION-NAME-DEF-VARIANTS>
+												<ECUC-FUNCTION-NAME-DEF-CONDITIONAL>
+													<DEFAULT-VALUE>Appl_Crypto_30_vHsm_WaitLoopCallout</DEFAULT-VALUE>
+												</ECUC-FUNCTION-NAME-DEF-CONDITIONAL>
+											</ECUC-FUNCTION-NAME-DEF-VARIANTS>
+										</ECUC-FUNCTION-NAME-DEF>
+										<ECUC-STRING-PARAM-DEF UUID="e8b1a9bc-a773-4b7e-869b-6488ff78c879">
+											<SHORT-NAME>CryptoHsmUserRevision</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">This parameter is always updated with the one located in the generated vHSM pre configuration file.
+Attention: This parameter is freely configurable in the vHSM (/MICROSAR/vHsm/vHsmGeneral/vHsmUserRevision) and changes only if was manually adapted in vHSM config. Use this to make sure that application and HSM on the same revision.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<ECUC-STRING-PARAM-DEF-VARIANTS>
+												<ECUC-STRING-PARAM-DEF-CONDITIONAL>
+													<DEFAULT-VALUE>0</DEFAULT-VALUE>
+													<MAX-LENGTH>255</MAX-LENGTH>
+													<MIN-LENGTH>1</MIN-LENGTH>
+												</ECUC-STRING-PARAM-DEF-CONDITIONAL>
+											</ECUC-STRING-PARAM-DEF-VARIANTS>
+										</ECUC-STRING-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="4f9ac6ff-56f1-48a1-bedc-bbf7327d5446">
+											<SHORT-NAME>CryptoRedirection</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Enable job input/output redirection to key elements. This is a Autosar 4.4 feature. Therefore a Csm and CryIf is required which also needs to support this feature</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>false</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="3ea0a49d-cb7b-4f5e-8d4d-ad1619a65731">
+											<SHORT-NAME>CryptoIpcMacJobOptimization</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">During MAC Verification only inputPtr, secondaryInputPtr and verifyPtr are needed. During MAC Generation only inputPtr and outputPtr are needed.
+
+This optimization reduces the transmission of mac jobs to this pointers. This will lead to a faster processing of the MAC because unnecessary checks for validity can be omitted.
+
+This feature may only be enabled if vHsm support this feature as well. This is true for vHsm starting from version 02.01.00 (R22)</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>true</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-INTEGER-PARAM-DEF UUID="15b96481-fcb7-4c7e-a72d-8c62e28277a3">
+											<SHORT-NAME>CryptoDetInstanceMask</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Det errors originating from the vHsm can be distinguished from det errors of the application cores by OR-ing the mask with instanceId before passing the received Det to Det_ErrorReport() on the application core.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:Display">
+														<SD GID="DV:DefaultFormat">HEX</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>0</DEFAULT-VALUE>
+											<MAX>255</MAX>
+											<MIN>0</MIN>
+										</ECUC-INTEGER-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="9c61b459-0664-4065-aefe-0289a95968ad">
+											<SHORT-NAME>CryptoKeyDeriveJobSupport</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Enables support for KeyDerive operations processed as jobs. This needs to be supported by both the HSM and Csm.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>true</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+										<ECUC-INTEGER-PARAM-DEF UUID="d1849fe7-6a78-41e4-af35-9620bc344e40">
+											<SHORT-NAME>CryptoHost2HsmAddress</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Host2Hsm Address</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">Address of the register which is used to communicate from Host to the HSM core</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:Display">
+														<SD GID="DV:DefaultFormat">HEX</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>0</DEFAULT-VALUE>
+											<MAX>4294967295</MAX>
+											<MIN>0</MIN>
+										</ECUC-INTEGER-PARAM-DEF>
+										<ECUC-INTEGER-PARAM-DEF UUID="23f10b1e-0c74-4493-8f5f-93e658263dbe">
+											<SHORT-NAME>CryptoHsm2HostAddress</SHORT-NAME>
+											<LONG-NAME>
+												<L-4 L="EN">Hsm2Host Address</L-4>
+											</LONG-NAME>
+											<DESC>
+												<L-2 L="EN">Address of the register which is used to communicate from Hsm to the Host core</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:Display">
+														<SD GID="DV:DefaultFormat">HEX</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>0</DEFAULT-VALUE>
+											<MAX>4294967295</MAX>
+											<MIN>0</MIN>
+										</ECUC-INTEGER-PARAM-DEF>
+										<ECUC-INTEGER-PARAM-DEF UUID="d3d0d88a-4f72-480e-99d2-0a7fe1aea7da">
+											<SHORT-NAME>CryptoIpcInstanceId</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Id of the Ipc instance inside the Hsm</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>0</DEFAULT-VALUE>
+											<MAX>255</MAX>
+											<MIN>0</MIN>
+										</ECUC-INTEGER-PARAM-DEF>
+										<ECUC-BOOLEAN-PARAM-DEF UUID="bfde2e0a-607f-4ad4-9f18-61928496e618">
+											<SHORT-NAME>CryptoIpcInitialization</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">If enabled, the driver will initialize the IPC memory and notify the vHsm firmware about the now usable IPC memory via the HOST2HSM interface</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+											<DEFAULT-VALUE>true</DEFAULT-VALUE>
+										</ECUC-BOOLEAN-PARAM-DEF>
+									</PARAMETERS>
+									<REFERENCES>
+										<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="346b64d0-f44e-4d28-966c-7519970bf43a">
+											<SHORT-NAME>CryptoManagementDriverObject</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">This driver object will be used for the Key management Functions.
+The buffers of the referenced driver objects must be set to values sufficient for proper operation.
+The driver object is used as transport medium for the communication with the vHsm.
+
+Input data of Key functions will be handled as InputPtr
+Output data of Key functions will be handled as OutputPtr
+
+When multiple Key API calls need to be performed at the same time, multiple driver objects need to be referenced here.
+During runtime the first free driver object of the references will be used.
+To enable Key APIs to be processed on all driver objects, all referenced driver objects need to have the same buffer size configured.
+
+Hint:
+HSM Configuration:
+There is only one vHsm_KeyM driver object in the HSM for the key management API.
+As this driver object can already process parallel key requests, there is no need to create a further driver object.
+To provide multiple driver object to the driver on application side where key API calls can be transmitted, create an additional CryIfChannel inside the vHsm and reference the already existing vHsm_KeyM driver object.
+So multiple CryIfChannels will reference the same driver object vHsm_KeyM.
+Furthermore make the new CryIfChannel available in the IPC under /MICROSAR/vHsm/vHsmIpc/vHsmIpcInstance/vHsmDriverObjectMapping.
+The sync mechanism will make the new CryIfChannel visible as driver object in the Driver after the vHsm has been generated.
+
+Driver Configuration:
+Reference the new available driver object as additional management driver object.
+Now the number of referenced driver objects will be the number of possible parallel key management API calls.</L-2>
+											</DESC>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<IMPLEMENTATION-CONFIG-CLASSES>
+												<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+													<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+												</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+											</IMPLEMENTATION-CONFIG-CLASSES>
+											<ORIGIN>Vector Informatik</ORIGIN>
+											<REQUIRES-INDEX>false</REQUIRES-INDEX>
+											<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoDriverObjects/CryptoDriverObject</DESTINATION-REF>
+										</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+									</REFERENCES>
+									<SUB-CONTAINERS>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="523ba6d3-dc21-4cab-b7a8-d0d7e8f77ab5">
+											<SHORT-NAME>CryptoMemoryArea</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">White list of memory areas used as input and output for crypto jobs or key management operations.
+The areas from the whitelist of the vHsm configuration can be used also in the driver.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<PARAMETERS>
+												<ECUC-INTEGER-PARAM-DEF UUID="681d78a5-ab8b-4b1a-b8d1-5f0d424e1873">
+													<SHORT-NAME>CryptoAreaStart</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Start address of the memory area</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">HEX</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>0</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-INTEGER-PARAM-DEF UUID="ce60372c-1a2c-458b-98c4-5e086b20dcc2">
+													<SHORT-NAME>CryptoAreaStop</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">End address of the memory area</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">HEX</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>4294967295</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="e3a9e41f-3762-4f82-8e6d-ba42c28201dd">
+													<SHORT-NAME>CryptoAreaType</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Type of the memory area as seen from the vHsm.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>CRYPTO_AREA_HSM_READ_ACCESS</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="033feec6-ec33-4bb4-a0c0-d8dc3ea3cb22">
+															<SHORT-NAME>CRYPTO_AREA_HSM_READ_ACCESS</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="dfb5c07d-646d-40ba-815d-a7fe1419b1a9">
+															<SHORT-NAME>CRYPTO_AREA_HSM_READWRITE_ACCESS</SHORT-NAME>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+												<ECUC-INTEGER-PARAM-DEF UUID="0ee3ea5a-9138-4a66-a2a4-4e66aaea7a03">
+													<SHORT-NAME>CryptoAreaPriority</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">The priority of the memory area.
+The higher the value, the higher the areas priority.
+The area with the highest priority will be checked first.
+To get the best performance assign a high priority to areas which are used very often.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>0</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-BOOLEAN-PARAM-DEF UUID="0eba9741-d6e9-479f-9e90-d42a3ee8adf8">
+													<SHORT-NAME>CryptoAreaEnabled</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Memory areas can be disabled if needed.
+This can be used in the Safe Use-Case, when it is not allowed to have an enabled READWRITE area.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>true</DEFAULT-VALUE>
+												</ECUC-BOOLEAN-PARAM-DEF>
+											</PARAMETERS>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="f91f5788-ac57-4d6f-919e-60ee7fe030c1">
+											<SHORT-NAME>CryptoJobResponseInterrupt</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Configures settings for receiving an interrupt from the hsm</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<PARAMETERS>
+												<ECUC-INTEGER-PARAM-DEF UUID="1551a27b-3c0c-48b3-b941-208174eecbe3">
+													<SHORT-NAME>CryptoJobResponseInterruptFlagClearAddress</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Address of the register which is used to clear the interrupt request flag</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">HEX</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>0</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-INTEGER-PARAM-DEF UUID="874ae42d-f71e-4cae-a25e-87619e2d4c8b">
+													<SHORT-NAME>CryptoJobResponseInterruptFlagClearMask</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Mask which is used to set the value</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">HEX</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>1</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-INTEGER-PARAM-DEF UUID="b9a7a198-47cf-4924-9a66-aa34e192a065">
+													<SHORT-NAME>CryptoJobResponseInterruptFlagClearValue</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Value which will be set to the masked register</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">HEX</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>1</DEFAULT-VALUE>
+													<MAX>1</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-BOOLEAN-PARAM-DEF UUID="151f847a-6951-4e29-972f-c947c1a73aff">
+													<SHORT-NAME>CryptoJobResponseInterruptFlagClearing</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Clearing the flag is only needed when the OS does not clear the interrupt flag automatically.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>true</DEFAULT-VALUE>
+												</ECUC-BOOLEAN-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="7e6ad817-118e-4ee6-a4e9-3dcd1a8dc460">
+													<SHORT-NAME>CryptoJobResponseInterruptFlagClearHandling</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Configures the way, how the interrupt flag is cleared.
+On different platforms a different access to e.g. registers is needed.
+Below is the corresponding code to each option which will be generated when clearing a flag:
+
+CRYPTO_CLEAR_INCLUSIVE_OR_ASSIGNMENT -&amp;gt; *ClearAddress |= mask
+CRYPTO_CLEAR_INCLUSIVE_AND_NOT_ASSIGNMENT -&amp;gt; *ClearAddress &amp;= ~mask
+CRYPTO_CLEAR_ONLY_READ -&amp;gt; dummyVar = *ClearAddress
+CRYPTO_CLEAR_CALLOUT -&amp;gt; call of Crypto_30_vHsm_ResponseInterruptClear_Callout()</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>CRYPTO_CLEAR_INCLUSIVE_OR_ASSIGNMENT</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="b952049a-6bd7-4929-ab4e-b4747a44f64e">
+															<SHORT-NAME>CRYPTO_CLEAR_INCLUSIVE_OR_ASSIGNMENT</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="1064ed12-273d-4c53-8035-cb0a6904f881">
+															<SHORT-NAME>CRYPTO_CLEAR_INCLUSIVE_AND_NOT_ASSIGNMENT</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="571bfc95-c958-4f02-9c75-db5c2ec13bff">
+															<SHORT-NAME>CRYPTO_CLEAR_ONLY_READ</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="bfcc2a30-9166-48f2-8289-0979abb1ec35">
+															<SHORT-NAME>CRYPTO_CLEAR_CALLOUT</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+											</PARAMETERS>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="b58575e0-ca04-4f66-9ac9-1a39a0119f09">
+											<SHORT-NAME>CryptoJobRequestInterrupt</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Configures settings for triggering an interrupt to the hsm</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<PARAMETERS>
+												<ECUC-INTEGER-PARAM-DEF UUID="773898b9-5acc-4e2b-816d-4a8c50beeaab">
+													<SHORT-NAME>CryptoJobRequestInterruptFlagSetAddress</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Address of the register which is used to clear the interrupt request flag</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">HEX</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>0</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-INTEGER-PARAM-DEF UUID="c4524e3f-bf97-4d94-aa53-88b2c54173b0">
+													<SHORT-NAME>CryptoJobRequestInterruptFlagSetMask</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Mask which is used to set the value</L-2>
+													</DESC>
+													<ADMIN-DATA>
+														<SDGS>
+															<SDG GID="DV:Display">
+																<SD GID="DV:DefaultFormat">HEX</SD>
+															</SDG>
+														</SDGS>
+													</ADMIN-DATA>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>1</DEFAULT-VALUE>
+													<MAX>4294967295</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+												<ECUC-BOOLEAN-PARAM-DEF UUID="7424f658-8b75-42d3-ad9b-aeb92247b1e4">
+													<SHORT-NAME>CryptoJobRequestInterruptFlagSetting</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Setting the interrupt flag and thus triggering an interrupt to the vHsm is only needed when isr support in vHsm is enabled.</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>true</DEFAULT-VALUE>
+												</ECUC-BOOLEAN-PARAM-DEF>
+												<ECUC-ENUMERATION-PARAM-DEF UUID="1f1e76d4-23eb-4ef1-a233-29bf04dbc606">
+													<SHORT-NAME>CryptoJobRequestInterruptFlagSetHandling</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Configures the way, how the interrupt flag is set.
+On different platforms a different access to e.g. registers is needed.
+Below is the corresponding code to each option which will be generated when clearing a flag:
+
+CRYPTO_SET_INCLUSIVE_OR_ASSIGNMENT -&gt; *SetAddress |= mask
+CRYPTO_SET_ONLY_ASSIGNMENT -&gt; *SetAddress = mask
+CRYPTO_SET_CALLOUT -&gt; call of Crypto_30_vHsm_RequestInterruptSet_Callout()</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>CRYPTO_SET_INCLUSIVE_OR_ASSIGNMENT</DEFAULT-VALUE>
+													<LITERALS>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="f0493c86-33b2-4d3c-aa3f-8b347b0ba34b">
+															<SHORT-NAME>CRYPTO_SET_INCLUSIVE_OR_ASSIGNMENT</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="3dfb5e6c-3f04-4e9a-a103-7389ad78c140">
+															<SHORT-NAME>CRYPTO_SET_ONLY_ASSIGNMENT</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+														<ECUC-ENUMERATION-LITERAL-DEF UUID="d0b9d642-9ee8-4b82-a7d0-56014ed848cc">
+															<SHORT-NAME>CRYPTO_SET_CALLOUT</SHORT-NAME>
+															<ORIGIN>Vector Informatik</ORIGIN>
+														</ECUC-ENUMERATION-LITERAL-DEF>
+													</LITERALS>
+												</ECUC-ENUMERATION-PARAM-DEF>
+											</PARAMETERS>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+										<ECUC-PARAM-CONF-CONTAINER-DEF UUID="c3d3ae16-78f1-4f91-8f30-d3241d357d73">
+											<SHORT-NAME>CryptoIpcInstance</SHORT-NAME>
+											<DESC>
+												<L-2 L="EN">Specifies the Ecu MultiCore partitions to which each Ipc can be mapped to.</L-2>
+											</DESC>
+											<ADMIN-DATA>
+												<SDGS>
+													<SDG GID="DV:CfgPostBuild">
+														<SD GID="DV:postBuildSelectableChangeable">false</SD>
+														<SD GID="DV:postBuildNotDeletable">false</SD>
+													</SDG>
+												</SDGS>
+											</ADMIN-DATA>
+											<LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+											<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+											<POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+											<PARAMETERS>
+												<ECUC-INTEGER-PARAM-DEF UUID="2b2c8589-3a8b-4398-a896-b07677af89e1">
+													<SHORT-NAME>CryptoIpcInstanceId</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Id of the Ipc instance inside the Hsm</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+													<DEFAULT-VALUE>0</DEFAULT-VALUE>
+													<MAX>255</MAX>
+													<MIN>0</MIN>
+												</ECUC-INTEGER-PARAM-DEF>
+											</PARAMETERS>
+											<REFERENCES>
+												<ECUC-REFERENCE-DEF UUID="3b6ac01c-5e08-48a0-9506-f961ea30a2cb">
+													<SHORT-NAME>CryptoIpcInstanceEcucPartitionRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to a EcuC Partition for Multicore support.
+
+The referenced partition
+- must also be set for all driver objects referenced by this IpcInstance
+- must be contained in the partition referneces in CryptoGeneral</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+												<ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="23ac1c85-e316-48fc-89a0-4837be87bb7e">
+													<SHORT-NAME>CryptoDriverObjectRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to driver objects which will be processed with this IPC</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoDriverObjects/CryptoDriverObject</DESTINATION-REF>
+												</ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+												<ECUC-REFERENCE-DEF UUID="5771bea1-336d-4f9a-b937-8915174ced27">
+													<SHORT-NAME>CryptoJobRequestInterruptRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to Request interrupt information</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptovHsm/CryptoJobRequestInterrupt</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+												<ECUC-REFERENCE-DEF UUID="1493a1a5-06ea-4fc8-aec1-d6d005f84cbf">
+													<SHORT-NAME>CryptoJobResponseInterruptRef</SHORT-NAME>
+													<DESC>
+														<L-2 L="EN">Reference to Response interrupt information</L-2>
+													</DESC>
+													<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+													<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+													<IMPLEMENTATION-CONFIG-CLASSES>
+														<ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+															<CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+															<CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+														</ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+													</IMPLEMENTATION-CONFIG-CLASSES>
+													<ORIGIN>Vector Informatik</ORIGIN>
+													<REQUIRES-INDEX>false</REQUIRES-INDEX>
+													<DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptovHsm/CryptoJobResponseInterrupt</DESTINATION-REF>
+												</ECUC-REFERENCE-DEF>
+											</REFERENCES>
+										</ECUC-PARAM-CONF-CONTAINER-DEF>
+									</SUB-CONTAINERS>
+								</ECUC-PARAM-CONF-CONTAINER-DEF>
+							</CONTAINERS>
+						</ECUC-MODULE-DEF>
+						<ECUC-MODULE-CONFIGURATION-VALUES UUID="bd7508ab-cf3e-4b73-b326-57de0c581a51">
+							<SHORT-NAME>Crypto_Pre</SHORT-NAME>
+							<DESC>
+								<L-2 L="EN">Software Crypto Driver pre-configuration</L-2>
+							</DESC>
+							<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/Crypto_30_vHsm/Crypto</DEFINITION-REF>
+							<CONTAINERS>
+								<ECUC-CONTAINER-VALUE UUID="54774215-c7f0-4a36-ad31-a6fd2655835e">
+									<SHORT-NAME>CryptoGeneral</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoGeneral</DEFINITION-REF>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="27f57d24-62d1-489e-8521-a24e78ec0f0a">
+									<SHORT-NAME>CryptoKeyTypes</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyTypes</DEFINITION-REF>
+									<SUB-CONTAINERS>
+										<ECUC-CONTAINER-VALUE UUID="d8d0ae73-d3ef-40f2-9191-610f5c6201e3">
+											<SHORT-NAME>vHsmDummyKeyType</SHORT-NAME>
+											<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyTypes/CryptoKeyType</DEFINITION-REF>
+											<REFERENCE-VALUES>
+												<ECUC-REFERENCE-VALUE>
+													<DEFINITION-REF DEST="ECUC-REFERENCE-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyTypes/CryptoKeyType/CryptoKeyElementRef</DEFINITION-REF>
+													<VALUE-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/Crypto_30_vHsm/Crypto_Pre/CryptoKeyElements/vHsmDummyKeyElement</VALUE-REF>
+												</ECUC-REFERENCE-VALUE>
+											</REFERENCE-VALUES>
+										</ECUC-CONTAINER-VALUE>
+									</SUB-CONTAINERS>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="a36b0c4f-dad6-4034-9d72-21545f52e233">
+									<SHORT-NAME>CryptoKeyElements</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements</DEFINITION-REF>
+									<SUB-CONTAINERS>
+										<ECUC-CONTAINER-VALUE UUID="cc43631b-b025-4c5f-86af-05bd10b4a240">
+											<SHORT-NAME>vHsmDummyKeyElement</SHORT-NAME>
+											<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements/CryptoKeyElement</DEFINITION-REF>
+											<PARAMETER-VALUES>
+												<ECUC-NUMERICAL-PARAM-VALUE>
+													<DEFINITION-REF DEST="ECUC-BOOLEAN-PARAM-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementAllowPartialAccess</DEFINITION-REF>
+													<VALUE>1</VALUE>
+												</ECUC-NUMERICAL-PARAM-VALUE>
+												<ECUC-NUMERICAL-PARAM-VALUE>
+													<DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementId</DEFINITION-REF>
+													<VALUE>0</VALUE>
+												</ECUC-NUMERICAL-PARAM-VALUE>
+												<ECUC-NUMERICAL-PARAM-VALUE>
+													<DEFINITION-REF DEST="ECUC-BOOLEAN-PARAM-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementPersist</DEFINITION-REF>
+													<VALUE>0</VALUE>
+												</ECUC-NUMERICAL-PARAM-VALUE>
+												<ECUC-TEXTUAL-PARAM-VALUE>
+													<DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementReadAccess</DEFINITION-REF>
+													<VALUE>RA_ALLOWED</VALUE>
+												</ECUC-TEXTUAL-PARAM-VALUE>
+												<ECUC-TEXTUAL-PARAM-VALUE>
+													<DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementWriteAccess</DEFINITION-REF>
+													<VALUE>WA_ALLOWED</VALUE>
+												</ECUC-TEXTUAL-PARAM-VALUE>
+											</PARAMETER-VALUES>
+										</ECUC-CONTAINER-VALUE>
+									</SUB-CONTAINERS>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="0a1435a5-c561-4bff-9ac5-9390eef9f773">
+									<SHORT-NAME>CryptoDriverObjects</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoDriverObjects</DEFINITION-REF>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="c8f369b7-4a32-47c3-978c-5d64c95c5813">
+									<SHORT-NAME>CryptovHsm</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptovHsm</DEFINITION-REF>
+								</ECUC-CONTAINER-VALUE>
+							</CONTAINERS>
+						</ECUC-MODULE-CONFIGURATION-VALUES>
+						<ECUC-MODULE-CONFIGURATION-VALUES UUID="b1820846-3feb-4ece-982d-dc4980cca7b1">
+							<SHORT-NAME>Crypto_Rec</SHORT-NAME>
+							<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/Crypto_30_vHsm/Crypto</DEFINITION-REF>
+							<CONTAINERS>
+								<ECUC-CONTAINER-VALUE UUID="2bae6919-aace-431e-84c8-00116a234e5a">
+									<SHORT-NAME>CryptoGeneral</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoGeneral</DEFINITION-REF>
+								</ECUC-CONTAINER-VALUE>
+								<ECUC-CONTAINER-VALUE UUID="464860d4-5b5e-4f6f-9e4c-e47c6b1a7e1c">
+									<SHORT-NAME>CryptoKeyElements</SHORT-NAME>
+									<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements</DEFINITION-REF>
+									<SUB-CONTAINERS>
+										<ECUC-CONTAINER-VALUE UUID="88a5409f-6a29-4054-afbc-343293ccd853">
+											<SHORT-NAME>vHsmDummyKeyElement</SHORT-NAME>
+											<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements/CryptoKeyElement</DEFINITION-REF>
+											<PARAMETER-VALUES>
+												<ECUC-NUMERICAL-PARAM-VALUE>
+													<DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/MICROSAR/Crypto_30_vHsm/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementSize</DEFINITION-REF>
+													<VALUE>1</VALUE>
+												</ECUC-NUMERICAL-PARAM-VALUE>
+											</PARAMETER-VALUES>
+										</ECUC-CONTAINER-VALUE>
+									</SUB-CONTAINERS>
+								</ECUC-CONTAINER-VALUE>
+							</CONTAINERS>
+						</ECUC-MODULE-CONFIGURATION-VALUES>
+					</ELEMENTS>
+				</AR-PACKAGE>
+			</AR-PACKAGES>
+		</AR-PACKAGE>
+	</AR-PACKAGES>
+</AUTOSAR>

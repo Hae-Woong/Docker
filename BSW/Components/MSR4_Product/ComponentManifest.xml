@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-15AE0C26-65AE-4870-92FC-3303495E0780</guid>
+        <name>MSR4_Product_Content@root</name>
+        <version>32.07.04</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-31A7A772-3B26-4315-9745-E0AD5A0B61FE</guid>
+        <name>MSR4_Product_Content@Doc_SafetyManual</name>
+        <version>1.16.04</version>
+    </subPackage>
+</componentManifest>

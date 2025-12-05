@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<license xmlns="urn:vector:schema:license" version="1.0">
+    <deliveries>
+        <delivery id="PAI11871">
+            <subprojectnumber>PAI11871</subprojectnumber>
+            <showbetadisclaimer>true</showbetadisclaimer>
+        </delivery>
+    </deliveries>
+    <paramset idref="PAI11871" consumer="DaVinciConfigurator">
+        <param>
+            <key>MDTYPE-B61D54D9-AC58-41F0-B8DD-3C3E0E62A594</key>
+            <value>MDVALUE-A23E8084-D3B2-40CD-BFB4-F546BE2DE4AC</value>
+        </param>
+        <param>
+            <key>MDTYPE-820D2803-3371-446D-8704-643A8FFBC03A</key>
+            <value>MDVALUE-BED68A67-481F-4CE6-BB3E-2CE40B8D0B04</value>
+        </param>
+        <param>
+            <key>43d95d1c-0cfb-45b1-80b4-789bdd62a466</key>
+            <value>d244edb7-6d70-4221-a3b9-5dae070f36d1</value>
+        </param>
+        <param>
+            <key>MDTYPE-7EE1CC75-DD31-4905-A34C-7D0B8B969D99</key>
+            <value>MDVALUE-027F6D38-8F26-4F28-84CA-81AD002088EF</value>
+        </param>
+        <param>
+            <key>MDTYPE-D07E7F1F-37FB-49D9-86E0-049EC82DD48D</key>
+            <value>MDVALUE-95C6BC7F-09DF-4C5B-B182-FC9C03D13364</value>
+        </param>
+        <param>
+            <key>MDTYPE-4CE8CC57-DC4A-447D-8DBB-0D56AD9E0F0D</key>
+            <value>MDVALUE-1CED2B3A-FCC8-4B4E-AAFA-BF9EEA78A9CC</value>
+        </param>
+        <param>
+            <key>MDTYPE-9AFBA155-B823-47D7-A71F-D5E14BE2E682</key>
+            <value>MDVALUE-AB7745D0-B33E-48C9-9B14-CB8159EF1B30</value>
+        </param>
+        <param>
+            <key>49dc2e0a-976b-4ee2-a973-2c7a62aa5aa4</key>
+            <value>ca29a614-4daa-4b1a-81ac-d50f6276cbd1</value>
+        </param>
+        <param>
+            <key>MDTYPE-3E64CBF6-6998-4E47-8C4C-4F4CAF08D13B</key>
+            <value>MDVALUE-67FD7B5F-7151-46D7-9B20-0B887471F7A3</value>
+        </param>
+    </paramset>
+    <paramset idref="PAI11871" consumer="LegacyDbConverter">
+        <param>
+            <key>MDTYPE-A3E21F07-8120-4CAD-8A80-1E3112EB14E4</key>
+            <value>MDVALUE-8C403FE9-30A7-47F3-ADFD-172473F3F98F</value>
+        </param>
+    </paramset>
+    <paramset idref="PAI11871" consumer="PostBuildXmlGenerator">
+        <param>
+            <key>MDTYPE-B61D54D9-AC58-41F0-B8DD-3C3E0E62A594</key>
+            <value>MDVALUE-A23E8084-D3B2-40CD-BFB4-F546BE2DE4AC</value>
+        </param>
+    </paramset>
+    <paramset idref="PAI11871" consumer="Rte">
+        <param>
+            <key>MDTYPE-820D2803-3371-446D-8704-643A8FFBC03A</key>
+            <value>MDVALUE-BED68A67-481F-4CE6-BB3E-2CE40B8D0B04</value>
+        </param>
+        <param>
+            <key>43d95d1c-0cfb-45b1-80b4-789bdd62a466</key>
+            <value>d244edb7-6d70-4221-a3b9-5dae070f36d1</value>
+        </param>
+        <param>
+            <key>MDTYPE-4CE8CC57-DC4A-447D-8DBB-0D56AD9E0F0D</key>
+            <value>MDVALUE-1CED2B3A-FCC8-4B4E-AAFA-BF9EEA78A9CC</value>
+        </param>
+    </paramset>
+</license>
+<!-- 39B9012028CA4CC831D5F8A443A211A65BE10AFD2D8E505BB5537B1A6DA16B187B29C03A21531EF6951450BCF4BEE7CAD093F57FB5E885613780579B3B22EAAE9FFC637CD0A219705C4788A528E966E2066932F305BF0D44431F31BB127D2CAE041597542882CA311D01773A552B3207FC1877990BCD3A1AF491EEAA3E2D89D6E69CD64725F00BEB63C348B67F4ED36CB73C8194A06B61C562D4BF1FDC45D4CE3BA91D065ADC31BA7444A1873264772152F11165CC6984363F964EDB871A6A7E75EB03ECB467C7DA44F2D993588D1F8581071A947A3D12ADDABA428D9F8B25B2EBF414F4A669C453E91797949619705DA8ABB1577A70F20242B8669CB1538F23 -->

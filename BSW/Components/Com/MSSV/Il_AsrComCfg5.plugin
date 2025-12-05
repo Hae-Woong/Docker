@@ -1,0 +1,91 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2024 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  Il_AsrComCfg5.plugin
+*  Module     :  MSSV
+*  Description:  Entry point of MSSV Core.
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version   Date        Author        Change Id     Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00  2016-04-25  visms         ESCAN00089733 FEAT-1688: SafeBSW Step 4
+*  02.00.00  2016-11-08  visgut        FEATC-275     FEAT-1920: SafeBSW Step 6
+*  03.00.00  2019-01-10  visbbk        STORYC-1791   Finalize Com TP and Meta Data APIs
+*  04.00.00  2021-01-19  vismij        COM-2282      Remove Com_ReceiveSignal macro API
+*  05.00.00  2021-04-08  visbbk        COM-2523      Remove ComDescriptionRoutingCodeGeneration
+*  06.00.00  2022-06-27  visms         COM-3894      Use the "*" operator in the MSSV plugin file
+*            2022-08-16  vishho        COM-3916      Do not support Gateway
+*            2022-08-16  vishho        COM-3816      Do not support BIG_ENDIAN CPU_BYTE_ORDER == HIGH_BYTE_FIRST
+*  07.00.00  2023-02-06  visms         COM-1008      Replace RH by VCA
+*  08.00.00  2023-05-04  visssg        COM-3820      Support BIG_ENDIAN CPU_BYTE_ORDER == HIGH_BYTE_FIRST
+*  08.01.00  2023-10-12  visbbk        ESCAN00115894 VCA erros when analyzing Com
+*            2023-10-12  visbbk        ESCAN00115896 Missing PduR_ComCancelTransmit in Il_AsrComCfg5_PduR.vcaspecs.c
+*  08.02.00  2024-03-04  visms         COM-5239      Compile Code as Unity Build
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : MSSV_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x080200)
+  reg.SetPackageName("Il_AsrComCfg5")
+  reg.SetInputFiles(["Com_Unity.c", "Com_Lcfg.c", "Com_PBcfg.c"])
+  return reg
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : N/A
+**********************************************************************************************************************/
+def main()
+{
+  InvokeRule("Check QM inactive", CheckQMDefines)
+}
+
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+*                Typically it checks that QM features are inactive in safety context.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  AssertDefineIsStdOn("COM_DEV_ERROR_DETECT")
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : MSSV_core calls this function to allow the plugin a version check against the BSW sources.
+*                Check against the major and minor version of the source code.
+*                Note: The version check is not necessary if only rule CheckQMDefines is implemented in this plugin.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+}
+
+

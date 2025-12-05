@@ -14,12 +14,11 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *             File:  IoHwAb.c
- *           Config:  LightControl.dpa
  *        SW-C Type:  IoHwAb
  *
- *        Generator:  MICROSAR RTE Generator Version 4.37.00
- *                    RTE Core Version 4.37.00
- *          License:  PAI11871
+ *        Generator:  MICROSAR RTE ContractPhase Generator Version 4.39.00
+ *                    RTE Core Version 4.39.00
+ *          License:  DVSwcGen
  *
  *      Description:  C-Code implementation template for SW-C <IoHwAb>
  *********************************************************************************************************************/
@@ -47,6 +46,7 @@
  *   Runnable Entity for calling the Operation 'LightIntensity' of the Client/Server Port Prototype 'LightIntensityPort'.
  *
  *********************************************************************************************************************/
+
 #include "Rte_IoHwAb.h"
 
 
@@ -142,7 +142,7 @@ FUNC(void, IoHwAb_CODE) IoHwAb_Init(void) /* PRQA S 0624, 3206 */ /* MD_Rte_0624
  *---------------------------------------------------------------------------------------------------------------------
  *
  * Executed if at least one of the following trigger conditions occurred:
- *   - triggered on TimingEvent every 10ms
+ *   - triggered on TimingEvent every 1ms
  *
  *********************************************************************************************************************/
 /**********************************************************************************************************************

@@ -1,0 +1,178 @@
+﻿  MemIf_Cfg.c
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(149,13): warning C4005: 'FEE_AR_RELEASE_MAJOR_VERSION': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee.h(200,10):
+      see previous definition of 'FEE_AR_RELEASE_MAJOR_VERSION'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(150,13): warning C4005: 'FEE_AR_RELEASE_MINOR_VERSION': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee.h(201,10):
+      see previous definition of 'FEE_AR_RELEASE_MINOR_VERSION'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(151,13): warning C4005: 'FEE_AR_RELEASE_REVISION_VERSION': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee.h(202,10):
+      see previous definition of 'FEE_AR_RELEASE_REVISION_VERSION'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(160,11): warning C4005: 'FEE_SW_MAJOR_VERSION': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee.h(209,10):
+      see previous definition of 'FEE_SW_MAJOR_VERSION'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(161,11): warning C4005: 'FEE_SW_MINOR_VERSION': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee.h(210,10):
+      see previous definition of 'FEE_SW_MINOR_VERSION'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(162,11): warning C4005: 'FEE_SW_PATCH_VERSION': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee.h(211,10):
+      see previous definition of 'FEE_SW_PATCH_VERSION'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(178,15): warning C4005: 'FEE_DEV_ERROR_DETECT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(176,15):
+      see previous definition of 'FEE_DEV_ERROR_DETECT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(206,13): warning C4005: 'FEE_VERSION_INFO_API': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(204,13):
+      see previous definition of 'FEE_VERSION_INFO_API'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(214,15): warning C4005: 'FEE_GET_CYCLE_COUNT_API': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(212,15):
+      see previous definition of 'FEE_GET_CYCLE_COUNT_API'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(234,11): warning C4005: 'FEE_RUNTIME_ERROR_DETECT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(232,11):
+      see previous definition of 'FEE_RUNTIME_ERROR_DETECT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(265,13): warning C4005: 'FEE_SET_MODE_SUPPORTED': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(247,17):
+      see previous definition of 'FEE_SET_MODE_SUPPORTED'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(284,3): error C2059: syntax error: '['
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(312,15): warning C4005: 'FEE_DATA_BLOCK_SUPPORTED': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(297,15):
+      see previous definition of 'FEE_DATA_BLOCK_SUPPORTED'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(337,15): warning C4005: 'FEE_GET_PREV_DATA_API': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(335,15):
+      see previous definition of 'FEE_GET_PREV_DATA_API'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(356,15): warning C4005: 'FEE_CANCELL_ALL_API': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(348,17):
+      see previous definition of 'FEE_CANCELL_ALL_API'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(367,13): warning C4005: 'FEE_ONGOING_WRITE_CANCEL_SUPPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(365,13):
+      see previous definition of 'FEE_ONGOING_WRITE_CANCEL_SUPPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(376,13): warning C4005: 'FEE_MAX_BYTES_PER_CYCLE': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(374,13):
+      see previous definition of 'FEE_MAX_BYTES_PER_CYCLE'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(378,13): warning C4005: 'FEE_MAX_BYTES_PER_CYCLE': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(376,13):
+      see previous definition of 'FEE_MAX_BYTES_PER_CYCLE'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(380,13): warning C4005: 'FEE_MAX_BYTES_PER_CYCLE': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(378,13):
+      see previous definition of 'FEE_MAX_BYTES_PER_CYCLE'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(388,13): warning C4005: 'FEE_VIRGIN_FLASH_ILLEGAL_STATE': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(385,13):
+      see previous definition of 'FEE_VIRGIN_FLASH_ILLEGAL_STATE'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(417,5): error C2059: syntax error: ')'
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(436,11): warning C4005: 'FEE_BLOCK_OVERHEAD': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Types.h(44,10):
+      see previous definition of 'FEE_BLOCK_OVERHEAD'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(440,11): warning C4005: 'FEE_PAGE_OVERHEAD': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Types.h(45,10):
+      see previous definition of 'FEE_PAGE_OVERHEAD'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(472,13): warning C4005: 'FEE_PAGES_PER_FEEMAIN': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(470,13):
+      see previous definition of 'FEE_PAGES_PER_FEEMAIN'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(486,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(506,13): error C2008: '[': unexpected in macro definition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(525,17): warning C4005: 'FEE_GC_INIT_DEM_REPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(521,17):
+      see previous definition of 'FEE_GC_INIT_DEM_REPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(534,17): warning C4005: 'FEE_WRITE_DEM_REPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(530,17):
+      see previous definition of 'FEE_WRITE_DEM_REPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(543,17): warning C4005: 'FEE_READ_DEM_REPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(539,17):
+      see previous definition of 'FEE_READ_DEM_REPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(552,17): warning C4005: 'FEE_GC_WRITE_DEM_REPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(548,17):
+      see previous definition of 'FEE_GC_WRITE_DEM_REPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(561,17): warning C4005: 'FEE_GC_READ_DEM_REPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(557,17):
+      see previous definition of 'FEE_GC_READ_DEM_REPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(570,17): warning C4005: 'FEE_GC_ERASE_DEM_REPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(566,17):
+      see previous definition of 'FEE_GC_ERASE_DEM_REPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(579,17): warning C4005: 'FEE_INVALIDATE_DEM_REPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(575,17):
+      see previous definition of 'FEE_INVALIDATE_DEM_REPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(588,17): warning C4005: 'FEE_WRITE_CYCLES_DEM_REPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(584,17):
+      see previous definition of 'FEE_WRITE_CYCLES_DEM_REPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(597,17): warning C4005: 'FEE_GC_TRIG_DEM_REPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(593,17):
+      see previous definition of 'FEE_GC_TRIG_DEM_REPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(605,17): warning C4005: 'FEE_UNCFG_BLK_DEM_REPORT': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(601,17):
+      see previous definition of 'FEE_UNCFG_BLK_DEM_REPORT'
+  
+D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(627,15): warning C4005: 'FEE_DEM_ENABLED': macro redefinition
+  (compiling source file '../../BFC/Appl/GenDataVtt/MemIf_Cfg.c')
+      D:\__GIT_1-3-HIL\ECU\BFC\BSW\Implementation\Fee_Cfg.h(625,15):
+      see previous definition of 'FEE_DEM_ENABLED'
+  

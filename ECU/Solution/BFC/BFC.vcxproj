@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{94FCACF4-FEA7-4B38-AB22-3DA0269D35EB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BFC</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <SIPDIR>c:\Program Files (x86)\Vector vVIRTUALtarget pro runtime 9.2.29</SIPDIR>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup>
+    <VttConfigExt>.config.$(Configuration)_vc143</VttConfigExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)_vc143\</OutDir>
+    <IntDir>$(Configuration)_vc143\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)_vc143\</OutDir>
+    <IntDir>$(Configuration)_vc143\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_USRDLL;;VVIRTUALTARGET;VTT_ENABLE_CUSTOMVARS;LEVEL1_vECU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\BFC\Appl\Source;..\..\BFC\Appl\IncludeLvl1;$(SIPDIR)\BSW\VttBsw;..\..\BFC\Appl\GenDataVtt\Components;$(SIPDIR)\Source\Interface;$(SIPDIR)\BSW\VttPlatformEmu;..\..\BFC\Appl\GenDataVtt</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <TreatSpecificWarningsAsErrors>4013;4133;4311</TreatSpecificWarningsAsErrors>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SIPDIR)\BSW\VttBsw;$(SIPDIR)\BSW\VttPlatformEmu</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Bsw_VC143_D.lib;SutCfg_VC143_D.lib;vttpe_vc143_x86_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>$(SIPDIR)\BSW\VttPlatformEmu\vttpe_vc_x86.def</ModuleDefinitionFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalOptions> /IGNORE:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_USRDLL;;VVIRTUALTARGET;VTT_ENABLE_CUSTOMVARS;LEVEL1_vECU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\BFC\Appl\Source;..\..\BFC\Appl\IncludeLvl1;$(SIPDIR)\BSW\VttBsw;..\..\BFC\Appl\GenDataVtt\Components;$(SIPDIR)\Source\Interface;$(SIPDIR)\BSW\VttPlatformEmu;..\..\BFC\Appl\GenDataVtt</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <TreatSpecificWarningsAsErrors>4013;4133;4311</TreatSpecificWarningsAsErrors>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SIPDIR)\BSW\VttBsw;$(SIPDIR)\BSW\VttPlatformEmu</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Bsw_VC143_R.lib;SutCfg_VC143_R.lib;vttpe_vc143_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>$(SIPDIR)\BSW\VttPlatformEmu\vttpe_vc_x86.def</ModuleDefinitionFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <AdditionalOptions> /IGNORE:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions></PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\RTE.cpp" />
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\RTE_BSW_Handler.cpp" />
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\RTE_IoHwAb.cpp" />
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\RTE_LightCtrl.cpp" />
+    <ClCompile Include="$(SIPDIR)\BSW\VttPlatformEmu\VttPlatformEmu_DllMain.cpp" />
+    <ClCompile Include="..\..\BFC\Appl\Source\BSW_Handler.c" />
+    <ClCompile Include="..\..\BFC\Appl\Source\IoHwAb.c" />
+    <ClCompile Include="..\..\BFC\Appl\Source\LightCtrl.c" />
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\Vtt_CustomVars.c" />
+    <ClCompile Include="..\..\BFC\Appl\Source\Vtt_CustomVars_InitCfg.c" />
+    <ClCompile Include="..\..\BFC\Appl\GenDataVtt\Vtt_Config.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SIPDIR)\BSW\VttPlatformEmu\CANoeApi.h" />
+    <ClInclude Include="$(SIPDIR)\BSW\VttPlatformEmu\CANoeEmuProcessor.h" />
+    <ClInclude Include="..\..\BFC\Appl\GenDataVtt\Vtt_CustomVars.h" />
+    <ClInclude Include="..\..\BFC\Appl\GenDataVtt\Vtt_CustomVars_private.h" />
+    <ClInclude Include="..\..\BFC\Appl\Source\Vtt_CustomVars_Cfg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\BFC\Appl\GenDataVtt\VttPlatformEmu.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+  <ItemGroup>
+    <SUTFilesToDelete Include="..\..\Level1SUT\BFC.config.*" Exclude="..\..\Level1SUT\BFC$(VttConfigExt)" />
+  </ItemGroup>
+  <Target Name="SigningSUT" AfterTargets="Build">
+    <Message Text="Signing SUT $(TargetDir)$(TargetName)$(TargetExt) ..." Importance="high"/>
+    <Exec Command="&quot;C:\Program Files\Vector vVIRTUALtarget 9\VttPlatformEmu\bin\vtt-sign-sut.exe&quot; &quot;$(TargetDir)$(TargetName)$(TargetExt)&quot;" />
+  </Target>
+  <Target Name="AfterBuild" DependsOnTargets="SigningSUT" Inputs="$(TargetDir)$(TargetName)$(TargetExt);$(TargetDir)$(TargetName).pdb;$(TargetDir)\$(TargetName).map" Outputs="..\..\Level1SUT\BFC$(TargetExt);..\..\Level1SUT\BFC.pdb;..\..\Level1SUT\BFC.map;..\..\Level1SUT\BFC$(VttConfigExt)">
+    <Message Text="Copying binaries to SUT folders..."/>
+    <Delete Files="@(SUTFilesToDelete)" />
+    <Copy SourceFiles="$(TargetDir)$(TargetName).dll" DestinationFiles="..\..\Level1SUT\BFC.dll" OverwriteReadOnlyFiles="true" />
+    <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFiles="..\..\Level1SUT\BFC.pdb" OverwriteReadOnlyFiles="true" />
+    <Copy SourceFiles="$(TargetDir)$(TargetName).map" DestinationFiles="..\..\Level1SUT\BFC.map" OverwriteReadOnlyFiles="true" />
+    <Touch Files="..\..\Level1SUT\BFC$(VttConfigExt)" AlwaysCreate="true" ForceTouch="true" />
+  </Target>
+</Project>

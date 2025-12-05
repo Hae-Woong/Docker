@@ -1,0 +1,120 @@
+#######################################################################################################################
+#  COPYRIGHT
+#  -------------------------------------------------------------------------------------------------------------------
+#  Copyright (c) 2024 by Vector Informatik GmbH.                                                  All rights reserved.
+#
+#                This software is copyright protected and proprietary to Vector Informatik GmbH.
+#                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+#                All other rights remain with Vector Informatik GmbH.
+#  -------------------------------------------------------------------------------------------------------------------
+#  FILE DESCRIPTION
+#  -------------------------------------------------------------------------------------------------------------------
+#  File       :  Il_AsrComCfg5.vcaplugin
+#  Module     :  Vector Code Analyzer
+#  Description:  Entry point of Vector Code Analyzer.
+#  -------------------------------------------------------------------------------------------------------------------
+#######################################################################################################################
+
+#######################################################################################################################
+# Mandatory Functions
+#######################################################################################################################
+
+#######################################################################################################################
+# Name         : setup
+# Return value : -
+# Description  : VectorCodeAnalyzer calls this function to query necessary information about the plugin.
+#                This function is mandatory.
+#######################################################################################################################
+def setup(plugin):
+    # Name of this plugin. Must match the component name.
+    plugin.name = "Il_AsrComCfg5"
+    
+    # Module Implementation Prefix of the component.
+    plugin.mip = "Com"
+
+    # Version of this plugin, encoded in BCD.
+    plugin.version = 0x070000
+
+    # List of files of the component. These files are checked by VectorCodeAnalyzer. If one of the files cannot be found
+    # in the project folders, analysis is skipped.
+    plugin.files = [
+                    "Com_Unity.c",
+                    "Com_Lcfg.c",
+                    "Com_PBcfg.c",
+                    "Il_AsrComCfg5_PduR.vcaspecs.c",
+                    "Il_AsrComCfg5_VStdLib.vcaspecs.c"
+                   ]
+
+    plugin.entry_functions = [
+                              "Com_Init",
+                              "Com_InitMemory",
+                              "Com_DeInit",
+                              "Com_GetConfigurationId",
+                              "Com_GetStatus",
+                              "Com_GetVersionInfo",
+                              "Com_IpduGroupStart",
+                              "Com_IpduGroupStop",
+                              "Com_EnableReceptionDM",
+                              "Com_DisableReceptionDM",
+                              "Com_TriggerIPDUSend",
+                              "Com_TriggerIPDUSendWithMetaData",
+                              "Com_ReceiveDynSignal",
+                              "Com_ReceiveSignal",
+                              "Com_ReceiveSignalGroup",
+                              "Com_ReceiveSignalGroupArray",
+                              "Com_InvalidateSignal",
+                              "Com_InvalidateSignalGroup",
+                              "Com_SwitchIpduTxMode",
+                              "Com_SendDynSignal",
+                              "Com_SendSignal",
+                              "Com_SendSignalGroup",
+                              "Com_SendSignalGroupArray",
+                              "Com_RxIndication",
+                              "Com_StartOfReception",
+                              "Com_CopyRxData",
+                              "Com_TpRxIndication",
+                              "Com_CopyTxData",
+                              "Com_TpTxConfirmation",
+                              "Com_TriggerTransmit",
+                              "Com_TxConfirmation",
+                              "Com_MainFunctionTxInternal", #2022-07-20 generated functions dispatch to this function, i suggested virhin to support *
+                              "Com_MainFunctionRxInternal", #2022-07-20 generated functions dispatch to this function, i suggested virhin to support *
+                              "Com_MainFunctionRouteSignalsInternal" #2022-07-20 generated functions dispatch to this function, i suggested virhin to support *
+                             ]
+
+    # Optional: Define a new symbol. The define will be passed directly to the executable.
+    plugin.defines = ["__VCA__"]
+
+    # Select the feature set. VectorCodeAnalyzer will behave consistently within one feature set, independent of the 
+    # actual version of VectorCodeAnalyzer. This ensures backward compatibility.
+    # The feature set should always match the most recent one. A warning is outputted if there is a new feature set 
+    # available.
+    plugin.feature_set_version = 6
+
+    # VCA analysis options to configure the VCA runtime. All options are optional.
+    plugin.vca_options = {
+                          # Select the engine with which the analysis shall be executed ("fwd-dfa"/"cdfa")
+                          "engine": "fwd-dfa",
+                          
+                          # Select the widening threshold for the first analysis step
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          "widening_threshold": 0,
+                          
+                          # Select the narrowing threshold for the second analysis step
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          "narrowing_threshold": 0,
+                          
+                          # Select the iteration limit to adjust the number of repetitions per cycle
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "iteration_limit": 0
+                         }
+
+    # Additional arguments which are added to the VCA invocation
+    plugin.additional_arguments = [
+                                   "--initialize-strings",   #https://jira.vi.vector.int/browse/MOLE-1210
+                                   "--enable-csl-usecase"
+#                                   "--inline-csl",
+#                                   "--mark-inlined-funcs",
+#                                   "--silence-mode=full"
+                                  ]
+

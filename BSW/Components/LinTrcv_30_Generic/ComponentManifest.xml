@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-654B685C-D5FC-124F-B4B7-B8E8DD7C1FE0</guid>
+        <name>DrvTrans_GenericLindioAsr@Doc_TechRef</name>
+        <version>3.02.01</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-6B489B98-EBF3-6445-9779-E7EA1B9EC849</guid>
+        <name>DrvTrans_GenericLindioAsr@root</name>
+        <version>7.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-977DA5CC-317E-4B8E-A583-2132267AA7AF</guid>
+        <name>DrvTrans_GenericLindioAsr@GenTool_GeneratorMsr</name>
+        <version>7.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-9D3727C1-DE28-6A49-9DD9-3B9E7B76588C</guid>
+        <name>DrvTrans_GenericLindioAsr@Description</name>
+        <version>6.01.01</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-A96C41F6-5AE0-6643-8CF0-107AA5875132</guid>
+        <name>DrvTrans_GenericLindioAsr@Make</name>
+        <version>2.01.02</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-E1218E12-5AD9-F246-B525-CD55FD717DD1</guid>
+        <name>DrvTrans_GenericLindioAsr@Implementation</name>
+        <version>6.00.00</version>
+    </subPackage>
+</componentManifest>

@@ -1,0 +1,95 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2021 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  If_AsrIfEth.plugin
+*  Module     :  MSSV
+*  Description:  Entry point of MSSV Core.
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version    Date          Author   Change Id        Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00   2017-12-04    vismha   STORYC-418       FEAT-2521,S-452 [SAFE] SafeBSW for EthIf (ASIL B), S1SIL
+*  01.01.00   2017-12-21    vismha   -                Implementation update
+*  02.00.00   2018-08-17    vismha   -                Implementation update
+*  03.00.00   2018-10-24    vismha   -                Removed asserts for component version since only CheckQMDefines
+*                                                     is implemented in this plugin
+*  03.01.00   2019-10-01    visdrr   ETH-606          Introduce driver abstraction API for the Ethernet switch 
+*                                                     enable/disable VLAN API
+*  04.00.00   2020-07-01    virstl   ETH-1495         Fail Avoidance for EthIf including Ethernet Switches
+*  04.01.00   2021-03-17    visaay   ETHCIF-139       Introduce measures that allow usage of EthIf in a multi core
+*                                                     environment based on VLAN
+*  04.01.01   2022-06-17    visdep   ETHCIF-1239      Upgrade ZC from QM to ASIL quality level
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : MSSV_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+  reg.SetVersion(0x040101)
+  reg.SetPackageName("If_AsrIfEth")
+  reg.SetInputFiles(["EthIf_Lcfg.c"])
+  return reg 
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : MSSV_core calls this function to allow the plugin a version check against the BSW sources.
+*                Check against the major and minor version of the source code.
+*                Note: The version check is not necessary if only rule CheckQMDefines is implemented in this plugin.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+  /* No version check since only CheckQMDefines is implemented in this plugin */
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the MSSV plugin. Main calls all rule functions to check the configuration.
+*                This function is mandatory.
+* Requirements : ADAPT: Enter here the references to the corresponding requirements
+**********************************************************************************************************************/
+def main()
+{
+  InvokeRule("Check QM inactive", CheckQMDefines)
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : This rule checks the setting of QM-related preprocessor defines.
+*                Typically it checks that QM features are inactive in safety context.
+* Requirements : N/A
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  AssertDefineIsStdOn("ETHIF_DEV_ERROR_DETECT")
+  /* not safe features */      
+  AssertDefineIsStdOff("ETHIF_MULTI_CORE_SUPPORT")
+  AssertDefineEquals("ETHIF_EXTENDED_TRAFFIC_HANDLING_TYPE", "ETHIF_NO_EXTENDED_TRAFFIC_HANDLING")
+}
+

@@ -6,26 +6,6 @@
       <AR-PACKAGES>
         <AR-PACKAGE UUID="7e118c10-0a18-49f2-9978-33759fe5e7c2">
           <SHORT-NAME>EcucDefs</SHORT-NAME>
-          <AR-PACKAGES>
-            <AR-PACKAGE UUID="7061a7bf-2916-4a8a-8eb1-2646190d7528">
-              <SHORT-NAME>Irq_ib_bswmd</SHORT-NAME>
-              <AR-PACKAGES>
-                <AR-PACKAGE UUID="e56c2d44-96cc-4f3e-a1c5-1540e3f16454">
-                  <SHORT-NAME>BswModuleDescriptions</SHORT-NAME>
-                  <ELEMENTS>
-                    <BSW-MODULE-DESCRIPTION UUID="fe2f5b71-487c-4ded-9407-eb353500dee7">
-                      <SHORT-NAME>Irq</SHORT-NAME>
-                      <INTERNAL-BEHAVIORS>
-                        <BSW-INTERNAL-BEHAVIOR UUID="8dfb666e-3459-40d9-b8e7-678a809baf5e">
-                          <SHORT-NAME>IrqBehavior</SHORT-NAME>
-                        </BSW-INTERNAL-BEHAVIOR>
-                      </INTERNAL-BEHAVIORS>
-                    </BSW-MODULE-DESCRIPTION>
-                  </ELEMENTS>
-                </AR-PACKAGE>
-              </AR-PACKAGES>
-            </AR-PACKAGE>
-          </AR-PACKAGES>
         </AR-PACKAGE>
       </AR-PACKAGES>
     </AR-PACKAGE>

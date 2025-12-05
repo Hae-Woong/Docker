@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-1296F1D0-9AAF-41F3-99EA-7D6385722DB0</guid>
+        <name>MSR_Vector_SLP4_Content@root</name>
+        <version>32.07.02</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-E0DD3DEF-37DF-4A73-9888-2F20D0F5BFD9</guid>
+        <name>MSR_Vector_SLP4_Content@Preconfig</name>
+        <version>32.00.00</version>
+    </subPackage>
+</componentManifest>

@@ -1,0 +1,92 @@
+/**********************************************************************************************************************
+*  COPYRIGHT
+*  -------------------------------------------------------------------------------------------------------------------
+*  Copyright (c) 2020 by Vector Informatik GmbH.                                                  All rights reserved.
+*
+*                This software is copyright protected and proprietary to Vector Informatik GmbH.
+*                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+*                All other rights remain with Vector Informatik GmbH.
+*  -------------------------------------------------------------------------------------------------------------------
+*  FILE DESCRIPTION
+*  -------------------------------------------------------------------------------------------------------------------
+*  File       :  Tp_AsrTpSomeIp.plugin
+*  Module     :  Elisa
+*
+*  Description:  Entry point of Elisa Core.
+*
+*  -------------------------------------------------------------------------------------------------------------------
+*  AUTHOR IDENTITY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Name                          Initials      Company
+*  -------------------------------------------------------------------------------------------------------------------
+*  Supraja Kovuru                 vissuk      Vector Informatik GmbH
+*  -------------------------------------------------------------------------------------------------------------------
+*  REVISION HISTORY
+*  -------------------------------------------------------------------------------------------------------------------
+*  Version    Date          Author   Change Id        Description
+*  -------------------------------------------------------------------------------------------------------------------
+*  01.00.00   2020-09-09    vissuk   SWAT-954         Bring the SomeIpTp from QM to ASIL D
+*  01.00.01   2020-11-10    visath                    Improvements after SafetyCheck
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Mandatory Functions
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : RegisterPlugin
+* Return value : Reference to a structure which contains the registration information about the plugin
+* Description  : Elisa_core calls this function to query necessary information about the plugin.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def RegisterPlugin()
+{
+  var reg = ModulePluginRegistration()
+
+  reg.SetVersion(0x010001)
+  reg.SetPackageName("Tp_AsrTpSomeIp")
+  reg.SetInputFiles(["SomeIpTp.c", "SomeIpTp_Lcfg.c", "SomeIpTp_PBcfg.c"])
+
+  return reg
+}
+
+/**********************************************************************************************************************
+* Name         : CheckVersions
+* Return value : -
+* Description  : Elisa_core calls this function to allow the plugin a version check against the BSW sources.
+**********************************************************************************************************************/
+def CheckVersions()
+{
+  /* Not required, since only CheckQMDefines is implemented in this plugin */
+}
+
+/**********************************************************************************************************************
+* Name         : main
+* Parameter    : None
+* Return value : None
+* Description  : This is the entry point of the Elisa plugin. main calls all rule functions to check the configuration.
+*                This function is mandatory.
+**********************************************************************************************************************/
+def main()
+{
+  InvokeRule("Check Restricted Precompile Options", CheckQMDefines)
+}
+
+/**********************************************************************************************************************
+* Rules
+**********************************************************************************************************************/
+
+/**********************************************************************************************************************
+* Name         : CheckQMDefines
+* Parameter    : None
+* Return value : None
+* Description  : Assert that restricted precompile options are set / not set as required.
+* Requirements : CM_SOMEIPTP_PRECOMPILEOPTIONS
+**********************************************************************************************************************/
+def CheckQMDefines()
+{
+  /* settings restricted to a certain value / range */
+  AssertDefineIsStdOn ("SOMEIPTP_DEV_ERROR_DETECT")
+  AssertDefineEquals  ("SOMEIPTP_SHORT_HEADER_LENGTH", "8u")
+  AssertDefineEquals  ("SOMEIPTP_LONG_HEADER_LENGTH", "12u")
+}

@@ -20,7 +20,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: EcuM_Callout_Stubs.c
- *   Generation Time: 2025-02-27 16:00:04
+ *   Generation Time: 2025-11-06 16:02:32
  *           Project: LightControl - Version 1.0
  *          Delivery: PAI11871
  *      Tool Version: DaVinci Configurator Classic (beta) 5.29.25
@@ -44,7 +44,7 @@
  * The generated code contains features that are not licensed and thus serial production is not allowed. The code may include errors.
  * 
  * [Warning] Cfg00033 - No valid license file. Serial production is not allowed! 
- * - No license file (.veplc) found in 'D:\DaVinciPackageManager\Packages\BSW'. Please contact the Vector support to obtain valid licenses.
+ * - No license file (.veplc) found in 'D:\BSW'. Please contact the Vector support to obtain valid licenses.
  *********************************************************************************************************************/
 
 /**********************************************************************************************************************
@@ -98,8 +98,6 @@
 #include "Dcm.h" 
 #include "CanTp.h" 
 
-// temp for testing
-#include "Os.h"
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           <USERBLOCK User Includes>                          DO NOT CHANGE THIS COMMENT!
@@ -119,7 +117,7 @@
 #include "Adc.h" 	
 #include "Irq.h"
 #include "Fls_17_Dmu.h"
-#include "Fee.h" 
+//#include "Fee.h" 
 #include "BrsHw.h"
 #endif
 /**********************************************************************************************************************
@@ -319,7 +317,7 @@ FUNC(void, ECUM_CODE) EcuM_AL_DriverInitOne(void)
   Adc_Init( &Adc_Config );
   IrqAdc_Init();
   Fls_17_Dmu_Init(&Fls_17_Dmu_Config);
-  Fee_Init(&Fee_Config);
+  //Fee_Init(&Fee_Config);
 #endif	
   return;
 /**********************************************************************************************************************

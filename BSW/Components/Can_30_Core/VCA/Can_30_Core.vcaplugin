@@ -1,0 +1,98 @@
+#######################################################################################################################
+#  COPYRIGHT
+#  -------------------------------------------------------------------------------------------------------------------
+#  Copyright (c) 2024 by Vector Informatik GmbH.                                                  All rights reserved.
+#
+#                This software is copyright protected and proprietary to Vector Informatik GmbH.
+#                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+#                All other rights remain with Vector Informatik GmbH.
+#  -------------------------------------------------------------------------------------------------------------------
+#  FILE DESCRIPTION
+#  -------------------------------------------------------------------------------------------------------------------
+#  File       :  DrvCanGen3_Core.vcaplugin
+#  Module     :  Vector Code Analyzer
+#  Description:  Entry point of Vector Code Analyzer.
+#  -------------------------------------------------------------------------------------------------------------------
+#  REVISION HISTORY
+#  -------------------------------------------------------------------------------------------------------------------
+#  Version   Date        Author        Change Id     Description
+#  -------------------------------------------------------------------------------------------------------------------
+#  01.00.00  2021-08-31  virstl        CANCORE-489   First version
+#  01.01.00  2022-10-18  visbir                      Update before ASIL/Silent release
+#  main-1    2024-02-26  visgaz        CANCORE-2371  Change history is maintained in the global ChangeHistory.txt file starting with this release
+#######################################################################################################################
+
+#######################################################################################################################
+# Mandatory Functions
+#######################################################################################################################
+
+#######################################################################################################################
+# Name         : setup
+# Return value : -
+# Description  : VectorCodeAnalyzer calls this function to query necessary information about the plugin.
+#                This function is mandatory.
+#######################################################################################################################
+def setup(plugin):
+    # Name of this plugin. Must match the component name.
+    plugin.name = "DrvCanGen3_Core"
+
+    # Module Implementation Prefix of the component.
+    plugin.mip = "Can_30_Core"
+
+    # Version of this plugin, encoded in BCD.
+    plugin.version = 0x010100
+
+    # List of files of the component. These files are checked by VectorCodeAnalyzer. If one of the files cannot be found
+    # in the project folders, analysis is skipped.
+    plugin.files = [
+                    "Can_30_Core.c", 
+                    "Can_30_Core_Baudrate.c", 
+                    "Can_30_Core_ErrorHandler.c", 
+                    "Can_30_Core_DiagnosticHandler.c",
+                    "Can_30_Core_ExclusiveAreaHandler.c",
+                    "Can_30_Core_Initialization.c",
+                    "Can_30_Core_InterruptService.c",
+                    "Can_30_Core_ModeHandler.c",
+                    "Can_30_Core_ModeRequest.c",
+                    "Can_30_Core_RxIndicationHandler.c",
+                    "Can_30_Core_RxQueueHandler.c",
+                    "Can_30_Core_TimeoutHandler.c",
+                    "Can_30_Core_TxBufferHandler.c",
+                    "Can_30_Core_TxConfirmationHandler.c",
+                    "Can_30_Core_TxRequestHandler.c",
+                    "Can_30_Core_Version.c",
+                    "Can_30_Core_WakeupHandler.c",
+                    "Can_30_Core_Lcfg.c",
+                    "Can_30_Core_PBcfg.c",
+                    "Can_30_Core_CanIf.vcaspecs.c"
+                   ]
+
+    # Optional: Define a new symbol. The define will be passed directly to the executable.
+    # plugin.defines = ["MIP_SOME_DEFINE=<value>"]
+
+    # Select the feature set. VectorCodeAnalyzer will behave consistently within one feature set, independent of the 
+    # actual version of VectorCodeAnalyzer. This ensures backward compatibility.
+    # The feature set should always match the most recent one. A warning is outputted if there is a new feature set 
+    # available.
+    plugin.feature_set_version = 6
+
+    # VCA analysis options to configure the VCA runtime. All options are optional.
+    plugin.vca_options = {
+                          # Select the engine with which the analysis shall be executed ("fwd-dfa"/"cdfa")
+                          "engine": "fwd-dfa",
+                          
+                          # Select the widening threshold for the first analysis step
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "widening_threshold": 0,
+                          
+                          # Select the narrowing threshold for the second analysis step
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "narrowing_threshold": 0,
+                          
+                          # Select the iteration limit to adjust the number of repetitions per cycle
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "iteration_limit": 0
+                         }
+
+    # Additional arguments which are added to the VCA invocation
+    # plugin.additional_arguments = []

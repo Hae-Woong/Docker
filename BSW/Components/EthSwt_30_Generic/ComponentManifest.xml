@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-0850723B-51F9-47E8-858C-75C963261718</guid>
+        <name>DrvEthSwitch_GenericAsr@root</name>
+        <version>1.00.01</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-3C3F34FE-8EC3-47C1-8365-38AC254760DC</guid>
+        <name>DrvEthSwitch_GenericAsr@Description</name>
+        <version>1.00.01</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-B19B6CB1-0875-44B0-9AE9-E556BC0E1816</guid>
+        <name>DrvEthSwitch_GenericAsr@Doc_TechRef</name>
+        <version>1.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-B80CD01B-36D8-45C1-82F3-B94AECD8AB81</guid>
+        <name>DrvEthSwitch_GenericAsr@GenTool_GeneratorMsr</name>
+        <version>1.00.01</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-FABCFC9C-AC88-4844-937A-6F75DF2C4942</guid>
+        <name>DrvEthSwitch_GenericAsr@Make</name>
+        <version>1.00.00</version>
+    </subPackage>
+</componentManifest>

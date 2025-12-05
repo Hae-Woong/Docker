@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-5F7EE0A7-6AE1-4099-B62F-69B4CE170360</guid>
+        <name>DrvEth_GenericEthAsr@root</name>
+        <version>5.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-62F52334-BC99-442A-BD93-24B7F1CEDB65</guid>
+        <name>DrvEth_GenericEthAsr@Make</name>
+        <version>1.01.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-695FBCDD-E975-4095-854B-DDDEDBBB37BD</guid>
+        <name>DrvEth_GenericEthAsr@Doc_TechRef</name>
+        <version>3.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-7DC54388-5814-4C8F-B785-D0BDE3F533BC</guid>
+        <name>DrvEth_GenericEthAsr@Description</name>
+        <version>2.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-946F7762-6155-477C-BF94-432077836A3F</guid>
+        <name>DrvEth_GenericEthAsr@GenTool_GeneratorMsr</name>
+        <version>4.00.00</version>
+    </subPackage>
+</componentManifest>

@@ -1,0 +1,237 @@
+/**********************************************************************************************************************
+ *  REVISION HISTORY
+ *
+ *  This file contains the revision history of the component implementation and all related artifacts.
+ *  The revision history covers all released version of the component. If you have received a development version of
+ *  this component, the changes made in the development version are not referenced herein.
+ *
+ *  Legend of Columns:
+ *
+ *    I - Implementation
+ *    G - Generator
+ *    D - Documentation & Technical Reference
+ *    T - Test Implementation
+ *    S - Specification
+ *    B - Build-Artifacts
+ *
+ *  Legend of Cells:
+ *
+ *    X - Artifact is affected by the change.
+ *    - - Artifact is not affected by the change.
+ *
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  Version              Date           Author          I G D T S B       Change Id           Description
+ *  -------------------------------------------------------------------------------------------------------------------
+ *  4.35.00              2023-08-26     visso           X X X X X -       RTE-8116            Remove history from all generator sources and add central change history file similar to adaptive
+ *  4.35.00              2023-08-28     visso           - X - X - -       ESCAN00115502       RTE01207 - Value specification type is not supported.
+ *  4.35.00              2023-08-28     visso           X X - X X -       RTE-8184            Fix review findings of Rte_Asr4 4.34.0
+ *  4.35.00              2023-08-29     visso           - X - X - -       ESCAN00115510       Compiler error: comparison of constant with expression of type 'uint8' (aka 'unsigned char') is always true
+ *  4.35.00              2023-08-29     visso           - X - - - -       RTE-8258            Check if metadata is configured for the return signal and not on the call signal
+ *  4.35.00              2023-08-30     visso           - X - X - -       RTE-8260            Add support for DiagXf connections of NvPorts where non of the connected SWCs is a NvBlock SWC
+ *  4.35.00              2023-08-31     visso           - X - X - -       RTE-8196            Reviews and Release
+ *  4.35.00              2023-08-31     visso           X X - X - -       RTE-8242            Support buffer instantiation by RTE for implicit buffer access implementation plugins Part 1
+ *  4.35.00              2023-08-31     visso           - X - - - -       RTE-8268            Improve RTE49999 message when primitive constant is configured for complex data type
+ *  4.35.00              2023-09-01     visso           X X - X - -       ESCAN00115560       Compiler error: Missing local variable ret in task
+ *  4.35.00              2023-09-02     csailer         - X - X X -       RTE-8235            Added setting to switch between multithreaded and sequential DataType transformation.
+ *  4.35.00              2023-09-05     visdes          X X - X - -       RTE-8182            Enable Java Templates feature by default for all customers
+ *  4.35.00              2023-09-05     visso           X X - X - -       RTE-8282            Rework model system so that PortConnectivity, SignalPortConnectivity and WasConnected are set in a post processing step
+ *  4.35.00              2023-09-11     visvrn          - X - - - -       RTE-8120            Allow RTE and BRE use-cases to be user selectable 
+ *  4.35.00              2023-09-11     visdes          X X X X - -       RTE-8194            Range checks for signal from the network at runtime Production
+ *  4.35.00              2023-09-14     visso           - - - X - -       RTE-8286            Remove Old Serializer
+ *  4.35.00              2023-09-14     vissdi          - X - X - -       RTE-8292            Allow FanOut signals assigned to one comMainFunctionTx per partition
+ *  4.35.00              2023-09-20     vissdi          - X - X - -       ESCAN00115596       Compiler error: passing void parameter to primitive type in SWC file
+ *  4.35.00              2023-09-20     vissdi          X X - X - -       RTE-7385            RTE Migrate MetaData to AR 4.3 Part 1 - (based on test configuration 3.69)
+ *  4.35.00              2023-09-25     visso           - X - X - -       RTE-8440            Reviews and Release
+ *  4.35.00              2023-09-25     jkugler         - X - - - -       RTE-8501            Add error when number of record elements in port init value do not match to the used data type
+ *  4.35.00              2023-09-26     visso           X X X X X -       RTE-8411            Improve Handling of TxUpdateFlag in case of multiple Rte_ComSendSignalProxyPeriodic
+ *  4.35.00              2023-09-26     visgme          - X - X - -       RTE-8492            Remove Old Serializer from Code
+ *  4.35.00              2023-09-27     visso           - X - X - -       RTE-8512            Improve support for characteristic table data types without input variable type
+ *  4.35.00              2023-09-28     visgme          - X - X - -       ESCAN00115745       RTE49999 configuration not supported Context <DVRteParser::PrintAbsAlarmOffsetWarring>
+ *  4.35.00              2023-09-28     visso           X X - X - -       RTE-8438            Fix review findings of Rte_Asr4 4.34.0 Part 2
+ *  4.35.00              2023-09-28     dschaefter      - X - X - -       RTE-8481            Jenkins Jobs for JavaJeeves
+ *  4.35.00              2023-09-28     visgme          - X - X - -       RTE-8510            ESCAN00115770: Rte90001 Rte90005 Fatal Generator Failure at Generation phase with McSupportData and Map ADT with both shared and local axis
+ *  4.35.00              2023-10-02     visso           - X - X - -       ESCAN00115804       RTE generator adds invalid Rte_ClientQueueID_uint8 IOC data type reference
+ *  4.35.00              2023-10-05     visgme          - X - X - -       RTE-8520            ESCAN00115809: RTE01999 Unsupported configuration. Context <setAssemblySignalPortFromMappingData> 
+ *  4.35.00              2023-10-05     visgme          - X - X - -       RTE-8522            ESCAN00115810: RTE13263 The primitive value <> of data type <<DATA_TYPE_NAME>> is not configured properly
+ *  4.35.00              2023-10-06     visso           X X - X - -       RTE-8431            Range checks for signal from the network at runtime Production Analyzer
+ *  4.35.00              2023-10-10     visvrn          X X - X X -       RTE-8430            New test variant for data conversion part2
+ *  4.35.00              2023-10-12     visso           X X - X - -       ESCAN00115901       RTE Analyzer does not report data conversion for pure table conversions
+ *  4.35.00              2023-10-14     visso           X X - X - -       ESCAN00115914       Compiler error: Unreferenced local variable
+ *  4.35.00              2023-10-14     visso           - X - X - -       ESCAN00115915       Compiler warning: Constant value without data type postfix
+ *  4.35.00              2023-10-14     visso           X X - X - -       ESCAN00115916       Compiler warning: variable dataSig was declared but never referenced
+ *  4.35.00              2023-10-14     visso           - X - X - -       ESCAN00115917       MAP symbol for memory segment not found in MAP file
+ *  4.35.00              2023-10-14     visso           - X - X - -       ESCAN00115918       Compiler error: RxTimeout flag not found
+ *  4.35.00              2023-10-15     jkugler         - X - X - -       ESCAN00115913       VttVfbTraceHooks not generated
+ *  4.35.00              2023-10-16     vissdi          - X - X - -       ESCAN00115924       Compiler error: OsIocs Index mismatch and missing sender
+ *  4.35.00              2023-10-16     dschaefter      - X - X - -       ESCAN00115925       E2E_P11ConfigType initialized with MaxDeltaCounterInit instead of MaxDeltaCounter
+ *  4.35.00              2023-10-17     visso           - X - X - -       RTE-8563            Reduce severity of task mapping checks if runnables use only RIPs
+ *  4.35.00              2023-10-18     visso           - X - - - -       RTE-8290            Check for missing init values in inter-runnable variables
+ *  4.35.00              2023-10-18     visvrn          X X - X - -       RTE-8539            ESCAN00115915: Compiler warning: Constant value without data type postfix
+ *  4.35.00              2023-10-18     visso           - X - - - -       RTE-8565            Improve robustness for constant values that are separated with |
+ *  4.35.00              2023-10-18     visso           - X - X - -       RTE-8567            Add option to reduce severity of Developer checks
+ *  4.35.00              2023-10-18     visso           - X - - - -       RTE-8569            Improve generator robustness in case calibration parameter is missing for axis individual
+ *  4.35.00              2023-10-18     visso           X X - X - -       RTE-8571            Change ERROR_BITFIELDTEXTTABLEMAPPING_MISSING_VALUELIST to warning
+ *  4.35.00              2023-10-19     dschaefter      - X - - - -       ESCAN00115953       Compiler error: Component CoreId is set to 0, regardless of the actual mapping in a single core scenario.
+ *  4.35.00              2023-10-20     visso           - - - X - -       RTE-8483            Update Jenkins master to new container based approach
+ *  4.35.00              2023-10-23     dschaefter      X X - X - -       RTE-8535            Parallel File Generation Safety and Additional Roundups
+ *  4.35.00              2023-10-23     visso           - X X X X -       RTE-8577            Reviews and Release
+ *  4.35.00              2023-10-23     dschaefter      - X - X - -       RTE-8654            Fix review findings of Rte_Asr4 4.34.0 Part 3
+ *  4.35.00              2023-10-24     visdes          - X - X - -       ESCAN00115993       Compiler error: use of undeclared identifier "Rte_Ev"
+ *  4.35.00              2023-10-25     visso           X X - X - -       ESCAN00116001       Protection hook called when E2EXF is called in Rte_ComSendSignalProxyPeriodic
+ *  4.35.00              2023-10-25     visso           X X - X - -       ESCAN00116002       IocWrite for RxUpdate flags called from the wrong partition
+ *  4.35.00              2023-10-25     visgme          - X - - - -       RTE-8678            Adapt Array of Axis ApplicartionValueSpecification
+ *  4.35.00              2023-10-25     visdes          - X - - - -       RTE-8683            ConstantPackagePath is not deterministic for syntaxtree
+ *  4.35.00              2023-10-26     visso           - X - - - -       RTE-8689            Support Inter Runnable Variables without Init Values for DVSwcGen
+ *  4.35.00              2023-10-26     visso           - - X - - -       RTE-8691            Clarify RTE_E_TIMEOUT return code description
+ *  4.36.00              2023-11-02     vislsa          - X - X - -       RTE-8618            RTE: Support buffer instantiation by RTE for implicit buffer access - Incooperate Customer Feedback
+ *  4.36.00              2023-11-02     visgme          - X - X - -       RTE-8627            Support SwRecordLayout according to AUTOSAR Analyze additional customer use cases
+ *  4.36.00              2023-11-06     visvrn          X X X X X -       RTE-8247            RTE shall allow to configure central start offset when SetAbsAlarms() is used Part 2
+ *  4.36.00              2023-11-06     dschaefter      - X - X - -       RTE-8625            Support of ProfileBehavior = FALSE in E2E_P02MapStatusToSM
+ *  4.36.00              2023-11-06     visso           - X - X - -       RTE-8687            Fix review findings of Rte_Asr4 4.35.0
+ *  4.36.00              2023-11-07     visdes          - X - X - -       ESCAN00116081       Compiler warning: dataSig unreferenced local variable
+ *  4.36.00              2023-11-08     visso           - X - - - -       ESCAN00116073       RTE49999: Configuration not supported in context <RteSystemInfo::CheckPduAccessToComPartition>
+ *  4.36.00              2023-11-08     visso           X X - - - -       ESCAN00116093       RTE Analyzer reports NotSupported template variant N2515c3d2b334410d7a959670814ac649
+ *  4.36.00              2023-11-08     csailer         - X - - - -       RTE-8434            Concept: Caching of AST data Part 2
+ *  4.36.00              2023-11-08     visdes          X X - X - -       RTE-8628            Optionally disable the generation of Rte_InitMemory
+ *  4.36.00              2023-11-08     visdes          - X - - - -       RTE-8713            SomeIpXf_InitMemory is not registered in InitFunctions-List
+ *  4.36.00              2023-11-08     visso           - X - - - -       RTE-8717            Downgrade error that static memory has no type to warning
+ *  4.36.00              2023-11-09     visgme          - - - X - -       RTE-7983            Fix problems in test configurations for model consistency integration Part 2
+ *  4.36.00              2023-11-09     visso           - X - X - -       RTE-8721            Reviews and Release
+ *  4.36.00              2023-11-09     csailer         - X - - - -       RTE-8745            Optimize runtime of create constants
+ *  4.36.00              2023-11-14     csailer         - X - X - -       RTE-8573            Code improvements: Fix review findings for DataType creation
+ *  4.36.00              2023-11-15     csailer         - X - X - -       RTE-8760            Finalize multithreaded component creation
+ *  4.36.00              2023-11-16     vislsa          - X - X - -       ESCAN00116163       McData exports wrong SwDataDefProps for Application Array data types
+ *  4.36.00              2023-11-17     visso           - X - X - -       ESCAN00116178       Compiler error: record init value assigned to array variable
+ *  4.36.00              2023-11-20     visvrn          X X X X X -       RTE-8636            Allow custom MemCpy Implementations for Rte_PartialMemCpy
+ *  4.36.00              2023-11-20     dschaefter      - X - X - -       RTE-8787            Parallel File Generation: Show RTE generator as 3 different generators
+ *  4.36.00              2023-11-21     visvrn          X X - X - -       RTE-8789            Reviews and Release
+ *  4.36.00              2023-11-21     visdes          X X X X X -       RTE-8842            Optionally disable the generation of Rte_InitMemory Roundups
+ *  4.36.00              2023-11-22     visso           - X - X - -       RTE-8866            Allow cross-partition PR port connections when there is only a single writer
+ *  4.36.00              2023-11-22     visso           - X - - - -       RTE-8868            Improve robustness for createLETExecutableEntityCluster
+ *  4.36.00              2023-11-22     jkugler         - X X X - -       RTE-8870            ESCAN00116210 RTE49999 when configuring an SchM_CallContext_Enter- or Exit-Hook.
+ *  4.36.00              2023-11-23     visgme          - X - - - -       RTE-8874            Fix Review Findings SwRecordLayout
+ *  4.36.00              2023-11-28     vislsa          - X - - - -       ESCAN00116260       McData exports wrong SwDataDefProps for Array data types
+ *  4.36.00              2023-11-29     vislsa          - X - - - -       RTE-8887            Add error for PerInstanceMemorys missing implementation data types
+ *  4.36.00              2023-11-30     vissdi          - X - - - -       RTE-8889            ESCAN00116270: Compiler error: undefined os event in call to SetEvent
+ *  4.36.00              2023-12-01     visgme          - X - X - -       RTE-8783            RTE: Support for manual task activation in combination with OsTaskPeriod Part 1
+ *  4.36.00              2023-12-01     jkugler         X X - X - -       RTE-8899            ESCAN00116288 Compilation error with active Illegal Invocation Detection on single core configurations
+ *  4.36.00              2023-12-04     vissdi          X X - X - -       RTE-8236            RTE Migrate MetaData to AR 4.3 Part 2
+ *  4.36.00              2023-12-05     visso           X X - X - -       RTE-6220            Combine Abstract Syntaxtree for RTE Phase and RTE Analyzer Phase (Part 1)
+ *  4.36.00              2023-12-05     visgme          - X - X - -       RTE-8706            Support ISignals with zero length for SOME/IP transformed triggers
+ *  4.36.00              2023-12-05     visgme          - - - X - -       RTE-8848            Fix problems in test configurations for model consistency integration Part 3
+ *  4.36.00              2023-12-12     visgme          - X - X - -       RTE-9037            Support SwRecordLayout for reference type
+ *  4.36.00              2023-12-12     visdes          - X - X - -       RTE-9047            ESCAN00116356: TLV: Incorrect length field is used for complex data types
+ *  4.36.00              2023-12-12     jkugler         - X - X - -       RTE-9049            ESCAN00116359 Compiler error: undeclared identifier with active Illegal Invocation Detection and configured service components
+ *  4.36.00              2023-12-18     visso           X X - X - -       ESCAN00116398       Wrong group signal sent or received when ComXf is used in combination with multiple subelement mappings
+ *  4.36.00              2023-12-18     visso           - X - X - -       RTE-7761            Combine Abstract Syntaxtree for RTE Phase and RTE Analyzer Phase
+ *  4.36.00              2023-12-18     visso           X X X X - -       RTE-8929            Parallel File Generation: Show RTE generator as 3 different generators
+ *  4.36.00              2023-12-19     vissdi          X X X X X -       RTE-8784            RTE: Support for manual task activation in combination with OsTaskPeriod Part 2
+ *  4.36.00              2023-12-20     csailer         - X - X - -       RTE-8960            Reviews and Release
+ *  4.36.00              2023-12-20     csailer         - X - X - -       RTE-9067            Finalize custom serializer and ant script
+ *  4.36.00              2023-12-21     visso           - X - - - -       RTE-9081            Add support for LdComPdus that are mapped to partitions with COM mainfunction but COM signal(groups)
+ *  4.36.00              2023-12-22     visjwe          - X - X - -       RTE-8987            Reviews and Release
+ *  4.36.00              2023-12-29     visgme          - X - X - -       RTE-7557            Extend E2E transformer to support new profile for J1939-76 Part 1
+ *  4.36.00              2024-01-08     dschaefter      - - X - - -       RTE-9072            Clarify TechRef NvM Mapping
+ *  4.36.00              2024-01-09     csailer         - X - - - -       RTE-9091            ESCAN00116462: Compiler error: Rte_Type.h compilation fails for DataReference pointing to another DataReference
+ *  4.36.00              2024-01-10     visso           - X - X - -       RTE-9096            Optimize ReformatConstantInitializer
+ *  4.36.00              2024-01-11     dschaefter      - X - - - -       RTE-9114            Parallel File Generation: Jenkins
+ *  4.36.00              2024-01-11     visso           - X - - - -       RTE-9116            Optimize AST handling for primitive constants
+ *  4.36.00              2024-01-11     visso           - X - - - -       RTE-9122            Optimize CreateSpinlockInfoForSignalPort()
+ *  4.36.00              2024-01-11     visso           - X - - - -       RTE-9124            Optimize event summarization
+ *  4.36.00              2024-01-11     visso           - X - - - -       RTE-9126            Optimize PostProcessRxNvBlockDataMappingDirtyFlagInfos
+ *  4.36.00              2024-01-11     visso           - X - - - -       RTE-9128            Optimize uint8 search in CreateClientServerSystemSignalInfos
+ *  4.36.00              2024-01-12     visso           - X - X - -       ESCAN00116397       Compiler error: Incompatible parameter type "array" in Call_Rte_TrustedCall 
+ *  4.36.00              2024-01-12     vislsa          X X - X - -       RTE-9051            RTE: Support buffer instantiation by RTE for implicit buffer access - use data handle type for global buffers instead of data type Part 2
+ *  4.36.00              2024-01-15     dschaefter      X X - X X -       RTE-9104            Parallel File Generation: Safety Analysis + Unit Tests Part 1
+ *  4.36.00              2024-01-16     visso           X X - X - -       RTE-8750            Extend RTE, E2EXf, RTE Analyzer for PROFILE_GM_01
+ *  4.36.00              2024-01-16     vissdi          - X - X - -       RTE-9130            Adapt validation for RTE01259 by making it less restrictive
+ *  4.36.00              2024-01-17     visgme          - X - X - -       RTE-8937            Extend E2E transformer to support new profile for J1939-76 Part 2
+ *  4.36.00              2024-01-17     visdes          - X - X - -       RTE-9120            ESCAN00116500: Incorrect data type is used for COM-APIs
+ *  4.36.00              2024-01-19     csailer         - X - - - -       RTE-9161            Improve processing time of Access Points
+ *  4.36.00              2024-01-19     visso           - X - - - -       RTE-9163            Optimize addPartitionInfo()
+ *  4.36.00              2024-01-19     visso           - X - - - -       RTE-9165            Optimize ModelUtilRTE
+ *  4.36.00              2024-01-19     visso           - X - X - -       RTE-9169            Optimize CreateConstantInitializer()
+ *  4.36.00              2024-01-22     visso           X X - X - -       ESCAN00116555       Data Conversion not enabled when Factor is 1 and Offset != 0
+ *  4.36.00              2024-01-22     visso           - X - X - -       ESCAN00116558       RTE_E_DET_UNINIT reported when basic task with schedule tables is triggered after Rte_Stop
+ *  4.36.00              2024-01-23     visso           - X - - - -       RTE-9181            Optimize AddProp
+ *  4.36.00              2024-01-23     visso           - X - - - -       RTE-9183            Optimize DVRteParser::CreateDataTypeInfo()
+ *  4.36.00              2024-01-23     visso           - X - - - -       RTE-9185            Optimize DVRteParser::CreateDirtyFlagInfos()
+ *  4.36.00              2024-01-23     visso           - X - - - -       RTE-9187            Optimize RteEcucUpdater adaptNameOfSubContainer
+ *  4.36.00              2024-01-24     dschaefter      - X - - - -       ESCAN00116562       Invalid path to RteTemplates.jar under Linux
+ *  4.36.00              2024-01-24     dschaefter      - X - - - -       ESCAN00116577       RTE Analyzer is not executed when new Template Engine is enabled
+ *  4.36.00              2024-01-25     jkugler         - X - - - -       RTE-9103            Added reference-preserving json export for AST
+ *  4.36.00              2024-01-26     jkugler         - - X - - -       RTE-9196            Adjust TechRef for Vfb Tracing Configuration
+ *  4.36.00              2024-01-26     dschaefter      - X - - - -       RTE-9198            Implement Support for Selfreferences in the JavaJeeves AST
+ *  4.36.00              2024-01-26     visso           - X - - - -       RTE-9199            Avoid creating Rte_Core<X> os applications without trusted functions
+ *  4.36.00              2024-01-30     dschaefter      - X - - - -       ESCAN00116605       RTE01060: Calculation phase aborts when numeric value is out of the range of a 32-bit integer
+ *  4.36.00              2024-01-30     csailer         - X - - - -       RTE-9205            Analyze and improve rte generation time
+ *  4.36.00              2024-01-31     visso           - X - X - -       RTE-9210            Do not print warning RTE15107 - Implicit read access with data transformation and no IStatus for P-ports
+ *  4.36.00              2024-02-01     visso           X X - - - -       ESCAN00116624       Compiler error: Rte_ComCbk or Rte_LdComCbk only declared statically
+ *  4.36.00              2024-02-01     visgme          - - - X - -       RTE-7985            Fix problems in test configurations for model consistency integration Part 3
+ *  4.36.00              2024-02-01     dschaefter      - X - - - -       RTE-9219            Suppress Duplicate and Identical .bak-Files
+ *  4.36.00              2024-02-01     visdes          - - - X - -       RTE-9220            Move debugger/Testhardware to server basement
+ *  4.36.00              2024-02-06     visgme          - X - - - -       RTE-9033            RTE: Support for manual task activation in combination with OsTaskPeriod Part 3 (Feature Test)
+ *  4.36.00              2024-02-06     vissdi          - X - X - -       RTE-9142            Add a warning when the denominator of a compu method is smaller than 1E-7
+ *  4.36.00              2024-02-07     csailer         - X - X - -       RTE-8779            Replace Checksum Mechanism for ARXML with Checksum for JSON
+ *  4.36.00              2024-02-07     visjwe          - X X X X -       RTE-9229            Reviews and Release 4.36.0
+ *  4.36.00              2024-02-07     visso           - X - - - -       RTE-9287            Avoid null pointer exceptions when invalid -m parameters are passed
+ *  4.36.00              2024-02-09     vislsa          - X - X - -       ESCAN00116670       McData exports wrong SwDataDefProps for Nested Record Data Types
+ *  4.36.00              2024-02-09     dschaefter      - X - - - -       RTE-9331            Improve Validation for RTE Com Proxies
+ *  4.36.00              2024-02-12     vissdi          - X - - - -       ESCAN00116706       Rte_ComSendSignalProxy is generated for the wrong ecuc partition
+ *  4.36.00              2024-02-12     jkugler         - X - - - -       RTE-9292            Reviews and Release 4.33.2
+ *  4.36.00              2024-02-13     dschaefter      - X - X - -       RTE-9339            Implement Check for Cyclic Dependencies
+ *  4.36.00              2024-02-15     vissdi          - - - X - -       RTE-9342            ESCAN00116706: Rte_ComSendSignalProxy is generated for the wrong ecuc partition
+ *  4.36.00              2024-02-16     visso           X X - X - -       ESCAN00116723       Wrong signal sent or received when a signal group that is handled by ComXf is declared differently in different variants
+ *  4.36.00              2024-02-16     visso           - X X - - -       RTE-9202            Replace DvSwcGen with CFG5 based contract phase generator
+ *  4.36.00              2024-02-18     visgme          - X - X - -       RTE-8926            Fix problems in test configurations for model consistency integration Part 4
+ *  4.36.00              2024-02-20     csailer         - X - - - -       RTE-8780            Unit Tests / Coverage for configuration change check
+ *  4.36.00              2024-02-20     dschaefter      X X - X X -       RTE-9106            Parallel File Generation: Unit Tests Part 2 and Safety Analysis
+ *  4.36.00              2024-02-21     visso           - X - X - -       ESCAN00116377       Compiler error: undeclared identifier/Missing define in Rte_Swc.h when implicit S/R communication uses different SwAddressingMethod
+ *  4.36.00              2024-02-21     visso           - X - X - -       ESCAN00116770       McData exports wrong SwDataDefProps for Nested Record Data Types
+ *  4.36.00              2024-02-21     visgme          X X - X - -       RTE-9056            ESCAN00116377: Compiler error: undeclared identifier/Missing define in Rte_Swc.h when implicit S/R communication uses different SwAddressingMethod
+ *  4.36.00              2024-02-21     visso           - X - - - -       RTE-9359            Optimize checkFlatInstanceDescriptor()
+ *  4.36.00              2024-02-22     visgme          - X - X - -       RTE-9329            Support ApplicationValueSpec for Nested Array Datatypes with FUNC_VALUE RecordLayoutAnnotation
+ *  4.36.00              2024-02-23     visso           - X - - - -       ESCAN00116787       RTE generator does not generate any files in case there was an error
+ *  4.36.00              2024-02-23     visso           X X - X - -       ESCAN00116788       Data conversion not applied when data element is sent implicitly with ComXf
+ *  4.36.00              2024-02-23     visso           - X - X X -       ESCAN00116791       Implict reader reads outdated data
+ *  4.36.00              2024-02-23     visso           - X - X - -       RTE-9374            Add Setting option to ignore scaling for maps & curves
+ *  4.36.00              2024-02-24     visgme          - X - - - -       RTE-9089            Remove E2EXf check 1192 for the [constr_3154]
+ *  4.36.00              2024-02-26     visso           X X - X - -       RTE-9376            Remove Use Code Section Comments from Analyzer Stubs
+ *  4.36.00              2024-02-27     visgme          - X - X - -       RTE-8694            Check and add Warning if parameter AxisIndex is missing for CharacteristicTable DT
+ *  4.36.00              2024-02-27     visvrn          X X X X X -       RTE-9225            RTE support for NVM Multicore Production
+ *  4.36.00              2024-02-27     visso           - X - X - -       RTE-9382            Improve precission of scaling operations
+ *  4.36.00              2024-02-28     csailer         - X - X X -       RTE-7321            Enable SessionHandling in SomeIpXf indepently of the session handling attribute (AR-111007)
+ *  4.36.00              2024-02-28     visso           - - X - - -       RTE-8530            Documentation of deviation of SWS_Rte_04583 and SWS_Rte_04584 in Technical Reference
+ *  4.36.00              2024-02-28     visso           - - X - - -       RTE-8700            Extend TechRef: not only inter partition var array communication is not supported but also as soon as var arrays are used on a core that is not equal to BswCoreId.
+ *  4.36.00              2024-02-28     visso           - - X - - -       RTE-9064            Extend RTE Technical with requirement that OS APIs and custom EAs act as memory barrier
+ *  4.36.00              2024-02-28     jkugler         X X - - - -       RTE-9177            Remove $main::OptimizedVFBTraceHookGeneration from Perl Code
+ *  4.36.00              2024-02-28     visso           - X - - - -       RTE-9384            Avoid null pointer exception when typereference references not existing data type
+ *  4.36.00              2024-02-28     csailer         - X - - - -       RTE-9386            Replace flexjson for CoverageLogger
+ *  4.36.00              2024-02-28     visgme          - X - X - -       RTE-9390            Adapt OsTaskPeriod LET Runnable to OsCore Mapping
+ *  4.36.00              2024-02-29     visso           X X - X - -       ESCAN00116842       Wrong group signal received if record element name share identical name parts
+ *  4.36.00              2024-02-29     csailer         - X - - - -       RTE-9392            ESCAN00116839: Rte: Could not open file [...]RteAnalyzerConfiguration.json
+ *  4.36.00              2024-03-01     vislsa          - X - X - -       RTE-8864            Add Error for unsupported queued communication with old world array datatypes and IOCs
+ *  4.36.00              2024-03-04     visso           X X - X - -       ESCAN00116462       Compiler error: Rte_Type.h compilation fails for DataReference pointing to another DataReference
+ *  4.36.00              2024-03-04     dschaefter      - X - X - -       ESCAN00116848       Compiler error: Component data structure is generated with incomplete data handles
+ *  4.36.00              2024-03-04     visdes          - X - X - -       RTE-9290            [SomeIpXf] Abort deserialization of structs with length errors Part 5
+ *  4.36.00              2024-03-04     vislsa          - - - X - -       RTE-9355            Create Jenkins Job for Perl to Java Migration
+ *  4.36.00              2024-03-04     visgme          - X - - - -       RTE-9401            Reduce severity of new Model Consistency Messages from ERROR to WARNING
+ *  4.36.00              2024-03-06     visso           - X - - - -       RTE-9324            Improve Description of RteDisableInterEcuIntToIntDataConversion and similar
+ *  4.36.00              2024-03-07     csailer         - - - - X -       RTE-9361            Document the rte generation flow when JavaJeeves is used
+ *  4.36.00              2024-03-09     visso           - X - - - -       ESCAN00116908       No files generated
+ *  4.37.00              2024-03-12     visvrn          - X - X X -       RTE-9484            Fix review findings of Rte_Asr4 4.36.0
+ *  4.37.00              2024-03-13     vissi           - X - X - -       RTE-9410            Reviews and Release 4.37.0
+ *  4.37.00              2024-03-13     visdes          - X - X - -       RTE-9460            [SomeIpXf] Abort deserialization of structs with length errors - Next Try
+ *  4.37.00              2024-03-13     dschaefter      - X - - - -       RTE-9501            Fix Discrepancies between JavaJeeves- and PerlJeeves-VariantLogger
+ *  4.37.00              2024-03-14     visso           X X - X - -       ESCAN00116888       Compiler error: Missing assignment value for pduInfo.SduDataPtr and pduInfo.SduLength in Rte_ComSendSignalProxyPeriodic
+ *  4.37.00              2024-03-14     dschaefter      - X - - - -       ESCAN00116942       GenData cleared when MicrosarRteGen terminates abnormally
+ *  4.37.00              2024-03-14     visgme          - X - X - -       RTE-9509            ESCAN00116956: Compiler error: Rte is generating code with empty places without initialization and wrong typedef (within Application Characteristic Table DataType)
+ *  4.37.00              2024-03-14     visso           - - - X - -       RTE-9514            Speedup Tricore Tasking Gen7 Test Execution
+ *  4.37.00              2024-03-15     visgme          - - - X - -       RTE-9511            Remove length parameter from E2E Lib for Profile J1939-76
+ *  4.37.00              2024-03-15     csailer         - X - - - -       RTE-9520            ESCAN00116970: Rte generation stuck in calculation: Multithreading issue
+ *  4.37.00              2024-03-16     visso           - X - - - -       RTE-9522            Rework User Code Preserver
+ *  4.37.00              2024-03-18     visso           - X - - - -       ESCAN00116918       Compiler error: pointer mismatch / illegal indirection
+ *  4.37.00              2024-03-19     csailer         - X - - - -       RTE-9525            ESCAN00116987: Cached developer check result is not updated
+ *  4.37.00              2024-03-19     visso           - X - - - -       ESCAN00116991       FATAL - Unhandled Exception: Exception in Rte generator during Generation encountered
+ *  4.37.00              2024-03-19     visso           - X - - - -       ESCAN00116992       RTE13318 - Missing data type for data element
+ *********************************************************************************************************************/

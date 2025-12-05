@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0">
+	<AR-PACKAGES>
+		<AR-PACKAGE UUID="6272bdda-da2e-43e3-9bb6-653f94833b0d">
+			<SHORT-NAME>MICROSAR</SHORT-NAME>
+			<ADMIN-DATA>
+				<DOC-REVISIONS>
+					<DOC-REVISION>
+						<REVISION-LABEL>28.00.00</REVISION-LABEL>
+						<STATE>released</STATE>
+						<ISSUED-BY>vissvh</ISSUED-BY>
+						<DATE>2022-01-24T08:18:37+01:00</DATE>
+						<MODIFICATIONS>
+							<MODIFICATION>
+								<CHANGE>
+									<L-2 L="EN">PCM-1022</L-2>
+								</CHANGE>
+								<REASON>
+									<L-2 L="EN">PbD Move Program Content to own Program Package - MSR_Vector_SLP4</L-2>
+								</REASON>
+							</MODIFICATION>
+						</MODIFICATIONS>
+					</DOC-REVISION>
+				</DOC-REVISIONS>
+			</ADMIN-DATA>
+			<ELEMENTS>
+				<ECUC-MODULE-CONFIGURATION-VALUES UUID="461aef8b-845e-4694-8b4e-1441c886a58f">
+					<SHORT-NAME>NmOsek_Rec</SHORT-NAME>
+					<ADMIN-DATA>
+						<SDGS>
+							<SDG GID="DV:ClassConfiguration">
+								<SD>/MICROSAR/NmOsek_Rec_Class1/NmOsekGlobalConfig</SD>
+							</SDG>
+						</SDGS>
+					</ADMIN-DATA>
+					<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/NmOsek</DEFINITION-REF>
+					<CONTAINERS></CONTAINERS>
+				</ECUC-MODULE-CONFIGURATION-VALUES>
+				<ECUC-MODULE-CONFIGURATION-VALUES UUID="7aa9c3e5-9a97-48c0-afea-5c94e756784f">
+					<SHORT-NAME>NmOsek_Rec_Class1</SHORT-NAME>
+					<DEFINITION-REF DEST="ECUC-MODULE-DEF">/MICROSAR/NmOsek</DEFINITION-REF>
+					<CONTAINERS>
+						<ECUC-CONTAINER-VALUE UUID="0321d739-5cb1-44cd-ac1f-5f452014350a">
+							<SHORT-NAME>NmOsekGlobalConfig</SHORT-NAME>
+							<DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/MICROSAR/NmOsek/NmOsekGlobalConfig</DEFINITION-REF>
+							<PARAMETER-VALUES>
+								<ECUC-NUMERICAL-PARAM-VALUE>
+									<DEFINITION-REF DEST="ECUC-BOOLEAN-PARAM-DEF">/MICROSAR/NmOsek/NmOsekGlobalConfig/NmOsekBusOffNotificationEnabled</DEFINITION-REF>
+									<VALUE>1</VALUE>
+								</ECUC-NUMERICAL-PARAM-VALUE>
+								<ECUC-TEXTUAL-PARAM-VALUE>
+									<DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/MICROSAR/NmOsek/NmOsekGlobalConfig/NmOsekType</DEFINITION-REF>
+									<VALUE>NMOSEK_TYPE_VECTOR_OSEK</VALUE>
+								</ECUC-TEXTUAL-PARAM-VALUE>
+							</PARAMETER-VALUES>
+						</ECUC-CONTAINER-VALUE>
+					</CONTAINERS>
+				</ECUC-MODULE-CONFIGURATION-VALUES>
+			</ELEMENTS>
+		</AR-PACKAGE>
+	</AR-PACKAGES>
+</AUTOSAR>

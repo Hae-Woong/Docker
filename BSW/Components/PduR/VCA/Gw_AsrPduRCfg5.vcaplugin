@@ -1,0 +1,114 @@
+#######################################################################################################################
+#  COPYRIGHT
+#  -------------------------------------------------------------------------------------------------------------------
+#  Copyright (c) 2023 by Vector Informatik GmbH.                                                  All rights reserved.
+#
+#                This software is copyright protected and proprietary to Vector Informatik GmbH.
+#                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+#                All other rights remain with Vector Informatik GmbH.
+#  -------------------------------------------------------------------------------------------------------------------
+#  FILE DESCRIPTION
+#  -------------------------------------------------------------------------------------------------------------------
+#  File       :  Gw_AsrPduRCfg5.vcaplugin
+#  Module     :  Vector Code Analyzer
+#  Description:  Entry point of Vector Code Analyzer.
+#  -------------------------------------------------------------------------------------------------------------------
+#  REVISION HISTORY
+#  -------------------------------------------------------------------------------------------------------------------
+#  Version   Date        Author        Change Id     Description
+#  -------------------------------------------------------------------------------------------------------------------
+#  02.00.00  2022-06-27  visms         COM-1184      Replace RH by VCA
+#  02.00.01  2023-08-22  visfrm        ESCAN00114950 VCA erros when analyzing PduR
+#  02.00.02  2023-10-11  visfrm        ESCAN00115813 VCA plugin is missing 'PduR_LoTpCopyRxData' API as entry function
+#            2023-10-13  visfrm        ESCAN00115815 VCA shows error that 'function 'PduR_*_*' is possibly called outside its specification [SPC-01]'
+#######################################################################################################################
+
+#######################################################################################################################
+# Mandatory Functions
+#######################################################################################################################
+
+#######################################################################################################################
+# Name         : setup
+# Return value : -
+# Description  : VectorCodeAnalyzer calls this function to query necessary information about the plugin.
+#                This function is mandatory.
+#######################################################################################################################
+def setup(plugin):
+    # Name of this plugin. Must match the component name.
+    plugin.name = "Gw_AsrPduRCfg5"
+    
+    # Module Implementation Prefix of the component.
+    plugin.mip = "PduR"
+
+    # Version of this plugin, encoded in BCD.
+    plugin.version = 0x020002
+
+    # List of files of the component. These files are checked by VectorCodeAnalyzer. If one of the files cannot be found
+    # in the project folders, analysis is skipped.
+    plugin.files = [
+                    "PduR.c",
+                    "PduR_*.c",
+                    "Gw_AsrPduRCfg5_VStdLib.vcaspecs.c",
+                    "Gw_AsrPduRCfg5_Appl.vcaspecs.c",
+                    "Gw_AsrPduRCfg5_BswM.vcaspecs.c"
+                   ]
+
+    plugin.entry_functions = [
+                              "PduR_PreInit",
+                              "PduR_Init",
+                              "PduR_InitMemory",
+                              "PduR_MainFunction",
+                              "PduR_GetVersionInfo",
+                              "PduR_GetConfigurationId",
+                              "PduR_UpTransmit",
+                              "PduR_LoIfRxIndication",
+                              "PduR_LoIfTriggerTransmit",
+                              "PduR_LoIfTxConfirmation",
+                              "PduR_LoTpStartOfReception",
+                              "PduR_LoTpRxIndication",
+                              "PduR_LoTpCopyRxData",
+                              "PduR_LoTpCopyTxData",
+                              "PduR_LoTpTxConfirmation",
+                              "PduR_CancelReceive",
+                              "PduR_ChangeParameter",
+                              "PduR_CancelTransmit",
+                              "PduR_EnableRouting",
+                              "PduR_DisableRouting"
+                             ]
+
+    # Optional: Define a new symbol. The define will be passed directly to the executable.
+    plugin.defines = ["__VCA__"]
+
+    # Select the feature set. VectorCodeAnalyzer will behave consistently within one feature set, independent of the 
+    # actual version of VectorCodeAnalyzer. This ensures backward compatibility.
+    # The feature set should always match the most recent one. A warning is outputted if there is a new feature set 
+    # available.
+    plugin.feature_set_version = 6
+
+    # VCA analysis options to configure the VCA runtime. All options are optional.
+    plugin.vca_options = {
+                          # Select the engine with which the analysis shall be executed ("fwd-dfa"/"cdfa")
+                          "engine": "fwd-dfa",
+                          
+                          # Select the widening threshold for the first analysis step
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          "widening_threshold": 0,
+                          
+                          # Select the narrowing threshold for the second analysis step
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          "narrowing_threshold": 0,
+                          
+                          # Select the iteration limit to adjust the number of repetitions per cycle
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "iteration_limit": 0
+                         }
+
+    # Additional arguments which are added to the VCA invocation
+    plugin.additional_arguments = [
+                                   "--initialize-strings",
+                                   "--enable-csl-usecase"
+#                                   "--inline-csl",
+#                                   "--mark-inlined-funcs",
+#                                   "--silence-mode=full"
+                                  ]
+

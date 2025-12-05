@@ -1,0 +1,145 @@
+#######################################################################################################################
+#  COPYRIGHT
+#  -------------------------------------------------------------------------------------------------------------------
+#  Copyright (c) 2023 by Vector Informatik GmbH.                                                  All rights reserved.
+#
+#                This software is copyright protected and proprietary to Vector Informatik GmbH.
+#                Vector Informatik GmbH grants to you only those rights as set out in the license conditions.
+#                All other rights remain with Vector Informatik GmbH.
+#  -------------------------------------------------------------------------------------------------------------------
+#  FILE DESCRIPTION
+#  -------------------------------------------------------------------------------------------------------------------
+#  File       :  SysService_IpBase.vcaplugin
+#  Module     :  Vector Code Analyzer
+#  Description:  Entry point of Vector Code Analyzer.
+#  -------------------------------------------------------------------------------------------------------------------
+#  REVISION HISTORY
+#  -------------------------------------------------------------------------------------------------------------------
+#  Version   Date        Author        Change Id     Description
+#  -------------------------------------------------------------------------------------------------------------------
+#  01.00.00  2022-03-25  visalr                      First version
+#  01.01.00  2023-04-06  visese                      Add IpBase_TcpIpChecksumCopyAdd
+#  01.01.02  2023-12-18  visalr                      Put, Get and Swap functions added
+#######################################################################################################################
+
+#######################################################################################################################
+# Mandatory Functions
+#######################################################################################################################
+
+#######################################################################################################################
+# Name         : setup
+# Return value : -
+# Description  : VectorCodeAnalyzer calls this function to query necessary information about the plugin.
+#                This function is mandatory.
+#######################################################################################################################
+def setup(plugin):
+    # Name of this plugin. Must match the component name.
+    plugin.name = "SysService_IpBase"
+
+    # Module Implementation Prefix of the component.
+    plugin.mip = "IpBase"
+
+    # Version of this plugin, encoded in BCD.
+    plugin.version = 0x010000
+
+    # List of files of the component. These files are checked by VectorCodeAnalyzer. If one of the files cannot be found
+    # in the project folders, analysis is skipped.
+    plugin.files = [
+                    "IpBase.c",
+                    "IpBase_Ber.c",
+                    "IpBase_Code.c",
+                    "IpBase_PBuf.c",
+                    "IpBase_Sock.c",
+                    "IpBase_String.c",
+                    "IpBase_VStdLib.vcaspecs.c"
+                   ]
+
+    plugin.entry_functions = [
+                               "IpBase_BerInitWorkspace",
+                               "IpBase_BerGetElement",
+                               "IpBase_Encode",
+                               "IpBase_Decode",
+                               "IpBase_StrCmpPBuf",
+                               "IpBase_IncPBuf",
+                               "IpBase_CopyString2PbufAt",
+                               "IpBase_CopyPbuf2String",
+                               "IpBase_FindStringInPbuf",
+                               "IpBase_CheckStringInPbuf",
+                               "IpBase_ReadByteInPbuf",
+                               "IpBase_DelSockAddr",
+                               "IpBase_CopySockAddr",
+                               "IpBase_CopyIpV6Addr",
+                               "IpBase_SockIpAddrIsEqual",
+                               "IpBase_SockPortIsEqual",
+                               "IpBase_CalcTcpIpChecksum",
+                               "IpBase_CalcTcpIpChecksum2",
+                               "IpBase_TcpIpChecksumAdd",
+                               "IpBase_TcpIpChecksumCopyAdd",
+                               "IpBase_StrCpy",
+                               "IpBase_StrCpyMaxLen",
+                               "IpBase_StrCmp",
+                               "IpBase_StrCmpLen",
+                               "IpBase_StrCmpNoCase",
+                               "IpBase_StrCmpLenNoCase",
+                               "IpBase_StrFindSubStr",
+                               "IpBase_StrLen",
+                               "IpBase_ConvInt2String",
+                               "IpBase_ConvInt2HexString",
+                               "IpBase_ConvInt2StringBase",
+                               "IpBase_ConvInt2StringFront",
+                               "IpBase_ConvArray2HexStringBase",
+                               "IpBase_ConvString2Int",
+                               "IpBase_ConvString2IntDyn",
+                               "IpBase_ConvStringHex2Int",
+                               "IpBase_ConvStringHex2IntDyn",
+                               "IpBase_ConvString2IntBase",
+                               "IpBase_ConvString2SignedIntBase",
+                               "IpBase_ConvHexString2ArrayBase",
+                               "IpBase_GetVersionInfo",
+                               "IpBase_ByteSwap16",
+                               "IpBase_ByteSwap32",
+                               "IpBase_ByteSwap64",
+                               "IpBase_PutUint8",
+                               "IpBase_PutUint16",
+                               "IpBase_PutUint24",
+                               "IpBase_PutUint32",
+                               "IpBase_PutUint48",
+                               "IpBase_PutUint64",
+                               "IpBase_GetUint8",
+                               "IpBase_GetUint16",
+                               "IpBase_GetUint24",
+                               "IpBase_GetUint32",
+                               "IpBase_GetUint48",
+                               "IpBase_GetUint64"
+                              ]
+
+    # Optional: Define a new symbol. The define will be passed directly to the executable.
+    plugin.defines = ["MICROSAR_DISABLE_MEMMAP"]
+
+    # Select the feature set. VectorCodeAnalyzer will behave consistently within one feature set, independent of the
+    # actual version of VectorCodeAnalyzer. This ensures backward compatibility.
+    # The feature set should always match the most recent one. A warning is outputted if there is a new feature set
+    # available.
+    plugin.feature_set_version = 6
+
+    # VCA analysis options to configure the VCA runtime. All options are optional.
+    plugin.vca_options = {
+                          # Select the engine with which the analysis shall be executed ("fwd-dfa"/"cdfa")
+                          "engine": "fwd-dfa",
+
+                          # Select the widening threshold for the first analysis step
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "widening_threshold": 0,
+
+                          # Select the narrowing threshold for the second analysis step
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "narrowing_threshold": 0,
+
+                          # Select the iteration limit to adjust the number of repetitions per cycle
+                          # The smaller the value, the faster the analysis; contrariwise the more precise
+                          # "iteration_limit": 0
+                         }
+
+    # Additional arguments which are added to the VCA invocation
+    plugin.additional_arguments = ["--Wunused-functions", "--entries-fix", "--mark-inlined-funcs"]
+

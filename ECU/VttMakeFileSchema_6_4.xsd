@@ -1,0 +1,1923 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="6.4">
+  <xs:element name="BuildSpecification" nillable="true" type="BuildSpecification" />
+  <xs:complexType name="BuildSpecification">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>VttMake provides you the possibility to setup your project programmatically and build your virtual ECU in a CI environment.</p>
+        <p>
+          The following elements allow you to specify the virtual ECU and the executed generation steps.
+          You can find the executable under Windows to run a VTTMAKE file here: %vVIRTUALtarget_InstallDir%\\Exec64\\VttMake.exe
+        </p>
+        <p><strong>Note</strong>: Each element which requires a path or directory may refer to environment variables. Syntax is like %TEMP%.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="Settings" type="Settings" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BuildDpa" type="BuildDpa" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BuildBswEmulatedSut" type="BuildBswEmulatedSut" />
+    </xs:all>
+    <xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="Settings">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Global settings. Settings can also be specified in make descriptions (e.g. BuildDpa).
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="RootDir" type="RootDir" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProjectName" type="ProjectName" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PortMonitoring" type="VttPortMonitoring" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PimMonitoring" type="VttPimMonitoring" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BuildDpa">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Generates a virtual ECU from a DaVinci project (.dpa) file, based on the MICROSAR Classic stack (Integration use case).</p>
+        <p>Ordering of the following generation steps reflects the order of the vVIRTUALtarget generation process.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="RootDir" type="RootDir" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DpaPath" type="DpaPath" />
+      <xs:element minOccurs="0" maxOccurs="1" name="VsSolutionPath" type="VsSolutionPath" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CMakeRootPath" type="CMakeRootPath" />
+      <xs:element minOccurs="0" maxOccurs="1" name="VEcuDerive" type="VEcuDerive" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ExecutionEnvironment" type="ExecutionEnvironment" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SimulationSetup" type="SimulationSetup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BuildSettings" type="BuildSettings" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RuntimeSettings" type="RuntimeSettings" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GenerateRte" type="GenerateRte" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GenerateBsw" type="GenerateBsw" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GenerateVcxProject" type="GenerateVcxProject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BuildVsSolution" type="BuildVsSolution" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GenerateCMakeProject" type="GenerateCMakeProject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BuildCMakeProject" type="BuildCMakeProject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BazelProject" type="BazelProject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GenerateCsvFile" type="GenerateCsvFile" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GenerateZip" type="GenerateZip" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AccessToRtePorts" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Enable access to open and monitored ports in the execution environment.</p>
+            <p>[Default] true</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BuildBswEmulatedSut">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Generates a virtual ECU from the given system descriptions, based on BSW stack that is emulated by <strong>vVIRTUALtarget pro runtime</strong> in the <strong>BSW Emulation</strong> use case.</p>
+        <p>Ordering of the following generation steps reflects the order of the vVIRTUALtarget generation process.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="RootDir" type="RootDir" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EcuName" type="EcuName"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="EcuOutputDir" type="EcuOutputDir" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SystemDescriptionFiles" type="FileSet">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Supported system description files are AUTOSAR XML (.arxml) and diagnostic databases (.cdd).
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DiagnosticVariantName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            If a diagnostic description is specified in <strong>SystemDescriptionFiles</strong>, you can select the supported diagnostic variant by name. The SUT is then generated for this diagnostic variant.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="SwcSelection" type="listOfStrings">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>List of SWCs which should be used for creating a user-defined ECU. (E.g. <strong>CustomSwc1</strong> <strong>CustomSwc3</strong>)</p>
+            <p>[Default] All SWCs which can be used for creating a user-defined ECU will be selected.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Configuration" type="BswConfiguration" />
+      <xs:element minOccurs="0" maxOccurs="1" name="VsSolutionPath" type="VsSolutionPath" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CMakeRootPath" type="CMakeRootPath" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ExecutionEnvironment" type="ExecutionEnvironment" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BuildSettings" type="BuildSettings" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RuntimeSettings" type="RuntimeSettings" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GenerateVcxProject" type="GenerateVcxProject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BuildVsSolution" type="BuildVsSolution" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GenerateCMakeProject" type="GenerateCMakeProject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BuildCMakeProject" type="BuildCMakeProject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BazelProject" type="BazelProject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GenerateZip" type="GenerateZip" />
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="RootDir">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Defines the root directory for relative path specifications.</p>
+        <p>Can be a relative or absolute path. This element can be set in different XML hierarchy levels but should only be used once.</p>
+        <p>[Default] Directory of the currently processed VTTMAKE file.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="ProjectName">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Defines the name of the resulting intermediate files (e.g. VTTPROJ file)</p>
+        <p>If an intermediate file with that name already exists, the name is extended with an increasing number. The default name for intermediate files is a random GUID.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="EcuName">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        If the system description defines only SWCs and no AUTOSAR ECU definition, vVIRTUALtarget creates around the mapped SWCs a custom ECU.
+        The name of this ECU can be specified within this property. If the system description defines more than one AUTOSAR ECU definition, the ECU can be selected by name.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="EcuOutputDir">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Defines the output directory of the ECU (e.g. GenDataVtt, Appl, Log)</p>
+        <p>[Default] "<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>\<a href="#../EcuName">EcuName</a>"</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="DpaPath">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Relative or absolute path to the DPA file.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="VsSolutionPath">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Path to the Visual Studio Solution created in generation step <a href="#../GenerateVcxProject">GenerateVcxProject</a> and build in generation step <a href="#../BuildVsSolution">BuildVsSolution</a>.</p>
+        <p>[Default] "<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>\Solution\<a href="#/BuildSpecification/Settings/ProjectName">ProjectName</a>.sln".</p>
+        <p>If no <strong><a href="#/BuildSpecification/Settings/ProjectName">ProjectName</a></strong> is specified, the name of the VTTMAKE file is used.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="CMakeRootPath">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Path to the CMake root directory created in generation step <a href="#../GenerateCMakeProject">GenerateCMakeProject</a> and used to build in generation step <a href="#../BuildCMakeProject">BuildCMakeProject</a>.</p>
+        <p>[Default] "<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>\CMake"</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="VEcuDerive">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Activates the generation process with the artifacts provided by vecu-derive.</p>
+        <p>If this element is used, the generation process specifically expects a file called <strong>SnippetExecutor.RealTargetProject.xml</strong> in the <a href="#/BuildSpecification/Settings/RootDir">RootDir</a>.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="ExecutionEnvironment">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Additional settings for the execution environment
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="StandaloneSut" type="StandaloneSut">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Generates a project that starts the SUT in a separate process and connects it to the CANoe simulation.</p>
+            <p>StandaloneSut always uses <strong>DistributedObjects</strong> as <a href="#../CommunicationInterface">CommunicationInterface</a>.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="CommunicationInterface" type="CommunicationInterface">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Specifies which communication primitives are used for the communication with CANoe.</p>
+            <ul>
+              <li><strong>Classic</strong> depicts communication objectives and system variables.</li>
+              <li><strong>DistributedObjects</strong> uses distributed objects whenever possible.</li>
+            </ul>
+            <p>[Default]</p>
+            <p>For BuildBswEmulatedSut the default is <strong>DistributedObjects</strong>.</p>
+            <p>For BuildDpa only <strong>Classic</strong> is currently supported.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DataTypesNamespace" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Namespace of the generated data types for the CANoe communication objects (COs) or distributed objects (DOs).</p>
+            <p>If no <strong><a href="#/BuildSpecification/Settings/ProjectName">ProjectName</a></strong> is specified, the name of the VTTMAKE file is used for the following defaults.</p>
+            <p>[Default] <a href="#/BuildSpecification/Settings/ProjectName">ProjectName</a>DT (for <strong>Classic</strong>)</p>
+            <p>[Default] <a href="#/BuildSpecification/Settings/ProjectName">ProjectName</a>_Types (for <strong>DistributedObjects</strong> or <a href="#../StandaloneSut">StandaloneSut</a>)</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DataObjectsNamespace" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Namespace of the generated CANoe communication objects (COs) or distributed objects (DOs).</p>
+            <p>If no <strong><a href="#/BuildSpecification/Settings/ProjectName">ProjectName</a></strong> is specified, the name of the VTTMAKE file is used for the following defaults.</p>
+            <p>[Default] <a href="#/BuildSpecification/Settings/ProjectName">ProjectName</a>DO (for <strong>Classic</strong>)</p>
+            <p>[Default] <a href="#/BuildSpecification/Settings/ProjectName">ProjectName</a> (for <strong>DistributedObjects</strong> or <a href="#../StandaloneSut">StandaloneSut</a>)</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BuildSettings">
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="VerboseLevel" type="VerboseLevelType">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Specifies the verbosity logging level of the build process [Low, Medium, High].</p>
+            <p>The higher the level, the more information will be displayed.</p>
+            <p>[Default] Medium</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="CANoeEmuPathOption" type="CANoeEmuPathOptionType">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Specifies which CANoeEmu path is used for the build process [BswPackage, VTTInstallation, Latest].</p>
+            <p>[Default] VTTInstallation</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="SutOutputDir" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Specifies the output directory of the generated virtual ECU (System-Under-Test).</p>
+            <p>[Default] "<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>\SUT".</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="ExportFMU" type="ExportFMU">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Exports the virtual ECU as a Functional Mock-up Unit (FMU).
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="PluginDlls" type="FileSet">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Specifies the paths to the vVIRTUALtarget plugin DLLs. Plugins allow you to perform user-defined steps during the build process.</p>
+            <p>For more information please see Plugins or the installed example: <strong>PluginExample.vttproj</strong></p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ComM">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>The Communication Manager (ComM) is a basic software module of the system services.</p>
+        <p>
+          The communication status of the ECU is controlled via ComM channels in relation to a specific bus. 
+          ComM users can be defined for grouping these communication channels.
+          The application interacts with the ComM via the service interfaces of the created ComM users, e.g. by requesting the communication mode.
+        </p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="ChannelsAndUsers" type="ComMChannelsAndUsers" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TminFullComModeDuration" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>This value specifies the minimum amount of time (in seconds) that the module must be in the COMM_FULL_COMMUNICATION sub-state COMM_FULL_COM_NETWORK_REQUESTED.</p>
+            <p><strong>Value Range</strong>: 0.001 – 65 s</p>
+            <p><strong>AUTOSAR Name</strong>: COMM_T_MIN_FULL_COM_MODE_DURATION</p>
+            <p>[Default] 5 s</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="NmLightTimeout" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>This value specifies the amount of time (in seconds) that the module must be in the COMM_FULL_COMMUNICATION sub-state COMM_FULL_COM_READY_SLEEP before the network is shut down.</p>
+            <p>If the value is 0 seconds, the state COMM_FULL_COM_READY_SLEEP is skipped.</p>
+            <p><strong>Value Range</strong>: 1 – 255 s</p>
+            <p><strong>AUTOSAR Name</strong>: COMM_NM_LIGHT_TIMEOUT</p>
+            <p>[Default] 10 s</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="RequestProcessingTime" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>This value specifies a time delay (in seconds) for switching a ComM channel state to the COMM_FULL_COMMUNICATION state.</p>
+            <p><strong>Value Range</strong>: 0 – 1 s</p>
+            <p>[Default] 0.01 s</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ComMChannelsAndUsers">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        List of communication channels and users.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Channel" type="ComMChannel" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" type="ComMUser" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="ComMChannel">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        A communication channel (ComM channel) represents the access to a specified bus. It controls the communication state for the bus.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Name" use="required" type="xs:string" />
+    <xs:attribute name="NoWakeUp" use="optional" type="xs:boolean" default="false" >
+      <xs:annotation>
+        <xs:documentation>
+          <![CDATA[
+          <p>You can use the <strong>NoWakeUp</strong> flag to prevent the controller from wakeup the channel.</p>
+          <p>[Default false]</p>
+          ]]>
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ComMUser">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>A communication user (ComM User) can be used to group communication channels. Therefore you can specify within the flag <strong>MappedToAllChannels</strong> if all channels should be mapped to this user.</p>
+        <p>Instead you can also define a specific list of channels within the element <a href="#MappedToChannels">MappedToChannels</a>. If no element is defined there will be no mapping.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="1">
+      <xs:element name="MappedToAllChannels" type="MappedToAllChannels">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            If this element exists all communication channels will be mapped to the user.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MappedToChannels" type="listOfStrings">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            List of communication channels.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+    <xs:attribute  name="Name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="MappedToAllChannels"/>
+  <xs:simpleType name="listOfStrings">
+    <xs:list itemType="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="EcuM">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>The ECU State Manager (EcuM) is a basic software module of the system services and is responsible for starting up, shutting down, and waking up the ECU.</p>
+        <p>
+          There are two versions of the AUTOSAR standard: <strong>EcuM Fixed</strong> and <strong>EcuM Flex</strong>.
+          vVIRTUALtarget simulates an abstract mixed form that combines features from both forms. Only the states STARTUP, RUN, WAKEUP, SLEEP and SHUTDOWN exist.
+          The ECU shuts down when the following conditions are met:
+          <ul>
+            <li>The amount of time corresponding to the <strong>Run Minimum Duration</strong> value has passed.</li>
+            <li>All ComM channels are in the state COMM_NO_COMMUNICATION.</li>
+            <li>No EcuM User has requested the RUN mode using RequestRUN.</li>
+          </ul>
+          Conversely, if the application does not have any service ports for ComM and EcuM or does not interact with them, the ECU is set to the Default Shutdown Target parameter after the specified time of the Run Minimum Duration parameter.
+        </p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="Users" type="EcuMUsers" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RunMinDuration" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>This value describes the minimum amount of time that the ECU must be in RUN mode.</p>
+            <p>
+              If the value is set to <strong>infinite</strong>, the ECU will never shut down.
+              If this is set to a numerical value, the ECU shuts down, if RUN mode is inactive and no more interaction is taking place on the bus (see <a href="#../../ComM/ChannelsAndUsers/Channel">ComM Channel</a>).
+            </p>
+            <p><strong>Value Range</strong>: 0 – 60 s or INF</p>
+            <p><strong>AUTOSAR Name</strong>: EcuMRunMinimumDuration</p>
+            <p>[Default] 5 s if there is at least one EcuM or ComM User, INF otherwise</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DefaultShutdownTarget" type="DefaultShutdownTargetType">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>This value describes the state the ECU should enter after shutdown.</p>
+            <p><strong>AUTOSAR Name</strong>: ECUM_DEFAULT_SHUTDOWN_TARGET</p>
+            <p><strong>Possible Values</strong>:
+              <ul>
+                <li><strong>Sleep</strong> (ECUM_SHUTDOWN_TARGET_SLEEP)</li>
+                <li><strong>Reset</strong> (ECUM_SHUTDOWN_TARGET_RESET)</li>
+                <li><strong>Power Off</strong> (ECUM_SHUTDOWN_TARGET_OFF)</li>
+              </ul>
+            </p>
+            <p>[Default] Sleep</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="EcuMUsers">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        This element lists the EcuM users. If it's not specified the users are derived automatically.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" type="EcuMUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EcuMUser">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>An EcuM User represents a logical role that can communicate RUN requests to the EcuM.</p>
+        <p>You usually work with one EcuM User per instance of a port with type <strong>EcuM_UserRequest</strong>.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ServiceMappings">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServiceMapping" type="ServiceMapping" />
+    </xs:sequence>
+    <xs:attribute name="FileRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          <![CDATA[
+          Instead of defining elements within ServiceMappings it is possible to refer to an existing CSV file.
+          ]]>
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ServiceMapping">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Path of the service port to BSW emulation service should be mapped to and name of the service itself can be specified in this element. Starting with the ECU root composition and separated by a "::".</p>
+        <p><strong>Example</strong>: ServicePort = "EcuSwComposition::DoorController::DiagnosticMonitor_B_DTC_0x800001" Value = "DTC_0x800001"</p>
+        <p><strong>Note</strong>: Service Port may contain one or more asterisks (*) as wildcards. E.g. "*DiagnosticMonitor_B_DTC_0x800001".</p>
+        <p>In this case it is highly recommended to use the optional attribute <strong>ServiceInterfaceType</strong>, to prevent false positives.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="1" maxOccurs="1" name="Port" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Path of the service port to BSW emulation service should be mapped to.</p>
+            <p>Starting with the ECU root composition and separated by a "::". E.g.: "EcuSwComposition::DoorController::DiagnosticMonitor_B_DTC_0x800001"</p>
+            <p><strong>Note</strong>: Service Port may contain one or more asterisks (*) as wildcards. E.g. "*DiagnosticMonitor_B_DTC_0x800001".</p>
+            <p>In this case it is highly recommended to use the optional attribute <strong>ServiceInterfaceType</strong>, to prevent false positives.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Name of the service value element.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="ServiceInterfaceType" use="optional" type="ServiceInterfaceType"/>
+  </xs:complexType>
+  <xs:complexType name="TaskMappings">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        With this element you assign runnables of your SWCs to tasks. If it's not specified, the mapping is derived automatically.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Task" type="Task" />
+    </xs:sequence>
+    <xs:attribute name="FileRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          <![CDATA[
+          Instead of defining elements within TaskMappings it is possible to refer to an existing CSV file.
+          ]]>
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="Task">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        This element defines a Task which must to have a Name and can have several mapped runnables.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MappedRunnable" type="MappedRunnable" />
+    </xs:sequence>
+    <xs:attribute name="Name" use="required" type="xs:string"/>
+    <xs:attribute name="Priority" use="optional" type="xs:int" default="0">
+      <xs:annotation>
+        <xs:documentation>
+          <![CDATA[
+          [Default] 0
+          ]]>
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="MappedRunnable">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Path of the Swc and name of runnable can be specified in this element. Starting with the ECU root composition and separated by a "::".</p>
+        <p><strong>Example</strong>: SwcPath = "EcuSwComposition::DoorController" Runnable = "DoorController_Init"</p>
+        <p><strong>Note</strong>: Both attribute values my contain one or more asterisks (*) as wildcards. E.g. "*DoorController" and "*er_Init".</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="SwcPath" use="required" type="xs:string"/>
+    <xs:attribute name="RunnableName" use="required" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="BswConfiguration">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Additional settings to specify behavior of BSW stack emulated by vVIRTUALtarget pro runtime.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="General" type="General" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ComM" type="ComM" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Diagnostics" type="Diagnostics" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EcuM" type="EcuM" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ServiceMappings" type="ServiceMappings" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TaskMappings" type="TaskMappings" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="General">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        General settings for BSW configuration.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="DeduceMissingInitValues" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Activates the derivation of missing init values for ports by VttMake.</p>
+            <p>[Default] false</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="DefaultShutdownTargetType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Sleep" />
+      <xs:enumeration value="Reset" />
+      <xs:enumeration value="PowerOff" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ServiceInterfaceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ComM_ChannelLimitation" />
+      <xs:enumeration value="ComM_ChannelWakeUp" />
+      <xs:enumeration value="ComM_CurrentMode" />
+      <xs:enumeration value="ComM_CurrentChannelRequest" />
+      <xs:enumeration value="ComM_ECUModeLimitation" />
+      <xs:enumeration value="ComM_UserRequest" />
+      <xs:enumeration value="EcuM_BootTarget" />
+      <xs:enumeration value="EcuM_CurrentMode" />
+      <xs:enumeration value="EcuM_ShutdownTarget" />
+      <xs:enumeration value="EcuM_StateRequest" />
+      <xs:enumeration value="OperationCycle" />
+      <xs:enumeration value="DiagnosticMonitor" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="VerboseLevelType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Low" />
+      <xs:enumeration value="Medium" />
+      <xs:enumeration value="High" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CANoeEmuPathOptionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BswPackage" />
+      <xs:enumeration value="VTTInstallation" />
+      <xs:enumeration value="Latest" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ExportFMU">
+  </xs:complexType>
+  <xs:complexType name="FileSet">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SipRelativeFile" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            File path relative to the BSW Package directory.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="File" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            File path relative to the build root directory (<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>) or absolute path.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:simpleType name="CommunicationInterface">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Classic" />
+      <xs:enumeration value="DistributedObjects" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="StandaloneSut">
+  </xs:complexType>
+  <xs:complexType name="RuntimeSettings">
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="AutostartEcu" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Whether to automatically enable the ECU virtual power supply after start of the measurement.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Diagnostics">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>
+          This configures the behavior of vVIRTUALtarget with respect to the diagnostic service ports of your application. You can achieve the best results by providing a diagnostic description.
+          But even without a diagnostic description, you can integrate the diagnostic service ports into a SIL environment.
+        </p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="PassDiagnosticServicePortsToTestEnvironment" type="ExtendedBool" default="auto">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>
+              Putting the ports through to the test environment causes the DCM and DEM behavior models provided by vVIRTUALtarget to be bypassed and the ports are put through directly to the test environment instead.
+              This is recommended if no diagnostic description is available. The ports are provided as communication objects or distributed objects.
+              <ul>
+                <li>
+                  <p><strong>true</strong></p>
+                  Diagnostic service ports are passed to test environment. The behavior of DCM and DEM is therefore deactivated.
+                </li>
+                <li>
+                  <p><strong>false</strong></p>
+                  Diagnostic service ports are not passed to test environment, instead they are handled by DCM and DEM.
+                </li>
+                <li>
+                  <p><strong>auto</strong></p>
+                  Diagnostic service ports are either passed or not depending on presence of a diagnostic description. [Default]:
+                  <ul>
+                    <li>If a diagnostic description exists vVIRTUALtarget won't pass diagnostic service ports to the test environment.</li>
+                    <li>If no diagnostic description exists, vVIRTUALtarget will pass diagnostic service ports to the test environment.</li>
+                  </ul>
+                </li>
+              </ul>
+            </p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:simpleType name="ExtendedBool" final="restriction" >
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="auto" />
+      <xs:enumeration value="false" />
+      <xs:enumeration value="true" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="GenerateRte">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Generates the RTE module in DaVinci Configurator.</p>
+        <p>To disable RTE hooks and Port Monitoring the attribute DisableRteHooks has to be set to <strong>true</strong>. The default value is <strong>false</strong>.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="DisableRteHooks" type="xs:boolean" default="false">
+      <xs:annotation>
+        <xs:documentation>
+          <![CDATA[
+          If this flag is set to true, vVIRTUALtarget will not create any RTE hooks. Also, the PortMonitoring will be ignored.
+          ]]>
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="canoeRepresentationType" final="restriction">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Specifies the desired kind of CANoe object for representing AUTOSAR port members.</p>
+        <p>Note that various limitations apply, depending on use case and port interface type.</p>
+        <p>Type: [SystemVariable, CommunicationObject, DistributedObject, NoMapping].</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SystemVariable">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            CANoe system variable.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CommunicationObject">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>CANoe communication object.</p>
+            <p>Only available for ECUs with emulated basic software (BSW).
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DistributedObject">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>CANoe distributed object.</p>
+            <p>Only available for ECUs with emulated basic software (BSW).
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoMapping">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            No object at all, do not instrument.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="VttPortMonitoring">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Port Monitoring can be used to exclude open ports from the generation and enable further ports for stimulating and analyzing.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="MonitorOpenPPorts" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Optional element to determine whether all open P ports should automatically participate in Port Monitoring.</p>
+            <p>If the value is set to <strong>true</strong>, then every open P port participates in port monitoring.</p>
+            <p>[Default] true.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DefaultCanoeRepresentation" type="canoeRepresentationType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Selects a default communication primitive for all ports. Only available for the communication primitive <strong>DistributedObjects</strong>.</p>
+            <p>
+              The following values are possible:
+              <ul>
+                <li>
+                  <strong>DistributedObject</strong>
+                  Selects distributed objects.
+                </li>
+                <li>
+                  <strong>NoMapping</strong>
+                  Prevents CANoe communication primitives.
+                </li>
+              </ul>
+            </p>
+            <p>[Default] DistributedObject</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DefaultCanoeRepresentationOpenSRPorts" type="canoeRepresentationType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Selects a default communication primitive for open transmitter/receiver ports.</p>
+            <p>
+              Only available for ECUs with emulated basic software (BSW).
+              The following values are possible:
+              <ul>
+                <li>
+                  <strong>CommunicationObject</strong>
+                  Selects communication objects.
+                </li>
+                <li>
+                  <strong>SystemVariable</strong>
+                  Selects CANoe system variables.
+                </li>
+                <li>
+                  <strong>NoMapping</strong>
+                  Prevents CANoe communication primitives.
+                </li>
+              </ul>
+              [Default] CommunicationObject
+            </p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="StatusVarPostfix" type="xs:string" default="status" minOccurs="0" >
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>When monitoring a port, this element allows changing the name of the additionally generated "status" variable.</p>
+            <p>Only available in Integration use case.</p>
+
+            <p>[Default] "status"</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PortHook" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Enable/Disable the hooking of the defined ports by the respective CANoe representation.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="Ecu" minOccurs="0" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  <![CDATA[
+                  <p>Name of the ECU.</p>
+                  <p>When used within VttMake this element is optional and is automatically set by vVIRTUALtarget.</p>
+                  ]]>
+                </xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[a-zA-Z][a-zA-Z0-9_]{0,31}"/>
+                  <xs:pattern value="[\*]"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="Port">
+              <xs:annotation>
+                <xs:documentation>
+                  <![CDATA[
+                  <p>Path of the port to analyze and stimulate starting with the ECU root composition and separated by a slash (/).</p>
+                  <p>Example: <strong>ECU_Composition/swc1/swc2/port1</strong>.</p>
+                  <p><strong>Note</strong>: May contain one or more asterisks (\*) as wildcards. E.g. "ECU_Composition/swc1/swc2/p*".</p>
+                  <p>
+                    If SWCs are added via the DaVinci Configurator, they are stored in the <strong>FlatExtract</strong> and no hierarchical information is available.
+                    Therefore, their port paths have to start with the ROOT-SW-COMPOSITION-PROTOTYPE name of the <strong>FlatExtract</strong>.
+                  </p>
+                  ]]>
+                </xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[a-zA-Z\*][a-zA-Z0-9_/\*]*"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="EnableHook" type="xs:boolean" default="true" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>
+                  <![CDATA[
+                  <p>This element is deprecated. Use <strong>CanoeRepresentation</strong> instead.</p>
+                  <p>
+                    Optional element to deactivate the generation of the port hook.
+                    This element is intended to disable automatically created <a href="#../../PortHook">port hook</a>.
+                  </p>
+                  <p>[Default] true</p>
+                  ]]>
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="CanoeRepresentation" type="canoeRepresentationType" minOccurs="0"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="FileRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          <![CDATA[
+          Instead of defining elements within VttPortMonitoring it is possible to refer to an existing VTTPM file.
+          ]]>
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="VttPimMonitoring">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>This feature enables the monitoring and stimulation of per instance memory objects of AUTOSAR software components, by interconnecting per instance memory regions with CANoe objects (e.g. system variable).</p>
+        <p>With the following subelements you can include per instance memory objects into the generation and enable them for stimulation and analysis.</p>
+        <p>(See also: Access to RTE Per Instance Memory).</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PimHook" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Enable the hooking of the defined PIMs by the respective CANoe representation.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="Ecu" minOccurs="0" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  <![CDATA[
+                  <p>Name of the ECU.</p>
+                  <p>When used within VttMake this element is optional and is automatically set by vVIRTUALtarget.</p>
+                  ]]>
+                </xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[a-zA-Z][a-zA-Z0-9_]{0,31}"/>
+                  <xs:pattern value="[\*]"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="Pim">
+              <xs:annotation>
+                <xs:documentation>
+                  <![CDATA[
+                  <p>Path of the pim to analyze and stimulate starting with the ECU root composition and separated by a slash (/).</p>
+                  <p>Example: <strong>ECU_Composition/swc1/swc2/pim1</strong>.</p>
+                  <p><strong>Note</strong>: May contain one or more asterisks (\*) as wildcards. E.g. "ECU_Composition/swc1/swc2/p*".</p>
+                  ]]>
+                </xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[a-zA-Z\*][a-zA-Z0-9_/\*]*"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="FileRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          <![CDATA[
+          Instead of defining elements within VttPimMonitoring it is possible to refer to an existing VTTPM file.
+          ]]>
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="GenerateBsw">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Generates the configured BSW modules in DaVinci Configurator.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="GenerateVcxProject">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Generates a Visual Studio solution and project, to the path given by settings element <a href="#../VsSolutionPath">VsSolutionPath</a>.
+        <p><strong>Note</strong>: If this element is present, <a href="#../GenerateCMakeProject">GenerateCMakeProject</a> and <a href="#../BazelProject">BazelProject</a> must not be used.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="VsSolutionGuid" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Optional solution GUID.</p>
+            <p>If not specified, a random GUID will be generated.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="VsTargetVersion" type="VsTargetVersionType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TargetPlatform" type="TargetPlatformType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="VcxProjectGuid" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Optional project GUID. If not specified.</p>
+            <p>If not specified, a random GUID will be generated.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="SourceFiles" type="SourceFileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="IncludeFolders" type="IncludeFolderSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ObjectFiles" type="ObjectFileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StaticLibraries" type="StaticLibraryFileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FileMetadataHeader" type="FileMetadataHeader" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PreprocessorDefinitions" type="PreprocessorDefinitionStringSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdditionalCompilerFlags" type="AdditionalCompilerFlagStringSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdditionalLinkerFlags" type="AdditionalLinkerFlagStringSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BuildEvents" type="BuildEventSet" />
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="VsTargetVersionType">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Visual Studio version [VS2017, VS2019, VS2022].</p>
+        <p>[Default] Version set as default in vVIRTUALtarget options.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="VS2017">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Visual Studio 2017, any edition
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VS2019">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Visual Studio 2019, any edition
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VS2022">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Visual Studio 2022, any edition
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TargetPlatformType">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Target Platform [Windows_x86, Windows_x64, Linux_x64].</p>
+        <p>Note that <strong>Windows_x64</strong> is currently only supported with Visual Studio compiler and <strong>Linux_x64</strong> is only supported with <a href="#../../GenerateCMakeProject">GenerateCMakeProject</a>.</p>
+        <p>With <strong>GenerateVcxProject</strong>, the target platform is optional and defaults to the target platform setting in the vVIRTUALtarget options.</p>
+        <p>
+          With <strong>GenerateCMakeProject</strong>, the target platform is optional and no default setting of vVIRTUALtarget is used. Instead, a VTTMAKE file without a target platform is expected to be <strong>generic</strong> 
+          so that it can be used on both Windows and Linux. In this case, building the SUT is skipped by <strong>VttMake</strong> and must then be done manually.
+        </p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Windows_x86"/>
+      <xs:enumeration value="Windows_x64"/>
+      <xs:enumeration value="Linux_x64"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SourceFileSet">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Set of files. Can be relative or absolute, depending on the used sub-elements (<a href="#File">File</a> or <a href="#SipRelativeFile">SipRelativeFile</a>).</p>
+        <p>Files can be virtually grouped by <a href="#Filter">Filter</a>.</p>
+        <p>Supported file types are .c, .h, .cpp, .hpp.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SipRelativeFile" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>File path relative to the BSW Package directory.</p>
+            <p>Supported file types are .c, .h, .cpp, .hpp.</p>
+            <p><strong>Note</strong>: It is also possible to use environment variables e.g. <strong>path2\\%envVar1%\\file.c</strong>.</p>
+            <p><strong>Note</strong>: If you are building under Windows for Linux, then the relative file references are not references to the copied BSW Package. You must clone your source file structure under Linux.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="File" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>File path relative to the build root directory (<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>) or absolute path.</p>
+            <p>Supported file types are .c, .h, .cpp, .hpp</p>
+            <p><strong>Note</strong>: It is also possible to use environment variables e.g. path2\\%envVar1%\\file.c</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Filter" type="Filter" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="CMakeSourceFileSet">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Set of files. Can be relative or absolute, depending on the used sub-elements (<a href="#File">File</a> or <a href="#SipRelativeFile">SipRelativeFile</a>).</p>
+        <p>Supported file types are .c, .h, .cpp, .hpp.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SipRelativeFile" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>File path relative to the BSW Package directory.</p>
+            <p>Supported file types are .c, .h, .cpp, .hpp.</p>
+            <p><strong>Note</strong>: It is also possible to use environment variables e.g. <strong>path2\\%envVar1%\\file.c</strong>.</p>
+            <p><strong>Note</strong>: If you are building under Windows for Linux, then the relative file references are not references to the copied BSW Package. You must clone your source file structure under Linux.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="File" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>File path relative to the root directory (<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>) or absolute path.</p>
+            <p>Supported file types are .c, .h, .cpp, .hpp.</p>
+            <p><strong>Note</strong>: It is also possible to use environment variables e.g. <strong>path2\\%envVar1%\\file.c</strong>.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="Filter">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Group source files into a logical folder.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SipRelativeFile" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>File path relative to the BSW Package directory.</p>
+            <p>Supported file types are .c, .h, .cpp, .hpp</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="File" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>File path relative to the build root directory (<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>) or absolute path.</p>
+            <p>Supported file types are .c, .h, .cpp, .hpp</p>
+            <p><strong>Note</strong>: It is also possible to use environment variables e.g. path2\\%envVar1%\\file.c</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Filter" type="Filter" />
+    </xs:choice>
+    <xs:attribute name="Name" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          <![CDATA[
+          Visual Studio display name of filter.
+          ]]>
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="IncludeFolderSet">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SipRelativeIncludeFolder" type="CfgDependentStringElement">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Directory path relative to the BSW Package directory.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IncludeFolder" type="CfgDependentStringElement">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>File path relative to the build root directory (<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>) or absolute path.</p>
+            <p><strong>Note</strong>: It is also possible to use environment variables e.g. %SOME_SDK%\\include.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="CfgDependentStringElement">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Compiler configuration [Debug, Release, All]</p>
+        <p>[Default] All</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Configuration" type="Configuration"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ObjectFileSet">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Set of already <a href="#ObjectFile">compiled source files</a>.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SipRelativeObjectFile" type="CfgDependentStringElement">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Object file path relative to the BSW Package directory.</p>
+            <p>Supported file types are .obj.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ObjectFile" type="CfgDependentStringElement">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Object file path relative to the root directory (<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>) or absolute path.</p>
+            <p>Supported file types are .obj.</p>
+            <p><strong>Note</strong>: It is also possible to use environment variables e.g. <strong>path2\\%envVar1%\\file.obj</strong>.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="StaticLibraryFileSet">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Additional libraries for Windows (.lib) or Linux (.a) as simulation platform.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SipRelativeStaticLibrary" type="CfgDependentStringElement">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Library file path relative to the BSW Package directory.</p>
+            <p>Supported file types are .lib (for Windows), .a (for Linux).</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StaticLibrary" type="CfgDependentStringElement">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Library file path relative to the root directory (<a href="#/BuildSpecification/Settings/RootDir">RootDir</a>) or absolute path.</p>
+            <p>Supported file types are .lib (for Windows), .a (for Linux)</p>
+            <p><strong>Note</strong>: It is also possible to use environment variables e.g. <strong>%SOME_SDK%\lib\someib.lib</strong>.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:simpleType name="FileMetadataHeader">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Path to a header file that defines metadata for the created SUT DLL. For more information see Application Files.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="PreprocessorDefinitionStringSet">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PreprocessorDefinition" type="CfgDependentStringElement">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Can be specified per configuration.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="AdditionalCompilerFlagStringSet">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AdditionalCompilerFlag" type="CfgDependentStringElement">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Can be specified per configuration.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="AdditionalLinkerFlagStringSet">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AdditionalLinkerFlag" type="CfgDependentStringElement">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Can be specified per configuration.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="BuildEventSet">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PreBuild" type="BuildEvent">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Build event executed before building. Can be specified per <a href="#../../../BuildVsSolution/VsConfiguration">VS</a>/<a href="#../../../BuildCMakeProject/Configuration">CMake</a> build configuration.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PreLink" type="BuildEvent">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Build event executed while linking. Can be specified per <a href="#../../../BuildVsSolution/VsConfiguration">VS</a>/<a href="#../../../BuildCMakeProject/Configuration">CMake</a> build configuration.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PostBuild" type="BuildEvent">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Build event executed after building. Can be specified per <a href="#../../../BuildVsSolution/VsConfiguration">VS</a>/<a href="#../../../BuildCMakeProject/Configuration">CMake</a> build configuration.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BuildEvent">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Build events are not supported by the target platform <strong>Linux_x64</strong>.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Textual description (user-readable). Only used with <strong><a href="#../../../../GenerateVcxProject">GenerateVcxProject</a></strong>.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="CommandLines" type="CommandLineSet" />
+    </xs:all>
+    <xs:attribute name="Configuration" type="Configuration" />
+  </xs:complexType>
+  <xs:complexType name="CommandLineSet">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Command" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Configuration">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Compiler configuration [Debug, Release, All]</p>
+        <p>[Default] All</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="BuildVsSolution">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Build the Visual Studio solution generated in the generation step <a href="#../GenerateVcxProject">GenerateVcxProject</a>.</p>
+        <p>The output of the build (DLL file) represents the virtual ECU.</p>
+        <p><strong>Note</strong>: If this element is present, <a href="#../BuildCMakeProject">BuildCMakeProject</a> and <a href="#../BazelProject">BazelProject</a> must not be used.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="VsToolchainPath" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>
+              If several Visual Studio installations of the same version (see Element <a href="#../../GenerateVcxProject/VsTargetVersion">VsTargetVersion</a>) exist
+              you can select the installation by setting this path. E.g. to "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools".
+            </p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="VsConfiguration" type="ConfigurationType" />
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="ConfigurationType">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Compiler configuration [Debug, Release]</p>
+        <p>[Default] Configuration set as default in vVIRTUALtarget options.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="GenerateCMakeProject">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Generates a CMake project, to the path given by settings element <a href="#../CMakeRootPath">CMakeRootPath</a>.</p>
+        <p>
+          In the generation step <a href="#../BuildCMakeProject">BuildCMakeProject</a> the generated CMake project is built.
+          In subelements the included application files, include directories and further settings can be configured.
+        </p>
+        <p><strong>Note</strong>: If this element is present, <a href="#../GenerateVcxProject">GenerateVcxProject</a> and <a href="#../BazelProject">BazelProject</a> must not be used.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="TargetPlatform" type="TargetPlatformType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CMakeGenerator" type="CMakeGeneratorType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CopyBswFiles" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Set this flag to <strong>true</strong>, if you want to generate a CMake project under Windows that you later want to compile under Linux. Then, all required BSW files are copied to CMakeRootPath.</p>
+            <p>[Default]
+              <ul>
+              <li>
+                <strong>true</strong> for TargetPlatform Linux
+              </li>
+              <li>
+                <strong>false</strong> for TargetPlatform Windows or if no TargetPlatform is specified
+              </li>
+            </ul>
+            </p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="LibraryType" type="LibraryType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SourceFiles" type="CMakeSourceFileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="IncludeFolders" type="IncludeFolderSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ObjectFiles" type="ObjectFileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StaticLibraries" type="StaticLibraryFileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FileMetadataHeader" type="FileMetadataHeader" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PreprocessorDefinitions" type="PreprocessorDefinitionStringSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdditionalCompilerFlags" type="AdditionalCompilerFlagStringSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdditionalLinkerFlags" type="AdditionalLinkerFlagStringSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BuildEvents" type="BuildEventSet" />
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="CMakeGeneratorType">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>CMake Generator [VS2017, VS2019, VS2022, MINGW, MINGW_NINJA, CLANG].</p>
+        <p><strong>Possible Values</strong>:
+          <ul>
+            <li>
+              <p><strong>VS2017</strong></p>
+              <p>CMake Generator <strong>Visual Studio 15 2017</strong> for the target platforms <strong>Windows_x86</strong> and <strong>Windows_x64</strong>.</p>
+            </li>
+            <li>
+              <p><strong>VS2019</strong></p>
+              <p>CMake Generator <strong>Visual Studio 16 2019</strong> for the target platforms <strong>Windows_x86</strong> and <strong>Windows_x64</strong>.</p>
+            </li>
+            <li>
+              <p><strong>VS2022</strong></p>
+              <p>CMake Generator <strong>Visual Studio 17 2022</strong> for the target platforms <strong>Windows_x86</strong> and <strong>Windows_x64</strong>.</p>
+            </li>
+            <li>
+              <p><strong>MINGW</strong></p>
+              <p>
+                MinGW Makefiles with compiler MinGW-w64 for target platform <strong>Windows_x86</strong>.
+                VttMake uses either the MinGW compiler from the vVIRTUALtarget INI or from the PATH environment variable.
+              </p>
+              <p>(For more information see page AUTOSAR Classic ECUs | MinGW-w64).</p>
+            </li>
+            <li>
+              <p><strong>MINGW_NINJA</strong></p>
+              <p>
+                Ninja build system with compiler MinGW-w64 for target platform <strong>Windows_x86</strong>.
+                VttMake uses either the MinGW compiler from the vVIRTUALtarget INI or from the PATH environment variable.
+              </p>
+              <p>(For more information see page AUTOSAR Classic ECUs | MinGW-w64).</p>
+            </li>
+            <li>
+              <p><strong>CLANG</strong></p>
+              <p>Compiler Clang for target platform <strong>Linux_x64</strong></p>
+            </li>
+          </ul>
+          [Default] Compiler set as default in vVIRTUALtarget options.
+        </p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="VS2017"/>
+      <xs:enumeration value="VS2019"/>
+      <xs:enumeration value="VS2022"/>
+      <xs:enumeration value="MINGW"/>
+      <xs:enumeration value="MINGW_NINJA"/>
+      <xs:enumeration value="CLANG"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LibraryType">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Library type [Shared, Static]</p>
+        <p><strong>Possible Values</strong>:
+          <ul>
+            <li>
+              <p><strong>Shared</strong></p>
+              <p>vVIRTUALtarget generates a CMake project to build a dynamic-link library (.dll | .so) that can directly be used in an execution environment.</p>
+            </li>
+            <li>
+              <p><strong>Static</strong></p>
+              <p>vVIRTUALtarget generates a CMake project to build a static library (.lib | .a). In a user-defined project, the static library can then be linked to a dynamic-link library that can be used in an execution environment.</p>
+            </li>
+          </ul>
+          [Default] Shared
+        </p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Shared"/>
+      <xs:enumeration value="Static"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BuildCMakeProject">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Build the CMake project generated in the generation step <a href="#../GenerateCMakeProject">GenerateCMakeProject</a>.</p>
+        <p>The output of the build (DLL/SO file) represents the virtual ECU.</p>
+        <p><strong>Note</strong>: CMake project for vECU under Linux will not automatically build.</p>
+        <p><strong>Note</strong>: If this element is present, <a href="#../BuildVsSolution">BuildVsSolution</a> and <a href="#../BazelProject">BazelProject</a> must not be used.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="Configuration" type="ConfigurationType" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="GenerateCsvFile">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Generates a CSV file which describes the ECU's system interface (signals and system variables).</p>
+        <p>This step is not required for the simulation.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="GenerateZip">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>Generates a ZIP archive file containing all necessary artifacts for the simulation.</p>
+        <p>
+          Intended use case is copying the virtual ECU with all required files to another computer for running the simulation there.
+          This step is not required for the simulation.
+        </p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="SimulationSetup">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Setup of the simulation containing ECU instances and their mapping to networks.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Name of the Simulation Setup that is used for some generated files.</p>
+            <p>[Default] "Setup"</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="EcuInstance" type="EcuInstance" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EcuInstance">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+          Represents an instance of the ECU.
+          ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="InstanceName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Name of the ECU instance, which must be unique within a vVIRTUALtarget makefile.</p>
+            <p>[Default] Name of the ECU. An incrementing index is added to the name for further instances of the same ECU.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Variant" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Variant of the ECU. In the simulated ECU code, the <strong>CANoeAPI_VariantName</strong> and <strong>CANoeAPI_TestVariantName</strong> functions of the <strong>CANoeEmu</strong> library can be used to determine the variant defined here.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="SimulationName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>Name of the ECU instance for usage in the simulation, which must be unique within a vVIRTUALtarget makefile. Must be a valid C identifier.</p>
+            <p>[Default] Name of the ECU. An incrementing index is added to the name for further instances of the same ECU.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="FileName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            <p>File name without extension used as template for the filenames of the vECU. Must be unique within a vVIRTUALtarget makefile.</p>
+            <p>[Default] Value of <a href="#../SimulationName">SimulationName</a>.</p>
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="NetworkMapping" type="NetworkMapping">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Maps different bus controllers of the ECU to the corresponding networks in the CANoe Simulation Setup.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="NetworkMapping">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Maps different bus controllers of the ECU to the corresponding channels in the CANoe Simulation Setup.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="ChannelMapping" type="ChannelMapping" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChannelMapping">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        Maps a network type and a channel index to a network name that is created by the CANoe Simulation Setup.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="1" maxOccurs="1" name="NetworkType" type="NetworkType">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Type of network to be configured. Possible values are <strong>CAN</strong>, <strong>LIN</strong>, <strong>FlexRay</strong> or <strong>Ethernet</strong>.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="ControllerIndex" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Index of the bus controller to be mapped to the <strong>CANoe</strong> network.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="NetworkName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            <![CDATA[
+            Name of the network created in the CANoe Simulation Setup.
+            ]]>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="NetworkType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CAN" />
+      <xs:enumeration value="LIN" />
+      <xs:enumeration value="FlexRay" />
+      <xs:enumeration value="Ethernet" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BazelProject">
+    <xs:annotation>
+      <xs:documentation>
+        <![CDATA[
+        <p>This element of the VTTMAKE file defines the creation of the virtual ECU with the Bazel workflow. It will be used for the creation and configuration of your vVIRTUALtarget Bazel project.</p>
+        <p>This project can be integrated as a Bazel module in your Bazel pipeline and requires access to vVIRTUALtarget. The output of the build (SUT-folder) of the execution of the Bazel module represents the virtual ECU.</p>
+        <p><strong>Note</strong>: If this element is present,
+          <a href="#/BuildSpecification/Settings/RootDir">RootDir</a>,
+          <a href="#../BuildCMakeProject">BuildCMakeProject</a>,
+          <a href="#../GenerateCMakeProject">GenerateCMakeProject</a>,
+          <a href="#../BuildVsSolution">BuildVsSolution</a> and 
+          <a href="#../GenerateVcxProject">GenerateVcxProject</a>
+          must not be used.</p>
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="SourceFiles" type="CMakeSourceFileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="IncludeFolders" type="IncludeFolderSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ObjectFiles" type="ObjectFileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StaticLibraries" type="StaticLibraryFileSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PreprocessorDefinitions" type="PreprocessorDefinitionStringSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdditionalCompilerFlags" type="AdditionalCompilerFlagStringSet" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdditionalLinkerFlags" type="AdditionalLinkerFlagStringSet" />
+    </xs:all>
+  </xs:complexType>
+</xs:schema>

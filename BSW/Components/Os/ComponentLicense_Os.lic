@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<license xmlns="urn:vector:schema:license" version="1.0">
+    <deliveries>
+        <delivery id="PAI14870">
+            <subprojectnumber>PAI14870</subprojectnumber>
+            <showbetadisclaimer>true</showbetadisclaimer>
+        </delivery>
+    </deliveries>
+    <paramset idref="PAI14870" consumer="DaVinciConfigurator">
+        <param>
+            <key>965635D8-F70E-4337-A95F-721941203AC6</key>
+            <value>711765DD-689C-472A-9E8C-BA698A8FF620</value>
+        </param>
+        <param>
+            <key>MDTYPE-B61D54D9-AC58-41F0-B8DD-3C3E0E62A594</key>
+            <value>MDVALUE-A23E8084-D3B2-40CD-BFB4-F546BE2DE4AC</value>
+        </param>
+        <param>
+            <key>CAB67918-90D6-43E5-A1FD-268163801123</key>
+            <value>1E34103C-7A91-4428-B631-943C7DBC6BD0</value>
+        </param>
+        <param>
+            <key>F5EDD6B6-6D0A-4E8E-A114-3628BB530029</key>
+            <value>EBC39A3A-9DFB-44BD-A89F-8B8B351BFA08</value>
+        </param>
+        <param>
+            <key>MDTYPE-7EE1CC75-DD31-4905-A34C-7D0B8B969D99</key>
+            <value>MDVALUE-027F6D38-8F26-4F28-84CA-81AD002088EF</value>
+        </param>
+        <param>
+            <key>MDTYPE-E3960605-B4D8-4DE4-83EC-E385BCE9331F</key>
+            <value>MDVALUE-F8D45566-DAAD-46BE-B84E-21C32D91F23E</value>
+        </param>
+        <param>
+            <key>B8E03D3D-3608-4639-A819-B69C12D2F19F</key>
+            <value>2FCA796D-B0EC-4B80-A41E-CFD7E1C0D4A8</value>
+        </param>
+        <param>
+            <key>f848b8fe-36b9-47b1-8de5-2fd25822dc97</key>
+            <value>0249a95c-b19d-4e20-a5b9-ef43ba4dab71</value>
+        </param>
+        <param>
+            <key>0a366e1f-8334-42cf-ae4e-4afe4753d6c1</key>
+            <value>df6ef533-b48a-4e83-926b-0d41be92ef6d</value>
+        </param>
+        <param>
+            <key>MDTYPE-1C0D099F-4A04-4F33-B9EE-2897A877108C</key>
+            <value>MDVALUE-3CCC4D60-6078-4A74-B7D4-F9CFDB87751E</value>
+        </param>
+    </paramset>
+</license>
+<!-- 79141A58ED9493082696D2B6C9321736E3195BECE554C28B8A2A341DF483FA8BDE35FB81AF6C5C21F2D5AF8D54733AF3D53B09CC32040DF8858CBE687D6542F51BA8C2E94DE752D2C39C8377B02BD09FF039A50025FE5EAF27F10A13F55D1F45EB78FAFD72CD200C063210BFE763A08FC42EE320F0DE6B5B9CB10E64693E9D296F189299233E9E7B3736D3BAE73497DB0ECB9C5F1C14180EDB5D7D40D283F93ECEED38C53C5682D704F2A0CDE3F09C9DC7DB00DA41F063224E8F2BFC544D6DF1B054562661FAEA5863D6D3A1F1E072B367E9213EA472D53BCC380EA0316164FAA0ADC58D6CB9D4CCC1DCB805967CF1D09ECFD822B0FA038E8994990840E23C92 -->

@@ -14,12 +14,11 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *             File:  BSW_Handler.c
- *           Config:  LightControl.dpa
  *        SW-C Type:  BSW_Handler
  *
- *        Generator:  MICROSAR RTE Generator Version 4.37.00
- *                    RTE Core Version 4.37.00
- *          License:  PAI11871
+ *        Generator:  MICROSAR RTE ContractPhase Generator Version 4.39.00
+ *                    RTE Core Version 4.39.00
+ *          License:  DVSwcGen
  *
  *      Description:  C-Code implementation template for SW-C <BSW_Handler>
  *********************************************************************************************************************/

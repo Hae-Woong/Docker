@@ -6,62 +6,6 @@
       <AR-PACKAGES>
         <AR-PACKAGE UUID="7e118c10-0a18-49f2-9978-33759fe5e7c2">
           <SHORT-NAME>EcucDefs</SHORT-NAME>
-          <AR-PACKAGES>
-            <AR-PACKAGE UUID="15419044-5648-4172-90a7-bda3d354d02d">
-              <SHORT-NAME>McalLib_ib_bswmd</SHORT-NAME>
-              <AR-PACKAGES>
-                <AR-PACKAGE UUID="d8bb956e-0704-4e42-b99d-4b9da5ea59e2">
-                  <SHORT-NAME>BswModuleDescriptions</SHORT-NAME>
-                  <ELEMENTS>
-                    <BSW-MODULE-DESCRIPTION UUID="3a202701-5037-480a-971e-17dc6130d803">
-                      <SHORT-NAME>McalLib</SHORT-NAME>
-                      <PROVIDED-ENTRYS>
-                        <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-                          <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib_Virtual</BSW-MODULE-ENTRY-REF>
-                        </BSW-MODULE-ENTRY-REF-CONDITIONAL>
-                      </PROVIDED-ENTRYS>
-                      <INTERNAL-BEHAVIORS>
-                        <BSW-INTERNAL-BEHAVIOR UUID="f836191c-d225-4f67-a48e-2ba57e1b10ea">
-                          <SHORT-NAME>McalLibBehavior</SHORT-NAME>
-                          <EXCLUSIVE-AREAS>
-                            <EXCLUSIVE-AREA UUID="cd9c1760-772b-48b1-bbbb-e6df81de83fa">
-                              <SHORT-NAME>CpuEndInit</SHORT-NAME>
-                            </EXCLUSIVE-AREA>
-                            <EXCLUSIVE-AREA UUID="23cdd627-0281-4341-be9b-6767f12b4695">
-                              <SHORT-NAME>PeripheralEndInit</SHORT-NAME>
-                            </EXCLUSIVE-AREA>
-                            <EXCLUSIVE-AREA UUID="c0d2d4d1-264e-46d7-8ec3-d2a92b01d2cf">
-                              <SHORT-NAME>SafetyEndInit</SHORT-NAME>
-                            </EXCLUSIVE-AREA>
-                            <EXCLUSIVE-AREA UUID="4f1b2952-28fa-468d-9326-e594991aa134">
-                              <SHORT-NAME>StmTimerResolution</SHORT-NAME>
-                            </EXCLUSIVE-AREA>
-                          </EXCLUSIVE-AREAS>
-                          <ENTITYS>
-                            <BSW-CALLED-ENTITY UUID="52bd720c-1cc1-4da0-976d-90f837ac7cba">
-                              <SHORT-NAME>McalLib_Virtual</SHORT-NAME>
-                              <CAN-ENTER-EXCLUSIVE-AREA-REFS>
-                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib/McalLibBehavior/CpuEndInit</CAN-ENTER-EXCLUSIVE-AREA-REF>
-                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib/McalLibBehavior/PeripheralEndInit</CAN-ENTER-EXCLUSIVE-AREA-REF>
-                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib/McalLibBehavior/SafetyEndInit</CAN-ENTER-EXCLUSIVE-AREA-REF>
-                                <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib/McalLibBehavior/StmTimerResolution</CAN-ENTER-EXCLUSIVE-AREA-REF>
-                              </CAN-ENTER-EXCLUSIVE-AREA-REFS>
-                              <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AURIX2G/EcucDefs/McalLib_ib_bswmd/BswModuleDescriptions/McalLib_Virtual</IMPLEMENTED-ENTRY-REF>
-                            </BSW-CALLED-ENTITY>
-                          </ENTITYS>
-                        </BSW-INTERNAL-BEHAVIOR>
-                      </INTERNAL-BEHAVIORS>
-                    </BSW-MODULE-DESCRIPTION>
-                    <BSW-MODULE-ENTRY UUID="3b7ae367-9ea5-4d11-bd5f-9c00909c9e18">
-                      <SHORT-NAME>McalLib_Virtual</SHORT-NAME>
-                      <CALL-TYPE>REGULAR</CALL-TYPE>
-                      <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
-                    </BSW-MODULE-ENTRY>
-                  </ELEMENTS>
-                </AR-PACKAGE>
-              </AR-PACKAGES>
-            </AR-PACKAGE>
-          </AR-PACKAGES>
         </AR-PACKAGE>
       </AR-PACKAGES>
     </AR-PACKAGE>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<componentManifest xmlns="urn:almplus:schema:swcp:componentManifest">
+    <schemaVersion>2</schemaVersion>
+    <subPackage>
+        <guid>PCKG-22B489D7-B6D6-0947-8C8C-136FF7281B8C</guid>
+        <name>Cp_XcpOnCanAsr@Doc_TechRef</name>
+        <version>2.02.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-22DFAB4E-6832-7E4F-8A35-736547C90F6E</guid>
+        <name>Cp_XcpOnCanAsr@Make</name>
+        <version>2.00.00</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-61C9D37B-6B77-C541-9450-63BB004CE415</guid>
+        <name>Cp_XcpOnCanAsr@Implementation</name>
+        <version>4.00.01</version>
+    </subPackage>
+    <subPackage>
+        <guid>PCKG-8F7DAD44-F6AA-874A-81C1-1CDB703B1BC1</guid>
+        <name>Cp_XcpOnCanAsr@root</name>
+        <version>4.00.01</version>
+    </subPackage>
+</componentManifest>
