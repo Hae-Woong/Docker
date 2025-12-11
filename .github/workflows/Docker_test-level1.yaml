@@ -22,6 +22,12 @@ jobs:
     
       - name: Checkout repository
         uses: actions/checkout@v4         
+        
+      - name: Login to GHCR
+        run: echo "${{ secrets.GHCR_DOCKER_IMAGE_ACTIONS_SECRET }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Pull Docker Image
+        run: docker pull ghcr.io/hae-woong/docker/canoe-se-window:1.0
 
       - name: Cache SUT
         id: cache-sut
@@ -55,10 +61,26 @@ jobs:
     runs-on: lvl1
     steps:
 
-      - name: Build simulation inside Docker via PowerShell
+      - name: Run CANoe SE Docker Container for Environment Build
         run: |
-            pwsh ./scripts/run-canoe.ps1 -WorkspaceDir ${{ github.workspace }}
+            docker run --rm --name canoe-container \
+            -v ${{ github.workspace }}:/workspace \
+            ghcr.io/hae-woong/docker/canoe-se-window:1.0 \
+            powershell -Command "
+            # È¯°æ ºôµå
+            & 'C:\Program Files\Vector\CANoe64\environment-make.exe' `
+            -o 'C:\ProjectFiles\compiled-environment-and-tests' `
+            -A Win32 -s L1_vECU 'C:\ProjectFiles\environment-make\venvironment.yaml'"
 
+
+            # Å×½ºÆ® À¯´Ö ºôµå
+            & 'C:\Program Files\Vector\CANoe64\test-unit-make.exe' `
+              -e 'C:\ProjectFiles\compiled-environment-and-tests\L1_vECU.venvironment' `
+              -o 'C:\ProjectFiles\compiled-environment-and-tests' `
+              'C:\ProjectFiles\tests\auto\auto.vtestunit.yaml' `
+              'C:\ProjectFiles\tests\basic\basic.vtestunit.yaml'
+          "
+      
       # upload the compiled environment and test units as an artifact
       - name: Export compiled-environment-and-tests
         uses: actions/upload-artifact@v4
