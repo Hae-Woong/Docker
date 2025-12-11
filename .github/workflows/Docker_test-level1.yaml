@@ -60,27 +60,26 @@ jobs:
     needs: [build-sut]
     runs-on: lvl1
     steps:
-
-      - name: Run CANoe SE Docker Container for Environment Build
+      - name: Run CANoe SE Docker Container for Environment + Test-Unit Build
         run: |
             docker run --rm --name canoe-container \
-            -v ${{ github.workspace }}:/workspace \
+            -v ${{ github.workspace }}:C:\ProjectFiles \
             ghcr.io/hae-woong/docker/canoe-se-window:1.0 \
             powershell -Command "
             # È¯°æ ºôµå
             & 'C:\Program Files\Vector\CANoe64\environment-make.exe' `
             -o 'C:\ProjectFiles\compiled-environment-and-tests' `
-            -A Win32 -s L1_vECU 'C:\ProjectFiles\environment-make\venvironment.yaml'"
-
+            -A Win32 -s L1_vECU `
+            'C:\ProjectFiles\environment-make\venvironment.yaml'
 
             # Å×½ºÆ® À¯´Ö ºôµå
             & 'C:\Program Files\Vector\CANoe64\test-unit-make.exe' `
-              -e 'C:\ProjectFiles\compiled-environment-and-tests\L1_vECU.venvironment' `
-              -o 'C:\ProjectFiles\compiled-environment-and-tests' `
-              'C:\ProjectFiles\tests\auto\auto.vtestunit.yaml' `
-              'C:\ProjectFiles\tests\basic\basic.vtestunit.yaml'
-          "
-      
+            -e 'C:\ProjectFiles\compiled-environment-and-tests\L1_vECU.venvironment' `
+            -o 'C:\ProjectFiles\compiled-environment-and-tests' `
+            'C:\ProjectFiles\tests\auto\auto.vtestunit.yaml' `
+            'C:\ProjectFiles\tests\basic\basic.vtestunit.yaml'
+            "
+
       # upload the compiled environment and test units as an artifact
       - name: Export compiled-environment-and-tests
         uses: actions/upload-artifact@v4
