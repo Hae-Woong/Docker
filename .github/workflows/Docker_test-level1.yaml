@@ -38,7 +38,7 @@ jobs:
         run: |
              docker push ghcr.io/hae-woong/canoe-se-window:1.0
         
-     # 5. Pull  
+     # 5. Pull  #
       - name: Pull CANoe SE Docker Image
         run: |
              docker pull ghcr.io/hae-woong/docker/canoe-se-window:1.0 || echo "Image already exists or pull skipped"
