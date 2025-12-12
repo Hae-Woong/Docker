@@ -20,17 +20,27 @@ jobs:
       NODE_TLS_REJECT_UNAUTHORIZED: 0 
     steps:
     
+      # 1. Checkout repository 
       - name: Checkout repository
         uses: actions/checkout@v4         
-        
+            
+      # 2. Log in to GitHub Container Registry
       - name: Login to GHCR
         run: echo "${{ secrets.GHCR_DOCKER_IMAGE_ACTIONS_SECRET }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        
+      # 3. Tag the local image for GHCR
+      - name: Tag local image
+        run: |
+             docker tag canoe-se-window:1.0 ghcr.io/${{ github.actor }}/canoe-se-window:
 
- 
+     # 4. Push the image to GHCR
+      - name: Push image to GHCR
+        run: |
+             docker push ghcr.io/${{ github.actor }}/canoe-se-window:1.0
+             
       - name: Pull CANoe SE Docker Image
         run: |
              docker pull ghcr.io/hae-woong/docker/canoe-se-window:1.0 || echo "Image already exists or pull skipped"
-
 
       - name: Cache SUT
         id: cache-sut
