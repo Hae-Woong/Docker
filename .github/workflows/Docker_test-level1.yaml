@@ -31,12 +31,12 @@ jobs:
       # 3. Tag the local image for GHCR
       - name: Tag local image
         run: |
-             docker tag canoe-se-window:1.0 ghcr.io/${{ github.actor }}/canoe-se-window:
+             docker tag canoe-se-window:1.0 ghcr.io/hae-woong/canoe-se-window:1.0
 
      # 4. Push the image to GHCR
       - name: Push image to GHCR
         run: |
-             docker push ghcr.io/${{ github.actor }}/canoe-se-window:1.0
+             docker push ghcr.io/hae-woong/canoe-se-window:1.0
              
       - name: Pull CANoe SE Docker Image
         run: |
